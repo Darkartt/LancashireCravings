@@ -16,13 +16,14 @@ const ThreeBackground = ({ sceneType }: ThreeBackgroundProps) => {
   }, []);
 
   useEffect(() => {
-    if (!isClient || !mountRef.current || typeof window === 'undefined') return;
+    const currentMount = mountRef.current; // Capture ref value
+    if (!isClient || !currentMount || typeof window === 'undefined') return;
 
     console.log(`ThreeBackground: Initializing scene for ${sceneType}`);
     if (sceneType === 'blog') {
       console.log("Blog scene: Setting up rotating scroll animation.");
       console.log("Blog scene: Component mounted, checking renderer and DOM element.");
-      if (mountRef.current) {
+      if (currentMount) { // Use currentMount
         console.log("Blog scene: Mount ref is available, appending renderer DOM element.");
       } else {
         console.error("Blog scene: Mount ref is not available, rendering may fail.");
@@ -39,8 +40,8 @@ const ThreeBackground = ({ sceneType }: ThreeBackgroundProps) => {
     const renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: "high-performance" }); // Enabled antialiasing and high performance
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    mountRef.current.innerHTML = ''; // Clear any existing content
-    mountRef.current.appendChild(renderer.domElement);
+    currentMount.innerHTML = ''; // Clear any existing content
+    currentMount.appendChild(renderer.domElement);
 
     // Add OrbitControls for interaction
     const controls = new OrbitControls(camera, renderer.domElement);
@@ -290,9 +291,9 @@ const ThreeBackground = ({ sceneType }: ThreeBackgroundProps) => {
     const handleVisibilityChange = () => {
       if (document.visibilityState === 'visible') {
         isVisible = true;
-        if (mountRef.current && !mountRef.current.querySelector('canvas')) {
-          mountRef.current.innerHTML = '';
-          mountRef.current.appendChild(renderer.domElement);
+        if (currentMount && !currentMount.querySelector('canvas')) { // Use currentMount
+          currentMount.innerHTML = '';
+          currentMount.appendChild(renderer.domElement);
         }
         animate();
       } else {
@@ -313,13 +314,13 @@ const ThreeBackground = ({ sceneType }: ThreeBackgroundProps) => {
     return () => {
       window.removeEventListener('resize', handleResize);
       document.removeEventListener('visibilitychange', handleVisibilityChange);
-      if (mountRef.current) { // Use currentMount for consistency
-        mountRef.current.innerHTML = '';
+      if (currentMount) { // Use currentMount for consistency
+        currentMount.innerHTML = '';
       }
       renderer.dispose();
       controls.dispose();
     };
-  }, [sceneType]);
+  }, [sceneType, isClient]); // Added isClient to dependency array
 
   if (!isClient) {
     return null;
