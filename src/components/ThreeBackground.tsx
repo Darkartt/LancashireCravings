@@ -128,13 +128,7 @@ const ThreeBackground = ({ sceneType }: ThreeBackgroundProps) => {
           metalness: 0.2,
           side: THREE.DoubleSide,
         });
-        const polishedWoodMaterial = new THREE.MeshStandardMaterial({
-          map: oakTexture,
-          color: 0x8B4513,
-          roughness: 0.3,
-          metalness: 0.4,
-          side: THREE.DoubleSide,
-        });
+        // Removed polishedWoodMaterial as it's unused
 
         const owlGroup = new THREE.Group();
         scene.add(owlGroup);
@@ -319,7 +313,7 @@ const ThreeBackground = ({ sceneType }: ThreeBackgroundProps) => {
     return () => {
       window.removeEventListener('resize', handleResize);
       document.removeEventListener('visibilitychange', handleVisibilityChange);
-      if (mountRef.current) {
+      if (mountRef.current) { // Use currentMount for consistency
         mountRef.current.innerHTML = '';
       }
       renderer.dispose();
@@ -332,9 +326,7 @@ const ThreeBackground = ({ sceneType }: ThreeBackgroundProps) => {
   }
 
   return (
-    <div style={{ position: 'fixed', top: 0, left: 0, zIndex: -10, width: '100%', height: '100vh', overflow: 'hidden', pointerEvents: 'none', background: 'transparent', isolation: 'isolate' }}>
-      <div ref={mountRef} style={{ width: '100%', height: '100%', zIndex: -10, pointerEvents: 'none' }} />
-    </div>
+    <div ref={mountRef} style={{ position: 'fixed', top: 0, left: 0, zIndex: -10, width: '100%', height: '100vh', overflow: 'hidden', pointerEvents: 'none', background: 'transparent', isolation: 'isolate' }} />
   );
 };
 

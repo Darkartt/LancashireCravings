@@ -61,7 +61,7 @@ const ContactBackground: React.FC = () => {
       });
     };
 
-    const animation = gsap.ticker.add(draw);
+    gsap.ticker.add(draw); // Removed 'const animation ='
 
     const handleResize = () => {
       if (canvasRef.current) {

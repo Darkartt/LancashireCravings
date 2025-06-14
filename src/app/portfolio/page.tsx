@@ -218,6 +218,8 @@ export default function Portfolio() {
         </motion.div>
       </section>
 
+      {/* Removed GSAP ScrollTrigger Initialization in favor of Framer Motion */}
+
       {/* Footer Section */}
       <footer className="py-8 px-4 sm:px-8 bg-foreground/5 border-t border-foreground/10">
         <div className="container mx-auto">

@@ -1,7 +1,7 @@
 'use client';
 
-import React, { Suspense, useState, useEffect, useLayoutEffect } from 'react'; // Added useLayoutEffect
-import { Canvas } from '@react-three/fiber'; // useLoader is not used directly here
+import React, { Suspense, useState, useEffect, useLayoutEffect } from 'react';
+import { Canvas } from '@react-three/fiber';
 import { OrbitControls, useGLTF, Html } from '@react-three/drei';
 import * as THREE from 'three';
 
@@ -30,25 +30,14 @@ interface ModelProps {
 }
 
 function Model({ woodType }: ModelProps) {
-  let gltf;
-  try {
-    gltf = useGLTF('/chair_model.glb') as any; // Cast to any to simplify GLTF type for now
-  } catch (error) {
-    console.error("Error loading GLTF model:", error);
-    return (
-      <Html center>
-        <div style={{ color: 'red', background: 'white', padding: '10px', borderRadius: '5px' }}>
-          Error: Unable to load 3D model. Please check the console for details.
-        </div>
-      </Html>
-    );
-  }
-  const { nodes } = gltf;
+  // All hooks must be called unconditionally at the top level
+  const gltf = useGLTF('/chair_model.glb') as any; // Cast to any to simplify GLTF type for now
+  const { nodes } = gltf; // Destructure nodes here, after gltf is assigned
   const [currentTexture, setCurrentTexture] = useState<THREE.Texture | null>(null);
   const [errorLoading, setErrorLoading] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
-  useLayoutEffect(() => { // Changed to useLayoutEffect
+  useLayoutEffect(() => {
     setIsLoading(true);
     setErrorLoading(false);
     const texturePath = placeholderTextures[woodType];
@@ -80,6 +69,17 @@ function Model({ woodType }: ModelProps) {
       setIsLoading(false);
     }
   }, [woodType]);
+
+  // Conditional returns must come after all hook calls
+  if (!gltf || !nodes) {
+    return (
+      <Html center>
+        <div style={{ color: 'red', background: 'white', padding: '10px', borderRadius: '5px' }}>
+          Error: Unable to load 3D model. Please check the console for details.
+        </div>
+      </Html>
+    );
+  }
 
   // Attempt to find a mesh with geometry. This is a common pattern for simple GLTFs.
   // You might need to adjust this based on your actual GLTF structure.
