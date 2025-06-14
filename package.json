@@ -2,7 +2,7 @@
   "name": "professional-website",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://Darkartt.github.io/check/",
+  "homepage": "https://exampledesign.co.uk/",
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
