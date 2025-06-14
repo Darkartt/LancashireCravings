@@ -1,0 +1,78 @@
+/* Services Page Specific Styles */
+.services-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: -5; /* Adjusted z-index to ensure it stays behind content but visible */
+  overflow: hidden;
+  background: linear-gradient(45deg, rgba(139, 69, 19, 0.1), rgba(139, 69, 19, 0.2), rgba(139, 69, 19, 0.1));
+  background-size: 400% 400%;
+  animation: woodGrainShift 60s ease-in-out infinite;
+  pointer-events: none; /* Ensure it doesn't interfere with user interactions */
+}
+
+/* Ensure content is above the background */
+.services-content {
+  position: relative;
+  z-index: 10; /* Increased z-index to ensure all content stays above background */
+}
+
+/* Subtle animation for Our Services section */
+section.bg-background {
+  background: linear-gradient(45deg, rgba(139, 69, 19, 0.05), rgba(139, 69, 19, 0.1), rgba(139, 69, 19, 0.05)) !important; /* Subtle background */
+  background-size: 400% 400% !important;
+  animation: woodGrainShift 80s ease-in-out infinite !important; /* Slower and subtler animation */
+  position: relative;
+  z-index: 5; /* Lower z-index to keep animation behind content */
+}
+
+/* Ensure content within Our Services remains clear and cards stand out */
+section.bg-background * {
+  background: transparent !important;
+  animation: none !important;
+  z-index: 15; /* Content stays above subtle animation */
+}
+
+/* Style the cards within Our Services to match Learn the Art of Woodcarving background */
+section.bg-background .p-6.rounded-lg.shadow-md {
+  background: rgba(0, 0, 0, 0.1) !important; /* Match background of Learn the Art section */
+  border: 1px solid rgba(139, 69, 19, 0.3) !important; /* Subtle border for definition */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important; /* Soft shadow for depth */
+}
+
+/* Specific styling for Call to Action section to be on top of animation */
+section.bg-accent-primary\/10 {
+  background: rgba(139, 69, 19, 0.1) !important; /* Semi-transparent background to maintain design */
+  animation: none !important; /* Explicitly disable animation */
+  position: relative;
+  z-index: 30; /* Even higher z-index to ensure it stays above background */
+}
+
+/* Ensure nested elements within Call to Action are also unaffected by animation */
+section.bg-accent-primary\/10 * {
+  background: transparent !important;
+  animation: none !important;
+}
+
+/* Removed CSS animation to prevent interference with Three.js animation */
+.services-background canvas {
+  display: block !important; /* Force display to prevent disappearance */
+  width: 100%;
+  height: 100%;
+  opacity: 1 !important; /* Ensure full opacity for visibility */
+}
+
+/* Subtle wood grain animation */
+@keyframes woodGrainShift {
+  0% {
+    background-position: 0% 0%;
+  }
+  50% {
+    background-position: 400% 400%;
+  }
+  100% {
+    background-position: 0% 0%;
+  }
+}

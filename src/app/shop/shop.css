@@ -1,0 +1,77 @@
+.shop-background {
+  background: linear-gradient(45deg, #3c2f2f, #4a3c31, #6a5a48, #4a3c31, #3c2f2f);
+  background-size: 250% 250%;
+  animation: woodGrainShift 25s ease infinite;
+  position: relative;
+  overflow: hidden;
+}
+
+.shop-background::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200%;
+  height: 200%;
+  background-image: radial-gradient(circle, #6a5a48 1.5px, transparent 1.5px), radial-gradient(circle, #7a6a58 1.5px, transparent 1.5px);
+  background-size: 35px 35px;
+  background-position: 0 0, 17.5px 17.5px;
+  animation: woodDustSlow 40s linear infinite;
+  opacity: 0.25;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.hero-wood-effect {
+  background: linear-gradient(to right, #2c1f1f, #3a2c22, #2c1f1f);
+  background-size: 200% 100%;
+  animation: woodFade 15s ease-in-out infinite;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-wood-effect::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: repeating-linear-gradient(to bottom, transparent, transparent 5px, rgba(82, 66, 48, 0.15) 5px, rgba(82, 66, 48, 0.15) 6px);
+  opacity: 0.4;
+  pointer-events: none;
+  z-index: 1;
+}
+
+@keyframes woodGrainShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes woodFade {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes woodDustSlow {
+  0% {
+    transform: translateX(0) translateY(0);
+  }
+  100% {
+    transform: translateX(-50%) translateY(-50%);
+  }
+}
