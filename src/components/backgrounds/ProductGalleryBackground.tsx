@@ -28,7 +28,7 @@ const ProductGalleryBackground: React.FC = () => {
 
     const ctx = gsap.context(() => {
       console.log("ProductGalleryBackground: Initializing ScrollTrigger animations for parallax effect");
-      const colors = ['#6A5A4F', '#7B6B5F', '#8C7C6F', '#9D8D7F', '#AE9E8F', '#BFADA0']; // Wood-like shades
+      // Removed 'const colors ='
       const speeds = [0.1, 0.25, 0.4, 0.55, 0.7, 0.85]; // Varying scroll speeds for parallax
 
       layersRef.current.forEach((layer, index) => {

@@ -33,7 +33,7 @@ export default function About() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
             viewport={{ once: true }}
-          >Discover the legacy of Elite Woodcraft, based in Liverpool, crafting unique wooden masterpieces for clients worldwide with over three decades of expertise.</motion.p>
+          >Discover the legacy of Elite Woodcraft, based in Liverpool, crafting unique wooden masterpieces for clients worldwide with over three decades of expertis'e.</motion.p>
         </div>
       </section>
 
