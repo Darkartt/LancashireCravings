@@ -27,7 +27,8 @@ const HomeBackground: React.FC = () => {
 
     const currentMount = mountRef.current;
 
-    let ctx: ReturnType<typeof gsap.context> | undefined; // Reverted to let and undefined initialization
+    // eslint-disable-next-line prefer-const
+    let ctx: ReturnType<typeof gsap.context> | undefined; 
     ctx = gsap.context(() => {
       // Scene setup
       const scene = new THREE.Scene();
