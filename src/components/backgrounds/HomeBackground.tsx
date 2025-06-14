@@ -27,7 +27,8 @@ const HomeBackground: React.FC = () => {
 
     const currentMount = mountRef.current;
 
-    const ctx = gsap.context(() => {
+    let ctx: ReturnType<typeof gsap.context> | undefined; // Reverted to let and undefined initialization
+    ctx = gsap.context(() => {
       // Scene setup
       const scene = new THREE.Scene();
       const camera = new THREE.PerspectiveCamera(75, currentMount.clientWidth / currentMount.clientHeight, 0.1, 1000);
