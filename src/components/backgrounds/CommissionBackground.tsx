@@ -2,7 +2,7 @@
 
 import React, { Suspense, useState, useEffect, useLayoutEffect } from 'react';
 import { Canvas } from '@react-three/fiber';
-import { OrbitControls, useGLTF, Html } from '@react-three/drei'; // Removed GLTFResult import
+import { OrbitControls, useGLTF, Html } from '@react-three/drei';
 import * as THREE from 'three';
 
 // Placeholder for texture loading, replace with actual texture paths
@@ -121,7 +121,13 @@ const CommissionBackground: React.FC = () => {
 
   useEffect(() => {
     setIsClient(true);
-  }, []);
+    // Preload GLTF model for better performance
+    useGLTF.preload('/chair_model.glb');
+    // Preload initial textures
+    Object.values(placeholderTextures).forEach(src => {
+      if (src) new THREE.TextureLoader().load(src);
+    });
+  }, []); // Empty dependency array to run only once on client mount
 
   // Placeholder textures - these would ideally be preloaded or handled more robustly
   // For now, we're loading them inside the Model component.
@@ -171,12 +177,11 @@ const CommissionBackground: React.FC = () => {
   );
 };
 
-// Preload GLTF model for better performance
-useGLTF.preload('/chair_model.glb');
-// Preload initial textures
-Object.values(placeholderTextures).forEach(src => {
-  if (src) new THREE.TextureLoader().load(src);
-});
+// Removed global preload calls
+// useGLTF.preload('/chair_model.glb');
+// Object.values(placeholderTextures).forEach(src => {
+//   if (src) new THREE.TextureLoader().load(src);
+// });
 
 
 export default CommissionBackground;
