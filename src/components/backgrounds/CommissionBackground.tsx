@@ -2,7 +2,7 @@
 
 import React, { Suspense, useState, useEffect, useLayoutEffect } from 'react';
 import { Canvas } from '@react-three/fiber';
-import { OrbitControls, useGLTF, Html } from '@react-three/drei';
+import { OrbitControls, useGLTF, Html } from '@react-three/drei'; // Removed GLTFResult import
 import * as THREE from 'three';
 
 // Placeholder for texture loading, replace with actual texture paths
@@ -31,15 +31,14 @@ interface ModelProps {
 
 function Model({ woodType }: ModelProps) {
   // All hooks must be called unconditionally at the top level
-  const gltf = useGLTF('/chair_model.glb') as any; // Cast to any to simplify GLTF type for now
+  const gltf = useGLTF('/chair_model.glb') as any; // Reverted to 'as any'
   const { nodes } = gltf; // Destructure nodes here, after gltf is assigned
   const [currentTexture, setCurrentTexture] = useState<THREE.Texture | null>(null);
-  const [errorLoading, setErrorLoading] = useState(false);
+  // Removed errorLoading state declaration
   const [isLoading, setIsLoading] = useState(true);
 
   useLayoutEffect(() => {
     setIsLoading(true);
-    setErrorLoading(false);
     const texturePath = placeholderTextures[woodType];
     if (texturePath) {
       new THREE.TextureLoader().load(
@@ -58,14 +57,12 @@ function Model({ woodType }: ModelProps) {
             errEv
           );
           setCurrentTexture(createPlaceholderTexture(woodType === 'walnut' ? 0x654321 : woodType === 'oak' ? 0xBDA072 : 0xA0522D));
-          setErrorLoading(true);
           setIsLoading(false);
         }
       );
     } else {
       console.warn(`No texture path defined for wood type: ${woodType}. Displaying fallback.`);
       setCurrentTexture(createPlaceholderTexture(0xcccccc)); // Grey placeholder
-      setErrorLoading(true);
       setIsLoading(false);
     }
   }, [woodType]);
