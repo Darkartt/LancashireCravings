@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
+import Image from "next/image"; // Import Image component
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -39,11 +40,10 @@ export default function Header() {
             transition={{ duration: 1.5, ease: "easeOut" }}
             className="mr-4"
           >
-            <svg width="40" height="40" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-              <rect width="100" height="100" rx="10" fill="#8B4513" opacity="0.8"/>
-              <text x="50" y="55" fontFamily="serif" fontSize="40" fontWeight="bold" textAnchor="middle" fill="#FFF">EW</text>
-              <path d="M20,80 L30,70 L40,80 L50,70 L60,80 L70,70 L80,80" stroke="#FFF" strokeWidth="2" fill="none" opacity="0.5"/>
-            </svg>
+            {/* Replace inline SVG with Image component */}
+            <Link href="/">
+              <Image src="/logo.svg" alt="Elite Woodcraft Logo" width={40} height={40} />
+            </Link>
           </motion.div>
           <motion.h1
             initial={{ opacity: 0, x: -20 }}
@@ -51,7 +51,7 @@ export default function Header() {
             transition={{ duration: 1.5, ease: "easeOut", delay: 0.3 }}
             className="text-2xl font-serif font-bold text-accent-primary"
           >
-            Elite Woodcraft
+            <Link href="/">Elite Woodcraft</Link>
           </motion.h1>
         </div>
         <nav className="hidden md:flex space-x-8">
