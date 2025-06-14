@@ -1,0 +1,26 @@
+.header-container {
+  background: linear-gradient(135deg, rgba(139, 69, 19, 0.4), rgba(139, 69, 19, 0.2));
+  background-size: 200% 200%;
+  animation: woodGrain 10s ease-in-out infinite;
+}
+
+@keyframes woodGrain {
+  0% {
+    background-position: 0% 0%;
+  }
+  50% {
+    background-position: 100% 100%;
+  }
+  100% {
+    background-position: 0% 0%;
+  }
+}
+
+.header-cta-button {
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.header-cta-button:hover {
+  transform: scale(1.05);
+  background-color: rgba(139, 69, 19, 0.9);
+}
