@@ -17,7 +17,7 @@ const ThreeBackground = ({ sceneType }: ThreeBackgroundProps) => {
 
   useEffect(() => {
     const currentMount = mountRef.current; // Capture ref value
-    if (!isClient || !currentMount || typeof window === 'undefined') return;
+    if (!isClient || !currentMount || typeof window === 'undefined' || typeof document === 'undefined') return; // Added typeof document check
 
     console.log(`ThreeBackground: Initializing scene for ${sceneType}`);
     if (sceneType === 'blog') {

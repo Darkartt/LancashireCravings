@@ -27,7 +27,7 @@ const HomeBackground: React.FC = () => {
 
     const currentMount = mountRef.current;
 
-    const ctx = gsap.context(() => { // Changed let to const
+    const ctx = gsap.context(() => {
       // Scene setup
       const scene = new THREE.Scene();
       const camera = new THREE.PerspectiveCamera(75, currentMount.clientWidth / currentMount.clientHeight, 0.1, 1000);
@@ -74,15 +74,35 @@ const HomeBackground: React.FC = () => {
       scene.add(backgroundMesh);
       camera.position.z = 5;
 
-      ScrollTrigger.create({
-        trigger: "body",
-        start: "top top",
-        end: "bottom bottom",
-        scrub: 1,
-        onUpdate: self => {
-          backgroundMesh.rotation.y = self.progress * Math.PI * 0.25;
-        }
-      });
+      // Ensure document.body is available before creating ScrollTrigger
+      if (document.body) {
+        ScrollTrigger.create({
+          trigger: "body",
+          start: "top top",
+          end: "bottom bottom",
+          scrub: 1,
+          onUpdate: self => {
+            backgroundMesh.rotation.y = self.progress * Math.PI * 0.25;
+          }
+        });
+      } else {
+        console.warn("HomeBackground: document.body not available for ScrollTrigger. Retrying on load.");
+        // Fallback if body is not immediately available
+        window.addEventListener('load', () => {
+          if (document.body) {
+            ScrollTrigger.create({
+              trigger: "body",
+              start: "top top",
+              end: "bottom bottom",
+              scrub: 1,
+              onUpdate: self => {
+                backgroundMesh.rotation.y = self.progress * Math.PI * 0.25;
+              }
+            });
+            ScrollTrigger.refresh();
+          }
+        }, { once: true });
+      }
 
       const handleMouseMove = (event: MouseEvent) => {
         mousePosition.current.x = (event.clientX / window.innerWidth) * 2 - 1;
@@ -151,7 +171,7 @@ const HomeBackground: React.FC = () => {
           if (material.map) material.map.dispose();
           clearTimeout(refreshTimeout);
           clearTimeout(refreshTimeout2);
-          window.removeEventListener('load', handleWindowLoad);
+          window.removeEventListener('load', handleWindowLoad); // Ensure this is removed
         });
       }
 
