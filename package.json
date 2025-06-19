@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "export": "next export"
+    "test-export": "bash ./scripts/test-static-export.sh",
+    "serve-static": "npx serve out"
   },
   "dependencies": {
     "@lottiefiles/react-lottie-player": "^3.6.0",

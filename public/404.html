@@ -5,21 +5,15 @@
   <title>Redirecting...</title>
   <script>
     // Single Page Apps for GitHub Pages
-    // This script checks if a redirect is needed and handles it
+    // MIT Licensed - https://github.com/rafgraph/spa-github-pages
     (function() {
-      // If the current page is 404.html, redirect to the requested path
-      var pathSegmentsToKeep = 0;
-      var location = window.location;
-      var redirect = sessionStorage.redirect;
-      delete sessionStorage.redirect;
+      // Save the current path to sessionStorage
+      sessionStorage.redirect = location.href;
       
-      // If there was a redirect path stored in sessionStorage, redirect to it
-      if (redirect && redirect != location.href) {
-        history.replaceState(null, null, redirect);
-      }
+      // Redirect to the root
+      location.href = '/';
     })();
   </script>
-  <meta http-equiv="refresh" content="0;URL='/'">
 </head>
 <body>
   <h1>Redirecting...</h1>

@@ -1,6 +1,4 @@
-import ShopCategoryClient from "./ShopCategoryClient";
-
-// This is needed for static export to work with dynamic routes
+// This file must be server-side code
 export function generateStaticParams() {
   return [
     { category: 'tables' },
@@ -15,8 +13,4 @@ export function generateStaticParams() {
     { category: 'gifts' },
     { category: 'memorial' }
   ];
-}
-
-export default function ShopCategory() {
-  return <ShopCategoryClient />;
 }
