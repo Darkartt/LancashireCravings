@@ -327,7 +327,7 @@ const ThreeBackground = ({ sceneType }: ThreeBackgroundProps) => {
   }
 
   return (
-    <div ref={mountRef} style={{ position: 'fixed', top: 0, left: 0, zIndex: -10, width: '100%', height: '100vh', overflow: 'hidden', pointerEvents: 'none', background: 'transparent', isolation: 'isolate' }} />
+    <div ref={mountRef} style={{ position: 'fixed', top: 0, left: 0, zIndex: 0, width: '100%', height: '100vh', overflow: 'hidden', pointerEvents: 'none', background: 'transparent', isolation: 'isolate' }} />
   );
 };
 
