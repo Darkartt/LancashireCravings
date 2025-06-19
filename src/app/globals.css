@@ -1,11 +1,16 @@
 @import "tailwindcss";
 
 :root {
-  /* Earth tones for a premium woodcarving aesthetic */
-  --background: #f5f5f0; /* Cream/off-white for a warm, natural feel */
-  --foreground: #3a2e1f; /* Dark brown for text, reminiscent of rich wood */
+  /* Enhanced Earth Tone Palette for Premium Woodcarving Aesthetic */
+  --background: #faf9f7; /* Warm cream for a luxurious feel */
+  --foreground: #2d1810; /* Rich espresso brown for text */
   --accent-primary: #8B4513; /* Saddle brown for primary accents */
   --accent-secondary: #556B2F; /* Dark olive green for secondary accents */
+  --accent-tertiary: #D2B48C; /* Tan/wood tone for subtle highlights */
+  --accent-warm: #CD853F; /* Peru/warm brown for highlights */
+  --text-muted: #6b5b4d; /* Muted brown for secondary text */
+  --border-subtle: #e8e4da; /* Very light brown for borders */
+  --surface-elevated: #ffffff; /* Pure white for cards and elevated surfaces */
 }
 
 @theme inline {
@@ -13,27 +18,485 @@
   --color-foreground: var(--foreground);
   --color-accent-primary: var(--accent-primary);
   --color-accent-secondary: var(--accent-secondary);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-accent-tertiary: var(--accent-tertiary);
+  --color-accent-warm: var(--accent-warm);
+  --color-text-muted: var(--text-muted);
+  --color-border-subtle: var(--border-subtle);
+  --color-surface-elevated: var(--surface-elevated);
+  --font-sans: var(--font-inter);
+  --font-serif: var(--font-lora);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #2c2416; /* Dark wood tone for background */
-    --foreground: #e8e4da; /* Light cream for text in dark mode */
-    --accent-primary: #A0522D; /* Sienna for primary accents in dark mode */
-    --accent-secondary: #6B8E23; /* Olive drab for secondary accents in dark mode */
+    --background: #1a0f0a; /* Deep wood tone for dark mode background */
+    --foreground: #f5f2ed; /* Warm cream for text in dark mode */
+    --accent-primary: #CD853F; /* Peru/warm brown for primary accents in dark mode */
+    --accent-secondary: #8FBC8F; /* Dark sea green for secondary accents in dark mode */
+    --accent-tertiary: #A0522D; /* Sienna for tertiary accents */
+    --accent-warm: #D2B48C; /* Tan for warm highlights */
+    --text-muted: #c4b59a; /* Light muted brown for secondary text */
+    --border-subtle: #3d2a1a; /* Dark brown for borders */
+    --surface-elevated: #2d1810; /* Elevated surface color */  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-serif), Georgia, 'Times New Roman', serif;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Enhanced Typography System */
+.hero-title {
+  line-height: 0.9;
+  letter-spacing: -0.02em;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.hero-subtitle {
+  line-height: 1.6;
+  letter-spacing: 0.01em;
+}
+
+/* Premium Section Spacing */
+.section-padding-large {
+  padding-top: 8rem;
+  padding-bottom: 8rem;
+}
+
+.section-padding-xlarge {
+  padding-top: 12rem;
+  padding-bottom: 12rem;
+}
+
+/* Smooth Scroll Behavior */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Enhanced Button Styles */
+.btn-primary {
+  background: linear-gradient(135deg, var(--accent-primary), var(--accent-warm));
+  color: var(--surface-elevated);
+  border: none;
+  border-radius: 12px;
+  padding: 1.25rem 3rem;
+  font-weight: 600;
+  font-size: 1.125rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 12px rgba(139, 69, 19, 0.2);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(139, 69, 19, 0.3);
+  background: linear-gradient(135deg, var(--accent-warm), var(--accent-primary));
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--accent-primary);
+  border: 2px solid var(--accent-primary);
+  border-radius: 12px;
+  padding: 1.25rem 3rem;
+  font-weight: 600;
+  font-size: 1.125rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-secondary:hover {
+  background: var(--accent-primary);
+  color: var(--surface-elevated);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(139, 69, 19, 0.2);
+}
+
+/* Wood Grain Texture Background */
+.wood-texture {
+  background-image: 
+    linear-gradient(90deg, transparent 79px, rgba(139, 69, 19, 0.03) 81px, rgba(139, 69, 19, 0.03) 82px, transparent 84px),
+    linear-gradient(rgba(139, 69, 19, 0.02) 0.5px, transparent 0.5px);
+  background-size: 84px 40px, 100% 20px;
+}
+
+/* Timeline Animation */
+.timeline-item {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.timeline-item.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Testimonial Card Enhancements */
+.testimonial-card {
+  background: var(--surface-elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: 16px;
+  padding: 2rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.testimonial-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.testimonial-card:hover::before {
+  transform: scaleX(1);
+}
+
+.testimonial-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
+}
+
+/* Portfolio Card Enhancements */
+.portfolio-card {
+  border-radius: 20px;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+.portfolio-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--accent-primary)/10, var(--accent-secondary)/10);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.portfolio-card:hover::after {
+  opacity: 1;
+}
+
+.portfolio-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+/* ===== PREMIUM ANIMATION SYSTEM ===== */
+
+/* Base Animation Classes */
+.animate-fade-in {
+  animation: fadeIn 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.animate-fade-in-down {
+  animation: fadeInDown 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.animate-slide-in-left {
+  animation: slideInLeft 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.animate-slide-in-right {
+  animation: slideInRight 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.animate-rotate-in {
+  animation: rotateIn 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* Staggered Animation Delays */
+.animate-delay-100 { animation-delay: 0.1s; }
+.animate-delay-200 { animation-delay: 0.2s; }
+.animate-delay-300 { animation-delay: 0.3s; }
+.animate-delay-400 { animation-delay: 0.4s; }
+.animate-delay-500 { animation-delay: 0.5s; }
+.animate-delay-600 { animation-delay: 0.6s; }
+.animate-delay-700 { animation-delay: 0.7s; }
+.animate-delay-800 { animation-delay: 0.8s; }
+
+/* Initial States for Elements That Will Animate */
+[data-animate-fade-up],
+[data-animate-fade-in],
+[data-animate-slide-left],
+[data-animate-slide-right],
+[data-animate-scale] {
+  opacity: 0;
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+[data-animate-fade-up] {
+  transform: translateY(30px);
+}
+
+[data-animate-slide-left] {
+  transform: translateX(-30px);
+}
+
+[data-animate-slide-right] {
+  transform: translateX(30px);
+}
+
+[data-animate-scale] {
+  transform: scale(0.9);
+}
+
+/* When animations are triggered, override the initial states */
+[data-animate-fade-up].animate-fade-in-up,
+[data-animate-fade-in].animate-fade-in,
+[data-animate-slide-left].animate-slide-in-left,
+[data-animate-slide-right].animate-slide-in-right,
+[data-animate-scale].animate-scale-in {
+  opacity: 1 !important;
+  transform: translateY(0) translateX(0) scale(1) !important;
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+/* Keyframe Definitions */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes rotateIn {
+  from {
+    opacity: 0;
+    transform: rotate(-10deg) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: rotate(0deg) scale(1);
+  }
+}
+
+/* Hero Section Scroll Animation */
+.hero-parallax {
+  transition: transform 0.1s ease-out, opacity 0.1s ease-out;
+}
+
+/* Smooth Scroll Behavior */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Micro-interactions for Interactive Elements */
+.btn-primary,
+.btn-secondary {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary::after,
+.btn-secondary::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.btn-primary:active::after,
+.btn-secondary:active::after {
+  width: 300px;
+  height: 300px;
+}
+
+/* Enhanced Card Hover Effects */
+.card-hover {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.card-hover::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transition: left 0.5s;
+}
+
+.card-hover:hover::before {
+  left: 100%;
+}
+
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+}
+
+/* Loading States */
+.loading-shimmer {
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Scroll Progress Indicator */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+  transform-origin: 0%;
+  z-index: 1000;
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  .hero-parallax {
+    transform: none !important;
+  }
+}
+
+/* Enhanced Accessibility Styles */
+:focus {
+  outline: 3px solid var(--accent-primary);
+  outline-offset: 2px;
+}
+
+a:focus,
+button:focus {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 2px;
+}
+
+/* Print Styles */
+@media print {
+  .no-print {
+    display: none;
+  }
+  
+  body {
+    background: white;
+    color: black;
+  }
+}
+
+/* High Contrast Mode Support */
+@media (prefers-contrast: high) {
+  :root {
+    --accent-primary: #000;
+    --accent-secondary: #000;
+    --foreground: #000;
+    --background: #fff;
   }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: 'Papyrus', fantasy, sans-serif;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7), 
-               -1px -1px 2px rgba(255, 255, 255, 0.3), 
-               3px 3px 6px rgba(0, 0, 0, 0.5), 
-               inset 1px 1px 2px rgba(0, 0, 0, 0.4);
+  font-family: 'Lora', sans-serif;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5), 
+               -1px -1px 1px rgba(255, 255, 255, 0.2), 
+               2px 2px 4px rgba(0, 0, 0, 0.3), 
+               inset 1px 1px 1px rgba(0, 0, 0, 0.2);
   animation: carveEffect 3s ease-in-out infinite;
 }
 
@@ -211,4 +674,126 @@ body {
   100% {
     transform: translateX(-50%) translateY(-50%);
   }
+}
+
+/* Mobile Responsive Styles */
+@media (max-width: 768px) {
+  body {
+    font-size: 14px; /* Reduce base font size for better readability on mobile */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5), 
+                 -1px -1px 1px rgba(255, 255, 255, 0.2); /* Reduce text shadow intensity */
+  }
+  
+  /* Adjust container padding and margins for mobile */
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  
+  /* Stack grid layouts vertically on mobile */
+  [class*="grid-cols-"] {
+    grid-template-columns: 1fr; /* Override multi-column grids to single column */
+  }
+  
+  /* Adjust headings for mobile */
+  h1, h2, h3, h4, h5, h6 {
+    font-size: calc(1.2em + 1vw); /* Scale headings down */
+    margin-bottom: 0.75rem;
+  }
+  
+  /* Improve touch target size for buttons and links */
+  button, a {
+    min-height: 44px; /* Minimum touch target size for mobile */
+    padding: 0.5rem 1rem;
+  }
+  
+  /* Hide or scale down heavy background animations on mobile for performance */
+  .particle-background {
+    background: var(--background); /* Fallback to solid background */
+    animation: none; /* Disable animations on mobile */
+  }
+  
+  .particles, .shop-background::before, .shop-page-container::before {
+    display: none; /* Hide particle effects on mobile */
+  }
+}
+
+/* Ensure animations are preserved on desktop */
+@media (min-width: 769px) {
+  .particle-background {
+    background: linear-gradient(-45deg, var(--accent-primary)/25, var(--accent-secondary)/25, var(--foreground)/15, var(--background));
+    background-size: 400% 400%;
+    animation: gradient-shift 15s ease infinite;
+  }
+  
+  .particles {
+    display: block;
+  }
+  
+  .shop-background, .shop-page-container {
+    background: linear-gradient(45deg, var(--background), var(--background)/95, var(--accent-primary)/10, var(--background)/95, var(--background));
+    background-size: 300% 300%;
+    animation: woodGrainShift 20s ease infinite;
+  }
+  
+  .shop-background::before, .shop-page-container::before {
+    display: block;
+  }
+}
+
+/* ===== BACKGROUND DOCKING ANIMATION ===== */
+
+/* Enhanced pulse animation for the docking target */
+@keyframes pulse {
+  0%, 100% { 
+    opacity: 0.2;
+    transform: scale(1);
+  }
+  50% { 
+    opacity: 0.4;
+    transform: scale(1.05);
+  }
+}
+
+/* Docking target hover and interaction states */
+#background-dock {
+  animation: none;
+  transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Add sophisticated glow effect when docking target is visible */
+#background-dock.visible {
+  animation: subtle-glow 4s ease-in-out infinite;
+}
+
+@keyframes subtle-glow {
+  0%, 100% { 
+    box-shadow: 
+      0 0 20px rgba(139, 69, 19, 0.3),
+      0 8px 32px -8px rgba(0, 0, 0, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  }
+  50% { 
+    box-shadow: 
+      0 0 35px rgba(139, 69, 19, 0.5),
+      0 8px 32px -8px rgba(0, 0, 0, 0.4),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  }
+}
+
+/* Sophisticated background for the docking target */
+.dock-background {
+  background: 
+    radial-gradient(circle at 30% 30%, rgba(245, 158, 11, 0.2), transparent 50%),
+    radial-gradient(circle at 70% 70%, rgba(139, 69, 19, 0.3), transparent 50%),
+    linear-gradient(135deg, rgba(139, 69, 19, 0.1), rgba(101, 69, 34, 0.2));
+}
+
+/* Add texture overlay for premium feel */
+.dock-texture {
+  background-image: 
+    radial-gradient(circle at 25% 25%, rgba(139, 69, 19, 0.1) 1px, transparent 1px),
+    radial-gradient(circle at 75% 75%, rgba(101, 69, 34, 0.1) 1px, transparent 1px);
+  background-size: 16px 16px, 12px 12px;
+  background-position: 0 0, 8px 6px;
 }

@@ -1,0 +1,69 @@
+<svg width="180" height="180" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background with rounded corners for iOS -->
+  <rect width="180" height="180" rx="40" fill="#F5F5DC"/>
+  
+  <!-- Main background circle -->
+  <circle cx="90" cy="90" r="70" fill="#8B4513" fill-opacity="0.1" stroke="#8B4513" stroke-width="2"/>
+  
+  <!-- Wood grain pattern -->
+  <defs>
+    <pattern id="appleWoodTexture" patternUnits="userSpaceOnUse" width="12" height="24">
+      <path d="M0,0 Q6,6 0,12 Q6,18 0,24" stroke="#CD853F" stroke-width="0.8" fill="none" opacity="0.3"/>
+      <path d="M6,0 Q12,8 6,16 Q12,20 6,24" stroke="#8B4513" stroke-width="0.6" fill="none" opacity="0.2"/>
+    </pattern>
+    
+    <!-- Enhanced gradients for Apple touch icon -->
+    <linearGradient id="appleChiselGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#E0E0E0;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#A0A0A0;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#606060;stop-opacity:1" />
+    </linearGradient>
+    
+    <linearGradient id="appleHandleGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#F5DEB3;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#DEB887;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#CD853F;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Subtle wood texture -->
+  <circle cx="90" cy="90" r="65" fill="url(#appleWoodTexture)" opacity="0.25"/>
+  
+  <!-- Main chisel illustration -->
+  <g transform="translate(90, 90)">
+    <!-- Chisel handle -->
+    <ellipse cx="0" cy="-25" rx="8" ry="20" fill="url(#appleHandleGradient)" stroke="#8B4513" stroke-width="1"/>
+    
+    <!-- Handle rings (traditional detail) -->
+    <ellipse cx="0" cy="-35" rx="8.5" ry="2" fill="none" stroke="#654321" stroke-width="0.8"/>
+    <ellipse cx="0" cy="-15" rx="8.5" ry="2" fill="none" stroke="#654321" stroke-width="0.8"/>
+    
+    <!-- Metal ferrule -->
+    <ellipse cx="0" cy="-5" rx="9" ry="4" fill="#C0C0C0" stroke="#808080" stroke-width="0.8"/>
+    
+    <!-- Chisel blade -->
+    <path d="M-8,0 L8,0 L10,25 L-10,25 Z" fill="url(#appleChiselGradient)" stroke="#404040" stroke-width="1"/>
+    
+    <!-- Blade bevel (for depth and realism) -->
+    <path d="M-6,0 L6,0 L7,15 L-7,15 Z" fill="#F0F0F0" opacity="0.8"/>
+    
+    <!-- Blade edge highlight -->
+    <path d="M-10,25 L10,25" stroke="#E8E8E8" stroke-width="2" stroke-linecap="round"/>
+  </g>
+  
+  <!-- Decorative wood shavings -->
+  <path d="M120 60 Q135 45 145 65 Q130 80 120 60" fill="#DEB887" opacity="0.7" stroke="#CD853F" stroke-width="1"/>
+  <path d="M130 100 Q145 85 155 105 Q140 120 130 100" fill="#CD853F" opacity="0.6" stroke="#8B4513" stroke-width="1"/>
+  <path d="M55 110 Q40 95 50 115 Q65 100 55 110" fill="#D4AF37" opacity="0.5" stroke="#B8860B" stroke-width="1"/>
+  
+  <!-- Brand initial in corner -->
+  <circle cx="145" cy="35" r="15" fill="#8B4513" opacity="0.8"/>
+  <text x="145" y="40" font-family="serif" font-size="16" font-weight="bold" fill="#F5F5DC" text-anchor="middle">E</text>
+  
+  <!-- Quality accent dots -->
+  <circle cx="45" cy="45" r="3" fill="#D4AF37" opacity="0.8"/>
+  <circle cx="135" cy="135" r="3" fill="#D4AF37" opacity="0.8"/>
+  
+  <!-- Subtle decorative border -->
+  <rect width="180" height="180" rx="40" fill="none" stroke="#8B4513" stroke-width="1" opacity="0.3"/>
+</svg>

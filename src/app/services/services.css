@@ -31,7 +31,7 @@ section.bg-background {
 /* Ensure content within Our Services remains clear and cards stand out */
 section.bg-background * {
   background: transparent !important;
-  animation: none !important;
+  animation: none; /* Disable animation for content within this section */
   z-index: 15; /* Content stays above subtle animation */
 }
 
@@ -45,7 +45,7 @@ section.bg-background .p-6.rounded-lg.shadow-md {
 /* Specific styling for Call to Action section to be on top of animation */
 section.bg-accent-primary\/10 {
   background: rgba(139, 69, 19, 0.1) !important; /* Semi-transparent background to maintain design */
-  animation: none !important; /* Explicitly disable animation */
+  animation: none; /* Disable animation for this section */
   position: relative;
   z-index: 30; /* Even higher z-index to ensure it stays above background */
 }
@@ -53,7 +53,7 @@ section.bg-accent-primary\/10 {
 /* Ensure nested elements within Call to Action are also unaffected by animation */
 section.bg-accent-primary\/10 * {
   background: transparent !important;
-  animation: none !important;
+  animation: none; /* Disable animation for nested elements */
 }
 
 /* Removed CSS animation to prevent interference with Three.js animation */
