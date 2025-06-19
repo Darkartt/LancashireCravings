@@ -2,8 +2,7 @@
   "name": "professional-website",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://exampledesign.co.uk/",
-  "scripts": {
+  "homepage": "https://exampledesign.co.uk/",  "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
