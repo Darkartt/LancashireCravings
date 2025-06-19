@@ -1,14 +1,13 @@
 import type { NextConfig } from "next";
 
-// const isProd = process.env.NODE_ENV === 'production'; // No longer needed for assetPrefix
+const isProd = process.env.NODE_ENV === 'production';
 
 const nextConfig: NextConfig = {
-  // output: 'export', // Temporarily commented out to resolve asset loading issues in development mode
-  // assetPrefix: isProd ? '/check/' : undefined, // Remove assetPrefix for custom domain root
+  output: 'export',
+  basePath: isProd ? '/your-repo-name' : '', // <-- Replace with your actual repo name
   images: {
     unoptimized: true
   },
-  /* config options here */
 };
 
 export default nextConfig;

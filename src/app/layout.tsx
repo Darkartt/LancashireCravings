@@ -3,6 +3,7 @@ import { Inter, Lora } from "next/font/google";
 import "./globals.css";
 import { AnimationProvider } from "../components/AnimationProvider";
 import ErrorBoundary from "../components/ErrorBoundary";
+import HydrationSuppressor from '../components/HydrationSuppressor';
 import { generateMetadata, generateStructuredData } from "../lib/metadata";
 
 const inter = Inter({
@@ -64,11 +65,13 @@ export default function RootLayout({
         />
       </head>
       <body className="antialiased">
-        <ErrorBoundary>
+        <HydrationSuppressor>
           <AnimationProvider>
-            {children}
+            <ErrorBoundary>
+              {children}
+            </ErrorBoundary>
           </AnimationProvider>
-        </ErrorBoundary>
+        </HydrationSuppressor>
       </body>
     </html>
   );
