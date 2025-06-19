@@ -9,9 +9,13 @@ const nextConfig: NextConfig = {
   output: 'export', // Enable static HTML export for GitHub Pages
   // basePath: basePath, // No basePath for custom domain
   images: {
-    unoptimized: true
+    unoptimized: true // Required for static export
   },
-  /* config options here */
+  trailingSlash: true, // Helps with GitHub Pages routing
+  // Ensure we're not treating 404s as SSG pages in production
+  experimental: {
+    scrollRestoration: true
+  }
 };
 
 export default nextConfig;

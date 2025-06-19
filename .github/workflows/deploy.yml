@@ -23,16 +23,25 @@ jobs:
           cache: 'npm'
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
       - name: Build the project
         run: npm run build
+        env:
+          NODE_ENV: production
 
       - name: Add .nojekyll file
         run: touch out/.nojekyll
         
       - name: Copy CNAME file
         run: cp CNAME out/
+        
+      - name: Create index.html in root for subfolder navigation
+        run: |
+          # Create a backup copy of the 404.html in case it's needed
+          cp out/404.html out/404.original.html
+          # Ensure we have a proper index.html at the root
+          cp out/index.html out/404.html
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
@@ -40,3 +49,4 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./out
           publish_branch: gh-pages
+          cname: exampledesign.co.uk
