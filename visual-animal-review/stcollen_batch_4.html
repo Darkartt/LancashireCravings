@@ -1,0 +1,2521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Review: STCOLLEN - Batch 4</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 20px; background: #f5f5f5; }
+        .header { background: white; padding: 20px; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .navigation { margin-bottom: 20px; }
+        .nav-button { display: inline-block; padding: 10px 15px; background: #007bff; color: white; text-decoration: none; border-radius: 4px; margin-right: 10px; }
+        .nav-button:hover { background: #0056b3; }
+        .image-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
+        .image-card { background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .image-container { position: relative; height: 250px; overflow: hidden; }
+        .image-container img { width: 100%; height: 100%; object-fit: cover; cursor: pointer; }
+        .image-info { padding: 15px; }
+        .filename { font-weight: bold; color: #333; margin-bottom: 10px; word-break: break-all; }
+        .classification-form { margin-top: 10px; }
+        .form-group { margin-bottom: 10px; }
+        .form-group label { display: block; font-weight: bold; margin-bottom: 5px; color: #555; }
+        .form-group select, .form-group input { width: 100%; padding: 5px; border: 1px solid #ddd; border-radius: 4px; }
+        .status-indicator { position: absolute; top: 10px; right: 10px; padding: 5px 10px; border-radius: 4px; font-weight: bold; }
+        .status-pending { background: #ffc107; color: #333; }
+        .status-classified { background: #28a745; color: white; }
+        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); }
+        .modal-content { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); max-width: 90%; max-height: 90%; }
+        .modal-content img { max-width: 100%; max-height: 100%; object-fit: contain; }
+        .close-modal { position: absolute; top: 10px; right: 25px; color: white; font-size: 35px; font-weight: bold; cursor: pointer; }
+        .progress-bar { background: #e9ecef; border-radius: 4px; height: 20px; margin: 10px 0; }
+        .progress-fill { background: #28a745; height: 100%; border-radius: 4px; transition: width 0.3s; }
+        .export-button { background: #17a2b8; color: white; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; margin: 10px 5px; }
+        .export-button:hover { background: #138496; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🔍 STCOLLEN - Batch 4/4</h1>
+        <p>Classify each image by animal type and process stage. Click images to enlarge.</p>
+        
+        <div class="progress-bar">
+            <div id="progressFill" class="progress-fill" style="width: 0%"></div>
+        </div>
+        <p id="progressText">0/22 images classified</p>
+        
+        <button onclick="exportClassifications()" class="export-button">📤 Export Classifications</button>
+        <button onclick="importClassifications()" class="export-button">📥 Import Classifications</button>
+    </div>
+
+    <div class="navigation">
+        <a href="index.html" class="nav-button">← Back to Index</a>
+        <a href="stcollen_batch_3.html" class="nav-button">← Previous Batch</a>
+        
+    </div>
+
+    <div class="image-grid" id="imageGrid">
+        
+            <div class="image-card" data-index="0">
+                <div class="image-container">
+                    <img src="/media/archive\original-files-backup-20250706\St Collen statue\IMG_0768.JPEG" alt="IMG_0768.JPEG" onclick="openModal(this.src)">
+                    <div class="status-indicator status-pending" id="status-0">Pending</div>
+                </div>
+                <div class="image-info">
+                    <div class="filename">IMG_0768.JPEG</div>
+                    <div style="font-size: 0.9em; color: #666; margin-bottom: 10px;">archive\original-files-backup-20250706\St Collen statue\IMG_0768.JPEG</div>
+                    
+                    <div class="classification-form">
+                        <div class="form-group">
+                            <label for="animal-0">Animal Type:</label>
+                            <select id="animal-0" onchange="updateClassification(0)">
+                                <option value="">-- Select Animal --</option>
+                                <optgroup label="Fish">
+                                    <option value="largemouth_bass">Largemouth Bass</option>
+                                    <option value="smallmouth_bass">Smallmouth Bass</option>
+                                    <option value="striped_bass">Striped Bass</option>
+                                    <option value="bass_generic">Bass (Generic)</option>
+                                    <option value="trout">Trout</option>
+                                    <option value="salmon">Salmon</option>
+                                    <option value="pike">Pike</option>
+                                    <option value="muskie">Muskie</option>
+                                    <option value="walleye">Walleye</option>
+                                    <option value="perch">Perch</option>
+                                    <option value="catfish">Catfish</option>
+                                    <option value="sunfish">Sunfish</option>
+                                    <option value="other_fish">Other Fish</option>
+                                </optgroup>
+                                <optgroup label="Birds">
+                                    <option value="bald_eagle">Bald Eagle</option>
+                                    <option value="golden_eagle">Golden Eagle</option>
+                                    <option value="eagle_generic">Eagle (Generic)</option>
+                                    <option value="owl">Owl</option>
+                                    <option value="hawk">Hawk</option>
+                                    <option value="duck">Duck</option>
+                                    <option value="goose">Goose</option>
+                                    <option value="heron">Heron</option>
+                                    <option value="cardinal">Cardinal</option>
+                                    <option value="woodpecker">Woodpecker</option>
+                                    <option value="other_bird">Other Bird</option>
+                                </optgroup>
+                                <optgroup label="Insects & Small Creatures">
+                                    <option value="butterfly">Butterfly</option>
+                                    <option value="dragonfly">Dragonfly</option>
+                                    <option value="bee">Bee</option>
+                                    <option value="spider">Spider</option>
+                                    <option value="frog">Frog</option>
+                                    <option value="turtle">Turtle</option>
+                                    <option value="lizard">Lizard</option>
+                                    <option value="snake">Snake</option>
+                                </optgroup>
+                                <optgroup label="Mammals">
+                                    <option value="deer">Deer</option>
+                                    <option value="bear">Bear</option>
+                                    <option value="wolf">Wolf</option>
+                                    <option value="fox">Fox</option>
+                                    <option value="rabbit">Rabbit</option>
+                                    <option value="squirrel">Squirrel</option>
+                                    <option value="horse">Horse</option>
+                                    <option value="cow">Cow</option>
+                                    <option value="other_mammal">Other Mammal</option>
+                                </optgroup>
+                                <optgroup label="Marine Life">
+                                    <option value="dolphin">Dolphin</option>
+                                    <option value="whale">Whale</option>
+                                    <option value="shark">Shark</option>
+                                    <option value="octopus">Octopus</option>
+                                </optgroup>
+                                <optgroup label="Mythical/Religious">
+                                    <option value="nessie">Nessie/Lake Monster</option>
+                                    <option value="dragon">Dragon</option>
+                                    <option value="st_collen">St. Collen</option>
+                                    <option value="angel">Angel</option>
+                                    <option value="cross">Cross</option>
+                                </optgroup>
+                                <optgroup label="Other">
+                                    <option value="unknown">Unknown/Unclear</option>
+                                    <option value="not_animal">Not an Animal</option>
+                                    <option value="multiple">Multiple Animals</option>
+                                </optgroup>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="stage-0">Process Stage:</label>
+                            <select id="stage-0" onchange="updateClassification(0)">
+                                <option value="">-- Select Stage --</option>
+                                <option value="raw_log">Raw Log (with bark)</option>
+                                <option value="rough_carving">Rough Carving (basic shape)</option>
+                                <option value="detailed_work">Detailed Work (features defined)</option>
+                                <option value="finishing">Finishing (sanding, refinement)</option>
+                                <option value="final_complete">Final Complete (painted/stained)</option>
+                                <option value="unknown_stage">Unknown Stage</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="notes-0">Notes (optional):</label>
+                            <input type="text" id="notes-0" placeholder="Any additional notes..." onchange="updateClassification(0)">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="image-card" data-index="1">
+                <div class="image-container">
+                    <img src="/media/archive\original-files-backup-20250706\St Collen statue\IMG_0776.JPEG" alt="IMG_0776.JPEG" onclick="openModal(this.src)">
+                    <div class="status-indicator status-pending" id="status-1">Pending</div>
+                </div>
+                <div class="image-info">
+                    <div class="filename">IMG_0776.JPEG</div>
+                    <div style="font-size: 0.9em; color: #666; margin-bottom: 10px;">archive\original-files-backup-20250706\St Collen statue\IMG_0776.JPEG</div>
+                    
+                    <div class="classification-form">
+                        <div class="form-group">
+                            <label for="animal-1">Animal Type:</label>
+                            <select id="animal-1" onchange="updateClassification(1)">
+                                <option value="">-- Select Animal --</option>
+                                <optgroup label="Fish">
+                                    <option value="largemouth_bass">Largemouth Bass</option>
+                                    <option value="smallmouth_bass">Smallmouth Bass</option>
+                                    <option value="striped_bass">Striped Bass</option>
+                                    <option value="bass_generic">Bass (Generic)</option>
+                                    <option value="trout">Trout</option>
+                                    <option value="salmon">Salmon</option>
+                                    <option value="pike">Pike</option>
+                                    <option value="muskie">Muskie</option>
+                                    <option value="walleye">Walleye</option>
+                                    <option value="perch">Perch</option>
+                                    <option value="catfish">Catfish</option>
+                                    <option value="sunfish">Sunfish</option>
+                                    <option value="other_fish">Other Fish</option>
+                                </optgroup>
+                                <optgroup label="Birds">
+                                    <option value="bald_eagle">Bald Eagle</option>
+                                    <option value="golden_eagle">Golden Eagle</option>
+                                    <option value="eagle_generic">Eagle (Generic)</option>
+                                    <option value="owl">Owl</option>
+                                    <option value="hawk">Hawk</option>
+                                    <option value="duck">Duck</option>
+                                    <option value="goose">Goose</option>
+                                    <option value="heron">Heron</option>
+                                    <option value="cardinal">Cardinal</option>
+                                    <option value="woodpecker">Woodpecker</option>
+                                    <option value="other_bird">Other Bird</option>
+                                </optgroup>
+                                <optgroup label="Insects & Small Creatures">
+                                    <option value="butterfly">Butterfly</option>
+                                    <option value="dragonfly">Dragonfly</option>
+                                    <option value="bee">Bee</option>
+                                    <option value="spider">Spider</option>
+                                    <option value="frog">Frog</option>
+                                    <option value="turtle">Turtle</option>
+                                    <option value="lizard">Lizard</option>
+                                    <option value="snake">Snake</option>
+                                </optgroup>
+                                <optgroup label="Mammals">
+                                    <option value="deer">Deer</option>
+                                    <option value="bear">Bear</option>
+                                    <option value="wolf">Wolf</option>
+                                    <option value="fox">Fox</option>
+                                    <option value="rabbit">Rabbit</option>
+                                    <option value="squirrel">Squirrel</option>
+                                    <option value="horse">Horse</option>
+                                    <option value="cow">Cow</option>
+                                    <option value="other_mammal">Other Mammal</option>
+                                </optgroup>
+                                <optgroup label="Marine Life">
+                                    <option value="dolphin">Dolphin</option>
+                                    <option value="whale">Whale</option>
+                                    <option value="shark">Shark</option>
+                                    <option value="octopus">Octopus</option>
+                                </optgroup>
+                                <optgroup label="Mythical/Religious">
+                                    <option value="nessie">Nessie/Lake Monster</option>
+                                    <option value="dragon">Dragon</option>
+                                    <option value="st_collen">St. Collen</option>
+                                    <option value="angel">Angel</option>
+                                    <option value="cross">Cross</option>
+                                </optgroup>
+                                <optgroup label="Other">
+                                    <option value="unknown">Unknown/Unclear</option>
+                                    <option value="not_animal">Not an Animal</option>
+                                    <option value="multiple">Multiple Animals</option>
+                                </optgroup>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="stage-1">Process Stage:</label>
+                            <select id="stage-1" onchange="updateClassification(1)">
+                                <option value="">-- Select Stage --</option>
+                                <option value="raw_log">Raw Log (with bark)</option>
+                                <option value="rough_carving">Rough Carving (basic shape)</option>
+                                <option value="detailed_work">Detailed Work (features defined)</option>
+                                <option value="finishing">Finishing (sanding, refinement)</option>
+                                <option value="final_complete">Final Complete (painted/stained)</option>
+                                <option value="unknown_stage">Unknown Stage</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="notes-1">Notes (optional):</label>
+                            <input type="text" id="notes-1" placeholder="Any additional notes..." onchange="updateClassification(1)">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="image-card" data-index="2">
+                <div class="image-container">
+                    <img src="/media/archive\original-files-backup-20250706\St Collen statue\IMG_0778.JPEG" alt="IMG_0778.JPEG" onclick="openModal(this.src)">
+                    <div class="status-indicator status-pending" id="status-2">Pending</div>
+                </div>
+                <div class="image-info">
+                    <div class="filename">IMG_0778.JPEG</div>
+                    <div style="font-size: 0.9em; color: #666; margin-bottom: 10px;">archive\original-files-backup-20250706\St Collen statue\IMG_0778.JPEG</div>
+                    
+                    <div class="classification-form">
+                        <div class="form-group">
+                            <label for="animal-2">Animal Type:</label>
+                            <select id="animal-2" onchange="updateClassification(2)">
+                                <option value="">-- Select Animal --</option>
+                                <optgroup label="Fish">
+                                    <option value="largemouth_bass">Largemouth Bass</option>
+                                    <option value="smallmouth_bass">Smallmouth Bass</option>
+                                    <option value="striped_bass">Striped Bass</option>
+                                    <option value="bass_generic">Bass (Generic)</option>
+                                    <option value="trout">Trout</option>
+                                    <option value="salmon">Salmon</option>
+                                    <option value="pike">Pike</option>
+                                    <option value="muskie">Muskie</option>
+                                    <option value="walleye">Walleye</option>
+                                    <option value="perch">Perch</option>
+                                    <option value="catfish">Catfish</option>
+                                    <option value="sunfish">Sunfish</option>
+                                    <option value="other_fish">Other Fish</option>
+                                </optgroup>
+                                <optgroup label="Birds">
+                                    <option value="bald_eagle">Bald Eagle</option>
+                                    <option value="golden_eagle">Golden Eagle</option>
+                                    <option value="eagle_generic">Eagle (Generic)</option>
+                                    <option value="owl">Owl</option>
+                                    <option value="hawk">Hawk</option>
+                                    <option value="duck">Duck</option>
+                                    <option value="goose">Goose</option>
+                                    <option value="heron">Heron</option>
+                                    <option value="cardinal">Cardinal</option>
+                                    <option value="woodpecker">Woodpecker</option>
+                                    <option value="other_bird">Other Bird</option>
+                                </optgroup>
+                                <optgroup label="Insects & Small Creatures">
+                                    <option value="butterfly">Butterfly</option>
+                                    <option value="dragonfly">Dragonfly</option>
+                                    <option value="bee">Bee</option>
+                                    <option value="spider">Spider</option>
+                                    <option value="frog">Frog</option>
+                                    <option value="turtle">Turtle</option>
+                                    <option value="lizard">Lizard</option>
+                                    <option value="snake">Snake</option>
+                                </optgroup>
+                                <optgroup label="Mammals">
+                                    <option value="deer">Deer</option>
+                                    <option value="bear">Bear</option>
+                                    <option value="wolf">Wolf</option>
+                                    <option value="fox">Fox</option>
+                                    <option value="rabbit">Rabbit</option>
+                                    <option value="squirrel">Squirrel</option>
+                                    <option value="horse">Horse</option>
+                                    <option value="cow">Cow</option>
+                                    <option value="other_mammal">Other Mammal</option>
+                                </optgroup>
+                                <optgroup label="Marine Life">
+                                    <option value="dolphin">Dolphin</option>
+                                    <option value="whale">Whale</option>
+                                    <option value="shark">Shark</option>
+                                    <option value="octopus">Octopus</option>
+                                </optgroup>
+                                <optgroup label="Mythical/Religious">
+                                    <option value="nessie">Nessie/Lake Monster</option>
+                                    <option value="dragon">Dragon</option>
+                                    <option value="st_collen">St. Collen</option>
+                                    <option value="angel">Angel</option>
+                                    <option value="cross">Cross</option>
+                                </optgroup>
+                                <optgroup label="Other">
+                                    <option value="unknown">Unknown/Unclear</option>
+                                    <option value="not_animal">Not an Animal</option>
+                                    <option value="multiple">Multiple Animals</option>
+                                </optgroup>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="stage-2">Process Stage:</label>
+                            <select id="stage-2" onchange="updateClassification(2)">
+                                <option value="">-- Select Stage --</option>
+                                <option value="raw_log">Raw Log (with bark)</option>
+                                <option value="rough_carving">Rough Carving (basic shape)</option>
+                                <option value="detailed_work">Detailed Work (features defined)</option>
+                                <option value="finishing">Finishing (sanding, refinement)</option>
+                                <option value="final_complete">Final Complete (painted/stained)</option>
+                                <option value="unknown_stage">Unknown Stage</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="notes-2">Notes (optional):</label>
+                            <input type="text" id="notes-2" placeholder="Any additional notes..." onchange="updateClassification(2)">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="image-card" data-index="3">
+                <div class="image-container">
+                    <img src="/media/archive\original-files-backup-20250706\St Collen statue\IMG_0779.JPEG" alt="IMG_0779.JPEG" onclick="openModal(this.src)">
+                    <div class="status-indicator status-pending" id="status-3">Pending</div>
+                </div>
+                <div class="image-info">
+                    <div class="filename">IMG_0779.JPEG</div>
+                    <div style="font-size: 0.9em; color: #666; margin-bottom: 10px;">archive\original-files-backup-20250706\St Collen statue\IMG_0779.JPEG</div>
+                    
+                    <div class="classification-form">
+                        <div class="form-group">
+                            <label for="animal-3">Animal Type:</label>
+                            <select id="animal-3" onchange="updateClassification(3)">
+                                <option value="">-- Select Animal --</option>
+                                <optgroup label="Fish">
+                                    <option value="largemouth_bass">Largemouth Bass</option>
+                                    <option value="smallmouth_bass">Smallmouth Bass</option>
+                                    <option value="striped_bass">Striped Bass</option>
+                                    <option value="bass_generic">Bass (Generic)</option>
+                                    <option value="trout">Trout</option>
+                                    <option value="salmon">Salmon</option>
+                                    <option value="pike">Pike</option>
+                                    <option value="muskie">Muskie</option>
+                                    <option value="walleye">Walleye</option>
+                                    <option value="perch">Perch</option>
+                                    <option value="catfish">Catfish</option>
+                                    <option value="sunfish">Sunfish</option>
+                                    <option value="other_fish">Other Fish</option>
+                                </optgroup>
+                                <optgroup label="Birds">
+                                    <option value="bald_eagle">Bald Eagle</option>
+                                    <option value="golden_eagle">Golden Eagle</option>
+                                    <option value="eagle_generic">Eagle (Generic)</option>
+                                    <option value="owl">Owl</option>
+                                    <option value="hawk">Hawk</option>
+                                    <option value="duck">Duck</option>
+                                    <option value="goose">Goose</option>
+                                    <option value="heron">Heron</option>
+                                    <option value="cardinal">Cardinal</option>
+                                    <option value="woodpecker">Woodpecker</option>
+                                    <option value="other_bird">Other Bird</option>
+                                </optgroup>
+                                <optgroup label="Insects & Small Creatures">
+                                    <option value="butterfly">Butterfly</option>
+                                    <option value="dragonfly">Dragonfly</option>
+                                    <option value="bee">Bee</option>
+                                    <option value="spider">Spider</option>
+                                    <option value="frog">Frog</option>
+                                    <option value="turtle">Turtle</option>
+                                    <option value="lizard">Lizard</option>
+                                    <option value="snake">Snake</option>
+                                </optgroup>
+                                <optgroup label="Mammals">
+                                    <option value="deer">Deer</option>
+                                    <option value="bear">Bear</option>
+                                    <option value="wolf">Wolf</option>
+                                    <option value="fox">Fox</option>
+                                    <option value="rabbit">Rabbit</option>
+                                    <option value="squirrel">Squirrel</option>
+                                    <option value="horse">Horse</option>
+                                    <option value="cow">Cow</option>
+                                    <option value="other_mammal">Other Mammal</option>
+                                </optgroup>
+                                <optgroup label="Marine Life">
+                                    <option value="dolphin">Dolphin</option>
+                                    <option value="whale">Whale</option>
+                                    <option value="shark">Shark</option>
+                                    <option value="octopus">Octopus</option>
+                                </optgroup>
+                                <optgroup label="Mythical/Religious">
+                                    <option value="nessie">Nessie/Lake Monster</option>
+                                    <option value="dragon">Dragon</option>
+                                    <option value="st_collen">St. Collen</option>
+                                    <option value="angel">Angel</option>
+                                    <option value="cross">Cross</option>
+                                </optgroup>
+                                <optgroup label="Other">
+                                    <option value="unknown">Unknown/Unclear</option>
+                                    <option value="not_animal">Not an Animal</option>
+                                    <option value="multiple">Multiple Animals</option>
+                                </optgroup>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="stage-3">Process Stage:</label>
+                            <select id="stage-3" onchange="updateClassification(3)">
+                                <option value="">-- Select Stage --</option>
+                                <option value="raw_log">Raw Log (with bark)</option>
+                                <option value="rough_carving">Rough Carving (basic shape)</option>
+                                <option value="detailed_work">Detailed Work (features defined)</option>
+                                <option value="finishing">Finishing (sanding, refinement)</option>
+                                <option value="final_complete">Final Complete (painted/stained)</option>
+                                <option value="unknown_stage">Unknown Stage</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="notes-3">Notes (optional):</label>
+                            <input type="text" id="notes-3" placeholder="Any additional notes..." onchange="updateClassification(3)">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="image-card" data-index="4">
+                <div class="image-container">
+                    <img src="/media/archive\original-files-backup-20250706\St Collen statue\IMG_0785.JPEG" alt="IMG_0785.JPEG" onclick="openModal(this.src)">
+                    <div class="status-indicator status-pending" id="status-4">Pending</div>
+                </div>
+                <div class="image-info">
+                    <div class="filename">IMG_0785.JPEG</div>
+                    <div style="font-size: 0.9em; color: #666; margin-bottom: 10px;">archive\original-files-backup-20250706\St Collen statue\IMG_0785.JPEG</div>
+                    
+                    <div class="classification-form">
+                        <div class="form-group">
+                            <label for="animal-4">Animal Type:</label>
+                            <select id="animal-4" onchange="updateClassification(4)">
+                                <option value="">-- Select Animal --</option>
+                                <optgroup label="Fish">
+                                    <option value="largemouth_bass">Largemouth Bass</option>
+                                    <option value="smallmouth_bass">Smallmouth Bass</option>
+                                    <option value="striped_bass">Striped Bass</option>
+                                    <option value="bass_generic">Bass (Generic)</option>
+                                    <option value="trout">Trout</option>
+                                    <option value="salmon">Salmon</option>
+                                    <option value="pike">Pike</option>
+                                    <option value="muskie">Muskie</option>
+                                    <option value="walleye">Walleye</option>
+                                    <option value="perch">Perch</option>
+                                    <option value="catfish">Catfish</option>
+                                    <option value="sunfish">Sunfish</option>
+                                    <option value="other_fish">Other Fish</option>
+                                </optgroup>
+                                <optgroup label="Birds">
+                                    <option value="bald_eagle">Bald Eagle</option>
+                                    <option value="golden_eagle">Golden Eagle</option>
+                                    <option value="eagle_generic">Eagle (Generic)</option>
+                                    <option value="owl">Owl</option>
+                                    <option value="hawk">Hawk</option>
+                                    <option value="duck">Duck</option>
+                                    <option value="goose">Goose</option>
+                                    <option value="heron">Heron</option>
+                                    <option value="cardinal">Cardinal</option>
+                                    <option value="woodpecker">Woodpecker</option>
+                                    <option value="other_bird">Other Bird</option>
+                                </optgroup>
+                                <optgroup label="Insects & Small Creatures">
+                                    <option value="butterfly">Butterfly</option>
+                                    <option value="dragonfly">Dragonfly</option>
+                                    <option value="bee">Bee</option>
+                                    <option value="spider">Spider</option>
+                                    <option value="frog">Frog</option>
+                                    <option value="turtle">Turtle</option>
+                                    <option value="lizard">Lizard</option>
+                                    <option value="snake">Snake</option>
+                                </optgroup>
+                                <optgroup label="Mammals">
+                                    <option value="deer">Deer</option>
+                                    <option value="bear">Bear</option>
+                                    <option value="wolf">Wolf</option>
+                                    <option value="fox">Fox</option>
+                                    <option value="rabbit">Rabbit</option>
+                                    <option value="squirrel">Squirrel</option>
+                                    <option value="horse">Horse</option>
+                                    <option value="cow">Cow</option>
+                                    <option value="other_mammal">Other Mammal</option>
+                                </optgroup>
+                                <optgroup label="Marine Life">
+                                    <option value="dolphin">Dolphin</option>
+                                    <option value="whale">Whale</option>
+                                    <option value="shark">Shark</option>
+                                    <option value="octopus">Octopus</option>
+                                </optgroup>
+                                <optgroup label="Mythical/Religious">
+                                    <option value="nessie">Nessie/Lake Monster</option>
+                                    <option value="dragon">Dragon</option>
+                                    <option value="st_collen">St. Collen</option>
+                                    <option value="angel">Angel</option>
+                                    <option value="cross">Cross</option>
+                                </optgroup>
+                                <optgroup label="Other">
+                                    <option value="unknown">Unknown/Unclear</option>
+                                    <option value="not_animal">Not an Animal</option>
+                                    <option value="multiple">Multiple Animals</option>
+                                </optgroup>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="stage-4">Process Stage:</label>
+                            <select id="stage-4" onchange="updateClassification(4)">
+                                <option value="">-- Select Stage --</option>
+                                <option value="raw_log">Raw Log (with bark)</option>
+                                <option value="rough_carving">Rough Carving (basic shape)</option>
+                                <option value="detailed_work">Detailed Work (features defined)</option>
+                                <option value="finishing">Finishing (sanding, refinement)</option>
+                                <option value="final_complete">Final Complete (painted/stained)</option>
+                                <option value="unknown_stage">Unknown Stage</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="notes-4">Notes (optional):</label>
+                            <input type="text" id="notes-4" placeholder="Any additional notes..." onchange="updateClassification(4)">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="image-card" data-index="5">
+                <div class="image-container">
+                    <img src="/media/archive\original-files-backup-20250706\St Collen statue\IMG_0789.JPEG" alt="IMG_0789.JPEG" onclick="openModal(this.src)">
+                    <div class="status-indicator status-pending" id="status-5">Pending</div>
+                </div>
+                <div class="image-info">
+                    <div class="filename">IMG_0789.JPEG</div>
+                    <div style="font-size: 0.9em; color: #666; margin-bottom: 10px;">archive\original-files-backup-20250706\St Collen statue\IMG_0789.JPEG</div>
+                    
+                    <div class="classification-form">
+                        <div class="form-group">
+                            <label for="animal-5">Animal Type:</label>
+                            <select id="animal-5" onchange="updateClassification(5)">
+                                <option value="">-- Select Animal --</option>
+                                <optgroup label="Fish">
+                                    <option value="largemouth_bass">Largemouth Bass</option>
+                                    <option value="smallmouth_bass">Smallmouth Bass</option>
+                                    <option value="striped_bass">Striped Bass</option>
+                                    <option value="bass_generic">Bass (Generic)</option>
+                                    <option value="trout">Trout</option>
+                                    <option value="salmon">Salmon</option>
+                                    <option value="pike">Pike</option>
+                                    <option value="muskie">Muskie</option>
+                                    <option value="walleye">Walleye</option>
+                                    <option value="perch">Perch</option>
+                                    <option value="catfish">Catfish</option>
+                                    <option value="sunfish">Sunfish</option>
+                                    <option value="other_fish">Other Fish</option>
+                                </optgroup>
+                                <optgroup label="Birds">
+                                    <option value="bald_eagle">Bald Eagle</option>
+                                    <option value="golden_eagle">Golden Eagle</option>
+                                    <option value="eagle_generic">Eagle (Generic)</option>
+                                    <option value="owl">Owl</option>
+                                    <option value="hawk">Hawk</option>
+                                    <option value="duck">Duck</option>
+                                    <option value="goose">Goose</option>
+                                    <option value="heron">Heron</option>
+                                    <option value="cardinal">Cardinal</option>
+                                    <option value="woodpecker">Woodpecker</option>
+                                    <option value="other_bird">Other Bird</option>
+                                </optgroup>
+                                <optgroup label="Insects & Small Creatures">
+                                    <option value="butterfly">Butterfly</option>
+                                    <option value="dragonfly">Dragonfly</option>
+                                    <option value="bee">Bee</option>
+                                    <option value="spider">Spider</option>
+                                    <option value="frog">Frog</option>
+                                    <option value="turtle">Turtle</option>
+                                    <option value="lizard">Lizard</option>
+                                    <option value="snake">Snake</option>
+                                </optgroup>
+                                <optgroup label="Mammals">
+                                    <option value="deer">Deer</option>
+                                    <option value="bear">Bear</option>
+                                    <option value="wolf">Wolf</option>
+                                    <option value="fox">Fox</option>
+                                    <option value="rabbit">Rabbit</option>
+                                    <option value="squirrel">Squirrel</option>
+                                    <option value="horse">Horse</option>
+                                    <option value="cow">Cow</option>
+                                    <option value="other_mammal">Other Mammal</option>
+                                </optgroup>
+                                <optgroup label="Marine Life">
+                                    <option value="dolphin">Dolphin</option>
+                                    <option value="whale">Whale</option>
+                                    <option value="shark">Shark</option>
+                                    <option value="octopus">Octopus</option>
+                                </optgroup>
+                                <optgroup label="Mythical/Religious">
+                                    <option value="nessie">Nessie/Lake Monster</option>
+                                    <option value="dragon">Dragon</option>
+                                    <option value="st_collen">St. Collen</option>
+                                    <option value="angel">Angel</option>
+                                    <option value="cross">Cross</option>
+                                </optgroup>
+                                <optgroup label="Other">
+                                    <option value="unknown">Unknown/Unclear</option>
+                                    <option value="not_animal">Not an Animal</option>
+                                    <option value="multiple">Multiple Animals</option>
+                                </optgroup>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="stage-5">Process Stage:</label>
+                            <select id="stage-5" onchange="updateClassification(5)">
+                                <option value="">-- Select Stage --</option>
+                                <option value="raw_log">Raw Log (with bark)</option>
+                                <option value="rough_carving">Rough Carving (basic shape)</option>
+                                <option value="detailed_work">Detailed Work (features defined)</option>
+                                <option value="finishing">Finishing (sanding, refinement)</option>
+                                <option value="final_complete">Final Complete (painted/stained)</option>
+                                <option value="unknown_stage">Unknown Stage</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="notes-5">Notes (optional):</label>
+                            <input type="text" id="notes-5" placeholder="Any additional notes..." onchange="updateClassification(5)">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="image-card" data-index="6">
+                <div class="image-container">
+                    <img src="/media/archive\original-files-backup-20250706\St Collen statue\IMG_0791.JPEG" alt="IMG_0791.JPEG" onclick="openModal(this.src)">
+                    <div class="status-indicator status-pending" id="status-6">Pending</div>
+                </div>
+                <div class="image-info">
+                    <div class="filename">IMG_0791.JPEG</div>
+                    <div style="font-size: 0.9em; color: #666; margin-bottom: 10px;">archive\original-files-backup-20250706\St Collen statue\IMG_0791.JPEG</div>
+                    
+                    <div class="classification-form">
+                        <div class="form-group">
+                            <label for="animal-6">Animal Type:</label>
+                            <select id="animal-6" onchange="updateClassification(6)">
+                                <option value="">-- Select Animal --</option>
+                                <optgroup label="Fish">
+                                    <option value="largemouth_bass">Largemouth Bass</option>
+                                    <option value="smallmouth_bass">Smallmouth Bass</option>
+                                    <option value="striped_bass">Striped Bass</option>
+                                    <option value="bass_generic">Bass (Generic)</option>
+                                    <option value="trout">Trout</option>
+                                    <option value="salmon">Salmon</option>
+                                    <option value="pike">Pike</option>
+                                    <option value="muskie">Muskie</option>
+                                    <option value="walleye">Walleye</option>
+                                    <option value="perch">Perch</option>
+                                    <option value="catfish">Catfish</option>
+                                    <option value="sunfish">Sunfish</option>
+                                    <option value="other_fish">Other Fish</option>
+                                </optgroup>
+                                <optgroup label="Birds">
+                                    <option value="bald_eagle">Bald Eagle</option>
+                                    <option value="golden_eagle">Golden Eagle</option>
+                                    <option value="eagle_generic">Eagle (Generic)</option>
+                                    <option value="owl">Owl</option>
+                                    <option value="hawk">Hawk</option>
+                                    <option value="duck">Duck</option>
+                                    <option value="goose">Goose</option>
+                                    <option value="heron">Heron</option>
+                                    <option value="cardinal">Cardinal</option>
+                                    <option value="woodpecker">Woodpecker</option>
+                                    <option value="other_bird">Other Bird</option>
+                                </optgroup>
+                                <optgroup label="Insects & Small Creatures">
+                                    <option value="butterfly">Butterfly</option>
+                                    <option value="dragonfly">Dragonfly</option>
+                                    <option value="bee">Bee</option>
+                                    <option value="spider">Spider</option>
+                                    <option value="frog">Frog</option>
+                                    <option value="turtle">Turtle</option>
+                                    <option value="lizard">Lizard</option>
+                                    <option value="snake">Snake</option>
+                                </optgroup>
+                                <optgroup label="Mammals">
+                                    <option value="deer">Deer</option>
+                                    <option value="bear">Bear</option>
+                                    <option value="wolf">Wolf</option>
+                                    <option value="fox">Fox</option>
+                                    <option value="rabbit">Rabbit</option>
+                                    <option value="squirrel">Squirrel</option>
+                                    <option value="horse">Horse</option>
+                                    <option value="cow">Cow</option>
+                                    <option value="other_mammal">Other Mammal</option>
+                                </optgroup>
+                                <optgroup label="Marine Life">
+                                    <option value="dolphin">Dolphin</option>
+                                    <option value="whale">Whale</option>
+                                    <option value="shark">Shark</option>
+                                    <option value="octopus">Octopus</option>
+                                </optgroup>
+                                <optgroup label="Mythical/Religious">
+                                    <option value="nessie">Nessie/Lake Monster</option>
+                                    <option value="dragon">Dragon</option>
+                                    <option value="st_collen">St. Collen</option>
+                                    <option value="angel">Angel</option>
+                                    <option value="cross">Cross</option>
+                                </optgroup>
+                                <optgroup label="Other">
+                                    <option value="unknown">Unknown/Unclear</option>
+                                    <option value="not_animal">Not an Animal</option>
+                                    <option value="multiple">Multiple Animals</option>
+                                </optgroup>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="stage-6">Process Stage:</label>
+                            <select id="stage-6" onchange="updateClassification(6)">
+                                <option value="">-- Select Stage --</option>
+                                <option value="raw_log">Raw Log (with bark)</option>
+                                <option value="rough_carving">Rough Carving (basic shape)</option>
+                                <option value="detailed_work">Detailed Work (features defined)</option>
+                                <option value="finishing">Finishing (sanding, refinement)</option>
+                                <option value="final_complete">Final Complete (painted/stained)</option>
+                                <option value="unknown_stage">Unknown Stage</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="notes-6">Notes (optional):</label>
+                            <input type="text" id="notes-6" placeholder="Any additional notes..." onchange="updateClassification(6)">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="image-card" data-index="7">
+                <div class="image-container">
+                    <img src="/media/archive\original-files-backup-20250706\St Collen statue\IMG_0806.JPEG" alt="IMG_0806.JPEG" onclick="openModal(this.src)">
+                    <div class="status-indicator status-pending" id="status-7">Pending</div>
+                </div>
+                <div class="image-info">
+                    <div class="filename">IMG_0806.JPEG</div>
+                    <div style="font-size: 0.9em; color: #666; margin-bottom: 10px;">archive\original-files-backup-20250706\St Collen statue\IMG_0806.JPEG</div>
+                    
+                    <div class="classification-form">
+                        <div class="form-group">
+                            <label for="animal-7">Animal Type:</label>
+                            <select id="animal-7" onchange="updateClassification(7)">
+                                <option value="">-- Select Animal --</option>
+                                <optgroup label="Fish">
+                                    <option value="largemouth_bass">Largemouth Bass</option>
+                                    <option value="smallmouth_bass">Smallmouth Bass</option>
+                                    <option value="striped_bass">Striped Bass</option>
+                                    <option value="bass_generic">Bass (Generic)</option>
+                                    <option value="trout">Trout</option>
+                                    <option value="salmon">Salmon</option>
+                                    <option value="pike">Pike</option>
+                                    <option value="muskie">Muskie</option>
+                                    <option value="walleye">Walleye</option>
+                                    <option value="perch">Perch</option>
+                                    <option value="catfish">Catfish</option>
+                                    <option value="sunfish">Sunfish</option>
+                                    <option value="other_fish">Other Fish</option>
+                                </optgroup>
+                                <optgroup label="Birds">
+                                    <option value="bald_eagle">Bald Eagle</option>
+                                    <option value="golden_eagle">Golden Eagle</option>
+                                    <option value="eagle_generic">Eagle (Generic)</option>
+                                    <option value="owl">Owl</option>
+                                    <option value="hawk">Hawk</option>
+                                    <option value="duck">Duck</option>
+                                    <option value="goose">Goose</option>
+                                    <option value="heron">Heron</option>
+                                    <option value="cardinal">Cardinal</option>
+                                    <option value="woodpecker">Woodpecker</option>
+                                    <option value="other_bird">Other Bird</option>
+                                </optgroup>
+                                <optgroup label="Insects & Small Creatures">
+                                    <option value="butterfly">Butterfly</option>
+                                    <option value="dragonfly">Dragonfly</option>
+                                    <option value="bee">Bee</option>
+                                    <option value="spider">Spider</option>
+                                    <option value="frog">Frog</option>
+                                    <option value="turtle">Turtle</option>
+                                    <option value="lizard">Lizard</option>
+                                    <option value="snake">Snake</option>
+                                </optgroup>
+                                <optgroup label="Mammals">
+                                    <option value="deer">Deer</option>
+                                    <option value="bear">Bear</option>
+                                    <option value="wolf">Wolf</option>
+                                    <option value="fox">Fox</option>
+                                    <option value="rabbit">Rabbit</option>
+                                    <option value="squirrel">Squirrel</option>
+                                    <option value="horse">Horse</option>
+                                    <option value="cow">Cow</option>
+                                    <option value="other_mammal">Other Mammal</option>
+                                </optgroup>
+                                <optgroup label="Marine Life">
+                                    <option value="dolphin">Dolphin</option>
+                                    <option value="whale">Whale</option>
+                                    <option value="shark">Shark</option>
+                                    <option value="octopus">Octopus</option>
+                                </optgroup>
+                                <optgroup label="Mythical/Religious">
+                                    <option value="nessie">Nessie/Lake Monster</option>
+                                    <option value="dragon">Dragon</option>
+                                    <option value="st_collen">St. Collen</option>
+                                    <option value="angel">Angel</option>
+                                    <option value="cross">Cross</option>
+                                </optgroup>
+                                <optgroup label="Other">
+                                    <option value="unknown">Unknown/Unclear</option>
+                                    <option value="not_animal">Not an Animal</option>
+                                    <option value="multiple">Multiple Animals</option>
+                                </optgroup>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="stage-7">Process Stage:</label>
+                            <select id="stage-7" onchange="updateClassification(7)">
+                                <option value="">-- Select Stage --</option>
+                                <option value="raw_log">Raw Log (with bark)</option>
+                                <option value="rough_carving">Rough Carving (basic shape)</option>
+                                <option value="detailed_work">Detailed Work (features defined)</option>
+                                <option value="finishing">Finishing (sanding, refinement)</option>
+                                <option value="final_complete">Final Complete (painted/stained)</option>
+                                <option value="unknown_stage">Unknown Stage</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="notes-7">Notes (optional):</label>
+                            <input type="text" id="notes-7" placeholder="Any additional notes..." onchange="updateClassification(7)">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="image-card" data-index="8">
+                <div class="image-container">
+                    <img src="/media/archive\original-files-backup-20250706\St Collen statue\IMG_0811.JPEG" alt="IMG_0811.JPEG" onclick="openModal(this.src)">
+                    <div class="status-indicator status-pending" id="status-8">Pending</div>
+                </div>
+                <div class="image-info">
+                    <div class="filename">IMG_0811.JPEG</div>
+                    <div style="font-size: 0.9em; color: #666; margin-bottom: 10px;">archive\original-files-backup-20250706\St Collen statue\IMG_0811.JPEG</div>
+                    
+                    <div class="classification-form">
+                        <div class="form-group">
+                            <label for="animal-8">Animal Type:</label>
+                            <select id="animal-8" onchange="updateClassification(8)">
+                                <option value="">-- Select Animal --</option>
+                                <optgroup label="Fish">
+                                    <option value="largemouth_bass">Largemouth Bass</option>
+                                    <option value="smallmouth_bass">Smallmouth Bass</option>
+                                    <option value="striped_bass">Striped Bass</option>
+                                    <option value="bass_generic">Bass (Generic)</option>
+                                    <option value="trout">Trout</option>
+                                    <option value="salmon">Salmon</option>
+                                    <option value="pike">Pike</option>
+                                    <option value="muskie">Muskie</option>
+                                    <option value="walleye">Walleye</option>
+                                    <option value="perch">Perch</option>
+                                    <option value="catfish">Catfish</option>
+                                    <option value="sunfish">Sunfish</option>
+                                    <option value="other_fish">Other Fish</option>
+                                </optgroup>
+                                <optgroup label="Birds">
+                                    <option value="bald_eagle">Bald Eagle</option>
+                                    <option value="golden_eagle">Golden Eagle</option>
+                                    <option value="eagle_generic">Eagle (Generic)</option>
+                                    <option value="owl">Owl</option>
+                                    <option value="hawk">Hawk</option>
+                                    <option value="duck">Duck</option>
+                                    <option value="goose">Goose</option>
+                                    <option value="heron">Heron</option>
+                                    <option value="cardinal">Cardinal</option>
+                                    <option value="woodpecker">Woodpecker</option>
+                                    <option value="other_bird">Other Bird</option>
+                                </optgroup>
+                                <optgroup label="Insects & Small Creatures">
+                                    <option value="butterfly">Butterfly</option>
+                                    <option value="dragonfly">Dragonfly</option>
+                                    <option value="bee">Bee</option>
+                                    <option value="spider">Spider</option>
+                                    <option value="frog">Frog</option>
+                                    <option value="turtle">Turtle</option>
+                                    <option value="lizard">Lizard</option>
+                                    <option value="snake">Snake</option>
+                                </optgroup>
+                                <optgroup label="Mammals">
+                                    <option value="deer">Deer</option>
+                                    <option value="bear">Bear</option>
+                                    <option value="wolf">Wolf</option>
+                                    <option value="fox">Fox</option>
+                                    <option value="rabbit">Rabbit</option>
+                                    <option value="squirrel">Squirrel</option>
+                                    <option value="horse">Horse</option>
+                                    <option value="cow">Cow</option>
+                                    <option value="other_mammal">Other Mammal</option>
+                                </optgroup>
+                                <optgroup label="Marine Life">
+                                    <option value="dolphin">Dolphin</option>
+                                    <option value="whale">Whale</option>
+                                    <option value="shark">Shark</option>
+                                    <option value="octopus">Octopus</option>
+                                </optgroup>
+                                <optgroup label="Mythical/Religious">
+                                    <option value="nessie">Nessie/Lake Monster</option>
+                                    <option value="dragon">Dragon</option>
+                                    <option value="st_collen">St. Collen</option>
+                                    <option value="angel">Angel</option>
+                                    <option value="cross">Cross</option>
+                                </optgroup>
+                                <optgroup label="Other">
+                                    <option value="unknown">Unknown/Unclear</option>
+                                    <option value="not_animal">Not an Animal</option>
+                                    <option value="multiple">Multiple Animals</option>
+                                </optgroup>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="stage-8">Process Stage:</label>
+                            <select id="stage-8" onchange="updateClassification(8)">
+                                <option value="">-- Select Stage --</option>
+                                <option value="raw_log">Raw Log (with bark)</option>
+                                <option value="rough_carving">Rough Carving (basic shape)</option>
+                                <option value="detailed_work">Detailed Work (features defined)</option>
+                                <option value="finishing">Finishing (sanding, refinement)</option>
+                                <option value="final_complete">Final Complete (painted/stained)</option>
+                                <option value="unknown_stage">Unknown Stage</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="notes-8">Notes (optional):</label>
+                            <input type="text" id="notes-8" placeholder="Any additional notes..." onchange="updateClassification(8)">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="image-card" data-index="9">
+                <div class="image-container">
+                    <img src="/media/archive\original-files-backup-20250706\St Collen statue\IMG_0812.JPEG" alt="IMG_0812.JPEG" onclick="openModal(this.src)">
+                    <div class="status-indicator status-pending" id="status-9">Pending</div>
+                </div>
+                <div class="image-info">
+                    <div class="filename">IMG_0812.JPEG</div>
+                    <div style="font-size: 0.9em; color: #666; margin-bottom: 10px;">archive\original-files-backup-20250706\St Collen statue\IMG_0812.JPEG</div>
+                    
+                    <div class="classification-form">
+                        <div class="form-group">
+                            <label for="animal-9">Animal Type:</label>
+                            <select id="animal-9" onchange="updateClassification(9)">
+                                <option value="">-- Select Animal --</option>
+                                <optgroup label="Fish">
+                                    <option value="largemouth_bass">Largemouth Bass</option>
+                                    <option value="smallmouth_bass">Smallmouth Bass</option>
+                                    <option value="striped_bass">Striped Bass</option>
+                                    <option value="bass_generic">Bass (Generic)</option>
+                                    <option value="trout">Trout</option>
+                                    <option value="salmon">Salmon</option>
+                                    <option value="pike">Pike</option>
+                                    <option value="muskie">Muskie</option>
+                                    <option value="walleye">Walleye</option>
+                                    <option value="perch">Perch</option>
+                                    <option value="catfish">Catfish</option>
+                                    <option value="sunfish">Sunfish</option>
+                                    <option value="other_fish">Other Fish</option>
+                                </optgroup>
+                                <optgroup label="Birds">
+                                    <option value="bald_eagle">Bald Eagle</option>
+                                    <option value="golden_eagle">Golden Eagle</option>
+                                    <option value="eagle_generic">Eagle (Generic)</option>
+                                    <option value="owl">Owl</option>
+                                    <option value="hawk">Hawk</option>
+                                    <option value="duck">Duck</option>
+                                    <option value="goose">Goose</option>
+                                    <option value="heron">Heron</option>
+                                    <option value="cardinal">Cardinal</option>
+                                    <option value="woodpecker">Woodpecker</option>
+                                    <option value="other_bird">Other Bird</option>
+                                </optgroup>
+                                <optgroup label="Insects & Small Creatures">
+                                    <option value="butterfly">Butterfly</option>
+                                    <option value="dragonfly">Dragonfly</option>
+                                    <option value="bee">Bee</option>
+                                    <option value="spider">Spider</option>
+                                    <option value="frog">Frog</option>
+                                    <option value="turtle">Turtle</option>
+                                    <option value="lizard">Lizard</option>
+                                    <option value="snake">Snake</option>
+                                </optgroup>
+                                <optgroup label="Mammals">
+                                    <option value="deer">Deer</option>
+                                    <option value="bear">Bear</option>
+                                    <option value="wolf">Wolf</option>
+                                    <option value="fox">Fox</option>
+                                    <option value="rabbit">Rabbit</option>
+                                    <option value="squirrel">Squirrel</option>
+                                    <option value="horse">Horse</option>
+                                    <option value="cow">Cow</option>
+                                    <option value="other_mammal">Other Mammal</option>
+                                </optgroup>
+                                <optgroup label="Marine Life">
+                                    <option value="dolphin">Dolphin</option>
+                                    <option value="whale">Whale</option>
+                                    <option value="shark">Shark</option>
+                                    <option value="octopus">Octopus</option>
+                                </optgroup>
+                                <optgroup label="Mythical/Religious">
+                                    <option value="nessie">Nessie/Lake Monster</option>
+                                    <option value="dragon">Dragon</option>
+                                    <option value="st_collen">St. Collen</option>
+                                    <option value="angel">Angel</option>
+                                    <option value="cross">Cross</option>
+                                </optgroup>
+                                <optgroup label="Other">
+                                    <option value="unknown">Unknown/Unclear</option>
+                                    <option value="not_animal">Not an Animal</option>
+                                    <option value="multiple">Multiple Animals</option>
+                                </optgroup>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="stage-9">Process Stage:</label>
+                            <select id="stage-9" onchange="updateClassification(9)">
+                                <option value="">-- Select Stage --</option>
+                                <option value="raw_log">Raw Log (with bark)</option>
+                                <option value="rough_carving">Rough Carving (basic shape)</option>
+                                <option value="detailed_work">Detailed Work (features defined)</option>
+                                <option value="finishing">Finishing (sanding, refinement)</option>
+                                <option value="final_complete">Final Complete (painted/stained)</option>
+                                <option value="unknown_stage">Unknown Stage</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="notes-9">Notes (optional):</label>
+                            <input type="text" id="notes-9" placeholder="Any additional notes..." onchange="updateClassification(9)">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="image-card" data-index="10">
+                <div class="image-container">
+                    <img src="/media/archive\original-files-backup-20250706\St Collen statue\IMG_0815.JPEG" alt="IMG_0815.JPEG" onclick="openModal(this.src)">
+                    <div class="status-indicator status-pending" id="status-10">Pending</div>
+                </div>
+                <div class="image-info">
+                    <div class="filename">IMG_0815.JPEG</div>
+                    <div style="font-size: 0.9em; color: #666; margin-bottom: 10px;">archive\original-files-backup-20250706\St Collen statue\IMG_0815.JPEG</div>
+                    
+                    <div class="classification-form">
+                        <div class="form-group">
+                            <label for="animal-10">Animal Type:</label>
+                            <select id="animal-10" onchange="updateClassification(10)">
+                                <option value="">-- Select Animal --</option>
+                                <optgroup label="Fish">
+                                    <option value="largemouth_bass">Largemouth Bass</option>
+                                    <option value="smallmouth_bass">Smallmouth Bass</option>
+                                    <option value="striped_bass">Striped Bass</option>
+                                    <option value="bass_generic">Bass (Generic)</option>
+                                    <option value="trout">Trout</option>
+                                    <option value="salmon">Salmon</option>
+                                    <option value="pike">Pike</option>
+                                    <option value="muskie">Muskie</option>
+                                    <option value="walleye">Walleye</option>
+                                    <option value="perch">Perch</option>
+                                    <option value="catfish">Catfish</option>
+                                    <option value="sunfish">Sunfish</option>
+                                    <option value="other_fish">Other Fish</option>
+                                </optgroup>
+                                <optgroup label="Birds">
+                                    <option value="bald_eagle">Bald Eagle</option>
+                                    <option value="golden_eagle">Golden Eagle</option>
+                                    <option value="eagle_generic">Eagle (Generic)</option>
+                                    <option value="owl">Owl</option>
+                                    <option value="hawk">Hawk</option>
+                                    <option value="duck">Duck</option>
+                                    <option value="goose">Goose</option>
+                                    <option value="heron">Heron</option>
+                                    <option value="cardinal">Cardinal</option>
+                                    <option value="woodpecker">Woodpecker</option>
+                                    <option value="other_bird">Other Bird</option>
+                                </optgroup>
+                                <optgroup label="Insects & Small Creatures">
+                                    <option value="butterfly">Butterfly</option>
+                                    <option value="dragonfly">Dragonfly</option>
+                                    <option value="bee">Bee</option>
+                                    <option value="spider">Spider</option>
+                                    <option value="frog">Frog</option>
+                                    <option value="turtle">Turtle</option>
+                                    <option value="lizard">Lizard</option>
+                                    <option value="snake">Snake</option>
+                                </optgroup>
+                                <optgroup label="Mammals">
+                                    <option value="deer">Deer</option>
+                                    <option value="bear">Bear</option>
+                                    <option value="wolf">Wolf</option>
+                                    <option value="fox">Fox</option>
+                                    <option value="rabbit">Rabbit</option>
+                                    <option value="squirrel">Squirrel</option>
+                                    <option value="horse">Horse</option>
+                                    <option value="cow">Cow</option>
+                                    <option value="other_mammal">Other Mammal</option>
+                                </optgroup>
+                                <optgroup label="Marine Life">
+                                    <option value="dolphin">Dolphin</option>
+                                    <option value="whale">Whale</option>
+                                    <option value="shark">Shark</option>
+                                    <option value="octopus">Octopus</option>
+                                </optgroup>
+                                <optgroup label="Mythical/Religious">
+                                    <option value="nessie">Nessie/Lake Monster</option>
+                                    <option value="dragon">Dragon</option>
+                                    <option value="st_collen">St. Collen</option>
+                                    <option value="angel">Angel</option>
+                                    <option value="cross">Cross</option>
+                                </optgroup>
+                                <optgroup label="Other">
+                                    <option value="unknown">Unknown/Unclear</option>
+                                    <option value="not_animal">Not an Animal</option>
+                                    <option value="multiple">Multiple Animals</option>
+                                </optgroup>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="stage-10">Process Stage:</label>
+                            <select id="stage-10" onchange="updateClassification(10)">
+                                <option value="">-- Select Stage --</option>
+                                <option value="raw_log">Raw Log (with bark)</option>
+                                <option value="rough_carving">Rough Carving (basic shape)</option>
+                                <option value="detailed_work">Detailed Work (features defined)</option>
+                                <option value="finishing">Finishing (sanding, refinement)</option>
+                                <option value="final_complete">Final Complete (painted/stained)</option>
+                                <option value="unknown_stage">Unknown Stage</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="notes-10">Notes (optional):</label>
+                            <input type="text" id="notes-10" placeholder="Any additional notes..." onchange="updateClassification(10)">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="image-card" data-index="11">
+                <div class="image-container">
+                    <img src="/media/archive\original-files-backup-20250706\St Collen statue\IMG_0822.JPEG" alt="IMG_0822.JPEG" onclick="openModal(this.src)">
+                    <div class="status-indicator status-pending" id="status-11">Pending</div>
+                </div>
+                <div class="image-info">
+                    <div class="filename">IMG_0822.JPEG</div>
+                    <div style="font-size: 0.9em; color: #666; margin-bottom: 10px;">archive\original-files-backup-20250706\St Collen statue\IMG_0822.JPEG</div>
+                    
+                    <div class="classification-form">
+                        <div class="form-group">
+                            <label for="animal-11">Animal Type:</label>
+                            <select id="animal-11" onchange="updateClassification(11)">
+                                <option value="">-- Select Animal --</option>
+                                <optgroup label="Fish">
+                                    <option value="largemouth_bass">Largemouth Bass</option>
+                                    <option value="smallmouth_bass">Smallmouth Bass</option>
+                                    <option value="striped_bass">Striped Bass</option>
+                                    <option value="bass_generic">Bass (Generic)</option>
+                                    <option value="trout">Trout</option>
+                                    <option value="salmon">Salmon</option>
+                                    <option value="pike">Pike</option>
+                                    <option value="muskie">Muskie</option>
+                                    <option value="walleye">Walleye</option>
+                                    <option value="perch">Perch</option>
+                                    <option value="catfish">Catfish</option>
+                                    <option value="sunfish">Sunfish</option>
+                                    <option value="other_fish">Other Fish</option>
+                                </optgroup>
+                                <optgroup label="Birds">
+                                    <option value="bald_eagle">Bald Eagle</option>
+                                    <option value="golden_eagle">Golden Eagle</option>
+                                    <option value="eagle_generic">Eagle (Generic)</option>
+                                    <option value="owl">Owl</option>
+                                    <option value="hawk">Hawk</option>
+                                    <option value="duck">Duck</option>
+                                    <option value="goose">Goose</option>
+                                    <option value="heron">Heron</option>
+                                    <option value="cardinal">Cardinal</option>
+                                    <option value="woodpecker">Woodpecker</option>
+                                    <option value="other_bird">Other Bird</option>
+                                </optgroup>
+                                <optgroup label="Insects & Small Creatures">
+                                    <option value="butterfly">Butterfly</option>
+                                    <option value="dragonfly">Dragonfly</option>
+                                    <option value="bee">Bee</option>
+                                    <option value="spider">Spider</option>
+                                    <option value="frog">Frog</option>
+                                    <option value="turtle">Turtle</option>
+                                    <option value="lizard">Lizard</option>
+                                    <option value="snake">Snake</option>
+                                </optgroup>
+                                <optgroup label="Mammals">
+                                    <option value="deer">Deer</option>
+                                    <option value="bear">Bear</option>
+                                    <option value="wolf">Wolf</option>
+                                    <option value="fox">Fox</option>
+                                    <option value="rabbit">Rabbit</option>
+                                    <option value="squirrel">Squirrel</option>
+                                    <option value="horse">Horse</option>
+                                    <option value="cow">Cow</option>
+                                    <option value="other_mammal">Other Mammal</option>
+                                </optgroup>
+                                <optgroup label="Marine Life">
+                                    <option value="dolphin">Dolphin</option>
+                                    <option value="whale">Whale</option>
+                                    <option value="shark">Shark</option>
+                                    <option value="octopus">Octopus</option>
+                                </optgroup>
+                                <optgroup label="Mythical/Religious">
+                                    <option value="nessie">Nessie/Lake Monster</option>
+                                    <option value="dragon">Dragon</option>
+                                    <option value="st_collen">St. Collen</option>
+                                    <option value="angel">Angel</option>
+                                    <option value="cross">Cross</option>
+                                </optgroup>
+                                <optgroup label="Other">
+                                    <option value="unknown">Unknown/Unclear</option>
+                                    <option value="not_animal">Not an Animal</option>
+                                    <option value="multiple">Multiple Animals</option>
+                                </optgroup>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="stage-11">Process Stage:</label>
+                            <select id="stage-11" onchange="updateClassification(11)">
+                                <option value="">-- Select Stage --</option>
+                                <option value="raw_log">Raw Log (with bark)</option>
+                                <option value="rough_carving">Rough Carving (basic shape)</option>
+                                <option value="detailed_work">Detailed Work (features defined)</option>
+                                <option value="finishing">Finishing (sanding, refinement)</option>
+                                <option value="final_complete">Final Complete (painted/stained)</option>
+                                <option value="unknown_stage">Unknown Stage</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="notes-11">Notes (optional):</label>
+                            <input type="text" id="notes-11" placeholder="Any additional notes..." onchange="updateClassification(11)">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="image-card" data-index="12">
+                <div class="image-container">
+                    <img src="/media/archive\original-files-backup-20250706\St Collen statue\IMG_0829.JPEG" alt="IMG_0829.JPEG" onclick="openModal(this.src)">
+                    <div class="status-indicator status-pending" id="status-12">Pending</div>
+                </div>
+                <div class="image-info">
+                    <div class="filename">IMG_0829.JPEG</div>
+                    <div style="font-size: 0.9em; color: #666; margin-bottom: 10px;">archive\original-files-backup-20250706\St Collen statue\IMG_0829.JPEG</div>
+                    
+                    <div class="classification-form">
+                        <div class="form-group">
+                            <label for="animal-12">Animal Type:</label>
+                            <select id="animal-12" onchange="updateClassification(12)">
+                                <option value="">-- Select Animal --</option>
+                                <optgroup label="Fish">
+                                    <option value="largemouth_bass">Largemouth Bass</option>
+                                    <option value="smallmouth_bass">Smallmouth Bass</option>
+                                    <option value="striped_bass">Striped Bass</option>
+                                    <option value="bass_generic">Bass (Generic)</option>
+                                    <option value="trout">Trout</option>
+                                    <option value="salmon">Salmon</option>
+                                    <option value="pike">Pike</option>
+                                    <option value="muskie">Muskie</option>
+                                    <option value="walleye">Walleye</option>
+                                    <option value="perch">Perch</option>
+                                    <option value="catfish">Catfish</option>
+                                    <option value="sunfish">Sunfish</option>
+                                    <option value="other_fish">Other Fish</option>
+                                </optgroup>
+                                <optgroup label="Birds">
+                                    <option value="bald_eagle">Bald Eagle</option>
+                                    <option value="golden_eagle">Golden Eagle</option>
+                                    <option value="eagle_generic">Eagle (Generic)</option>
+                                    <option value="owl">Owl</option>
+                                    <option value="hawk">Hawk</option>
+                                    <option value="duck">Duck</option>
+                                    <option value="goose">Goose</option>
+                                    <option value="heron">Heron</option>
+                                    <option value="cardinal">Cardinal</option>
+                                    <option value="woodpecker">Woodpecker</option>
+                                    <option value="other_bird">Other Bird</option>
+                                </optgroup>
+                                <optgroup label="Insects & Small Creatures">
+                                    <option value="butterfly">Butterfly</option>
+                                    <option value="dragonfly">Dragonfly</option>
+                                    <option value="bee">Bee</option>
+                                    <option value="spider">Spider</option>
+                                    <option value="frog">Frog</option>
+                                    <option value="turtle">Turtle</option>
+                                    <option value="lizard">Lizard</option>
+                                    <option value="snake">Snake</option>
+                                </optgroup>
+                                <optgroup label="Mammals">
+                                    <option value="deer">Deer</option>
+                                    <option value="bear">Bear</option>
+                                    <option value="wolf">Wolf</option>
+                                    <option value="fox">Fox</option>
+                                    <option value="rabbit">Rabbit</option>
+                                    <option value="squirrel">Squirrel</option>
+                                    <option value="horse">Horse</option>
+                                    <option value="cow">Cow</option>
+                                    <option value="other_mammal">Other Mammal</option>
+                                </optgroup>
+                                <optgroup label="Marine Life">
+                                    <option value="dolphin">Dolphin</option>
+                                    <option value="whale">Whale</option>
+                                    <option value="shark">Shark</option>
+                                    <option value="octopus">Octopus</option>
+                                </optgroup>
+                                <optgroup label="Mythical/Religious">
+                                    <option value="nessie">Nessie/Lake Monster</option>
+                                    <option value="dragon">Dragon</option>
+                                    <option value="st_collen">St. Collen</option>
+                                    <option value="angel">Angel</option>
+                                    <option value="cross">Cross</option>
+                                </optgroup>
+                                <optgroup label="Other">
+                                    <option value="unknown">Unknown/Unclear</option>
+                                    <option value="not_animal">Not an Animal</option>
+                                    <option value="multiple">Multiple Animals</option>
+                                </optgroup>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="stage-12">Process Stage:</label>
+                            <select id="stage-12" onchange="updateClassification(12)">
+                                <option value="">-- Select Stage --</option>
+                                <option value="raw_log">Raw Log (with bark)</option>
+                                <option value="rough_carving">Rough Carving (basic shape)</option>
+                                <option value="detailed_work">Detailed Work (features defined)</option>
+                                <option value="finishing">Finishing (sanding, refinement)</option>
+                                <option value="final_complete">Final Complete (painted/stained)</option>
+                                <option value="unknown_stage">Unknown Stage</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="notes-12">Notes (optional):</label>
+                            <input type="text" id="notes-12" placeholder="Any additional notes..." onchange="updateClassification(12)">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="image-card" data-index="13">
+                <div class="image-container">
+                    <img src="/media/archive\original-files-backup-20250706\St Collen statue\IMG_0832.JPEG" alt="IMG_0832.JPEG" onclick="openModal(this.src)">
+                    <div class="status-indicator status-pending" id="status-13">Pending</div>
+                </div>
+                <div class="image-info">
+                    <div class="filename">IMG_0832.JPEG</div>
+                    <div style="font-size: 0.9em; color: #666; margin-bottom: 10px;">archive\original-files-backup-20250706\St Collen statue\IMG_0832.JPEG</div>
+                    
+                    <div class="classification-form">
+                        <div class="form-group">
+                            <label for="animal-13">Animal Type:</label>
+                            <select id="animal-13" onchange="updateClassification(13)">
+                                <option value="">-- Select Animal --</option>
+                                <optgroup label="Fish">
+                                    <option value="largemouth_bass">Largemouth Bass</option>
+                                    <option value="smallmouth_bass">Smallmouth Bass</option>
+                                    <option value="striped_bass">Striped Bass</option>
+                                    <option value="bass_generic">Bass (Generic)</option>
+                                    <option value="trout">Trout</option>
+                                    <option value="salmon">Salmon</option>
+                                    <option value="pike">Pike</option>
+                                    <option value="muskie">Muskie</option>
+                                    <option value="walleye">Walleye</option>
+                                    <option value="perch">Perch</option>
+                                    <option value="catfish">Catfish</option>
+                                    <option value="sunfish">Sunfish</option>
+                                    <option value="other_fish">Other Fish</option>
+                                </optgroup>
+                                <optgroup label="Birds">
+                                    <option value="bald_eagle">Bald Eagle</option>
+                                    <option value="golden_eagle">Golden Eagle</option>
+                                    <option value="eagle_generic">Eagle (Generic)</option>
+                                    <option value="owl">Owl</option>
+                                    <option value="hawk">Hawk</option>
+                                    <option value="duck">Duck</option>
+                                    <option value="goose">Goose</option>
+                                    <option value="heron">Heron</option>
+                                    <option value="cardinal">Cardinal</option>
+                                    <option value="woodpecker">Woodpecker</option>
+                                    <option value="other_bird">Other Bird</option>
+                                </optgroup>
+                                <optgroup label="Insects & Small Creatures">
+                                    <option value="butterfly">Butterfly</option>
+                                    <option value="dragonfly">Dragonfly</option>
+                                    <option value="bee">Bee</option>
+                                    <option value="spider">Spider</option>
+                                    <option value="frog">Frog</option>
+                                    <option value="turtle">Turtle</option>
+                                    <option value="lizard">Lizard</option>
+                                    <option value="snake">Snake</option>
+                                </optgroup>
+                                <optgroup label="Mammals">
+                                    <option value="deer">Deer</option>
+                                    <option value="bear">Bear</option>
+                                    <option value="wolf">Wolf</option>
+                                    <option value="fox">Fox</option>
+                                    <option value="rabbit">Rabbit</option>
+                                    <option value="squirrel">Squirrel</option>
+                                    <option value="horse">Horse</option>
+                                    <option value="cow">Cow</option>
+                                    <option value="other_mammal">Other Mammal</option>
+                                </optgroup>
+                                <optgroup label="Marine Life">
+                                    <option value="dolphin">Dolphin</option>
+                                    <option value="whale">Whale</option>
+                                    <option value="shark">Shark</option>
+                                    <option value="octopus">Octopus</option>
+                                </optgroup>
+                                <optgroup label="Mythical/Religious">
+                                    <option value="nessie">Nessie/Lake Monster</option>
+                                    <option value="dragon">Dragon</option>
+                                    <option value="st_collen">St. Collen</option>
+                                    <option value="angel">Angel</option>
+                                    <option value="cross">Cross</option>
+                                </optgroup>
+                                <optgroup label="Other">
+                                    <option value="unknown">Unknown/Unclear</option>
+                                    <option value="not_animal">Not an Animal</option>
+                                    <option value="multiple">Multiple Animals</option>
+                                </optgroup>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="stage-13">Process Stage:</label>
+                            <select id="stage-13" onchange="updateClassification(13)">
+                                <option value="">-- Select Stage --</option>
+                                <option value="raw_log">Raw Log (with bark)</option>
+                                <option value="rough_carving">Rough Carving (basic shape)</option>
+                                <option value="detailed_work">Detailed Work (features defined)</option>
+                                <option value="finishing">Finishing (sanding, refinement)</option>
+                                <option value="final_complete">Final Complete (painted/stained)</option>
+                                <option value="unknown_stage">Unknown Stage</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="notes-13">Notes (optional):</label>
+                            <input type="text" id="notes-13" placeholder="Any additional notes..." onchange="updateClassification(13)">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="image-card" data-index="14">
+                <div class="image-container">
+                    <img src="/media/archive\original-files-backup-20250706\St Collen statue\IMG_0835.JPEG" alt="IMG_0835.JPEG" onclick="openModal(this.src)">
+                    <div class="status-indicator status-pending" id="status-14">Pending</div>
+                </div>
+                <div class="image-info">
+                    <div class="filename">IMG_0835.JPEG</div>
+                    <div style="font-size: 0.9em; color: #666; margin-bottom: 10px;">archive\original-files-backup-20250706\St Collen statue\IMG_0835.JPEG</div>
+                    
+                    <div class="classification-form">
+                        <div class="form-group">
+                            <label for="animal-14">Animal Type:</label>
+                            <select id="animal-14" onchange="updateClassification(14)">
+                                <option value="">-- Select Animal --</option>
+                                <optgroup label="Fish">
+                                    <option value="largemouth_bass">Largemouth Bass</option>
+                                    <option value="smallmouth_bass">Smallmouth Bass</option>
+                                    <option value="striped_bass">Striped Bass</option>
+                                    <option value="bass_generic">Bass (Generic)</option>
+                                    <option value="trout">Trout</option>
+                                    <option value="salmon">Salmon</option>
+                                    <option value="pike">Pike</option>
+                                    <option value="muskie">Muskie</option>
+                                    <option value="walleye">Walleye</option>
+                                    <option value="perch">Perch</option>
+                                    <option value="catfish">Catfish</option>
+                                    <option value="sunfish">Sunfish</option>
+                                    <option value="other_fish">Other Fish</option>
+                                </optgroup>
+                                <optgroup label="Birds">
+                                    <option value="bald_eagle">Bald Eagle</option>
+                                    <option value="golden_eagle">Golden Eagle</option>
+                                    <option value="eagle_generic">Eagle (Generic)</option>
+                                    <option value="owl">Owl</option>
+                                    <option value="hawk">Hawk</option>
+                                    <option value="duck">Duck</option>
+                                    <option value="goose">Goose</option>
+                                    <option value="heron">Heron</option>
+                                    <option value="cardinal">Cardinal</option>
+                                    <option value="woodpecker">Woodpecker</option>
+                                    <option value="other_bird">Other Bird</option>
+                                </optgroup>
+                                <optgroup label="Insects & Small Creatures">
+                                    <option value="butterfly">Butterfly</option>
+                                    <option value="dragonfly">Dragonfly</option>
+                                    <option value="bee">Bee</option>
+                                    <option value="spider">Spider</option>
+                                    <option value="frog">Frog</option>
+                                    <option value="turtle">Turtle</option>
+                                    <option value="lizard">Lizard</option>
+                                    <option value="snake">Snake</option>
+                                </optgroup>
+                                <optgroup label="Mammals">
+                                    <option value="deer">Deer</option>
+                                    <option value="bear">Bear</option>
+                                    <option value="wolf">Wolf</option>
+                                    <option value="fox">Fox</option>
+                                    <option value="rabbit">Rabbit</option>
+                                    <option value="squirrel">Squirrel</option>
+                                    <option value="horse">Horse</option>
+                                    <option value="cow">Cow</option>
+                                    <option value="other_mammal">Other Mammal</option>
+                                </optgroup>
+                                <optgroup label="Marine Life">
+                                    <option value="dolphin">Dolphin</option>
+                                    <option value="whale">Whale</option>
+                                    <option value="shark">Shark</option>
+                                    <option value="octopus">Octopus</option>
+                                </optgroup>
+                                <optgroup label="Mythical/Religious">
+                                    <option value="nessie">Nessie/Lake Monster</option>
+                                    <option value="dragon">Dragon</option>
+                                    <option value="st_collen">St. Collen</option>
+                                    <option value="angel">Angel</option>
+                                    <option value="cross">Cross</option>
+                                </optgroup>
+                                <optgroup label="Other">
+                                    <option value="unknown">Unknown/Unclear</option>
+                                    <option value="not_animal">Not an Animal</option>
+                                    <option value="multiple">Multiple Animals</option>
+                                </optgroup>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="stage-14">Process Stage:</label>
+                            <select id="stage-14" onchange="updateClassification(14)">
+                                <option value="">-- Select Stage --</option>
+                                <option value="raw_log">Raw Log (with bark)</option>
+                                <option value="rough_carving">Rough Carving (basic shape)</option>
+                                <option value="detailed_work">Detailed Work (features defined)</option>
+                                <option value="finishing">Finishing (sanding, refinement)</option>
+                                <option value="final_complete">Final Complete (painted/stained)</option>
+                                <option value="unknown_stage">Unknown Stage</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="notes-14">Notes (optional):</label>
+                            <input type="text" id="notes-14" placeholder="Any additional notes..." onchange="updateClassification(14)">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="image-card" data-index="15">
+                <div class="image-container">
+                    <img src="/media/archive\original-files-backup-20250706\St Collen statue\IMG_0878.JPEG" alt="IMG_0878.JPEG" onclick="openModal(this.src)">
+                    <div class="status-indicator status-pending" id="status-15">Pending</div>
+                </div>
+                <div class="image-info">
+                    <div class="filename">IMG_0878.JPEG</div>
+                    <div style="font-size: 0.9em; color: #666; margin-bottom: 10px;">archive\original-files-backup-20250706\St Collen statue\IMG_0878.JPEG</div>
+                    
+                    <div class="classification-form">
+                        <div class="form-group">
+                            <label for="animal-15">Animal Type:</label>
+                            <select id="animal-15" onchange="updateClassification(15)">
+                                <option value="">-- Select Animal --</option>
+                                <optgroup label="Fish">
+                                    <option value="largemouth_bass">Largemouth Bass</option>
+                                    <option value="smallmouth_bass">Smallmouth Bass</option>
+                                    <option value="striped_bass">Striped Bass</option>
+                                    <option value="bass_generic">Bass (Generic)</option>
+                                    <option value="trout">Trout</option>
+                                    <option value="salmon">Salmon</option>
+                                    <option value="pike">Pike</option>
+                                    <option value="muskie">Muskie</option>
+                                    <option value="walleye">Walleye</option>
+                                    <option value="perch">Perch</option>
+                                    <option value="catfish">Catfish</option>
+                                    <option value="sunfish">Sunfish</option>
+                                    <option value="other_fish">Other Fish</option>
+                                </optgroup>
+                                <optgroup label="Birds">
+                                    <option value="bald_eagle">Bald Eagle</option>
+                                    <option value="golden_eagle">Golden Eagle</option>
+                                    <option value="eagle_generic">Eagle (Generic)</option>
+                                    <option value="owl">Owl</option>
+                                    <option value="hawk">Hawk</option>
+                                    <option value="duck">Duck</option>
+                                    <option value="goose">Goose</option>
+                                    <option value="heron">Heron</option>
+                                    <option value="cardinal">Cardinal</option>
+                                    <option value="woodpecker">Woodpecker</option>
+                                    <option value="other_bird">Other Bird</option>
+                                </optgroup>
+                                <optgroup label="Insects & Small Creatures">
+                                    <option value="butterfly">Butterfly</option>
+                                    <option value="dragonfly">Dragonfly</option>
+                                    <option value="bee">Bee</option>
+                                    <option value="spider">Spider</option>
+                                    <option value="frog">Frog</option>
+                                    <option value="turtle">Turtle</option>
+                                    <option value="lizard">Lizard</option>
+                                    <option value="snake">Snake</option>
+                                </optgroup>
+                                <optgroup label="Mammals">
+                                    <option value="deer">Deer</option>
+                                    <option value="bear">Bear</option>
+                                    <option value="wolf">Wolf</option>
+                                    <option value="fox">Fox</option>
+                                    <option value="rabbit">Rabbit</option>
+                                    <option value="squirrel">Squirrel</option>
+                                    <option value="horse">Horse</option>
+                                    <option value="cow">Cow</option>
+                                    <option value="other_mammal">Other Mammal</option>
+                                </optgroup>
+                                <optgroup label="Marine Life">
+                                    <option value="dolphin">Dolphin</option>
+                                    <option value="whale">Whale</option>
+                                    <option value="shark">Shark</option>
+                                    <option value="octopus">Octopus</option>
+                                </optgroup>
+                                <optgroup label="Mythical/Religious">
+                                    <option value="nessie">Nessie/Lake Monster</option>
+                                    <option value="dragon">Dragon</option>
+                                    <option value="st_collen">St. Collen</option>
+                                    <option value="angel">Angel</option>
+                                    <option value="cross">Cross</option>
+                                </optgroup>
+                                <optgroup label="Other">
+                                    <option value="unknown">Unknown/Unclear</option>
+                                    <option value="not_animal">Not an Animal</option>
+                                    <option value="multiple">Multiple Animals</option>
+                                </optgroup>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="stage-15">Process Stage:</label>
+                            <select id="stage-15" onchange="updateClassification(15)">
+                                <option value="">-- Select Stage --</option>
+                                <option value="raw_log">Raw Log (with bark)</option>
+                                <option value="rough_carving">Rough Carving (basic shape)</option>
+                                <option value="detailed_work">Detailed Work (features defined)</option>
+                                <option value="finishing">Finishing (sanding, refinement)</option>
+                                <option value="final_complete">Final Complete (painted/stained)</option>
+                                <option value="unknown_stage">Unknown Stage</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="notes-15">Notes (optional):</label>
+                            <input type="text" id="notes-15" placeholder="Any additional notes..." onchange="updateClassification(15)">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="image-card" data-index="16">
+                <div class="image-container">
+                    <img src="/media/archive\original-files-backup-20250706\St Collen statue\IMG_0895.JPEG" alt="IMG_0895.JPEG" onclick="openModal(this.src)">
+                    <div class="status-indicator status-pending" id="status-16">Pending</div>
+                </div>
+                <div class="image-info">
+                    <div class="filename">IMG_0895.JPEG</div>
+                    <div style="font-size: 0.9em; color: #666; margin-bottom: 10px;">archive\original-files-backup-20250706\St Collen statue\IMG_0895.JPEG</div>
+                    
+                    <div class="classification-form">
+                        <div class="form-group">
+                            <label for="animal-16">Animal Type:</label>
+                            <select id="animal-16" onchange="updateClassification(16)">
+                                <option value="">-- Select Animal --</option>
+                                <optgroup label="Fish">
+                                    <option value="largemouth_bass">Largemouth Bass</option>
+                                    <option value="smallmouth_bass">Smallmouth Bass</option>
+                                    <option value="striped_bass">Striped Bass</option>
+                                    <option value="bass_generic">Bass (Generic)</option>
+                                    <option value="trout">Trout</option>
+                                    <option value="salmon">Salmon</option>
+                                    <option value="pike">Pike</option>
+                                    <option value="muskie">Muskie</option>
+                                    <option value="walleye">Walleye</option>
+                                    <option value="perch">Perch</option>
+                                    <option value="catfish">Catfish</option>
+                                    <option value="sunfish">Sunfish</option>
+                                    <option value="other_fish">Other Fish</option>
+                                </optgroup>
+                                <optgroup label="Birds">
+                                    <option value="bald_eagle">Bald Eagle</option>
+                                    <option value="golden_eagle">Golden Eagle</option>
+                                    <option value="eagle_generic">Eagle (Generic)</option>
+                                    <option value="owl">Owl</option>
+                                    <option value="hawk">Hawk</option>
+                                    <option value="duck">Duck</option>
+                                    <option value="goose">Goose</option>
+                                    <option value="heron">Heron</option>
+                                    <option value="cardinal">Cardinal</option>
+                                    <option value="woodpecker">Woodpecker</option>
+                                    <option value="other_bird">Other Bird</option>
+                                </optgroup>
+                                <optgroup label="Insects & Small Creatures">
+                                    <option value="butterfly">Butterfly</option>
+                                    <option value="dragonfly">Dragonfly</option>
+                                    <option value="bee">Bee</option>
+                                    <option value="spider">Spider</option>
+                                    <option value="frog">Frog</option>
+                                    <option value="turtle">Turtle</option>
+                                    <option value="lizard">Lizard</option>
+                                    <option value="snake">Snake</option>
+                                </optgroup>
+                                <optgroup label="Mammals">
+                                    <option value="deer">Deer</option>
+                                    <option value="bear">Bear</option>
+                                    <option value="wolf">Wolf</option>
+                                    <option value="fox">Fox</option>
+                                    <option value="rabbit">Rabbit</option>
+                                    <option value="squirrel">Squirrel</option>
+                                    <option value="horse">Horse</option>
+                                    <option value="cow">Cow</option>
+                                    <option value="other_mammal">Other Mammal</option>
+                                </optgroup>
+                                <optgroup label="Marine Life">
+                                    <option value="dolphin">Dolphin</option>
+                                    <option value="whale">Whale</option>
+                                    <option value="shark">Shark</option>
+                                    <option value="octopus">Octopus</option>
+                                </optgroup>
+                                <optgroup label="Mythical/Religious">
+                                    <option value="nessie">Nessie/Lake Monster</option>
+                                    <option value="dragon">Dragon</option>
+                                    <option value="st_collen">St. Collen</option>
+                                    <option value="angel">Angel</option>
+                                    <option value="cross">Cross</option>
+                                </optgroup>
+                                <optgroup label="Other">
+                                    <option value="unknown">Unknown/Unclear</option>
+                                    <option value="not_animal">Not an Animal</option>
+                                    <option value="multiple">Multiple Animals</option>
+                                </optgroup>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="stage-16">Process Stage:</label>
+                            <select id="stage-16" onchange="updateClassification(16)">
+                                <option value="">-- Select Stage --</option>
+                                <option value="raw_log">Raw Log (with bark)</option>
+                                <option value="rough_carving">Rough Carving (basic shape)</option>
+                                <option value="detailed_work">Detailed Work (features defined)</option>
+                                <option value="finishing">Finishing (sanding, refinement)</option>
+                                <option value="final_complete">Final Complete (painted/stained)</option>
+                                <option value="unknown_stage">Unknown Stage</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="notes-16">Notes (optional):</label>
+                            <input type="text" id="notes-16" placeholder="Any additional notes..." onchange="updateClassification(16)">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="image-card" data-index="17">
+                <div class="image-container">
+                    <img src="/media/archive\original-files-backup-20250706\St Collen statue\IMG_0897.JPEG" alt="IMG_0897.JPEG" onclick="openModal(this.src)">
+                    <div class="status-indicator status-pending" id="status-17">Pending</div>
+                </div>
+                <div class="image-info">
+                    <div class="filename">IMG_0897.JPEG</div>
+                    <div style="font-size: 0.9em; color: #666; margin-bottom: 10px;">archive\original-files-backup-20250706\St Collen statue\IMG_0897.JPEG</div>
+                    
+                    <div class="classification-form">
+                        <div class="form-group">
+                            <label for="animal-17">Animal Type:</label>
+                            <select id="animal-17" onchange="updateClassification(17)">
+                                <option value="">-- Select Animal --</option>
+                                <optgroup label="Fish">
+                                    <option value="largemouth_bass">Largemouth Bass</option>
+                                    <option value="smallmouth_bass">Smallmouth Bass</option>
+                                    <option value="striped_bass">Striped Bass</option>
+                                    <option value="bass_generic">Bass (Generic)</option>
+                                    <option value="trout">Trout</option>
+                                    <option value="salmon">Salmon</option>
+                                    <option value="pike">Pike</option>
+                                    <option value="muskie">Muskie</option>
+                                    <option value="walleye">Walleye</option>
+                                    <option value="perch">Perch</option>
+                                    <option value="catfish">Catfish</option>
+                                    <option value="sunfish">Sunfish</option>
+                                    <option value="other_fish">Other Fish</option>
+                                </optgroup>
+                                <optgroup label="Birds">
+                                    <option value="bald_eagle">Bald Eagle</option>
+                                    <option value="golden_eagle">Golden Eagle</option>
+                                    <option value="eagle_generic">Eagle (Generic)</option>
+                                    <option value="owl">Owl</option>
+                                    <option value="hawk">Hawk</option>
+                                    <option value="duck">Duck</option>
+                                    <option value="goose">Goose</option>
+                                    <option value="heron">Heron</option>
+                                    <option value="cardinal">Cardinal</option>
+                                    <option value="woodpecker">Woodpecker</option>
+                                    <option value="other_bird">Other Bird</option>
+                                </optgroup>
+                                <optgroup label="Insects & Small Creatures">
+                                    <option value="butterfly">Butterfly</option>
+                                    <option value="dragonfly">Dragonfly</option>
+                                    <option value="bee">Bee</option>
+                                    <option value="spider">Spider</option>
+                                    <option value="frog">Frog</option>
+                                    <option value="turtle">Turtle</option>
+                                    <option value="lizard">Lizard</option>
+                                    <option value="snake">Snake</option>
+                                </optgroup>
+                                <optgroup label="Mammals">
+                                    <option value="deer">Deer</option>
+                                    <option value="bear">Bear</option>
+                                    <option value="wolf">Wolf</option>
+                                    <option value="fox">Fox</option>
+                                    <option value="rabbit">Rabbit</option>
+                                    <option value="squirrel">Squirrel</option>
+                                    <option value="horse">Horse</option>
+                                    <option value="cow">Cow</option>
+                                    <option value="other_mammal">Other Mammal</option>
+                                </optgroup>
+                                <optgroup label="Marine Life">
+                                    <option value="dolphin">Dolphin</option>
+                                    <option value="whale">Whale</option>
+                                    <option value="shark">Shark</option>
+                                    <option value="octopus">Octopus</option>
+                                </optgroup>
+                                <optgroup label="Mythical/Religious">
+                                    <option value="nessie">Nessie/Lake Monster</option>
+                                    <option value="dragon">Dragon</option>
+                                    <option value="st_collen">St. Collen</option>
+                                    <option value="angel">Angel</option>
+                                    <option value="cross">Cross</option>
+                                </optgroup>
+                                <optgroup label="Other">
+                                    <option value="unknown">Unknown/Unclear</option>
+                                    <option value="not_animal">Not an Animal</option>
+                                    <option value="multiple">Multiple Animals</option>
+                                </optgroup>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="stage-17">Process Stage:</label>
+                            <select id="stage-17" onchange="updateClassification(17)">
+                                <option value="">-- Select Stage --</option>
+                                <option value="raw_log">Raw Log (with bark)</option>
+                                <option value="rough_carving">Rough Carving (basic shape)</option>
+                                <option value="detailed_work">Detailed Work (features defined)</option>
+                                <option value="finishing">Finishing (sanding, refinement)</option>
+                                <option value="final_complete">Final Complete (painted/stained)</option>
+                                <option value="unknown_stage">Unknown Stage</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="notes-17">Notes (optional):</label>
+                            <input type="text" id="notes-17" placeholder="Any additional notes..." onchange="updateClassification(17)">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="image-card" data-index="18">
+                <div class="image-container">
+                    <img src="/media/archive\original-files-backup-20250706\St Collen statue\IMG_0898.JPEG" alt="IMG_0898.JPEG" onclick="openModal(this.src)">
+                    <div class="status-indicator status-pending" id="status-18">Pending</div>
+                </div>
+                <div class="image-info">
+                    <div class="filename">IMG_0898.JPEG</div>
+                    <div style="font-size: 0.9em; color: #666; margin-bottom: 10px;">archive\original-files-backup-20250706\St Collen statue\IMG_0898.JPEG</div>
+                    
+                    <div class="classification-form">
+                        <div class="form-group">
+                            <label for="animal-18">Animal Type:</label>
+                            <select id="animal-18" onchange="updateClassification(18)">
+                                <option value="">-- Select Animal --</option>
+                                <optgroup label="Fish">
+                                    <option value="largemouth_bass">Largemouth Bass</option>
+                                    <option value="smallmouth_bass">Smallmouth Bass</option>
+                                    <option value="striped_bass">Striped Bass</option>
+                                    <option value="bass_generic">Bass (Generic)</option>
+                                    <option value="trout">Trout</option>
+                                    <option value="salmon">Salmon</option>
+                                    <option value="pike">Pike</option>
+                                    <option value="muskie">Muskie</option>
+                                    <option value="walleye">Walleye</option>
+                                    <option value="perch">Perch</option>
+                                    <option value="catfish">Catfish</option>
+                                    <option value="sunfish">Sunfish</option>
+                                    <option value="other_fish">Other Fish</option>
+                                </optgroup>
+                                <optgroup label="Birds">
+                                    <option value="bald_eagle">Bald Eagle</option>
+                                    <option value="golden_eagle">Golden Eagle</option>
+                                    <option value="eagle_generic">Eagle (Generic)</option>
+                                    <option value="owl">Owl</option>
+                                    <option value="hawk">Hawk</option>
+                                    <option value="duck">Duck</option>
+                                    <option value="goose">Goose</option>
+                                    <option value="heron">Heron</option>
+                                    <option value="cardinal">Cardinal</option>
+                                    <option value="woodpecker">Woodpecker</option>
+                                    <option value="other_bird">Other Bird</option>
+                                </optgroup>
+                                <optgroup label="Insects & Small Creatures">
+                                    <option value="butterfly">Butterfly</option>
+                                    <option value="dragonfly">Dragonfly</option>
+                                    <option value="bee">Bee</option>
+                                    <option value="spider">Spider</option>
+                                    <option value="frog">Frog</option>
+                                    <option value="turtle">Turtle</option>
+                                    <option value="lizard">Lizard</option>
+                                    <option value="snake">Snake</option>
+                                </optgroup>
+                                <optgroup label="Mammals">
+                                    <option value="deer">Deer</option>
+                                    <option value="bear">Bear</option>
+                                    <option value="wolf">Wolf</option>
+                                    <option value="fox">Fox</option>
+                                    <option value="rabbit">Rabbit</option>
+                                    <option value="squirrel">Squirrel</option>
+                                    <option value="horse">Horse</option>
+                                    <option value="cow">Cow</option>
+                                    <option value="other_mammal">Other Mammal</option>
+                                </optgroup>
+                                <optgroup label="Marine Life">
+                                    <option value="dolphin">Dolphin</option>
+                                    <option value="whale">Whale</option>
+                                    <option value="shark">Shark</option>
+                                    <option value="octopus">Octopus</option>
+                                </optgroup>
+                                <optgroup label="Mythical/Religious">
+                                    <option value="nessie">Nessie/Lake Monster</option>
+                                    <option value="dragon">Dragon</option>
+                                    <option value="st_collen">St. Collen</option>
+                                    <option value="angel">Angel</option>
+                                    <option value="cross">Cross</option>
+                                </optgroup>
+                                <optgroup label="Other">
+                                    <option value="unknown">Unknown/Unclear</option>
+                                    <option value="not_animal">Not an Animal</option>
+                                    <option value="multiple">Multiple Animals</option>
+                                </optgroup>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="stage-18">Process Stage:</label>
+                            <select id="stage-18" onchange="updateClassification(18)">
+                                <option value="">-- Select Stage --</option>
+                                <option value="raw_log">Raw Log (with bark)</option>
+                                <option value="rough_carving">Rough Carving (basic shape)</option>
+                                <option value="detailed_work">Detailed Work (features defined)</option>
+                                <option value="finishing">Finishing (sanding, refinement)</option>
+                                <option value="final_complete">Final Complete (painted/stained)</option>
+                                <option value="unknown_stage">Unknown Stage</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="notes-18">Notes (optional):</label>
+                            <input type="text" id="notes-18" placeholder="Any additional notes..." onchange="updateClassification(18)">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="image-card" data-index="19">
+                <div class="image-container">
+                    <img src="/media/archive\original-files-backup-20250706\St Collen statue\IMG_0899.JPEG" alt="IMG_0899.JPEG" onclick="openModal(this.src)">
+                    <div class="status-indicator status-pending" id="status-19">Pending</div>
+                </div>
+                <div class="image-info">
+                    <div class="filename">IMG_0899.JPEG</div>
+                    <div style="font-size: 0.9em; color: #666; margin-bottom: 10px;">archive\original-files-backup-20250706\St Collen statue\IMG_0899.JPEG</div>
+                    
+                    <div class="classification-form">
+                        <div class="form-group">
+                            <label for="animal-19">Animal Type:</label>
+                            <select id="animal-19" onchange="updateClassification(19)">
+                                <option value="">-- Select Animal --</option>
+                                <optgroup label="Fish">
+                                    <option value="largemouth_bass">Largemouth Bass</option>
+                                    <option value="smallmouth_bass">Smallmouth Bass</option>
+                                    <option value="striped_bass">Striped Bass</option>
+                                    <option value="bass_generic">Bass (Generic)</option>
+                                    <option value="trout">Trout</option>
+                                    <option value="salmon">Salmon</option>
+                                    <option value="pike">Pike</option>
+                                    <option value="muskie">Muskie</option>
+                                    <option value="walleye">Walleye</option>
+                                    <option value="perch">Perch</option>
+                                    <option value="catfish">Catfish</option>
+                                    <option value="sunfish">Sunfish</option>
+                                    <option value="other_fish">Other Fish</option>
+                                </optgroup>
+                                <optgroup label="Birds">
+                                    <option value="bald_eagle">Bald Eagle</option>
+                                    <option value="golden_eagle">Golden Eagle</option>
+                                    <option value="eagle_generic">Eagle (Generic)</option>
+                                    <option value="owl">Owl</option>
+                                    <option value="hawk">Hawk</option>
+                                    <option value="duck">Duck</option>
+                                    <option value="goose">Goose</option>
+                                    <option value="heron">Heron</option>
+                                    <option value="cardinal">Cardinal</option>
+                                    <option value="woodpecker">Woodpecker</option>
+                                    <option value="other_bird">Other Bird</option>
+                                </optgroup>
+                                <optgroup label="Insects & Small Creatures">
+                                    <option value="butterfly">Butterfly</option>
+                                    <option value="dragonfly">Dragonfly</option>
+                                    <option value="bee">Bee</option>
+                                    <option value="spider">Spider</option>
+                                    <option value="frog">Frog</option>
+                                    <option value="turtle">Turtle</option>
+                                    <option value="lizard">Lizard</option>
+                                    <option value="snake">Snake</option>
+                                </optgroup>
+                                <optgroup label="Mammals">
+                                    <option value="deer">Deer</option>
+                                    <option value="bear">Bear</option>
+                                    <option value="wolf">Wolf</option>
+                                    <option value="fox">Fox</option>
+                                    <option value="rabbit">Rabbit</option>
+                                    <option value="squirrel">Squirrel</option>
+                                    <option value="horse">Horse</option>
+                                    <option value="cow">Cow</option>
+                                    <option value="other_mammal">Other Mammal</option>
+                                </optgroup>
+                                <optgroup label="Marine Life">
+                                    <option value="dolphin">Dolphin</option>
+                                    <option value="whale">Whale</option>
+                                    <option value="shark">Shark</option>
+                                    <option value="octopus">Octopus</option>
+                                </optgroup>
+                                <optgroup label="Mythical/Religious">
+                                    <option value="nessie">Nessie/Lake Monster</option>
+                                    <option value="dragon">Dragon</option>
+                                    <option value="st_collen">St. Collen</option>
+                                    <option value="angel">Angel</option>
+                                    <option value="cross">Cross</option>
+                                </optgroup>
+                                <optgroup label="Other">
+                                    <option value="unknown">Unknown/Unclear</option>
+                                    <option value="not_animal">Not an Animal</option>
+                                    <option value="multiple">Multiple Animals</option>
+                                </optgroup>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="stage-19">Process Stage:</label>
+                            <select id="stage-19" onchange="updateClassification(19)">
+                                <option value="">-- Select Stage --</option>
+                                <option value="raw_log">Raw Log (with bark)</option>
+                                <option value="rough_carving">Rough Carving (basic shape)</option>
+                                <option value="detailed_work">Detailed Work (features defined)</option>
+                                <option value="finishing">Finishing (sanding, refinement)</option>
+                                <option value="final_complete">Final Complete (painted/stained)</option>
+                                <option value="unknown_stage">Unknown Stage</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="notes-19">Notes (optional):</label>
+                            <input type="text" id="notes-19" placeholder="Any additional notes..." onchange="updateClassification(19)">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="image-card" data-index="20">
+                <div class="image-container">
+                    <img src="/media/archive\original-files-backup-20250706\St Collen statue\IMG_0904.JPEG" alt="IMG_0904.JPEG" onclick="openModal(this.src)">
+                    <div class="status-indicator status-pending" id="status-20">Pending</div>
+                </div>
+                <div class="image-info">
+                    <div class="filename">IMG_0904.JPEG</div>
+                    <div style="font-size: 0.9em; color: #666; margin-bottom: 10px;">archive\original-files-backup-20250706\St Collen statue\IMG_0904.JPEG</div>
+                    
+                    <div class="classification-form">
+                        <div class="form-group">
+                            <label for="animal-20">Animal Type:</label>
+                            <select id="animal-20" onchange="updateClassification(20)">
+                                <option value="">-- Select Animal --</option>
+                                <optgroup label="Fish">
+                                    <option value="largemouth_bass">Largemouth Bass</option>
+                                    <option value="smallmouth_bass">Smallmouth Bass</option>
+                                    <option value="striped_bass">Striped Bass</option>
+                                    <option value="bass_generic">Bass (Generic)</option>
+                                    <option value="trout">Trout</option>
+                                    <option value="salmon">Salmon</option>
+                                    <option value="pike">Pike</option>
+                                    <option value="muskie">Muskie</option>
+                                    <option value="walleye">Walleye</option>
+                                    <option value="perch">Perch</option>
+                                    <option value="catfish">Catfish</option>
+                                    <option value="sunfish">Sunfish</option>
+                                    <option value="other_fish">Other Fish</option>
+                                </optgroup>
+                                <optgroup label="Birds">
+                                    <option value="bald_eagle">Bald Eagle</option>
+                                    <option value="golden_eagle">Golden Eagle</option>
+                                    <option value="eagle_generic">Eagle (Generic)</option>
+                                    <option value="owl">Owl</option>
+                                    <option value="hawk">Hawk</option>
+                                    <option value="duck">Duck</option>
+                                    <option value="goose">Goose</option>
+                                    <option value="heron">Heron</option>
+                                    <option value="cardinal">Cardinal</option>
+                                    <option value="woodpecker">Woodpecker</option>
+                                    <option value="other_bird">Other Bird</option>
+                                </optgroup>
+                                <optgroup label="Insects & Small Creatures">
+                                    <option value="butterfly">Butterfly</option>
+                                    <option value="dragonfly">Dragonfly</option>
+                                    <option value="bee">Bee</option>
+                                    <option value="spider">Spider</option>
+                                    <option value="frog">Frog</option>
+                                    <option value="turtle">Turtle</option>
+                                    <option value="lizard">Lizard</option>
+                                    <option value="snake">Snake</option>
+                                </optgroup>
+                                <optgroup label="Mammals">
+                                    <option value="deer">Deer</option>
+                                    <option value="bear">Bear</option>
+                                    <option value="wolf">Wolf</option>
+                                    <option value="fox">Fox</option>
+                                    <option value="rabbit">Rabbit</option>
+                                    <option value="squirrel">Squirrel</option>
+                                    <option value="horse">Horse</option>
+                                    <option value="cow">Cow</option>
+                                    <option value="other_mammal">Other Mammal</option>
+                                </optgroup>
+                                <optgroup label="Marine Life">
+                                    <option value="dolphin">Dolphin</option>
+                                    <option value="whale">Whale</option>
+                                    <option value="shark">Shark</option>
+                                    <option value="octopus">Octopus</option>
+                                </optgroup>
+                                <optgroup label="Mythical/Religious">
+                                    <option value="nessie">Nessie/Lake Monster</option>
+                                    <option value="dragon">Dragon</option>
+                                    <option value="st_collen">St. Collen</option>
+                                    <option value="angel">Angel</option>
+                                    <option value="cross">Cross</option>
+                                </optgroup>
+                                <optgroup label="Other">
+                                    <option value="unknown">Unknown/Unclear</option>
+                                    <option value="not_animal">Not an Animal</option>
+                                    <option value="multiple">Multiple Animals</option>
+                                </optgroup>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="stage-20">Process Stage:</label>
+                            <select id="stage-20" onchange="updateClassification(20)">
+                                <option value="">-- Select Stage --</option>
+                                <option value="raw_log">Raw Log (with bark)</option>
+                                <option value="rough_carving">Rough Carving (basic shape)</option>
+                                <option value="detailed_work">Detailed Work (features defined)</option>
+                                <option value="finishing">Finishing (sanding, refinement)</option>
+                                <option value="final_complete">Final Complete (painted/stained)</option>
+                                <option value="unknown_stage">Unknown Stage</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="notes-20">Notes (optional):</label>
+                            <input type="text" id="notes-20" placeholder="Any additional notes..." onchange="updateClassification(20)">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="image-card" data-index="21">
+                <div class="image-container">
+                    <img src="/media/archive\original-files-backup-20250706\St Collen statue\IMG_0907.JPEG" alt="IMG_0907.JPEG" onclick="openModal(this.src)">
+                    <div class="status-indicator status-pending" id="status-21">Pending</div>
+                </div>
+                <div class="image-info">
+                    <div class="filename">IMG_0907.JPEG</div>
+                    <div style="font-size: 0.9em; color: #666; margin-bottom: 10px;">archive\original-files-backup-20250706\St Collen statue\IMG_0907.JPEG</div>
+                    
+                    <div class="classification-form">
+                        <div class="form-group">
+                            <label for="animal-21">Animal Type:</label>
+                            <select id="animal-21" onchange="updateClassification(21)">
+                                <option value="">-- Select Animal --</option>
+                                <optgroup label="Fish">
+                                    <option value="largemouth_bass">Largemouth Bass</option>
+                                    <option value="smallmouth_bass">Smallmouth Bass</option>
+                                    <option value="striped_bass">Striped Bass</option>
+                                    <option value="bass_generic">Bass (Generic)</option>
+                                    <option value="trout">Trout</option>
+                                    <option value="salmon">Salmon</option>
+                                    <option value="pike">Pike</option>
+                                    <option value="muskie">Muskie</option>
+                                    <option value="walleye">Walleye</option>
+                                    <option value="perch">Perch</option>
+                                    <option value="catfish">Catfish</option>
+                                    <option value="sunfish">Sunfish</option>
+                                    <option value="other_fish">Other Fish</option>
+                                </optgroup>
+                                <optgroup label="Birds">
+                                    <option value="bald_eagle">Bald Eagle</option>
+                                    <option value="golden_eagle">Golden Eagle</option>
+                                    <option value="eagle_generic">Eagle (Generic)</option>
+                                    <option value="owl">Owl</option>
+                                    <option value="hawk">Hawk</option>
+                                    <option value="duck">Duck</option>
+                                    <option value="goose">Goose</option>
+                                    <option value="heron">Heron</option>
+                                    <option value="cardinal">Cardinal</option>
+                                    <option value="woodpecker">Woodpecker</option>
+                                    <option value="other_bird">Other Bird</option>
+                                </optgroup>
+                                <optgroup label="Insects & Small Creatures">
+                                    <option value="butterfly">Butterfly</option>
+                                    <option value="dragonfly">Dragonfly</option>
+                                    <option value="bee">Bee</option>
+                                    <option value="spider">Spider</option>
+                                    <option value="frog">Frog</option>
+                                    <option value="turtle">Turtle</option>
+                                    <option value="lizard">Lizard</option>
+                                    <option value="snake">Snake</option>
+                                </optgroup>
+                                <optgroup label="Mammals">
+                                    <option value="deer">Deer</option>
+                                    <option value="bear">Bear</option>
+                                    <option value="wolf">Wolf</option>
+                                    <option value="fox">Fox</option>
+                                    <option value="rabbit">Rabbit</option>
+                                    <option value="squirrel">Squirrel</option>
+                                    <option value="horse">Horse</option>
+                                    <option value="cow">Cow</option>
+                                    <option value="other_mammal">Other Mammal</option>
+                                </optgroup>
+                                <optgroup label="Marine Life">
+                                    <option value="dolphin">Dolphin</option>
+                                    <option value="whale">Whale</option>
+                                    <option value="shark">Shark</option>
+                                    <option value="octopus">Octopus</option>
+                                </optgroup>
+                                <optgroup label="Mythical/Religious">
+                                    <option value="nessie">Nessie/Lake Monster</option>
+                                    <option value="dragon">Dragon</option>
+                                    <option value="st_collen">St. Collen</option>
+                                    <option value="angel">Angel</option>
+                                    <option value="cross">Cross</option>
+                                </optgroup>
+                                <optgroup label="Other">
+                                    <option value="unknown">Unknown/Unclear</option>
+                                    <option value="not_animal">Not an Animal</option>
+                                    <option value="multiple">Multiple Animals</option>
+                                </optgroup>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="stage-21">Process Stage:</label>
+                            <select id="stage-21" onchange="updateClassification(21)">
+                                <option value="">-- Select Stage --</option>
+                                <option value="raw_log">Raw Log (with bark)</option>
+                                <option value="rough_carving">Rough Carving (basic shape)</option>
+                                <option value="detailed_work">Detailed Work (features defined)</option>
+                                <option value="finishing">Finishing (sanding, refinement)</option>
+                                <option value="final_complete">Final Complete (painted/stained)</option>
+                                <option value="unknown_stage">Unknown Stage</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="notes-21">Notes (optional):</label>
+                            <input type="text" id="notes-21" placeholder="Any additional notes..." onchange="updateClassification(21)">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+    </div>
+
+    <!-- Image Modal -->
+    <div id="imageModal" class="modal" onclick="closeModal()">
+        <span class="close-modal" onclick="closeModal()">&times;</span>
+        <div class="modal-content">
+            <img id="modalImage" src="" alt="">
+        </div>
+    </div>
+
+    <script>
+        // Store classifications
+        window.animalClassifications = window.animalClassifications || {};
+        const batchId = 'stcollen_batch_4';
+        
+        if (!window.animalClassifications[batchId]) {
+            window.animalClassifications[batchId] = {};
+        }
+
+        // Load saved classifications
+        const savedData = localStorage.getItem('animalClassifications_' + batchId);
+        if (savedData) {
+            try {
+                const saved = JSON.parse(savedData);
+                window.animalClassifications[batchId] = saved;
+                loadSavedClassifications();
+            } catch (e) {
+                console.warn('Could not load saved classifications:', e);
+            }
+        }
+
+        function updateClassification(index) {
+            const animal = document.getElementById('animal-' + index).value;
+            const stage = document.getElementById('stage-' + index).value;
+            const notes = document.getElementById('notes-' + index).value;
+            
+            const imageCard = document.querySelector('[data-index="' + index + '"]');
+            const filename = imageCard.querySelector('.filename').textContent;
+            const relativePath = imageCard.querySelector('.image-info > div:nth-child(2)').textContent;
+            
+            window.animalClassifications[batchId][index] = {
+                filename: filename,
+                relativePath: relativePath,
+                animal: animal,
+                stage: stage,
+                notes: notes,
+                timestamp: new Date().toISOString()
+            };
+            
+            // Update status indicator
+            const statusEl = document.getElementById('status-' + index);
+            if (animal && stage) {
+                statusEl.textContent = 'Classified';
+                statusEl.className = 'status-indicator status-classified';
+            } else {
+                statusEl.textContent = 'Pending';
+                statusEl.className = 'status-indicator status-pending';
+            }
+            
+            updateProgress();
+            saveClassifications();
+        }
+
+        function updateProgress() {
+            const total = 22;
+            const classified = Object.values(window.animalClassifications[batchId] || {})
+                .filter(c => c.animal && c.stage).length;
+            
+            const percentage = (classified / total) * 100;
+            document.getElementById('progressFill').style.width = percentage + '%';
+            document.getElementById('progressText').textContent = classified + '/' + total + ' images classified';
+        }
+
+        function saveClassifications() {
+            localStorage.setItem('animalClassifications_' + batchId, 
+                JSON.stringify(window.animalClassifications[batchId]));
+        }
+
+        function loadSavedClassifications() {
+            const classifications = window.animalClassifications[batchId] || {};
+            
+            for (const [index, data] of Object.entries(classifications)) {
+                if (data.animal) document.getElementById('animal-' + index).value = data.animal;
+                if (data.stage) document.getElementById('stage-' + index).value = data.stage;
+                if (data.notes) document.getElementById('notes-' + index).value = data.notes;
+                
+                const statusEl = document.getElementById('status-' + index);
+                if (data.animal && data.stage) {
+                    statusEl.textContent = 'Classified';
+                    statusEl.className = 'status-indicator status-classified';
+                }
+            }
+            
+            updateProgress();
+        }
+
+        function exportClassifications() {
+            const data = {
+                batchId: batchId,
+                project: 'stcollen',
+                batchNumber: 4,
+                classifications: window.animalClassifications[batchId] || {},
+                exportTimestamp: new Date().toISOString()
+            };
+            
+            const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = batchId + '_classifications.json';
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        function importClassifications() {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = '.json';
+            input.onchange = function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        try {
+                            const data = JSON.parse(e.target.result);
+                            if (data.classifications) {
+                                window.animalClassifications[batchId] = data.classifications;
+                                loadSavedClassifications();
+                                alert('Classifications imported successfully!');
+                            }
+                        } catch (err) {
+                            alert('Error importing file: ' + err.message);
+                        }
+                    };
+                    reader.readAsText(file);
+                }
+            };
+            input.click();
+        }
+
+        function openModal(src) {
+            document.getElementById('modalImage').src = src;
+            document.getElementById('imageModal').style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('imageModal').style.display = 'none';
+        }
+
+        // Initialize
+        updateProgress();
+    </script>
+</body>
+</html>

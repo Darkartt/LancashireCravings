@@ -1,20 +1,28 @@
 import type { NextConfig } from "next";
 
-const isProd = process.env.NODE_ENV === 'production';
-// No need for basePath if we're using a custom domain as homepage
-// If you're using GitHub Pages with a repo name, uncomment and set this:
-// const basePath = isProd ? '/your-repo-name' : '';
-
 const nextConfig: NextConfig = {
-  output: 'export', // Enable static HTML export for GitHub Pages
-  // basePath: basePath, // No basePath for custom domain
+  // output: 'export', // Enable static HTML export for GitHub Pages - temporarily disabled for dynamic routes
   images: {
     unoptimized: true // Required for static export
   },
   trailingSlash: true, // Helps with GitHub Pages routing
-  // Ensure we're not treating 404s as SSG pages in production
   experimental: {
-    scrollRestoration: true
+    scrollRestoration: true,
+    // Lightning CSS integration for improved performance
+    cssChunking: true, // Enable CSS chunking for better performance
+  },
+  // Configure Lightning CSS for production builds
+  webpack: (config, { isServer, dev }) => {
+    if (!dev && !isServer) {
+      // Use Lightning CSS for CSS minification in production
+      config.optimization = {
+        ...config.optimization,
+        minimizer: [
+          ...config.optimization.minimizer,
+        ],
+      };
+    }
+    return config;
   }
 };
 

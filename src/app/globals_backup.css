@@ -1,0 +1,531 @@
+@import "tailwindcss";
+
+/* === CSS Upgrade Plan: Phase 2 - Cascade Layers Architecture === */
+@layer theme, reset, base, layouts, components, utilities, overrides;
+
+/* Theme layer - CSS variables and design tokens */
+@layer theme {
+  :root {
+    /* Enhanced Earth Tone Palette for Premium Woodcarving Aesthetic */
+    --background: #faf9f7; /* Warm cream for a luxurious feel */
+    --foreground: #2d1810; /* Rich espresso brown for text */
+    --accent-primary: #8B4513; /* Saddle brown for primary accents */
+    --accent-secondary: #556B2F; /* Dark olive green for secondary accents */
+    --accent-tertiary: #D2B48C; /* Tan/wood tone for subtle highlights */
+    --accent-warm: #CD853F; /* Peru/warm brown for highlights */
+    --text-muted: #6b5b4d; /* Muted brown for secondary text */
+    --border-subtle: #e8e4da; /* Very light brown for borders */
+    --surface-elevated: #ffffff; /* Pure white for cards and elevated surfaces */
+
+    /* === Wood Grain Colors (Phase 1) === */
+    --wood-oak-base: #E8D4AD;
+    --wood-oak-grain: #D4B48C;
+    --wood-oak-accent: #B89F65;
+    --wood-walnut-base: #5E4B3C;
+    --wood-walnut-grain: #3A2C24;
+    --wood-walnut-accent: #4E3424;
+    --wood-cherry-base: #A15843;
+    --wood-cherry-grain: #7E3B2C;
+    --wood-cherry-accent: #8B4537;
+    --wood-maple-base: #F5DEB3;
+    --wood-maple-grain: #E5C99F;
+    --wood-maple-accent: #DEB887;
+    
+    /* === Modern Border Radius Design Tokens === */
+    --border-radius-xs: 0.125rem; /* 2px - subtle curves */
+    --border-radius-sm: 0.375rem; /* 6px - small elements */
+    --border-radius-md: 0.5rem;   /* 8px - standard cards */
+    --border-radius-lg: 0.75rem;  /* 12px - larger containers */
+    --border-radius-xl: 1rem;     /* 16px - feature elements */
+    --border-radius-2xl: 1.5rem;  /* 24px - hero sections */
+    --border-radius-3xl: 2rem;    /* 32px - dramatic elements */
+    
+    /* === Modern Shadow System === */
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+    
+    /* === Spacing Scale for Consistent Layouts === */
+  }
+
+  /* Dark mode theme */
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --background: #1a0f0a; /* Deep wood tone for dark mode background */
+      --foreground: #f5f2ed; /* Warm cream for text in dark mode */
+      --accent-primary: #CD853F; /* Peru/warm brown for primary accents in dark mode */
+      --accent-secondary: #8FBC8F; /* Dark sea green for secondary accents in dark mode */
+      --accent-tertiary: #A0522D; /* Sienna for tertiary accents */
+      --accent-warm: #D2B48C; /* Tan for warm highlights */
+      --text-muted: #c4b59a; /* Light muted brown for secondary text */
+      --border-subtle: #3d2a1a; /* Dark brown for borders */
+      --surface-elevated: #2d1810; /* Elevated surface color */
+    }
+  }
+}
+
+/* Reset layer - Tailwind preflight and normalize */
+@layer reset {
+  /* Tailwind preflight will be imported here automatically */
+}
+
+/* Base layer - Base element styles */
+@layer base {
+  body {
+    background: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-serif), Georgia, 'Times New Roman', serif;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Enhanced Typography System */
+  .hero-title {
+    line-height: 0.9;
+    letter-spacing: -0.02em;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .hero-subtitle {
+    line-height: 1.6;
+    letter-spacing: 0.01em;
+  }
+}
+
+/* Layouts layer - Layout-specific styles */
+@layer layouts {
+  /* Premium Section Spacing */
+  .section-padding-large {
+    padding-top: 8rem;
+    padding-bottom: 8rem;
+  }
+
+  .section-padding-xlarge {
+    padding-top: 12rem;
+    padding-bottom: 12rem;
+  }
+
+  /* Smooth Scroll Behavior */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Container with blob shapes (Phase 1 implementation) */
+  .container-blob {
+    clip-path: var(--blob-radius-md);
+    width: min(100% - 3rem, var(--container-max, 60ch));
+    margin-inline: auto;
+  }
+
+  /* Container queries for responsive blobs (Phase 7) */
+  .portfolio-grid {
+    container-type: inline-size;
+    container-name: portfolio;
+  }
+  
+  @container portfolio (width > 768px) {
+    .portfolio-showcase {
+      clip-path: var(--blob-radius-lg);
+    }
+    
+    .product-card-blob {
+      clip-path: var(--blob-organic);
+    }
+  }
+  
+  @container portfolio (width <= 768px) {
+    .portfolio-showcase {
+      clip-path: var(--blob-radius-sm);
+    }
+    
+    .product-card-blob {
+      clip-path: var(--blob-gentle);
+    }
+  }
+}
+
+/* Components layer - Reusable component styles */
+@layer components {
+  /* Enhanced Button Styles */
+  .btn-primary {
+    background: linear-gradient(135deg, var(--accent-primary), var(--accent-warm));
+    color: var(--surface-elevated);
+    border: none;
+    border-radius: 12px;
+    padding: 1.25rem 3rem;
+    font-weight: 600;
+    font-size: 1.125rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 12px rgba(139, 69, 19, 0.2);
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(139, 69, 19, 0.3);
+    background: linear-gradient(135deg, var(--accent-warm), var(--accent-primary));
+  }
+
+  .btn-secondary {
+    background: transparent;
+    color: var(--accent-primary);
+    border: 2px solid var(--accent-primary);
+    border-radius: 12px;
+    padding: 1.25rem 3rem;
+    font-weight: 600;
+    font-size: 1.125rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .btn-secondary:hover {
+    background: var(--accent-primary);
+    color: var(--surface-elevated);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(139, 69, 19, 0.2);
+  }
+
+  /* === Blob Button Component (Phase 1) === */
+  .blob-button {
+    position: relative;
+    overflow: visible;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .blob-button[data-blob-shape="gentle"] {
+    clip-path: var(--blob-gentle);
+  }
+  
+  .blob-button[data-blob-shape="gentle"]:hover {
+    clip-path: var(--blob-gentle-alt);
+    transform: translateY(-1px) scale(1.02);
+  }
+
+  .blob-button[data-blob-shape="organic"] {
+    clip-path: var(--blob-organic);
+  }
+  
+  .blob-button[data-blob-shape="organic"]:hover {
+    clip-path: var(--blob-organic-alt);
+    transform: translateY(-1px) scale(1.02);
+  }
+
+  .blob-button[data-blob-shape="flowing"] {
+    clip-path: var(--blob-flowing);
+  }
+  
+  .blob-button[data-blob-shape="flowing"]:hover {
+    clip-path: var(--blob-flowing-alt);
+    transform: translateY(-1px) scale(1.02);
+  }
+
+  .blob-button[data-blob-shape="dynamic"] {
+    clip-path: var(--blob-dynamic);
+  }
+  
+  .blob-button[data-blob-shape="dynamic"]:hover {
+    clip-path: var(--blob-dynamic-alt);
+    transform: translateY(-1px) scale(1.02);
+  }
+
+  .blob-button[data-blob-shape="subtle"] {
+    clip-path: var(--blob-subtle);
+  }
+  
+  .blob-button[data-blob-shape="subtle"]:hover {
+    clip-path: var(--blob-subtle-alt);
+    transform: translateY(-1px) scale(1.02);
+  }
+
+  .blob-button:hover {
+    transform: scale(1.05);
+  }
+  
+  /* Enhanced blob button focus states for accessibility */
+  .blob-button:focus {
+    outline: 2px solid var(--accent-primary);
+    outline-offset: 2px;
+  }
+
+  /* === Enhanced Product Showcase Blobs === */
+  .product-showcase-blob {
+    clip-path: var(--blob-radius-md);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .product-showcase-blob:hover {
+    clip-path: var(--blob-radius-lg);
+    transform: scale(1.02);
+  }
+  
+  /* Portfolio card blob shapes */
+  .portfolio-card-blob {
+    clip-path: var(--blob-radius-sm);
+    transition: all 0.3s ease;
+  }
+  
+  .portfolio-card-blob:hover {
+    clip-path: var(--blob-radius-md);
+  }
+
+  /* Product card blob shapes */
+  .product-card-blob {
+    clip-path: var(--blob-radius-sm);
+    transition: all 0.3s ease;
+  }
+  
+  .product-card-blob:hover {
+    clip-path: var(--blob-radius-md);
+  }
+
+  /* Gallery item blob shapes */
+  .gallery-item-blob {
+    clip-path: var(--blob-radius-sm);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .gallery-item-blob:hover {
+    clip-path: var(--blob-radius-md);
+    transform: translateY(-4px);
+  }
+
+  /* === Phase 1: Blob Shape Components === */
+  .product-showcase {
+    clip-path: var(--blob-radius-sm);
+    transition: clip-path 0.3s ease;
+  }
+
+  .product-showcase:hover {
+    clip-path: var(--blob-radius-md);
+  }
+
+  /* Blob container utility */
+  .blob-container {
+    clip-path: var(--blob-radius-md);
+  }
+
+  .blob-container.blob-sm {
+    clip-path: var(--blob-radius-sm);
+  }
+
+  .blob-container.blob-lg {
+    clip-path: var(--blob-radius-lg);
+  }
+
+  /* === Blob Container Component (Phase 1) === */
+  .blob-container {
+    position: relative;
+    overflow: hidden;
+    transition: clip-path 0.3s ease;
+  }
+  
+  .blob-container[data-blob-size="sm"] {
+    clip-path: var(--blob-radius-sm);
+  }
+  
+  .blob-container[data-blob-size="md"] {
+    clip-path: var(--blob-radius-md);
+  }
+  
+  .blob-container[data-blob-size="lg"] {
+    clip-path: var(--blob-radius-lg);
+  }
+  
+  /* Enhanced Wood Grain Background with Blob Support */
+  .wood-grain-background {
+    position: relative;
+    
+    &[data-blob-shape="sm"] {
+      clip-path: var(--blob-radius-sm);
+    }
+    
+    &[data-blob-shape="md"] {
+      clip-path: var(--blob-radius-md);
+    }
+    
+    &[data-blob-shape="lg"] {
+      clip-path: var(--blob-radius-lg);
+    }
+  }
+
+  /* Enhanced Wood Grain Background (Phase 1) */
+  .wood-grain-background {
+    opacity: 0.6;
+    transition: opacity 0.3s ease;
+    
+    /* Phase 7: CSS Nesting with :has() selector */
+    &:has(.product-showcase:hover) {
+      opacity: 0.8;
+    }
+    
+    &:has(.portfolio-showcase:hover) {
+      opacity: 0.9;
+    }
+    
+    /* Nested blob variations based on wood type */
+    &[data-wood-type="oak"] {
+      --blob-variation: var(--blob-gentle);
+      
+      .product-showcase {
+        clip-path: var(--blob-variation);
+      }
+    }
+    
+    &[data-wood-type="walnut"] {
+      --blob-variation: var(--blob-organic);
+      
+      .product-showcase {
+        clip-path: var(--blob-variation);
+      }
+    }
+    
+    &[data-wood-type="cherry"] {
+      --blob-variation: var(--blob-flowing);
+      
+      .product-showcase {
+        clip-path: var(--blob-variation);
+      }
+    }
+  }
+  
+  /* Wood Grain Texture Background (Enhanced) */
+  .wood-texture {
+    background-image: 
+      linear-gradient(90deg, transparent 79px, rgba(139, 69, 19, 0.03) 81px, rgba(139, 69, 19, 0.03) 82px, transparent 84px),
+      linear-gradient(rgba(139, 69, 19, 0.02) 0.5px, transparent 0.5px);
+    background-size: 84px 40px, 100% 20px;
+    clip-path: var(--blob-radius-md);
+  }
+
+  /* Timeline Animation */
+  .timeline-item {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.timeline-item.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Testimonial Card Enhancements */
+.testimonial-card {
+  background: var(--surface-elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: 16px;
+  padding: 2rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.testimonial-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.testimonial-card:hover::before {
+  transform: scaleX(1);
+}
+
+.testimonial-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
+}
+
+/* === CSS @scope for Component Isolation (Phase 4) === */
+  
+  /* Portfolio item scoped styles */
+  @scope (.portfolio-item) {
+    .title { 
+      font-size: 1.5rem; 
+      color: var(--wood-walnut-base);
+      font-family: var(--font-serif);
+    }
+    
+    .description { 
+      color: var(--wood-contrast-medium);
+      line-height: 1.6;
+    }
+    
+    .image-container {
+      clip-path: var(--blob-radius-md);
+      transition: clip-path 0.3s ease;
+    }
+    
+    .image-container:hover {
+      clip-path: var(--blob-radius-lg);
+    }
+  }
+  
+  /* Product card scoped styles */
+  @scope (.product-card) {
+    .price {
+      color: var(--accent-primary);
+      font-weight: 600;
+    }
+    
+    .title {
+      color: var(--foreground);
+      font-family: var(--font-serif);
+    }
+    
+    .image {
+      transition: all 0.3s ease;
+    }
+    
+    .image:hover {
+      transform: scale(1.05);
+      filter: brightness(1.1);
+    }
+  }
+  
+  /* Gallery scoped styles */
+  @scope (.gallery-container) {
+    .gallery-item {
+      clip-path: var(--blob-radius-sm);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .gallery-item:hover {
+      clip-path: var(--blob-radius-md);
+      transform: translateY(-4px);
+    }
+    
+    .gallery-title {
+      color: var(--accent-primary);
+      font-family: var(--font-serif);
+    }
+  }
+  
+  /* Navigation scoped styles */
+  @scope (.navigation) {
+    .nav-link {
+      position: relative;
+      transition: all 0.2s ease;
+    }
+    
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+      transition: width 0.3s ease;
+    }
+    
+    .nav-link:hover::after {
+      width: 100%;
+    }
+  }
+} /* End @layer components */

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classification Export Template</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .container { max-width: 800px; margin: 0 auto; }
+        .section { background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0; }
+        code { background: #e9ecef; padding: 2px 4px; border-radius: 4px; }
+        pre { background: #e9ecef; padding: 15px; border-radius: 4px; overflow-x: auto; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔧 Classification Export Instructions</h1>
+        
+        <div class="section">
+            <h3>📤 Exporting All Classifications</h3>
+            <p>After classifying images in the review batches, use your browser's developer tools to export all data:</p>
+            <ol>
+                <li>Press <code>F12</code> to open developer tools</li>
+                <li>Go to the <strong>Console</strong> tab</li>
+                <li>Paste and run this script:</li>
+            </ol>
+            <pre>
+// Export all classifications from all batches
+const allClassifications = {};
+for (let i = 0; i < localStorage.length; i++) {
+    const key = localStorage.key(i);
+    if (key.startsWith('animalClassifications_')) {
+        const batchId = key.replace('animalClassifications_', '');
+        try {
+            allClassifications[batchId] = JSON.parse(localStorage.getItem(key));
+        } catch (e) {
+            console.warn('Could not parse:', key);
+        }
+    }
+}
+
+// Create export data
+const exportData = {
+    exportTimestamp: new Date().toISOString(),
+    totalBatches: Object.keys(allClassifications).length,
+    totalClassifications: Object.values(allClassifications).reduce((sum, batch) => sum + Object.keys(batch).length, 0),
+    classifications: allClassifications
+};
+
+// Download as JSON
+const blob = new Blob([JSON.stringify(exportData, null, 2)], { type: 'application/json' });
+const url = URL.createObjectURL(blob);
+const a = document.createElement('a');
+a.href = url;
+a.download = 'all_animal_classifications_' + new Date().toISOString().slice(0, 19).replace(/:/g, '-') + '.json';
+a.click();
+URL.revokeObjectURL(url);
+
+console.log('Export complete!', exportData);
+            </pre>
+        </div>
+        
+        <div class="section">
+            <h3>📊 Classification Summary</h3>
+            <p>To get a summary of your classifications:</p>
+            <pre>
+// Get classification summary
+const summary = {};
+for (let i = 0; i < localStorage.length; i++) {
+    const key = localStorage.key(i);
+    if (key.startsWith('animalClassifications_')) {
+        const batchId = key.replace('animalClassifications_', '');
+        try {
+            const batch = JSON.parse(localStorage.getItem(key));
+            Object.values(batch).forEach(classification => {
+                if (classification.animal) {
+                    if (!summary[classification.animal]) {
+                        summary[classification.animal] = 0;
+                    }
+                    summary[classification.animal]++;
+                }
+            });
+        } catch (e) {
+            console.warn('Could not parse:', key);
+        }
+    }
+}
+
+console.table(summary);
+            </pre>
+        </div>
+        
+        <div class="section">
+            <h3>🔄 Processing Classifications</h3>
+            <p>Once you have the exported JSON file, you can process it with a Node.js script to:</p>
+            <ul>
+                <li>Create new project folders for each unique animal</li>
+                <li>Move images to their correct locations</li>
+                <li>Organize by process stage</li>
+                <li>Update the media-organized.ts file</li>
+            </ul>
+            <p>Save your exported JSON file and run the processing script to apply all classifications.</p>
+        </div>
+    </div>
+</body>
+</html>

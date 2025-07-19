@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useCallback, useMemo } from 'react';
+import { default as NextImage } from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { OrbitControls, Environment, ContactShadows, Text, Plane } from '@react-three/drei';
@@ -1255,11 +1256,13 @@ export default function InteractiveConfigurator({ onConfigChange }: Configurator
                       <div className="mt-3">
                         <div className="text-sm font-medium text-foreground mb-2">Pattern Preview:</div>
                         <div className="w-full h-32 bg-foreground/5 rounded-lg overflow-hidden">
-                          {/* eslint-disable-next-line @next/next/no-img-element */}
-                          <img
+                          <NextImage
                             src={config.customPatternPreview}
                             alt="Custom pattern preview"
                             className="w-full h-full object-cover"
+                            width={300}
+                            height={128}
+                            unoptimized
                           />
                         </div>
                       </div>

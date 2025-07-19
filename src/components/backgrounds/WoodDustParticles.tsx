@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { useAnimation } from '../AnimationProvider';
 
@@ -30,13 +30,14 @@ export const WoodDustParticles: React.FC<WoodDustParticlesProps> = ({
   const cursorPosition = animation?.cursorPosition || { x: 0, y: 0 };
   
   // Color schemes for different wood types
-  const colorSchemes = {
-    light: ['#F5DEB3', '#DEB887', '#D2B48C', '#FAEBD7', '#F5F5DC'],
-    dark: ['#8B4513', '#A0522D', '#CD853F', '#D2691E', '#B8860B'],
-    warm: ['#E6CCB2', '#DDB892', '#B08968', '#7F5539', '#9C6644']
-  };
-  
-  const colors = colorSchemes[colorScheme] || colorSchemes.warm;
+  const colors = useMemo(() => {
+    const colorSchemes = {
+      light: ['#F5DEB3', '#DEB887', '#D2B48C', '#FAEBD7', '#F5F5DC'],
+      dark: ['#8B4513', '#A0522D', '#CD853F', '#D2691E', '#B8860B'],
+      warm: ['#E6CCB2', '#DDB892', '#B08968', '#7F5539', '#9C6644']
+    };
+    return colorSchemes[colorScheme] || colorSchemes.warm;
+  }, [colorScheme]);
   
   useEffect(() => {
     // Generate random particles
@@ -51,7 +52,7 @@ export const WoodDustParticles: React.FC<WoodDustParticlesProps> = ({
     }));
     
     setParticles(newParticles);
-  }, [count, colors]);
+  }, [count, colors]); // Include colors dependency
   
   return (
     <div className="absolute inset-0 pointer-events-none overflow-hidden">

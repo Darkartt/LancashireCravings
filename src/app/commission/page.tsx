@@ -99,7 +99,7 @@ export default function CommissionPage() {
   };
 
   return (
-    <div ref={containerRef} className="flex flex-col min-h-screen bg-background text-foreground">
+    <div ref={containerRef} className="flex flex-col min-h-screen text-foreground" style={{ background: 'transparent' }}>
       <Header />
         {/* Hero Section with Modern Parallax */}
       <motion.section 

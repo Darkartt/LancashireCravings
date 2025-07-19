@@ -1,16 +1,17 @@
 "use client";
 
 import Link from "next/link";
-import AboutBackground from "@/components/backgrounds/AboutBackground"; // Changed import
+import Image from "next/image";
+import AboutBackground from "../../components/backgrounds/AboutBackground";
 import { motion } from "framer-motion";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 
 export default function About() {
   return (
-    <div className="flex flex-col min-h-screen bg-background text-foreground">
+    <div className="flex flex-col min-h-screen text-foreground" style={{ background: 'transparent' }}>
       <Header />      {/* Hero Section */}
-      <section className="relative pt-24 pb-16 px-4 sm:px-8 bg-foreground/5">
+      <section className="relative pt-40 pb-16 px-4 sm:px-8 bg-foreground/5">
         {/* Replacing ThreeBackground with AboutBackground */}
         {/* The AboutBackground component has its own styling including height: 70vh */}
         {/* We might need to adjust the section's padding or structure if this doesn't look right */}
@@ -32,7 +33,7 @@ export default function About() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
             viewport={{ once: true }}
-          >Discover the legacy of Elite Woodcraft, based in Liverpool, crafting unique wooden masterpieces for clients worldwide with over three decades of expertis'e.</motion.p>
+          >Discover the legacy of Lancaster Carving Limited, based in Mold, United Kingdom, crafting unique wooden masterpieces for clients worldwide with over three decades of expertise.</motion.p>
         </div>
       </section>
 
@@ -47,7 +48,7 @@ export default function About() {
               viewport={{ once: true }}
             >
               <h3 className="text-2xl font-serif font-bold text-accent-primary mb-4">A Legacy of Craftsmanship</h3>
-              <p className="text-foreground/80 mb-4">Founded in 1987 by master woodcarver Edward Langston, Elite Woodcraft was born from a deep reverence for the timeless art of woodworking. What began as a small workshop in Liverpool has grown into a globally recognized atelier, celebrated for creating unique, bespoke wooden masterpieces.</p>
+              <p className="text-foreground/80 mb-4">Founded in 1987 by master woodcarver Edward Langston, Lancaster Carving Limited was born from a deep reverence for the timeless art of woodworking. What began as a small workshop in Mold has grown into a globally recognized atelier, celebrated for creating unique, bespoke wooden masterpieces.</p>
               <p className="text-foreground/80">Edward's vision was simple yet profound: to preserve traditional carving techniques while embracing bespoke design tailored to each client's vision, ensuring no two pieces are ever identical. Today, under the guidance of his son, Michael Langston, we continue to honor that legacy with every piece we create.</p>
             </motion.div>
             <div className="rounded-lg shadow-lg h-80 bg-foreground/10"></div>
@@ -60,7 +61,7 @@ export default function About() {
               viewport={{ once: true }}
             >
               <h3 className="text-2xl font-serif font-bold text-accent-primary mb-4">Our Philosophy</h3>
-              <p className="text-foreground/80 mb-4">At Elite Woodcraft, we believe that true luxury lies in the details. Each piece is meticulously crafted by hand, using sustainably sourced premium hardwoods, to ensure not only beauty but also enduring quality and uniqueness.</p>
+              <p className="text-foreground/80 mb-4">At Lancaster Carving Limited, we believe that true luxury lies in the details. Each piece is meticulously crafted by hand, using sustainably sourced premium hardwoods, to ensure not only beauty but also enduring quality and uniqueness.</p>
               <p className="text-foreground/80">We view every project as a collaboration with our clients, transforming their ideas into one-of-a-kind works of art that reflect personal style and heritage. Our commitment to excellence means we never compromise on craftsmanship, delivering pieces that become cherished heirlooms.</p>
             </motion.div>
             <div className="rounded-lg shadow-lg h-80 bg-foreground/10"></div>
@@ -136,8 +137,112 @@ export default function About() {
           viewport={{ once: true }}
         >
           <h3 className="text-3xl font-serif font-bold text-accent-primary mb-4">Collaborate With Us</h3>
-          <p className="text-lg text-foreground/80 max-w-2xl mx-auto mb-8">Experience the artistry of Elite Woodcraft firsthand. Commission a custom piece that embodies your vision with our unparalleled craftsmanship.</p>
+          <p className="text-lg text-foreground/80 max-w-2xl mx-auto mb-8">Experience the artistry of Lancaster Carving Limited firsthand. Commission a custom piece that embodies your vision with our unparalleled craftsmanship.</p>
           <Link href="/contact" className="inline-block bg-accent-primary text-background px-8 py-3 rounded-md font-medium hover:bg-accent-primary/90 transition-colors">Request a Consultation</Link>        </motion.div>
+      </section>
+
+      {/* Community & Inspiration */}
+      <section className="py-16 px-4 sm:px-8 bg-background">
+        <div className="container mx-auto max-w-6xl">
+          <motion.h3 
+            className="text-3xl font-serif font-bold text-accent-primary mb-8 text-center"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            viewport={{ once: true }}
+          >Community & Inspiration</motion.h3>
+          
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <motion.div 
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              viewport={{ once: true }}
+            >
+              <div className="relative">
+                <div className="aspect-[4/5] rounded-2xl overflow-hidden shadow-xl">
+                  <Image 
+                    src="/OwlAtNight.jpg" 
+                    alt="Owl at night, a memorial piece" 
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                  />
+                </div>
+                <div className="absolute inset-0 bg-gradient-to-t from-accent-primary/20 to-transparent rounded-2xl"></div>
+              </div>
+            </motion.div>
+
+            <motion.div 
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              viewport={{ once: true }}
+            >
+              <div className="p-8 bg-foreground/5 rounded-2xl">
+                <h4 className="text-2xl font-serif font-bold text-accent-primary mb-6">In Memory & Celebration</h4>
+                <p className="text-foreground/80 leading-relaxed mb-6">
+                  "It's true what they say God takes the best first. This poem is for my beautiful cousin Hayley..."
+                </p>
+                
+                <div className="bg-background p-6 rounded-xl border-l-4 border-accent-primary shadow-md">
+                  <div className="text-lg font-serif italic text-accent-primary leading-relaxed">
+                    "A flower of the moon...<br />
+                    With the wind and sun in your hair"
+                  </div>
+                  <div className="mt-4 text-sm text-foreground/60">
+                    — In loving memory
+                  </div>
+                </div>
+
+                <p className="text-foreground/70 mt-6 leading-relaxed">
+                  Every piece we create carries emotion, memory, and meaning. Our work often serves as a bridge between 
+                  the physical and spiritual, honoring those we love and celebrating the beauty that surrounds us.
+                </p>
+              </div>
+            </motion.div>
+          </div>
+
+          <motion.div 
+            className="text-center mt-16"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.5 }}
+            viewport={{ once: true }}
+          >
+            <div className="max-w-4xl mx-auto">
+              <h4 className="text-xl font-serif font-semibold text-accent-primary mb-4">Creating with Purpose</h4>
+              <p className="text-lg text-foreground/80 leading-relaxed mb-8">
+                Our craft is more than woodworking—it's about creating meaningful connections, preserving memories, 
+                and bringing comfort through the timeless beauty of handcrafted art.
+              </p>
+              
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div className="text-center">
+                  <div className="w-16 h-16 bg-accent-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <span className="text-2xl">🌙</span>
+                  </div>
+                  <h5 className="text-lg font-serif font-semibold text-accent-primary mb-2">Memorial Pieces</h5>
+                  <p className="text-foreground/70">Honoring cherished memories through thoughtful design</p>
+                </div>
+                <div className="text-center">
+                  <div className="w-16 h-16 bg-accent-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <span className="text-2xl">🌟</span>
+                  </div>
+                  <h5 className="text-lg font-serif font-semibold text-accent-primary mb-2">Celebration</h5>
+                  <p className="text-foreground/70">Marking life's precious moments with lasting beauty</p>
+                </div>
+                <div className="text-center">
+                  <div className="w-16 h-16 bg-accent-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <span className="text-2xl">❤️</span>
+                  </div>
+                  <h5 className="text-lg font-serif font-semibold text-accent-primary mb-2">Connection</h5>
+                  <p className="text-foreground/70">Building bridges between hearts through handcraft</p>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </div>
       </section>
 
       <Footer />

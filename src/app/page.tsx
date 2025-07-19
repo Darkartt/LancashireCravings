@@ -1,20 +1,60 @@
 "use client";
 
 import Link from "next/link";
-import HomeBackground from "../components/backgrounds/HomeBackground";
+import Image from "next/image";
+import { useState, useEffect, Suspense, lazy } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Button from "../components/ui/Button";
+import ImageLightbox from "../components/ui/ImageLightbox";
+import { PageLoadingFallback } from "../components/ui/LoadingSpinner";
+import { 
+  projects,
+  getFeaturedProjects 
+} from "@/lib/media-organized";
+
+// Lazy load heavy components
+const HomeBackground = lazy(() => import("../components/backgrounds/HomeBackground"));
+const SectionMorphing = lazy(() => import("../components/animations/SectionMorphing"));
+
 import { companyInfo } from "../lib/data";
 
-export default function Home() {return (
-    <div className="flex flex-col min-h-screen bg-background text-foreground relative">
-      <HomeBackground />
+export default function Home() {
+  const [lightboxImage, setLightboxImage] = useState<{src: string, alt: string} | null>(null);
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  // Get featured projects with images
+  const featuredProjects = getFeaturedProjects();
+
+  useEffect(() => {
+    // Set loaded state after mount to prevent hydration mismatch
+    setIsLoaded(true);
+  }, []);
+
+  const openLightbox = (src: string, alt: string) => {
+    setLightboxImage({ src, alt });
+  };
+
+  const closeLightbox = () => {
+    setLightboxImage(null);
+  };
+
+  // Show loading fallback during initial render
+  if (!isLoaded) {
+    return <PageLoadingFallback />;
+  }
+
+  return (
+    <div className="flex flex-col min-h-screen text-foreground relative" style={{ background: 'transparent' }}>
+      <Suspense fallback={<div className="fixed inset-0 bg-[var(--background)]" />}>
+        <HomeBackground />
+      </Suspense>
+      
       <Header />
 
       {/* Hero Section - Enhanced Full-Height Immersive */}
-      <section id="hero" className="relative min-h-screen flex flex-col justify-center items-center bg-transparent z-10 pt-24 pb-32 hero-parallax">
-        <div className="container mx-auto px-6 sm:px-12 text-center max-w-6xl">
+      <section id="hero" className="hero-section relative min-h-screen flex flex-col justify-center items-center bg-transparent pt-40 pb-40 hero-parallax section-transition-smooth">
+        <div className="container-modern text-center max-w-6xl relative z-10">
           <div
             className="mb-6"
             data-animate-scale
@@ -55,12 +95,12 @@ export default function Home() {return (
             data-animate-fade-up
           >
             <Link href="/commission">
-              <Button variant="primary" size="lg" fullWidth className="sm:w-auto">
+              <Button variant="primary" size="lg-plus" fullWidth className="sm:w-auto">
                 Commission Custom Piece
               </Button>
             </Link>
-            <Link href="#portfolio">
-              <Button variant="outline" size="lg" fullWidth className="sm:w-auto">
+            <Link href="/portfolio">
+              <Button variant="outline" size="lg-plus" fullWidth className="sm:w-auto">
                 Explore Collection
               </Button>
             </Link>
@@ -81,9 +121,20 @@ export default function Home() {return (
         </div>
       </section>
 
+      {/* Hero to Process Transition */}
+      <SectionMorphing 
+        sectionId="hero" 
+        nextSectionId="process" 
+        morphingType="hero-to-process"
+        className="section-transition-trigger"
+      />
+
       {/* Enhanced Process Section with Timeline */}
-      <section id="process" className="py-32 px-6 sm:px-12 bg-gradient-to-br from-accent-primary/5 to-accent-secondary/5 border-t border-foreground/10">
-        <div className="container mx-auto max-w-7xl">
+      <section id="process" className="process-section section-padding-xl bg-transparent shadow-separator-medium relative section-transition-smooth" style={{ 
+        background: 'linear-gradient(to bottom right, transparent 0%, rgba(var(--accent-secondary-rgb, 85, 107, 47), 0.05) 100%)'
+      }}>
+        <div className="mb-24"> {/* Empty space for scroll animation trigger */}</div>
+        <div className="container-modern max-w-7xl">
           <div className="text-center mb-20" data-animate-fade-up>
             <h2 className="text-5xl md:text-6xl font-serif font-bold text-accent-primary mb-8">
               From Vision to Heirloom
@@ -102,7 +153,7 @@ export default function Home() {return (
                 data-animate-slide-left
               >
                 <div className="lg:w-1/2 text-center lg:text-right">
-                  <div className="inline-flex items-center justify-center w-20 h-20 bg-accent-primary text-background rounded-full text-4xl mb-6 shadow-lg">
+                  <div className="inline-flex items-center justify-center w-20 h-20 bg-accent-primary text-background rounded-2xl text-4xl mb-6 shadow-lg">
                     📝
                   </div>
                   <h3 className="text-3xl font-serif font-bold text-accent-primary mb-4">Discovery & Consultation</h3>
@@ -125,7 +176,7 @@ export default function Home() {return (
                 data-animate-slide-right
               >
                 <div className="lg:w-1/2 text-center lg:text-left">
-                  <div className="inline-flex items-center justify-center w-20 h-20 bg-accent-secondary text-background rounded-full text-4xl mb-6 shadow-lg">
+                  <div className="inline-flex items-center justify-center w-20 h-20 bg-accent-secondary text-background rounded-2xl text-4xl mb-6 shadow-lg">
                     🪵
                   </div>
                   <h3 className="text-3xl font-serif font-bold text-accent-primary mb-4">Material Selection</h3>
@@ -148,7 +199,7 @@ export default function Home() {return (
                 data-animate-slide-left
               >
                 <div className="lg:w-1/2 text-center lg:text-right">
-                  <div className="inline-flex items-center justify-center w-20 h-20 bg-accent-primary text-background rounded-full text-4xl mb-6 shadow-lg">
+                  <div className="inline-flex items-center justify-center w-20 h-20 bg-accent-primary text-background rounded-2xl text-4xl mb-6 shadow-lg">
                     🪚
                   </div>
                   <h3 className="text-3xl font-serif font-bold text-accent-primary mb-4">Master Craftsmanship</h3>
@@ -169,7 +220,7 @@ export default function Home() {return (
 
           {/* Sustainability Commitment */}
           <div 
-            className="mt-24 p-12 bg-background rounded-3xl shadow-lg border border-foreground/10"
+            className="mt-24 p-12 bg-background rounded-3xl shadow-lg shadow-separator-subtle"
             data-animate-fade-up
           >
             <div className="text-center">
@@ -183,9 +234,18 @@ export default function Home() {return (
         </div>
       </section>
 
+      {/* Process to Portfolio Transition */}
+      <SectionMorphing 
+        sectionId="process" 
+        nextSectionId="portfolio" 
+        morphingType="process-to-portfolio"
+        className="section-transition-trigger"
+      />
+
       {/* Enhanced Portfolio Section with Case Studies */}
-      <section id="portfolio" className="py-32 px-6 sm:px-12 bg-background border-t border-foreground/10">
-        <div className="container mx-auto max-w-7xl">
+      <section id="portfolio" className="portfolio-section section-padding-xl shadow-separator-medium relative section-transition-smooth" style={{ background: 'transparent' }}>
+        <div className="mb-24"> {/* Empty space for scroll animation trigger */}</div>
+        <div className="container-modern max-w-7xl">
           <h2 
             className="text-5xl md:text-6xl font-serif font-bold text-accent-primary mb-16 text-center"
             data-animate-fade-up
@@ -203,84 +263,129 @@ export default function Home() {return (
 
           {/* Featured Case Study */}
           <div 
-            className="mb-24 p-8 md:p-12 bg-gradient-to-br from-accent-primary/5 to-accent-secondary/5 rounded-3xl border border-foreground/10"
+            className="mb-24 p-8 md:p-12 bg-gradient-to-br from-accent-primary/5 to-accent-secondary/5 blob-container blob-lg shadow-separator-subtle"
             data-animate-fade-up
           >
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
               <div>
-                <span className="inline-block px-4 py-2 bg-accent-primary/10 text-accent-primary rounded-full text-sm font-medium mb-6">
+                <span className="inline-block px-4 py-2 bg-accent-primary/10 text-accent-primary blob-container blob-xs text-sm font-medium mb-6">
                   Featured Commission
                 </span>
                 <h3 className="text-4xl font-serif font-bold text-accent-primary mb-6">
-                  "The Guardian Oak"
+                  {featuredProjects[0]?.title || "Golden Eagle Masterpiece"}
                 </h3>
                 <div className="space-y-4 text-lg text-foreground/80 leading-relaxed">
                   <p>
-                    Commissioned by the Thornfield Estate in 2023, this 8-foot oak sculpture represents the ancient guardian 
-                    spirit of their 200-year-old property. Carved from a single piece of English oak that fell naturally 
-                    on the estate itself, the piece incorporates intricate Celtic knotwork and wildlife motifs.
+                    {featuredProjects[0]?.description || "Majestic golden eagle carved with incredible detail, showcasing the power and grace of this magnificent bird of prey."}
                   </p>
                   <p>
-                    The project required 6 months of meticulous work, including consultations with local historians 
-                    and naturalists to ensure every detail reflected the land's unique heritage. The piece now serves 
-                    as the centerpiece of the estate's grand entrance hall.
+                    This masterpiece required months of meticulous work, capturing every feather detail and the fierce intelligence 
+                    in the eagle's gaze. Carved from premium hardwood and finished with natural wood stain to enhance the grain.
                   </p>
                 </div>
                 <div className="mt-8 grid grid-cols-2 gap-6 text-sm">
                   <div>
+                    <h4 className="font-semibold text-accent-primary mb-2">Category</h4>
+                    <p className="text-foreground/60">{featuredProjects[0]?.category || "Wildlife"}</p>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-accent-primary mb-2">Difficulty</h4>
+                    <p className="text-foreground/60">{featuredProjects[0]?.difficulty || "Expert"}</p>
+                  </div>
+                  <div>
                     <h4 className="font-semibold text-accent-primary mb-2">Materials</h4>
-                    <p className="text-foreground/60">Estate-grown English Oak, 200+ years old</p>
+                    <p className="text-foreground/60">{featuredProjects[0]?.materials?.join(", ") || "Premium Hardwood"}</p>
                   </div>
                   <div>
-                    <h4 className="font-semibold text-accent-primary mb-2">Dimensions</h4>
-                    <p className="text-foreground/60">8' H × 3' W × 2' D</p>
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-accent-primary mb-2">Techniques</h4>
-                    <p className="text-foreground/60">Traditional chisel work, Celtic knotwork</p>
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-accent-primary mb-2">Finish</h4>
-                    <p className="text-foreground/60">Hand-rubbed tung oil, natural wax</p>
+                    <h4 className="font-semibold text-accent-primary mb-2">Time</h4>
+                    <p className="text-foreground/60">{featuredProjects[0]?.completionTime || "6-8 weeks"}</p>
                   </div>
                 </div>
               </div>
               <div className="space-y-4">
-                <div className="aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl bg-gradient-to-br from-accent-primary/20 to-accent-secondary/20">
-                  <div className="w-full h-full bg-foreground/10 flex items-center justify-center">
-                    <span className="text-foreground/40 text-center px-4">The Guardian Oak - Completed piece</span>
-                  </div>
+                <div className="portfolio-showcase aspect-[4/5] overflow-hidden shadow-2xl bg-gradient-to-br from-accent-primary/20 to-accent-secondary/20">
+                  {featuredProjects[0]?.coverImage ? (
+                    <Image
+                      src={featuredProjects[0].coverImage}
+                      alt={featuredProjects[0].title}
+                      width={400}
+                      height={500}
+                      className="w-full h-full object-cover cursor-pointer hover:scale-110 transition-transform duration-500"
+                      onClick={() => openLightbox(featuredProjects[0].coverImage, featuredProjects[0].title)}
+                    />
+                  ) : (
+                    <div className="w-full h-full bg-foreground/10 flex items-center justify-center">
+                      <span className="text-foreground/40 text-center px-4">Featured Project - Main View</span>
+                    </div>
+                  )}
                 </div>
                 <div className="grid grid-cols-2 gap-4">
-                  <div className="aspect-square rounded-xl overflow-hidden shadow-lg bg-gradient-to-br from-accent-primary/20 to-accent-secondary/20">
-                    <div className="w-full h-full bg-foreground/10 flex items-center justify-center">
-                      <span className="text-foreground/40 text-xs text-center px-2">Detail: Celtic knotwork</span>
+                  {featuredProjects[1]?.coverImage ? (
+                    <div className="product-card-blob aspect-square overflow-hidden shadow-lg bg-gradient-to-br from-accent-primary/20 to-accent-secondary/20">
+                      <Image
+                        src={featuredProjects[1].coverImage}
+                        alt={featuredProjects[1].title}
+                        width={200}
+                        height={200}
+                        className="w-full h-full object-cover cursor-pointer hover:scale-110 transition-transform duration-300"
+                        onClick={() => openLightbox(featuredProjects[1].coverImage, featuredProjects[1].title)}
+                      />
                     </div>
-                  </div>
-                  <div className="aspect-square rounded-xl overflow-hidden shadow-lg bg-gradient-to-br from-accent-primary/20 to-accent-secondary/20">
-                    <div className="w-full h-full bg-foreground/10 flex items-center justify-center">
-                      <span className="text-foreground/40 text-xs text-center px-2">Process: Rough carving</span>
+                  ) : (
+                    <div className="product-card-blob aspect-square overflow-hidden shadow-lg bg-gradient-to-br from-accent-primary/20 to-accent-secondary/20">
+                      <div className="w-full h-full bg-foreground/10 flex items-center justify-center">
+                        <span className="text-foreground/40 text-xs text-center px-2">Detail view</span>
+                      </div>
                     </div>
-                  </div>
+                  )}
+                  {featuredProjects[2]?.coverImage ? (
+                    <div className="product-card-blob aspect-square overflow-hidden shadow-lg bg-gradient-to-br from-accent-primary/20 to-accent-secondary/20">
+                      <Image
+                        src={featuredProjects[2].coverImage}
+                        alt={featuredProjects[2].title}
+                        width={200}
+                        height={200}
+                        className="w-full h-full object-cover cursor-pointer hover:scale-110 transition-transform duration-300"
+                        onClick={() => openLightbox(featuredProjects[2].coverImage, featuredProjects[2].title)}
+                      />
+                    </div>
+                  ) : (
+                    <div className="product-card-blob aspect-square overflow-hidden shadow-lg bg-gradient-to-br from-accent-primary/20 to-accent-secondary/20">
+                      <div className="w-full h-full bg-foreground/10 flex items-center justify-center">
+                        <span className="text-foreground/40 text-xs text-center px-2">Process view</span>
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
           </div>
 
           {/* Portfolio Categories */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
+          <div className="portfolio-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
             <div 
-              className="group cursor-pointer card-hover"
+              className="portfolio-item group cursor-pointer card-hover"
               data-animate-fade-up
             >
-              <div className="relative overflow-hidden rounded-2xl shadow-xl bg-gradient-to-br from-accent-primary/20 to-accent-secondary/20 mb-6 group-hover:shadow-2xl transition-all duration-500">
-                <div className="aspect-[4/5] bg-foreground/10 flex items-center justify-center">
-                  <span className="text-foreground/40 text-center px-4">Sculptural Figures</span>
-                </div>
+              <div className="portfolio-showcase relative overflow-hidden shadow-xl bg-gradient-to-br from-accent-primary/20 to-accent-secondary/20 mb-6 group-hover:shadow-2xl transition-all duration-500">
+                {projects[0]?.coverImage ? (
+                  <Image
+                    src={projects[0].coverImage}
+                    alt={projects[0].title}
+                    width={400}
+                    height={500}
+                    className="aspect-[4/5] w-full object-cover group-hover:scale-110 transition-transform duration-500"
+                    onClick={() => openLightbox(projects[0].coverImage, projects[0].title)}
+                  />
+                ) : (
+                  <div className="aspect-[4/5] bg-foreground/10 flex items-center justify-center">
+                    <span className="text-foreground/40 text-center px-4">Wildlife Sculptures</span>
+                  </div>
+                )}
                 <div className="absolute inset-0 bg-gradient-to-t from-accent-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
               </div>
               <h4 className="text-2xl font-serif font-bold text-accent-primary mb-3 group-hover:text-accent-secondary transition-colors">
-                Sculptural Figures
+                Wildlife Sculptures
               </h4>
               <p className="text-foreground/70 leading-relaxed mb-4">
                 Lifelike human and animal figures that capture movement, emotion, and character. Each piece tells a story 
@@ -297,7 +402,7 @@ export default function Home() {return (
               className="group cursor-pointer card-hover"
               data-animate-fade-up
             >
-              <div className="relative overflow-hidden rounded-2xl shadow-xl bg-gradient-to-br from-accent-primary/20 to-accent-secondary/20 mb-6 group-hover:shadow-2xl transition-all duration-500">
+              <div className="portfolio-showcase relative overflow-hidden shadow-xl bg-gradient-to-br from-accent-primary/20 to-accent-secondary/20 mb-6 group-hover:shadow-2xl transition-all duration-500">
                 <div className="aspect-[4/5] bg-foreground/10 flex items-center justify-center">
                   <span className="text-foreground/40 text-center px-4">Architectural Elements</span>
                 </div>
@@ -321,7 +426,7 @@ export default function Home() {return (
               className="group cursor-pointer card-hover"
               data-animate-fade-up
             >
-              <div className="relative overflow-hidden rounded-2xl shadow-xl bg-gradient-to-br from-accent-primary/20 to-accent-secondary/20 mb-6 group-hover:shadow-2xl transition-all duration-500">
+              <div className="portfolio-showcase relative overflow-hidden shadow-xl bg-gradient-to-br from-accent-primary/20 to-accent-secondary/20 mb-6 group-hover:shadow-2xl transition-all duration-500">
                 <div className="aspect-[4/5] bg-foreground/10 flex items-center justify-center">
                   <span className="text-foreground/40 text-center px-4">Heirloom Furniture</span>
                 </div>
@@ -366,7 +471,7 @@ export default function Home() {return (
           </div>
 
           <div className="text-center">
-            <Link href="/portfolio" className="btn-primary">
+            <Link href="/portfolio" className="btn btn-lg-plus btn-primary">
               Explore Complete Portfolio
               <span className="text-xl">→</span>
             </Link>
@@ -375,8 +480,11 @@ export default function Home() {return (
       </section>
 
       {/* Enhanced About Section with Craftsman Story */}
-      <section id="about" className="py-32 px-6 sm:px-12 bg-gradient-to-br from-accent-primary/5 to-accent-secondary/5 border-t border-foreground/10">
-        <div className="container mx-auto max-w-7xl">
+      <section id="about" className="about-section section-padding-xl bg-transparent shadow-separator-medium section-transition-smooth" style={{
+        background: 'linear-gradient(to bottom right, transparent 0%, rgba(var(--accent-primary-rgb, 139, 69, 19), 0.05) 100%)'
+      }}>
+        <div className="mb-24"> {/* Empty space for scroll animation trigger */}</div>
+        <div className="container-modern max-w-7xl">
           <h2 
             className="text-5xl md:text-6xl font-serif font-bold text-accent-primary mb-16 text-center"
             data-animate-fade-up
@@ -409,13 +517,13 @@ export default function Home() {return (
             </div>
             
             <div className="order-1 lg:order-2" data-animate-slide-right>
-              <div className="aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl bg-gradient-to-br from-accent-primary/20 to-accent-secondary/20 mb-6">
+              <div className="aspect-[4/5] blob-container blob-lg overflow-hidden shadow-2xl bg-gradient-to-br from-accent-primary/20 to-accent-secondary/20 mb-6">
                 <div className="w-full h-full bg-foreground/10 flex items-center justify-center">
                   <span className="text-foreground/40 text-center px-4">Master Craftsman Edward Langston in his Liverpool workshop</span>
                 </div>
               </div>
               <div className="text-center">
-                <div className="bg-background p-6 rounded-xl shadow-lg border border-foreground/10">
+                <div className="bg-background p-6 blob-container blob-md shadow-lg shadow-separator-subtle">
                   <p className="text-foreground/80 italic mb-4">
                     "Edward's work transcends mere decoration—each piece is a meditation on the relationship between human creativity and natural beauty."
                   </p>
@@ -426,31 +534,31 @@ export default function Home() {return (
           </div>
 
           {/* Workshop Tools Gallery */}
-          <div className="border-t border-foreground/10 pt-16" data-animate-fade-up>
+          <div className="shadow-separator-medium pt-16" data-animate-fade-up>
             <h3 className="text-2xl font-serif font-semibold text-center mb-12 text-foreground">
               Traditional Tools, Timeless Techniques
             </h3>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
               <div className="text-center">
-                <div className="w-16 h-16 bg-accent-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                <div className="w-16 h-16 bg-accent-primary/10 blob-container blob-sm flex items-center justify-center mx-auto mb-4">
                   <span className="text-2xl">🪚</span>
                 </div>
                 <h4 className="font-semibold text-accent-primary mb-2">Hand Chisels</h4>
               </div>
               <div className="text-center">
-                <div className="w-16 h-16 bg-accent-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                <div className="w-16 h-16 bg-accent-primary/10 blob-container blob-sm flex items-center justify-center mx-auto mb-4">
                   <span className="text-2xl">🔨</span>
                 </div>
                 <h4 className="font-semibold text-accent-primary mb-2">Carving Mallets</h4>
               </div>
               <div className="text-center">
-                <div className="w-16 h-16 bg-accent-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                <div className="w-16 h-16 bg-accent-primary/10 blob-container blob-sm flex items-center justify-center mx-auto mb-4">
                   <span className="text-2xl">⚒️</span>
                 </div>
                 <h4 className="font-semibold text-accent-primary mb-2">Gouges</h4>
               </div>
               <div className="text-center">
-                <div className="w-16 h-16 bg-accent-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                <div className="w-16 h-16 bg-accent-primary/10 blob-container blob-sm flex items-center justify-center mx-auto mb-4">
                   <span className="text-2xl">📐</span>
                 </div>
                 <h4 className="font-semibold text-accent-primary mb-2">Precision Tools</h4>
@@ -468,8 +576,9 @@ export default function Home() {return (
       </section>
 
       {/* Enhanced Testimonials Section */}
-      <section id="testimonials" className="py-32 px-6 sm:px-12 bg-background border-t border-foreground/10">
-        <div className="container mx-auto max-w-7xl">
+      <section id="testimonials" className="testimonials-section section-padding-xl bg-transparent shadow-separator-medium section-transition-smooth">
+        <div className="mb-24"> {/* Empty space for scroll animation trigger */}</div>
+        <div className="container-modern max-w-7xl">
           <h2 
             className="text-5xl md:text-6xl font-serif font-bold text-accent-primary mb-16 text-center"
             data-animate-fade-up
@@ -484,7 +593,7 @@ export default function Home() {return (
                 The sculpture Edward created for our estate exceeded every expectation. It's not just art—it's a piece of our family's heritage carved in wood.
               </p>
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-accent-primary/20 rounded-full flex items-center justify-center">
+                <div className="w-12 h-12 bg-accent-primary/20 blob-container blob-xs flex items-center justify-center">
                   <span className="text-accent-primary font-bold">JH</span>
                 </div>
                 <div>
@@ -497,10 +606,10 @@ export default function Home() {return (
             <div className="testimonial-card" data-animate-fade-up>
               <div className="text-4xl text-accent-primary mb-6">"</div>
               <p className="text-lg text-foreground/80 leading-relaxed mb-6">
-                Working with Elite Woodcraft was transformational. The attention to detail and respect for the wood's natural character created something truly magical.
+                Working with Lancaster Carving Limited was transformational. The attention to detail and respect for the wood's natural character created something truly magical.
               </p>
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-accent-primary/20 rounded-full flex items-center justify-center">
+                <div className="w-12 h-12 bg-accent-primary/20 blob-container blob-xs flex items-center justify-center">
                   <span className="text-accent-primary font-bold">SM</span>
                 </div>
                 <div>
@@ -516,7 +625,7 @@ export default function Home() {return (
                 The craftsmanship is extraordinary. Each piece tells a story and becomes more beautiful with time. This is heirloom-quality artistry.
               </p>
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-accent-primary/20 rounded-full flex items-center justify-center">
+                <div className="w-12 h-12 bg-accent-primary/20 blob-container blob-xs flex items-center justify-center">
                   <span className="text-accent-primary font-bold">DR</span>
                 </div>
                 <div>
@@ -525,11 +634,13 @@ export default function Home() {return (
                 </div>
               </div>
             </div>
+
+
           </div>
 
           <div className="text-center" data-animate-fade-up>
             <p className="text-lg text-foreground/70 mb-8">Join our community of satisfied collectors and commissioners</p>
-            <Link href="/contact" className="btn-secondary">
+            <Link href="/contact" className="btn btn-lg-plus btn-secondary">
               Share Your Vision
               <span className="text-xl">→</span>
             </Link>
@@ -537,8 +648,196 @@ export default function Home() {return (
         </div>
       </section>
 
+      {/* Social Highlights / Latest from Facebook */}
+      <section className="py-32 px-6 sm:px-12 bg-foreground/5 shadow-separator-medium">
+        <div className="container mx-auto max-w-7xl">
+          <h2 
+            className="text-5xl md:text-6xl font-serif font-bold text-accent-primary mb-16 text-center"
+            data-animate-fade-up
+          >
+            Latest from Our Workshop
+          </h2>
+          
+          <p 
+            className="text-xl text-foreground/70 text-center max-w-3xl mx-auto mb-20 leading-relaxed"
+            data-animate-fade-up
+          >
+            Follow our journey as we bring wood to life. Here are some recent moments from our workshop and the creatures that inspire our craft.
+          </p>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="group cursor-pointer" data-animate-fade-up onClick={() => openLightbox("/BarOwlBack.jpg", "Barn Owl Back carving - Good Afternoon 🌞 My Barn Owls back 😜 ❤️🔪🦉")}>
+              <div className="relative overflow-hidden rounded-2xl shadow-xl mb-6 group-hover:shadow-2xl transition-all duration-500">
+                <div className="aspect-[4/5]">
+                  <Image 
+                    src="/BarOwlBack.jpg" 
+                    alt="Barn Owl Back carving" 
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    priority={false}
+                  />
+                </div>
+                <div className="absolute inset-0 bg-gradient-to-t from-accent-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <span className="text-white text-4xl">🔍</span>
+                </div>
+              </div>
+              <div className="p-6 bg-background rounded-xl shadow-lg">
+                <p className="text-lg text-foreground/80 leading-relaxed text-center">
+                  "Good Afternoon 🌞 My Barn Owls back 😜 ❤️🔪🦉"
+                </p>
+              </div>
+            </div>
+
+            <div className="group cursor-pointer" data-animate-fade-up onClick={() => openLightbox("/OwlFront.jpg", "Owl Front carving - When the sun sets gold...A new beginning begins to unfold ❤️🔪🦉")}>
+              <div className="relative overflow-hidden rounded-2xl shadow-xl mb-6 group-hover:shadow-2xl transition-all duration-500">
+                <div className="aspect-[4/5]">
+                  <Image 
+                    src="/OwlFront.jpg" 
+                    alt="Owl Front carving" 
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  />
+                </div>
+                <div className="absolute inset-0 bg-gradient-to-t from-accent-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <span className="text-white text-4xl">🔍</span>
+                </div>
+              </div>
+              <div className="p-6 bg-background rounded-xl shadow-lg">
+                <p className="text-lg text-foreground/80 leading-relaxed text-center">
+                  "When the sun sets gold...A new beginning begins to unfold ❤️🔪🦉"
+                </p>
+              </div>
+            </div>
+
+            <div className="group cursor-pointer" data-animate-fade-up onClick={() => openLightbox("/Crow.jpg", "Crow carving - I became insane, with long intervals of horrible sanity - Edgar Allan Poe ❤️🔪🐦‍⬛")}>
+              <div className="relative overflow-hidden rounded-2xl shadow-xl mb-6 group-hover:shadow-2xl transition-all duration-500">
+                <div className="aspect-[4/5]">
+                  <Image 
+                    src="/Crow.jpg" 
+                    alt="Crow carving" 
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  />
+                </div>
+                <div className="absolute inset-0 bg-gradient-to-t from-accent-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <span className="text-white text-4xl">🔍</span>
+                </div>
+              </div>
+              <div className="p-6 bg-background rounded-xl shadow-lg">
+                <p className="text-lg text-foreground/80 leading-relaxed text-center">
+                  "I became insane, with long intervals of horrible sanity." <br />
+                  <span className="text-sm text-foreground/60 italic">- EDGAR ALLAN POE</span> ❤️🔪🐦‍⬛
+                </p>
+              </div>
+            </div>
+
+            <div className="group cursor-pointer" data-animate-fade-up onClick={() => openLightbox("/FishesOnTopOfTable.jpg", "Fish carvings on table - A collection of handcrafted fish showcasing different wood grains and carving techniques 🐟🎨")}>
+              <div className="relative overflow-hidden rounded-2xl shadow-xl mb-6 group-hover:shadow-2xl transition-all duration-500">
+                <div className="aspect-[4/5]">
+                  <Image 
+                    src="/FishesOnTopOfTable.jpg" 
+                    alt="Fish carvings on table" 
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  />
+                </div>
+                <div className="absolute inset-0 bg-gradient-to-t from-accent-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <span className="text-white text-4xl">🔍</span>
+                </div>
+              </div>
+              <div className="p-6 bg-background rounded-xl shadow-lg">
+                <p className="text-lg text-foreground/80 leading-relaxed text-center">
+                  "A collection of handcrafted fish showcasing different wood grains and carving techniques 🐟🎨"
+                </p>
+              </div>
+            </div>
+
+            <div className="group cursor-pointer" data-animate-fade-up onClick={() => openLightbox("/OwlAtNight.jpg", "Owl at Night - A majestic owl carving captured in atmospheric nighttime lighting 🦉🌙")}>
+              <div className="relative overflow-hidden rounded-2xl shadow-xl mb-6 group-hover:shadow-2xl transition-all duration-500">
+                <div className="aspect-[4/5]">
+                  <Image 
+                    src="/OwlAtNight.jpg" 
+                    alt="Owl at Night carving" 
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  />
+                </div>
+                <div className="absolute inset-0 bg-gradient-to-t from-accent-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <span className="text-white text-4xl">🔍</span>
+                </div>
+              </div>
+              <div className="p-6 bg-background rounded-xl shadow-lg">
+                <p className="text-lg text-foreground/80 leading-relaxed text-center">
+                  "A majestic owl carving captured in atmospheric nighttime lighting 🦉🌙"
+                </p>
+              </div>
+            </div>
+
+            <div className="group cursor-pointer" data-animate-fade-up onClick={() => openLightbox("/Dog.jpg", "Dog carving - Man's best friend immortalized in wood with loving detail 🐕❤️")}>
+              <div className="relative overflow-hidden rounded-2xl shadow-xl mb-6 group-hover:shadow-2xl transition-all duration-500">
+                <div className="aspect-[4/5]">
+                  <Image 
+                    src="/Dog.jpg" 
+                    alt="Dog carving" 
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  />
+                </div>
+                <div className="absolute inset-0 bg-gradient-to-t from-accent-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <span className="text-white text-4xl">🔍</span>
+                </div>
+              </div>
+              <div className="p-6 bg-background rounded-xl shadow-lg">
+                <p className="text-lg text-foreground/80 leading-relaxed text-center">
+                  "Man's best friend immortalized in wood with loving detail 🐕❤️"
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="text-center mt-16" data-animate-fade-up>
+            <p className="text-lg text-foreground/70 mb-8">Experience the joy of handcrafted artistry</p>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+              <div>
+                <div className="w-16 h-16 bg-accent-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <span className="text-2xl">🦉</span>
+                </div>
+                <h3 className="text-xl font-serif font-semibold text-accent-primary mb-2">Wildlife Inspiration</h3>
+                <p className="text-foreground/70">Nature's creatures guide our artistic vision</p>
+              </div>
+              <div>
+                <div className="w-16 h-16 bg-accent-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <span className="text-2xl">🔪</span>
+                </div>
+                <h3 className="text-xl font-serif font-semibold text-accent-primary mb-2">Traditional Tools</h3>
+                <p className="text-foreground/70">Time-honored techniques in every cut</p>
+              </div>
+              <div>
+                <div className="w-16 h-16 bg-accent-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <span className="text-2xl">❤️</span>
+                </div>
+                <h3 className="text-xl font-serif font-semibold text-accent-primary mb-2">Passionate Craft</h3>
+                <p className="text-foreground/70">Love for the art in every piece</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Enhanced Call-to-Action Section */}
-      <section className="py-32 px-6 sm:px-12 bg-gradient-to-br from-accent-primary/10 to-accent-secondary/10 border-t border-foreground/10">
+      <section className="py-32 px-6 sm:px-12 bg-gradient-to-br from-accent-primary/10 to-accent-secondary/10 shadow-separator-medium">
         <div className="container mx-auto max-w-4xl text-center">
           <div data-animate-fade-up>
             <h2 className="text-5xl md:text-6xl font-serif font-bold text-accent-primary mb-8">
@@ -550,10 +849,10 @@ export default function Home() {return (
             </p>
             
             <div className="flex flex-col sm:flex-row gap-6 justify-center max-w-2xl mx-auto mb-16">
-              <Link href="/commission" className="btn-primary">
+              <Link href="/commission" className="btn btn-lg-plus btn-primary">
                 Start Your Commission
               </Link>
-              <Link href="/contact" className="btn-secondary">
+              <Link href="/contact" className="btn btn-lg-plus btn-secondary">
                 Schedule Consultation
               </Link>
             </div>
@@ -585,7 +884,20 @@ export default function Home() {return (
         </div>
       </section>
 
+      {/* Spacing before footer for scroll animations */}
+      <div className="h-24"></div>
+      
       <Footer />
+
+      {/* Image Lightbox */}
+      {lightboxImage && (
+        <ImageLightbox
+          src={lightboxImage.src}
+          alt={lightboxImage.alt}
+          isOpen={!!lightboxImage}
+          onClose={closeLightbox}
+        />
+      )}
     </div>
   );
 }

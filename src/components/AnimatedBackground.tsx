@@ -148,11 +148,11 @@ const AnimatedBackground: React.FC<AnimatedBackgroundProps> = ({
   const config = backgroundConfig[variant];
   
   return (
-    <div className={`fixed inset-0 -z-10 overflow-hidden ${className}`}>
+    <div className={`fixed inset-0 overflow-hidden ${className}`} style={{ zIndex: -9 }}>
       {/* Base gradient */}
       <motion.div 
         className={`absolute inset-0 bg-gradient-to-br ${config.baseGradient}`}
-        style={{ y: y1 }}
+        style={{ y: y1, opacity: 0.8 }} // Increased opacity for better visibility
       />
       
       {/* Wood grain pattern appropriate for the section */}

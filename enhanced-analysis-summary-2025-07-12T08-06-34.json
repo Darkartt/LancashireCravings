@@ -1,0 +1,2126 @@
+{
+  "totalAnalyzed": 2812,
+  "correctlyPlaced": 619,
+  "misplaced": 301,
+  "uncertain": 1892,
+  "newProjectsSuggested": 301,
+  "uniqueAnimalsFound": [
+    "bass_generic",
+    "bald_eagle",
+    "eagle_generic",
+    "nessie",
+    "st_collen"
+  ],
+  "projectCreationSuggestions": [
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\final\\eagle_eagle_224.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\final\\eagle_eagle_225.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\final\\eagle_eagle_226.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\final\\eagle_eagle_227.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\final\\eagle_eagle_228.jpeg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\final\\eagle_eagle_229.jpeg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\final\\eagle_eagle_230.jpeg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\final\\eagle_eagle_231.jpeg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\final\\eagle_eagle_232.jpeg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\final\\eagle_eagle_233.jpeg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\final\\eagle_eagle_234.jpeg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\final\\eagle_eagle_235.jpeg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\final\\eagle_eagle_236.jpeg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\final\\eagle_eagle_237.jpeg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\final\\eagle_eagle_238.jpeg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\final\\eagle_eagle_239.jpeg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\final\\eagle_eagle_240.jpeg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\final\\eagle_eagle_241.jpeg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\final\\eagle_eagle_242.jpeg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\final\\eagle_eagle_243.jpeg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\final\\eagle_eagle_244.jpeg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\final\\eagle_eagle_245.jpeg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\final\\eagle_eagle_246.jpeg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\final\\eagle_eagle_247.jpeg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\final\\eagle_eagle_248.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\final\\eagle_eagle_249.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\final\\eagle_eagle_250.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\final\\eagle_eagle_251.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\final\\eagle_eagle_252.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\final\\eagle_eagle_253.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\final\\eagle_eagle_254.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\final\\eagle_eagle_255.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\final\\eagle_eagle_256.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\final\\eagle_eagle_257.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\final\\eagle_eagle_258.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\final\\eagle_eagle_259.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\final\\eagle_eagle_260.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\final\\eagle_eagle_261.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\final\\eagle_eagle_262.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\final\\eagle_eagle_263.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\final\\eagle_eagle_264.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\final\\eagle_eagle_265.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\final\\eagle_eagle_266.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\final\\eagle_eagle_267.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\final\\eagle_eagle_268.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\final\\eagle_eagle_269.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\final\\eagle_eagle_270.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\final\\eagle_eagle_271.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\final\\eagle_eagle_272.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\final\\eagle_eagle_273.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\final\\eagle_eagle_274.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\final\\eagle_eagle_275.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\final\\eagle_eagle_276.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\final\\eagle_eagle_277.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\final\\eagle_eagle_278.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\final\\eagle_eagle_279.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\final\\eagle_eagle_280.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\final\\eagle_eagle_281.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\final\\eagle_eagle_282.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\final\\eagle_eagle_283.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\final\\eagle_eagle_284.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\final\\eagle_eagle_285.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\final\\eagle_eagle_286.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\final\\eagle_eagle_287.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\final\\eagle_eagle_288.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\final\\eagle_eagle_289.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\final\\eagle_eagle_290.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\final\\eagle_eagle_291.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\final\\eagle_eagle_292.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\final\\eagle_eagle_293.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\final\\eagle_eagle_294.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\final\\eagle_eagle_295.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\final\\eagle_eagle_296.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\final\\eagle_eagle_297.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\final\\eagle_eagle_298.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\final\\eagle_eagle_299.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\final\\eagle_eagle_300.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\final\\eagle_eagle_301.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\final\\eagle_process_050.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\final\\eagle_process_051.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\final\\eagle_process_060.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\final\\eagle_process_061.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\final\\eagle_process_062.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\final\\eagle_process_063.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\final\\eagle_process_064.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\final\\eagle_process_068.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\final\\eagle_process_069.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\final\\eagle_process_090.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\final\\eagle_process_091.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\final\\eagle_process_092.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\final\\eagle_process_093.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_001.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_002.jpeg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_003.jpeg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_004.jpeg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_005.jpeg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_006.jpeg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_007.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_008.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_009.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_010.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_011.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_012.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_013.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_014.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_015.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_016.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_017.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_018.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_019.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_020.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_021.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_022.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_023.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_024.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_025.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_026.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_027.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_028.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_029.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_030.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_031.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_032.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_033.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_034.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_035.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_036.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_037.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_038.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_039.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_040.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_041.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_042.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_043.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_044.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_045.jpeg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_046.jpeg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_047.jpeg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_048.jpeg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_049.jpeg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_052.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_053.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_054.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_055.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_056.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_057.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_058.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_059.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_065.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_066.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_067.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_070.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_071.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_072.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_073.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_074.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_075.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_076.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_077.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_078.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_079.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_080.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_081.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_082.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_083.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_084.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_085.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_086.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_087.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_088.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_089.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_094.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_095.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_096.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_097.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_098.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_099.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_100.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_101.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_102.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_103.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_104.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_105.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_106.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_107.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_108.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_109.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_110.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_111.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_112.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_113.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_114.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_115.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_116.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_117.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_118.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_119.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_120.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_121.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_122.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_123.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_124.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_125.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_126.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_127.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_128.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_129.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_130.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_131.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_132.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_133.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_134.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_135.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_136.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_137.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_138.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_139.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_140.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_141.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_142.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_143.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_144.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_145.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_146.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_147.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_148.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_149.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_150.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_151.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_152.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_153.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_154.jpeg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_155.jpeg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_156.jpeg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_157.jpeg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_158.jpeg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_159.jpeg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_160.jpeg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_161.jpeg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_162.jpeg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_163.jpeg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_164.jpeg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_165.jpeg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_166.jpeg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_167.jpeg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_168.jpeg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_169.jpeg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_170.jpeg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_171.jpeg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_172.jpeg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_173.jpeg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_174.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_175.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_176.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_177.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_178.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_179.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_180.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_181.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_182.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_183.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_184.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_185.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_186.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_187.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_188.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_189.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_190.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_191.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_192.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_193.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_194.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_195.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_196.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_197.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_198.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_199.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_200.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_201.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_202.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_203.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_204.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_205.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_206.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_207.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_208.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_209.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_210.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_211.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_212.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_213.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_214.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_215.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_216.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_217.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_218.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_219.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_220.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_221.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_222.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    },
+    {
+      "animalType": "bald_eagle",
+      "sourceFile": "projects\\eagle\\images\\process\\eagle_eagle_223.jpg",
+      "sourceProject": "eagle",
+      "suggestedPath": "/projects/bald_eagle/",
+      "confidence": "unknown"
+    }
+  ],
+  "animalSeparations": [],
+  "stageMismatches": [],
+  "suggestions": []
+}

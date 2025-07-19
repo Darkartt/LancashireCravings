@@ -1,0 +1,13 @@
+{
+  "summary": {
+    "totalAnalyzed": 2812,
+    "correctlyPlaced": 2812,
+    "misplaced": 0,
+    "uncertain": 0,
+    "suggestions": []
+  },
+  "timestamp": "2025-07-11T17:44:01.006Z",
+  "misplacedImages": [],
+  "uncertainImages": [],
+  "highConfidenceIssues": []
+}

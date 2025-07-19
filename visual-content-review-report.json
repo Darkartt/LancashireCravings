@@ -1,0 +1,182 @@
+{
+  "timestamp": "2025-07-07T20:01:16.827Z",
+  "totalFiles": 3604,
+  "reviewSections": [
+    {
+      "category": "projects/eagle",
+      "path": "C:\\gladen\\FixtureSync\\daniel\\woodcrave\\opit2\\check2\\public\\media\\projects\\eagle",
+      "fileCount": 314,
+      "sampleFiles": [
+        "C:\\gladen\\FixtureSync\\daniel\\woodcrave\\opit2\\check2\\public\\media\\projects\\eagle\\images\\final\\eagle_eagle_224.jpg",
+        "C:\\gladen\\FixtureSync\\daniel\\woodcrave\\opit2\\check2\\public\\media\\projects\\eagle\\images\\final\\eagle_eagle_225.jpg",
+        "C:\\gladen\\FixtureSync\\daniel\\woodcrave\\opit2\\check2\\public\\media\\projects\\eagle\\images\\final\\eagle_eagle_226.jpg",
+        "C:\\gladen\\FixtureSync\\daniel\\woodcrave\\opit2\\check2\\public\\media\\projects\\eagle\\images\\final\\eagle_eagle_227.jpg",
+        "C:\\gladen\\FixtureSync\\daniel\\woodcrave\\opit2\\check2\\public\\media\\projects\\eagle\\images\\final\\eagle_eagle_228.jpeg",
+        "C:\\gladen\\FixtureSync\\daniel\\woodcrave\\opit2\\check2\\public\\media\\projects\\eagle\\videos\\eagle_eagle_009.mp4",
+        "C:\\gladen\\FixtureSync\\daniel\\woodcrave\\opit2\\check2\\public\\media\\projects\\eagle\\videos\\eagle_eagle_010.mov",
+        "C:\\gladen\\FixtureSync\\daniel\\woodcrave\\opit2\\check2\\public\\media\\projects\\eagle\\videos\\eagle_eagle_011.mp4",
+        "C:\\gladen\\FixtureSync\\daniel\\woodcrave\\opit2\\check2\\public\\media\\projects\\eagle\\videos\\eagle_eagle_012.mov",
+        "C:\\gladen\\FixtureSync\\daniel\\woodcrave\\opit2\\check2\\public\\media\\projects\\eagle\\videos\\eagle_eagle_013.mp4"
+      ],
+      "needsReview": true,
+      "possibleIssues": []
+    },
+    {
+      "category": "projects/nessie",
+      "path": "C:\\gladen\\FixtureSync\\daniel\\woodcrave\\opit2\\check2\\public\\media\\projects\\nessie",
+      "fileCount": 167,
+      "sampleFiles": [
+        "C:\\gladen\\FixtureSync\\daniel\\woodcrave\\opit2\\check2\\public\\media\\projects\\nessie\\images\\final\\nessie_nessie_108.jpg",
+        "C:\\gladen\\FixtureSync\\daniel\\woodcrave\\opit2\\check2\\public\\media\\projects\\nessie\\images\\final\\nessie_nessie_109.jpg",
+        "C:\\gladen\\FixtureSync\\daniel\\woodcrave\\opit2\\check2\\public\\media\\projects\\nessie\\images\\final\\nessie_nessie_110.jpg",
+        "C:\\gladen\\FixtureSync\\daniel\\woodcrave\\opit2\\check2\\public\\media\\projects\\nessie\\images\\final\\nessie_nessie_111.jpg",
+        "C:\\gladen\\FixtureSync\\daniel\\woodcrave\\opit2\\check2\\public\\media\\projects\\nessie\\images\\final\\nessie_nessie_112.jpg",
+        "C:\\gladen\\FixtureSync\\daniel\\woodcrave\\opit2\\check2\\public\\media\\projects\\nessie\\videos\\nessie_nessie_010.mov",
+        "C:\\gladen\\FixtureSync\\daniel\\woodcrave\\opit2\\check2\\public\\media\\projects\\nessie\\videos\\nessie_nessie_011.mov",
+        "C:\\gladen\\FixtureSync\\daniel\\woodcrave\\opit2\\check2\\public\\media\\projects\\nessie\\videos\\nessie_nessie_012.mov",
+        "C:\\gladen\\FixtureSync\\daniel\\woodcrave\\opit2\\check2\\public\\media\\projects\\nessie\\videos\\nessie_nessie_013.mov",
+        "C:\\gladen\\FixtureSync\\daniel\\woodcrave\\opit2\\check2\\public\\media\\projects\\nessie\\videos\\nessie_nessie_014.mov"
+      ],
+      "needsReview": true,
+      "possibleIssues": []
+    },
+    {
+      "category": "projects/bass",
+      "path": "C:\\gladen\\FixtureSync\\daniel\\woodcrave\\opit2\\check2\\public\\media\\projects\\bass",
+      "fileCount": 251,
+      "sampleFiles": [
+        "C:\\gladen\\FixtureSync\\daniel\\woodcrave\\opit2\\check2\\public\\media\\projects\\bass\\images\\final\\bass_bass_142.jpeg",
+        "C:\\gladen\\FixtureSync\\daniel\\woodcrave\\opit2\\check2\\public\\media\\projects\\bass\\images\\final\\bass_bass_143.jpeg",
+        "C:\\gladen\\FixtureSync\\daniel\\woodcrave\\opit2\\check2\\public\\media\\projects\\bass\\images\\final\\bass_bass_144.jpeg",
+        "C:\\gladen\\FixtureSync\\daniel\\woodcrave\\opit2\\check2\\public\\media\\projects\\bass\\images\\final\\bass_bass_145.jpeg",
+        "C:\\gladen\\FixtureSync\\daniel\\woodcrave\\opit2\\check2\\public\\media\\projects\\bass\\images\\final\\bass_bass_146.jpeg",
+        "C:\\gladen\\FixtureSync\\daniel\\woodcrave\\opit2\\check2\\public\\media\\projects\\bass\\videos\\bass_bass_045.mov",
+        "C:\\gladen\\FixtureSync\\daniel\\woodcrave\\opit2\\check2\\public\\media\\projects\\bass\\videos\\bass_bass_046.mov",
+        "C:\\gladen\\FixtureSync\\daniel\\woodcrave\\opit2\\check2\\public\\media\\projects\\bass\\videos\\bass_bass_047.mov",
+        "C:\\gladen\\FixtureSync\\daniel\\woodcrave\\opit2\\check2\\public\\media\\projects\\bass\\videos\\bass_bass_048.mov",
+        "C:\\gladen\\FixtureSync\\daniel\\woodcrave\\opit2\\check2\\public\\media\\projects\\bass\\videos\\bass_bass_049.mp4"
+      ],
+      "needsReview": true,
+      "possibleIssues": []
+    },
+    {
+      "category": "projects/stcollen",
+      "path": "C:\\gladen\\FixtureSync\\daniel\\woodcrave\\opit2\\check2\\public\\media\\projects\\stcollen",
+      "fileCount": 507,
+      "sampleFiles": [
+        "C:\\gladen\\FixtureSync\\daniel\\woodcrave\\opit2\\check2\\public\\media\\projects\\stcollen\\images\\final\\stcollen_stcollen_185.jpeg",
+        "C:\\gladen\\FixtureSync\\daniel\\woodcrave\\opit2\\check2\\public\\media\\projects\\stcollen\\images\\final\\stcollen_stcollen_186.jpeg",
+        "C:\\gladen\\FixtureSync\\daniel\\woodcrave\\opit2\\check2\\public\\media\\projects\\stcollen\\images\\final\\stcollen_stcollen_187.jpeg",
+        "C:\\gladen\\FixtureSync\\daniel\\woodcrave\\opit2\\check2\\public\\media\\projects\\stcollen\\images\\final\\stcollen_stcollen_188.jpeg",
+        "C:\\gladen\\FixtureSync\\daniel\\woodcrave\\opit2\\check2\\public\\media\\projects\\stcollen\\images\\final\\stcollen_stcollen_189.jpeg",
+        "C:\\gladen\\FixtureSync\\daniel\\woodcrave\\opit2\\check2\\public\\media\\projects\\stcollen\\videos\\stcollen_stcollen_239.mov",
+        "C:\\gladen\\FixtureSync\\daniel\\woodcrave\\opit2\\check2\\public\\media\\projects\\stcollen\\videos\\stcollen_stcollen_240.mov",
+        "C:\\gladen\\FixtureSync\\daniel\\woodcrave\\opit2\\check2\\public\\media\\projects\\stcollen\\videos\\stcollen_stcollen_241.mov",
+        "C:\\gladen\\FixtureSync\\daniel\\woodcrave\\opit2\\check2\\public\\media\\projects\\stcollen\\videos\\stcollen_stcollen_242.mov",
+        "C:\\gladen\\FixtureSync\\daniel\\woodcrave\\opit2\\check2\\public\\media\\projects\\stcollen\\videos\\stcollen_stcollen_243.mov"
+      ],
+      "needsReview": true,
+      "possibleIssues": []
+    },
+    {
+      "category": "nature/insects",
+      "path": "C:\\gladen\\FixtureSync\\daniel\\woodcrave\\opit2\\check2\\public\\media\\nature\\insects",
+      "fileCount": 2,
+      "sampleFiles": [
+        "C:\\gladen\\FixtureSync\\daniel\\woodcrave\\opit2\\check2\\public\\media\\nature\\insects\\videos\\insects_butterfly_001.mp4",
+        "C:\\gladen\\FixtureSync\\daniel\\woodcrave\\opit2\\check2\\public\\media\\nature\\insects\\videos\\insects_butterfly_002.mp4"
+      ],
+      "needsReview": true,
+      "possibleIssues": []
+    },
+    {
+      "category": "nature/birds",
+      "path": "C:\\gladen\\FixtureSync\\daniel\\woodcrave\\opit2\\check2\\public\\media\\nature\\birds",
+      "fileCount": 0,
+      "sampleFiles": [],
+      "needsReview": true,
+      "possibleIssues": []
+    },
+    {
+      "category": "nature/fish",
+      "path": "C:\\gladen\\FixtureSync\\daniel\\woodcrave\\opit2\\check2\\public\\media\\nature\\fish",
+      "fileCount": 1,
+      "sampleFiles": [
+        "C:\\gladen\\FixtureSync\\daniel\\woodcrave\\opit2\\check2\\public\\media\\nature\\fish\\videos\\fish_fish_001.mp4"
+      ],
+      "needsReview": true,
+      "possibleIssues": []
+    },
+    {
+      "category": "nature/mammals",
+      "path": "C:\\gladen\\FixtureSync\\daniel\\woodcrave\\opit2\\check2\\public\\media\\nature\\mammals",
+      "fileCount": 0,
+      "sampleFiles": [],
+      "needsReview": true,
+      "possibleIssues": []
+    },
+    {
+      "category": "nature/flowers",
+      "path": "C:\\gladen\\FixtureSync\\daniel\\woodcrave\\opit2\\check2\\public\\media\\nature\\flowers",
+      "fileCount": 0,
+      "sampleFiles": [],
+      "needsReview": true,
+      "possibleIssues": []
+    },
+    {
+      "category": "nature/landscapes",
+      "path": "C:\\gladen\\FixtureSync\\daniel\\woodcrave\\opit2\\check2\\public\\media\\nature\\landscapes",
+      "fileCount": 0,
+      "sampleFiles": [],
+      "needsReview": true,
+      "possibleIssues": []
+    },
+    {
+      "category": "nature/portraits",
+      "path": "C:\\gladen\\FixtureSync\\daniel\\woodcrave\\opit2\\check2\\public\\media\\nature\\portraits",
+      "fileCount": 797,
+      "sampleFiles": [
+        "C:\\gladen\\FixtureSync\\daniel\\woodcrave\\opit2\\check2\\public\\media\\nature\\portraits\\images\\portraits_portrait_001.jpg",
+        "C:\\gladen\\FixtureSync\\daniel\\woodcrave\\opit2\\check2\\public\\media\\nature\\portraits\\images\\portraits_portrait_002.jpg",
+        "C:\\gladen\\FixtureSync\\daniel\\woodcrave\\opit2\\check2\\public\\media\\nature\\portraits\\images\\portraits_portrait_003.jpeg",
+        "C:\\gladen\\FixtureSync\\daniel\\woodcrave\\opit2\\check2\\public\\media\\nature\\portraits\\images\\portraits_portrait_004.jpeg",
+        "C:\\gladen\\FixtureSync\\daniel\\woodcrave\\opit2\\check2\\public\\media\\nature\\portraits\\images\\portraits_portrait_005.jpeg",
+        "C:\\gladen\\FixtureSync\\daniel\\woodcrave\\opit2\\check2\\public\\media\\nature\\portraits\\videos\\portraits_portrait_168.mov",
+        "C:\\gladen\\FixtureSync\\daniel\\woodcrave\\opit2\\check2\\public\\media\\nature\\portraits\\videos\\portraits_portrait_169.mp4",
+        "C:\\gladen\\FixtureSync\\daniel\\woodcrave\\opit2\\check2\\public\\media\\nature\\portraits\\videos\\portraits_portrait_170.mov",
+        "C:\\gladen\\FixtureSync\\daniel\\woodcrave\\opit2\\check2\\public\\media\\nature\\portraits\\videos\\portraits_portrait_171.mov",
+        "C:\\gladen\\FixtureSync\\daniel\\woodcrave\\opit2\\check2\\public\\media\\nature\\portraits\\videos\\portraits_portrait_172.mp4"
+      ],
+      "needsReview": true,
+      "possibleIssues": []
+    },
+    {
+      "category": "nature/artistic",
+      "path": "C:\\gladen\\FixtureSync\\daniel\\woodcrave\\opit2\\check2\\public\\media\\nature\\artistic",
+      "fileCount": 1565,
+      "sampleFiles": [
+        "C:\\gladen\\FixtureSync\\daniel\\woodcrave\\opit2\\check2\\public\\media\\nature\\artistic\\images\\artistic_nature_001.jpeg",
+        "C:\\gladen\\FixtureSync\\daniel\\woodcrave\\opit2\\check2\\public\\media\\nature\\artistic\\images\\artistic_nature_002.jpg",
+        "C:\\gladen\\FixtureSync\\daniel\\woodcrave\\opit2\\check2\\public\\media\\nature\\artistic\\images\\artistic_nature_003.jpg",
+        "C:\\gladen\\FixtureSync\\daniel\\woodcrave\\opit2\\check2\\public\\media\\nature\\artistic\\images\\artistic_nature_004.jpg",
+        "C:\\gladen\\FixtureSync\\daniel\\woodcrave\\opit2\\check2\\public\\media\\nature\\artistic\\images\\artistic_nature_005.jpg",
+        "C:\\gladen\\FixtureSync\\daniel\\woodcrave\\opit2\\check2\\public\\media\\nature\\artistic\\videos\\artistic_nature_294.mov",
+        "C:\\gladen\\FixtureSync\\daniel\\woodcrave\\opit2\\check2\\public\\media\\nature\\artistic\\videos\\artistic_nature_295.mov",
+        "C:\\gladen\\FixtureSync\\daniel\\woodcrave\\opit2\\check2\\public\\media\\nature\\artistic\\videos\\artistic_nature_296.mov",
+        "C:\\gladen\\FixtureSync\\daniel\\woodcrave\\opit2\\check2\\public\\media\\nature\\artistic\\videos\\artistic_nature_297.mov",
+        "C:\\gladen\\FixtureSync\\daniel\\woodcrave\\opit2\\check2\\public\\media\\nature\\artistic\\videos\\artistic_nature_298.mp4"
+      ],
+      "needsReview": true,
+      "possibleIssues": []
+    },
+    {
+      "category": "workshop",
+      "path": "C:\\gladen\\FixtureSync\\daniel\\woodcrave\\opit2\\check2\\public\\media\\workshop",
+      "fileCount": 0,
+      "sampleFiles": [],
+      "needsReview": true,
+      "possibleIssues": []
+    }
+  ],
+  "instructions": "\nVISUAL CONTENT REVIEW INSTRUCTIONS:\n1. Open each folder in file explorer\n2. Look at thumbnail previews or open individual files\n3. Categorize based on ACTUAL CONTENT, not filename\n4. Use the categories below to organize files properly\n\nCATEGORIES TO LOOK FOR:\n- PROJECTS:\n  * Eagle carvings (any stage)\n  * Nessie/Loch Ness monster carvings\n  * Bass fish carvings\n  * St Collen statue carvings\n  * Other specific carving projects\n\n- NATURE SUBJECTS:\n  * Insects: butterflies, dragonflies, bees, beetles\n  * Birds: owls, crows, eagles (live birds, not carvings)\n  * Fish: real fish, aquatic life\n  * Mammals: squirrels, dogs, cats, etc.\n  * Flowers: garden flowers, floral arrangements\n  * Landscapes: outdoor scenes, nature views\n  * Portraits: people, selfies, family photos\n  * Artistic: creative compositions, abstract nature\n\n- WORKSHOP:\n  * Tools: carving tools, equipment closeups\n  * Techniques: hands-on carving demonstrations\n  * Environment: workshop setup, workspace views\n        "
+}

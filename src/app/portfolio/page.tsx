@@ -1,225 +1,308 @@
-"use client";
+'use client';
 
-import Link from "next/link";
-import { useRef } from "react";
-import { motion } from "framer-motion";
-import Header from "../../components/Header";
-import Footer from "../../components/Footer";
-import PortfolioBackground from "../../components/backgrounds/PortfolioBackground";
-import "./portfolio.css"; // Ensure this points to the correct CSS file if needed
+import React, { useState } from 'react';
+import Link from 'next/link';
+import { motion } from 'framer-motion';
+import CleanBackground from '@/components/CleanBackground';
+import ProjectCard from '@/components/ProjectCard';
+import MediaCard from '@/components/MediaCard';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
+import { 
+  projects,
+  getFeaturedProjects,
+  getFeaturedMedia
+} from '@/lib/media-organized';
 
-export default function Portfolio() {
-  const galleryRef = useRef<HTMLDivElement>(null);
+export default function PortfolioPage() {
+  const [selectedCategory, setSelectedCategory] = useState<string>('all');
+  
+  const allProjects = projects;
+  const featuredProjects = getFeaturedProjects();
+  const featuredMedia = getFeaturedMedia();
+  
+  // Filter projects by category
+  const filteredProjects = selectedCategory === 'all' 
+    ? allProjects 
+    : allProjects.filter(project => project.category === selectedCategory);
+
+  const categories = [
+    { key: 'all', label: 'All Projects', count: allProjects.length },
+    { key: 'wildlife', label: 'Wildlife Carvings', count: allProjects.filter(p => p.category === 'wildlife').length },
+    { key: 'mythical', label: 'Mythical Creatures', count: allProjects.filter(p => p.category === 'mythical').length },
+    { key: 'religious', label: 'Religious Art', count: allProjects.filter(p => p.category === 'religious').length },
+    { key: 'commissioned', label: 'Commissioned Works', count: allProjects.filter(p => p.category === 'commissioned').length },
+    { key: 'nature', label: 'Nature Collections', count: allProjects.filter(p => p.category === 'nature').length }
+  ];
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.2
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { 
+      opacity: 1, 
+      y: 0,
+      transition: { duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }
+    }
+  };
 
   return (
-    <div className="flex flex-col min-h-screen bg-background text-foreground">
-      <PortfolioBackground />
-      <Header />      {/* Hero Section */}
-      <section className="relative py-16 px-4 sm:px-8 bg-foreground/5 pt-24 z-10"> {/* Added z-10 for proper layering */}
-        <div className="container mx-auto relative" style={{ zIndex: 10 }}>
-          <motion.h2 
-            className="text-4xl font-serif font-bold text-accent-primary mb-6"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-            viewport={{ once: true }}
-          >Our Masterpieces</motion.h2>
-          <motion.p 
-            className="text-lg text-foreground/80 max-w-2xl"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
-            viewport={{ once: true }}
-          >Explore the artistry of Elite Woodcraft through our portfolio of bespoke woodcarvings, custom furniture, and architectural elements crafted for clients worldwide.</motion.p>
-        </div>
-      </section>
+    <div className="min-h-screen" style={{ background: 'transparent' }}>
+      {/* Background Layer */}
+      <CleanBackground variant="portfolio" />
+      
+      <Header />
+      
+      <main className="relative z-10" style={{ background: 'transparent' }}>
+        {/* Hero Section */}
+        <section className="pt-32 pb-16 px-4" style={{ background: 'transparent' }}>
+          <div className="max-w-7xl mx-auto text-center">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+            >
+              <h1 className="text-4xl md:text-6xl font-bold text-[var(--foreground)] mb-6">
+                Portfolio of
+                <span className="block text-[var(--accent-primary)]">Masterworks</span>
+              </h1>
+              <p className="text-lg md:text-xl text-[var(--text-muted)] max-w-3xl mx-auto leading-relaxed">
+                Explore decades of artisanal woodcarving excellence. From majestic wildlife to sacred religious pieces, 
+                each creation represents the pinnacle of traditional craftsmanship merged with contemporary artistry.
+              </p>
+            </motion.div>
 
-      {/* Categories Section */}
-      <section className="relative py-16 px-4 sm:px-8 bg-background z-10"> {/* Added relative and z-10 */}
-        <div className="container mx-auto">
-          <motion.h3 
-            className="text-3xl font-serif font-bold text-accent-primary mb-8 text-center"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-            viewport={{ once: true }}
-          >Browse by Category</motion.h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto">
+            {/* Portfolio Stats */}
             <motion.div 
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.1, ease: "easeOut" }}
-              viewport={{ once: true }}
+              className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
             >
-              <Link href="/portfolio/custom-furniture" className="block relative overflow-hidden rounded-lg shadow-lg h-48 bg-foreground/10 group">
-                <div className="absolute inset-0 bg-gradient-to-t from-foreground/80 to-transparent opacity-70 group-hover:opacity-50 transition-opacity"></div>
-                <h4 className="absolute bottom-0 left-0 p-6 text-background text-xl font-serif font-semibold">Custom Furniture</h4>
-              </Link>
-            </motion.div>
-            <motion.div 
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.3, ease: "easeOut" }}
-              viewport={{ once: true }}
-            >
-              <Link href="/portfolio/decorative-carvings" className="block relative overflow-hidden rounded-lg shadow-lg h-48 bg-foreground/10 group">
-                <div className="absolute inset-0 bg-gradient-to-t from-foreground/80 to-transparent opacity-70 group-hover:opacity-50 transition-opacity"></div>
-                <h4 className="absolute bottom-0 left-0 p-6 text-background text-xl font-serif font-semibold">Decorative Carvings</h4>
-              </Link>
-            </motion.div>
-            <motion.div 
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.5, ease: "easeOut" }}
-              viewport={{ once: true }}
-            >
-              <Link href="/portfolio/architectural-elements" className="block relative overflow-hidden rounded-lg shadow-lg h-48 bg-foreground/10 group">
-                <div className="absolute inset-0 bg-gradient-to-t from-foreground/80 to-transparent opacity-70 group-hover:opacity-50 transition-opacity"></div>
-                <h4 className="absolute bottom-0 left-0 p-6 text-background text-xl font-serif font-semibold">Architectural Elements</h4>
-              </Link>
-            </motion.div>
-            <motion.div 
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.7, ease: "easeOut" }}
-              viewport={{ once: true }}
-            >
-              <Link href="/portfolio/restoration" className="block relative overflow-hidden rounded-lg shadow-lg h-48 bg-foreground/10 group">
-                <div className="absolute inset-0 bg-gradient-to-t from-foreground/80 to-transparent opacity-70 group-hover:opacity-50 transition-opacity"></div>
-                <h4 className="absolute bottom-0 left-0 p-6 text-background text-xl font-serif font-semibold">Restoration Projects</h4>
-              </Link>
-            </motion.div>
-          </div>
-        </div>
-      </section>      {/* Featured Projects Section */}
-      <section className="relative py-16 px-4 sm:px-8 bg-foreground/5 z-10" ref={galleryRef}> {/* Added relative and z-10 */}
-        <div className="container mx-auto">
-          <motion.h3 
-            className="text-3xl font-serif font-bold text-accent-primary mb-8 text-center"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-            viewport={{ once: true }}
-          >Featured Projects</motion.h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            <motion.div 
-              className="gallery-item bg-background rounded-lg shadow-lg overflow-hidden"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.1, ease: "easeOut" }}
-              viewport={{ once: true }}
-            >
-              <div className="h-64 bg-foreground/10"></div>
-              <div className="p-6">
-                <h4 className="text-xl font-serif font-semibold text-accent-primary mb-2">Victorian-Inspired Armoire</h4>
-                <p className="text-foreground/80 mb-4">A bespoke armoire featuring intricate Victorian motifs, crafted from sustainably sourced walnut for a private residence in London.</p>
-                <Link href="/portfolio/victorian-armoire" className="text-accent-primary font-medium hover:underline">View Project Details</Link>
+              <div className="text-center">
+                <div className="text-3xl font-bold text-[var(--accent-primary)]">{allProjects.length}</div>
+                <div className="text-sm text-[var(--text-muted)] uppercase tracking-wide">Featured Projects</div>
               </div>
-            </motion.div>
-            <motion.div 
-              className="gallery-item bg-background rounded-lg shadow-lg overflow-hidden"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.3, ease: "easeOut" }}
-              viewport={{ once: true }}
-            >
-              <div className="h-64 bg-foreground/10"></div>
-              <div className="p-6">
-                <h4 className="text-xl font-serif font-semibold text-accent-primary mb-2">Ornate Fireplace Mantel</h4>
-                <p className="text-foreground/80 mb-4">A hand-carved oak mantel with classical detailing, designed as the centerpiece for a historic estate's grand hall.</p>
-                <Link href="/portfolio/fireplace-mantel" className="text-accent-primary font-medium hover:underline">View Project Details</Link>
+              <div className="text-center">
+                <div className="text-3xl font-bold text-[var(--accent-primary)]">15+</div>
+                <div className="text-sm text-[var(--text-muted)] uppercase tracking-wide">Years Experience</div>
               </div>
-            </motion.div>
-            <motion.div 
-              className="gallery-item bg-background rounded-lg shadow-lg overflow-hidden"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.5, ease: "easeOut" }}
-              viewport={{ once: true }}
-            >
-              <div className="h-64 bg-foreground/10"></div>
-              <div className="p-6">
-                <h4 className="text-xl font-serif font-semibold text-accent-primary mb-2">Custom Dining Table</h4>
-                <p className="text-foreground/80 mb-4">A 12-foot dining table crafted from reclaimed cherry wood, featuring subtle carvings inspired by the client's family heritage.</p>
-                <Link href="/portfolio/dining-table" className="text-accent-primary font-medium hover:underline">View Project Details</Link>
+              <div className="text-center">
+                <div className="text-3xl font-bold text-[var(--accent-primary)]">250+</div>
+                <div className="text-sm text-[var(--text-muted)] uppercase tracking-wide">Pieces Created</div>
               </div>
-            </motion.div>
-            <motion.div 
-              className="gallery-item bg-background rounded-lg shadow-lg overflow-hidden"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.7, ease: "easeOut" }}
-              viewport={{ once: true }}
-            >
-              <div className="h-64 bg-foreground/10"></div>
-              <div className="p-6">
-                <h4 className="text-xl font-serif font-semibold text-accent-primary mb-2">Decorative Wall Panel</h4>
-                <p className="text-foreground/80 mb-4">An expansive wall panel with nature-inspired carvings, installed in the lobby of a luxury boutique hotel in Paris.</p>
-                <Link href="/portfolio/wall-panel" className="text-accent-primary font-medium hover:underline">View Project Details</Link>
-              </div>
-            </motion.div>
-            <motion.div 
-              className="gallery-item bg-background rounded-lg shadow-lg overflow-hidden"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.9, ease: "easeOut" }}
-              viewport={{ once: true }}
-            >
-              <div className="h-64 bg-foreground/10"></div>
-              <div className="p-6">
-                <h4 className="text-xl font-serif font-semibold text-accent-primary mb-2">Restored Cathedral Doors</h4>
-                <p className="text-foreground/80 mb-4">A meticulous restoration of 18th-century cathedral doors, preserving historical integrity while reinforcing structural durability.</p>
-                <Link href="/portfolio/cathedral-doors" className="text-accent-primary font-medium hover:underline">View Project Details</Link>
-              </div>
-            </motion.div>
-            <motion.div 
-              className="gallery-item bg-background rounded-lg shadow-lg overflow-hidden"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 1.1, ease: "easeOut" }}
-              viewport={{ once: true }}
-            >
-              <div className="h-64 bg-foreground/10"></div>
-              <div className="p-6">
-                <h4 className="text-xl font-serif font-semibold text-accent-primary mb-2">Bespoke Staircase Balustrade</h4>
-                <p className="text-foreground/80 mb-4">A custom-designed balustrade featuring flowing organic patterns, crafted to complement a modern architectural residence.</p>
-                <Link href="/portfolio/staircase-balustrade" className="text-accent-primary font-medium hover:underline">View Project Details</Link>
+              <div className="text-center">
+                <div className="text-3xl font-bold text-[var(--accent-primary)]">100%</div>
+                <div className="text-sm text-[var(--text-muted)] uppercase tracking-wide">Handcrafted</div>
               </div>
             </motion.div>
           </div>
-          <motion.div 
-            className="text-center mt-12"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.2, ease: "easeOut" }}
-            viewport={{ once: true }}
-          >
-            <Link href="/portfolio/all" className="inline-block border-2 border-accent-primary text-accent-primary px-8 py-3 rounded-md font-medium hover:bg-accent-primary/10 transition-colors">View All Projects</Link>
-          </motion.div>
-        </div>
-      </section>      {/* Call to Action Section */}
-      <section className="relative py-16 px-4 sm:px-8 bg-accent-primary/10 z-10"> {/* Added relative and z-10 */}
-        <motion.div 
-          className="container mx-auto text-center"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease: "easeOut" }}
-          viewport={{ once: true }}
-        >
-          <h3 className="text-3xl font-serif font-bold text-accent-primary mb-4">Inspired by Our Work?</h3>
-          <p className="text-lg text-foreground/80 max-w-2xl mx-auto mb-8">Commission a bespoke piece that reflects your unique style. Let's create something extraordinary together.</p>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            viewport={{ once: true }}
-          >
-            <Link href="/contact" className="inline-block bg-accent-primary text-background px-8 py-3 rounded-md font-medium hover:bg-accent-primary/90 transition-colors">Request a Consultation</Link>
-          </motion.div>
-        </motion.div>
-      </section>      {/* Using Framer Motion for all animations */}
+        </section>
 
-      {/* Footer Section */}
+        {/* Featured Projects Section */}
+        <section className="py-16 px-4 bg-transparent backdrop-blur-sm">
+          <div className="max-w-7xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              className="text-center mb-12"
+            >
+              <h2 className="text-3xl md:text-4xl font-bold text-[var(--foreground)] mb-4">
+                Featured Masterpieces
+              </h2>
+              <p className="text-lg text-[var(--text-muted)] max-w-2xl mx-auto">
+                Signature pieces that showcase the highest level of artisanal skill and creative vision
+              </p>
+            </motion.div>
+
+            <motion.div 
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+              variants={containerVariants}
+              initial="hidden"
+              animate="visible"
+            >
+              {featuredProjects.map((project, index) => (
+                <motion.div key={`featured-${project.id}-${index}`} variants={itemVariants}>
+                  <ProjectCard 
+                    project={project} 
+                    variant="detailed"
+                    className="h-full hover:scale-[1.02] transition-transform duration-300"
+                  />
+                </motion.div>
+              ))}
+            </motion.div>
+
+            {/* View All Gallery Link */}
+            <motion.div 
+              className="text-center mt-12"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.8 }}
+            >
+              <Link
+                href="/gallery"
+                className="inline-flex items-center gap-2 bg-[var(--accent-primary)] text-white px-8 py-4 rounded-lg font-medium hover:bg-[var(--accent-warm)] transition-colors duration-300 shadow-lg hover:shadow-xl"
+              >
+                View Complete Gallery
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </Link>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* Category Filter Section */}
+        <section className="py-16 px-4">
+          <div className="max-w-7xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.5 }}
+              className="text-center mb-12"
+            >
+              <h2 className="text-3xl md:text-4xl font-bold text-[var(--foreground)] mb-4">
+                Browse by Category
+              </h2>
+              <p className="text-lg text-[var(--text-muted)]">
+                Discover our diverse range of woodcarving specialties
+              </p>
+            </motion.div>
+
+            {/* Category Filters */}
+            <motion.div 
+              className="flex flex-wrap justify-center gap-3 mb-12"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.6 }}
+            >
+              {categories.map((category) => (
+                <button
+                  key={category.key}
+                  onClick={() => setSelectedCategory(category.key)}
+                  className={`px-6 py-3 rounded-lg font-medium transition-all duration-300 ${
+                    selectedCategory === category.key
+                      ? 'bg-[var(--accent-primary)] text-white shadow-lg'
+                      : 'bg-[var(--surface-elevated)] text-[var(--foreground)] hover:bg-[var(--border-subtle)] border border-[var(--border-subtle)]'
+                  }`}
+                >
+                  {category.label} ({category.count})
+                </button>
+              ))}
+            </motion.div>
+
+            {/* Filtered Projects Grid */}
+            <motion.div 
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
+              layout
+              key={selectedCategory}
+            >
+              {filteredProjects.map((project, index) => (
+                <motion.div 
+                  key={`filtered-${project.id}-${selectedCategory}-${index}`}
+                  layout
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.4, delay: index * 0.05 }}
+                >
+                  <ProjectCard 
+                    project={project} 
+                    variant="compact"
+                    className="h-full"
+                  />
+                </motion.div>
+              ))}
+            </motion.div>
+          </div>
+        </section>
+
+        {/* Process Highlight Section */}
+        <section className="py-16 px-4 bg-transparent backdrop-blur-sm">
+          <div className="max-w-7xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.7 }}
+              className="text-center mb-12"
+            >
+              <h2 className="text-3xl md:text-4xl font-bold text-[var(--foreground)] mb-4">
+                Behind the Artistry
+              </h2>
+              <p className="text-lg text-[var(--text-muted)] max-w-2xl mx-auto">
+                Witness the transformation from raw wood to breathtaking sculpture through our documented process
+              </p>
+            </motion.div>
+
+            <motion.div 
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+              variants={containerVariants}
+              initial="hidden"
+              animate="visible"
+            >
+              {featuredMedia.slice(0, 6).map((media, index) => (
+                <motion.div key={`media-${media.id}-${index}`} variants={itemVariants}>
+                  <MediaCard 
+                    media={media}
+                    size="medium"
+                    variant="detailed"
+                  />
+                </motion.div>
+              ))}
+            </motion.div>
+          </div>
+        </section>
+
+        {/* Commission Call to Action */}
+        <section className="py-16 px-4">
+          <div className="max-w-4xl mx-auto text-center">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.8 }}
+            >
+              <h2 className="text-3xl md:text-4xl font-bold text-[var(--foreground)] mb-6">
+                Commission Your Vision
+              </h2>
+              <p className="text-lg text-[var(--text-muted)] mb-8 leading-relaxed">
+                Every masterpiece begins with an idea. Whether you envision a wildlife sculpture, 
+                religious piece, or architectural element, we bring your creative vision to life 
+                with uncompromising craftsmanship.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Link
+                  href="/commission"
+                  className="inline-flex items-center gap-2 bg-[var(--accent-primary)] text-white px-8 py-4 rounded-lg font-medium hover:bg-[var(--accent-warm)] transition-colors duration-300 shadow-lg hover:shadow-xl"
+                >
+                  Start Commission
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </Link>
+                <Link
+                  href="/contact"
+                  className="inline-flex items-center gap-2 bg-[var(--surface-elevated)] text-[var(--foreground)] px-8 py-4 rounded-lg font-medium hover:bg-[var(--border-subtle)] transition-colors duration-300 border border-[var(--border-subtle)]"
+                >
+                  Discuss Ideas
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-3.582 8-8 8a8.955 8.955 0 01-2.748-.431L5 21l1.43-5.248A8 8 0 1121 12z" />
+                  </svg>
+                </Link>
+              </div>
+            </motion.div>
+          </div>
+        </section>
+      </main>
+
       <Footer />
     </div>
   );

@@ -13,7 +13,7 @@ export default function Blog() {
         <BlogBackground />
       </div>
       <Header />      {/* Hero Section */}
-      <section className="relative py-16 px-4 sm:px-8 bg-foreground/5 overflow-hidden pt-24" style={{ zIndex: 5 }}> {/* Added top padding for header */}
+      <section className="relative py-16 px-4 sm:px-8 bg-foreground/5 overflow-hidden pt-40" style={{ zIndex: 5 }}> {/* Fixed header clearance */}
         <div className="container mx-auto relative">
           <motion.h2 
             className="text-4xl font-serif font-bold text-accent-primary mb-6"

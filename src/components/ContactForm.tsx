@@ -161,7 +161,7 @@ export default function ContactForm({ onSubmit, className = '' }: ContactFormPro
           <select
             value={fields.projectType.value}
             onChange={(e) => updateField('projectType', e.target.value)}
-            className="w-full px-4 py-3 rounded-lg border border-border-subtle bg-surface-elevated focus:outline-none focus:ring-2 focus:ring-accent-primary/20 focus:border-accent-primary transition-colors disabled:opacity-50"
+            className="w-full px-4 py-3 blob-container blob-sm border border-border-subtle bg-surface-elevated focus:outline-none focus:ring-2 focus:ring-accent-primary/20 focus:border-accent-primary transition-colors disabled:opacity-50"
             required
             disabled={isSubmitting}
           >
@@ -184,7 +184,7 @@ export default function ContactForm({ onSubmit, className = '' }: ContactFormPro
           <select
             value={fields.budget.value}
             onChange={(e) => updateField('budget', e.target.value)}
-            className="w-full px-4 py-3 rounded-lg border border-border-subtle bg-surface-elevated focus:outline-none focus:ring-2 focus:ring-accent-primary/20 focus:border-accent-primary transition-colors disabled:opacity-50"
+            className="w-full px-4 py-3 blob-container blob-sm border border-border-subtle bg-surface-elevated focus:outline-none focus:ring-2 focus:ring-accent-primary/20 focus:border-accent-primary transition-colors disabled:opacity-50"
             required
             disabled={isSubmitting}
           >
@@ -220,7 +220,7 @@ export default function ContactForm({ onSubmit, className = '' }: ContactFormPro
           value={fields.message.value}
           onChange={(e) => updateField('message', e.target.value)}
           rows={6}
-          className="w-full px-4 py-3 rounded-lg border border-border-subtle bg-surface-elevated focus:outline-none focus:ring-2 focus:ring-accent-primary/20 focus:border-accent-primary transition-colors disabled:opacity-50 resize-vertical"
+          className="w-full px-4 py-3 blob-container blob-sm border border-border-subtle bg-surface-elevated focus:outline-none focus:ring-2 focus:ring-accent-primary/20 focus:border-accent-primary transition-colors disabled:opacity-50 resize-vertical"
           placeholder="Tell us about your vision, dimensions, preferred materials, timeline, and any specific requirements..."
           required
           disabled={isSubmitting}
@@ -232,7 +232,7 @@ export default function ContactForm({ onSubmit, className = '' }: ContactFormPro
 
       {submitStatus !== 'idle' && (
         <div
-          className={`p-4 rounded-lg ${
+          className={`p-4 blob-container blob-sm ${
             submitStatus === 'success'
               ? 'bg-green-50 text-green-800 border border-green-200'
               : 'bg-red-50 text-red-800 border border-red-200'

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Image Path Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .test-image { max-width: 300px; margin: 10px; border: 2px solid #ccc; }
+        .test-path { font-family: monospace; background: #f0f0f0; padding: 5px; margin: 5px 0; }
+    </style>
+</head>
+<body>
+    <h1>Image Path Testing</h1>
+    
+    <h2>Test 1: Direct path from organized-batch-reviews folder</h2>
+    <div class="test-path">../public/media/projects/bass/images/process/bass_bass_001.jpeg</div>
+    <img src="../public/media/projects/bass/images/process/bass_bass_001.jpeg" class="test-image" alt="Test 1">
+    
+    <h2>Test 2: Relative path without public</h2>
+    <div class="test-path">../media/projects/bass/images/process/bass_bass_001.jpeg</div>
+    <img src="../media/projects/bass/images/process/bass_bass_001.jpeg" class="test-image" alt="Test 2">
+    
+    <h2>Test 3: Different relative path</h2>
+    <div class="test-path">../../public/media/projects/bass/images/process/bass_bass_001.jpeg</div>
+    <img src="../../public/media/projects/bass/images/process/bass_bass_001.jpeg" class="test-image" alt="Test 3">
+    
+    <h2>Test 4: Full file URL</h2>
+    <div class="test-path">file:///C:/gladen/FixtureSync/daniel/woodcrave/opit2/check2/public/media/projects/bass/images/process/bass_bass_001.jpeg</div>
+    <img src="file:///C:/gladen/FixtureSync/daniel/woodcrave/opit2/check2/public/media/projects/bass/images/process/bass_bass_001.jpeg" class="test-image" alt="Test 4">
+
+    <script>
+        // Add error handlers to see which paths work
+        document.querySelectorAll('img').forEach((img, index) => {
+            img.onload = () => console.log(`Test ${index + 1}: SUCCESS - ${img.src}`);
+            img.onerror = () => console.log(`Test ${index + 1}: FAILED - ${img.src}`);
+        });
+    </script>
+</body>
+</html>
