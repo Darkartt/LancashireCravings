@@ -39,3 +39,28 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Large media files
+public/media/archive/
+public/media/**/*.mov
+public/media/**/*.mp4
+public/media/**/*.avi
+public/media/**/*.webm
+public/media/**/*.mkv
+*.mov
+*.mp4
+*.avi
+*.webm
+*.mkv
+
+# Large analysis files
+*-analysis-results*.json
+*-analysis-summary*.json
+comprehensive-project-*.json
+enhanced-*.json
+advanced-*.json
+*.log
+master-inventory*.json
+media-*.json
+nature-categorization*.json
+organized-visual-review*.json
