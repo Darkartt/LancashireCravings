@@ -16,7 +16,7 @@ export default function Services() {
       </div>
       <div className="services-content">
       <Header />      {/* Hero Section */}
-      <section className="relative py-24 px-4 sm:px-8 bg-foreground/5 overflow-hidden pt-32" style={{ zIndex: 5 }}> {/* Added top padding for header */}
+      <section className="relative py-24 px-4 sm:px-8 bg-foreground/5 overflow-hidden pt-40" style={{ zIndex: 5 }}> {/* Fixed header clearance */}
         <div className="container mx-auto relative">
           <motion.h2 
             className="text-4xl font-serif font-bold text-accent-primary mb-6"
@@ -31,7 +31,7 @@ export default function Services() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
             viewport={{ once: true }}
-          >Discover the range of bespoke woodcarving services offered by Elite Woodcraft, based in Liverpool, tailored to bring your vision to life with unparalleled artistry for clients worldwide.</motion.p>
+          >Discover the range of bespoke woodcarving services offered by Lancaster Carving Limited, based in Mold, United Kingdom, tailored to bring your vision to life with unparalleled artistry for clients worldwide.</motion.p>
         </div>
       </section>
 

@@ -10,21 +10,22 @@ interface MetadataParams {
 }
 
 const defaultMetadata = {
-  title: 'Elite Woodcraft - Premium Custom Woodcarving & Furniture',
-  description: 'Discover exceptional custom woodcarving craftsmanship from Liverpool. Bespoke wooden furniture, sculptures, and architectural elements for discerning clients who value quality and artistry.',
+  title: 'Lancaster Carving Limited - Premium Custom Woodcarving & Furniture',
+  description: 'Discover exceptional custom woodcarving craftsmanship from Mold, United Kingdom. Bespoke wooden furniture, sculptures, and architectural elements for discerning clients who value quality and artistry.',
   keywords: [
     'custom woodcarving',
     'bespoke furniture',
-    'Liverpool woodcraft',
+    'Mold woodcraft',
     'handcrafted furniture',
     'wooden sculptures',
     'artisan woodworking',
     'sustainable furniture',
-    'commissioned woodwork'
+    'commissioned woodwork',
+    'Lancaster Carving'
   ],
   siteUrl: 'https://exampledesign.co.uk',
   ogImage: '/og-image.jpg',
-  twitterHandle: '@elitewoodcraft'
+  twitterHandle: '@lancastercarving'
 };
 
 export function generateMetadata({
@@ -43,9 +44,9 @@ export function generateMetadata({
     title: fullTitle,
     description,
     keywords: keywords.join(', '),
-    authors: [{ name: 'Elite Woodcraft' }],
-    creator: 'Elite Woodcraft',
-    publisher: 'Elite Woodcraft',
+    authors: [{ name: 'Lancaster Carving Limited' }],
+    creator: 'Lancaster Carving Limited',
+    publisher: 'Lancaster Carving Limited',
     robots: {
       index: true,
       follow: true,
@@ -63,13 +64,13 @@ export function generateMetadata({
       url: canonicalUrl || defaultMetadata.siteUrl,
       title: fullTitle,
       description,
-      siteName: 'Elite Woodcraft',
+      siteName: 'Lancaster Carving Limited',
       images: [
         {
           url: ogImage,
           width: 1200,
           height: 630,
-          alt: title || 'Elite Woodcraft - Premium Custom Woodcarving',
+          alt: title || 'Lancaster Carving Limited - Premium Custom Woodcarving',
         },
       ],
     },
@@ -82,6 +83,14 @@ export function generateMetadata({
     },
     alternates: {
       canonical: canonicalUrl,
+    },
+    icons: {
+      icon: [
+        { url: '/logo.svg', type: 'image/svg+xml' },
+        { url: '/favicon.svg', type: 'image/svg+xml' }
+      ],
+      shortcut: '/logo.svg',
+      apple: '/apple-touch-icon.svg',
     },
   };
 
@@ -98,13 +107,13 @@ export function generateStructuredData(type: 'organization' | 'website' | 'produ
       return {
         ...baseData,
         '@type': 'Organization',
-        name: 'Elite Woodcraft',
+        name: 'Lancaster Carving Limited',
         url: defaultMetadata.siteUrl,
         logo: `${defaultMetadata.siteUrl}/logo.svg`,
         description: defaultMetadata.description,
         address: {
           '@type': 'PostalAddress',
-          addressLocality: 'Liverpool',
+          addressLocality: 'Mold',
           addressCountry: 'GB',
         },
         contactPoint: {
@@ -119,7 +128,7 @@ export function generateStructuredData(type: 'organization' | 'website' | 'produ
       return {
         ...baseData,
         '@type': 'WebSite',
-        name: 'Elite Woodcraft',
+        name: 'Lancaster Carving Limited',
         url: defaultMetadata.siteUrl,
         description: defaultMetadata.description,
         potentialAction: {
@@ -136,11 +145,11 @@ export function generateStructuredData(type: 'organization' | 'website' | 'produ
         '@type': 'Product',
         brand: {
           '@type': 'Brand',
-          name: 'Elite Woodcraft',
+          name: 'Lancaster Carving Limited',
         },
         manufacturer: {
           '@type': 'Organization',
-          name: 'Elite Woodcraft',
+          name: 'Lancaster Carving Limited',
         },
         ...data,
       };
@@ -151,7 +160,7 @@ export function generateStructuredData(type: 'organization' | 'website' | 'produ
         '@type': 'Article',
         publisher: {
           '@type': 'Organization',
-          name: 'Elite Woodcraft',
+          name: 'Lancaster Carving Limited',
           logo: {
             '@type': 'ImageObject',
             url: `${defaultMetadata.siteUrl}/logo.svg`,

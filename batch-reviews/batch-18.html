@@ -1,0 +1,2245 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Batch Review 18 - Image Analysis</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .batch-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .navigation {
+            display: flex;
+            gap: 10px;
+        }
+        .nav-btn {
+            padding: 8px 16px;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        .nav-btn:hover {
+            background: #5a6fd8;
+        }
+        .nav-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        .image-card {
+            background: white;
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+        }
+        .image-card:hover {
+            transform: translateY(-5px);
+        }
+        .image-container {
+            position: relative;
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            background: #f8f9fa;
+        }
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            cursor: pointer;
+        }
+        .image-info {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+        .image-name {
+            font-weight: bold;
+            margin-bottom: 5px;
+            word-break: break-word;
+        }
+        .image-path {
+            font-size: 11px;
+            color: #888;
+            margin-bottom: 5px;
+        }
+        .categorization {
+            margin-top: 10px;
+        }
+        .category-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            margin-bottom: 10px;
+        }
+        .category-btn {
+            padding: 4px 8px;
+            border: 1px solid #ddd;
+            background: white;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 11px;
+            transition: all 0.2s;
+        }
+        .category-btn.selected {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+        .notes-input {
+            width: 100%;
+            padding: 5px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 11px;
+            margin-top: 5px;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background: #eee;
+            border-radius: 5px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            transition: width 0.3s;
+        }
+        .save-progress {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            z-index: 1000;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.9);
+        }
+        .modal-content {
+            margin: auto;
+            display: block;
+            max-width: 90%;
+            max-height: 90%;
+        }
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        .stat-card {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .stat-number {
+            font-size: 24px;
+            font-weight: bold;
+            color: #667eea;
+        }
+        .stat-label {
+            font-size: 12px;
+            color: #666;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🎨 Woodcarving Media Analysis</h1>
+        <p>Batch 18 of 114 - Systematic Visual Review</p>
+    </div>
+
+    <div class="batch-info">
+        <div>
+            <strong>Images 851-900 of 5655</strong>
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: 15.789473684210526%"></div>
+            </div>
+        </div>
+        <div class="navigation">
+            <a href="batch-17.html" class="nav-btn">← Previous</a>
+            <span class="nav-btn" style="background: #6c757d;">Batch 18</span>
+            <a href="batch-19.html" class="nav-btn">Next →</a>
+        </div>
+    </div>
+
+    <div class="stats">
+        <div class="stat-card">
+            <div class="stat-number">50</div>
+            <div class="stat-label">Images in Batch</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">18</div>
+            <div class="stat-label">Current Batch</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">114</div>
+            <div class="stat-label">Total Batches</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">16%</div>
+            <div class="stat-label">Progress</div>
+        </div>
+    </div>
+
+    <button class="save-progress" onclick="saveProgress()">💾 Save Progress</button>
+
+    <div class="image-grid">
+        
+            <div class="image-card" data-file-index="850">
+                <div class="image-container">
+                    <img src="../media/archive/original-files-backup-20250706/archive/original-files/3/IMG_0102.JPG" alt="IMG_0102.JPG" 
+                         onclick="openModal(this)" 
+                         onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22><rect width=%22200%22 height=%22200%22 fill=%22%23f8f9fa%22/><text x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22>No Image</text></svg>'">
+                </div>
+                <div class="image-info">
+                    <div class="image-name">IMG_0102.JPG</div>
+                    <div class="image-path">media\archive\original-files-backup-20250706\archive\original-files\3\IMG_0102.JPG</div>
+                    <div>Size: 2.28 MB</div>
+                </div>
+                <div class="categorization">
+                    <div class="category-buttons">
+                        <button class="category-btn" data-category="dragonfly">🦋 Dragonfly</button>
+                        <button class="category-btn" data-category="butterfly">🦋 Butterfly</button>
+                        <button class="category-btn" data-category="fish">🐟 Fish</button>
+                        <button class="category-btn" data-category="duck">🦆 Duck</button>
+                        <button class="category-btn" data-category="eagle">🦅 Eagle</button>
+                        <button class="category-btn" data-category="stcollen">⛪ St Collen</button>
+                        <button class="category-btn" data-category="bass">🎸 Bass</button>
+                        <button class="category-btn" data-category="nessie">🐲 Nessie</button>
+                        <button class="category-btn" data-category="nature">🌿 Nature</button>
+                        <button class="category-btn" data-category="tools">🔧 Tools</button>
+                        <button class="category-btn" data-category="process">⚙️ Process</button>
+                        <button class="category-btn" data-category="other">❓ Other</button>
+                    </div>
+                    <select class="process-stage" style="width: 100%; margin-bottom: 5px;">
+                        <option value="">Select stage...</option>
+                        <option value="initial">Initial/Raw</option>
+                        <option value="process">Work in Progress</option>
+                        <option value="final">Final/Complete</option>
+                        <option value="detail">Detail Shot</option>
+                    </select>
+                    <input type="text" class="notes-input" placeholder="Notes or project name...">
+                </div>
+            </div>
+        
+            <div class="image-card" data-file-index="851">
+                <div class="image-container">
+                    <img src="../media/archive/original-files-backup-20250706/archive/original-files/3/IMG_0120.JPG" alt="IMG_0120.JPG" 
+                         onclick="openModal(this)" 
+                         onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22><rect width=%22200%22 height=%22200%22 fill=%22%23f8f9fa%22/><text x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22>No Image</text></svg>'">
+                </div>
+                <div class="image-info">
+                    <div class="image-name">IMG_0120.JPG</div>
+                    <div class="image-path">media\archive\original-files-backup-20250706\archive\original-files\3\IMG_0120.JPG</div>
+                    <div>Size: 2.53 MB</div>
+                </div>
+                <div class="categorization">
+                    <div class="category-buttons">
+                        <button class="category-btn" data-category="dragonfly">🦋 Dragonfly</button>
+                        <button class="category-btn" data-category="butterfly">🦋 Butterfly</button>
+                        <button class="category-btn" data-category="fish">🐟 Fish</button>
+                        <button class="category-btn" data-category="duck">🦆 Duck</button>
+                        <button class="category-btn" data-category="eagle">🦅 Eagle</button>
+                        <button class="category-btn" data-category="stcollen">⛪ St Collen</button>
+                        <button class="category-btn" data-category="bass">🎸 Bass</button>
+                        <button class="category-btn" data-category="nessie">🐲 Nessie</button>
+                        <button class="category-btn" data-category="nature">🌿 Nature</button>
+                        <button class="category-btn" data-category="tools">🔧 Tools</button>
+                        <button class="category-btn" data-category="process">⚙️ Process</button>
+                        <button class="category-btn" data-category="other">❓ Other</button>
+                    </div>
+                    <select class="process-stage" style="width: 100%; margin-bottom: 5px;">
+                        <option value="">Select stage...</option>
+                        <option value="initial">Initial/Raw</option>
+                        <option value="process">Work in Progress</option>
+                        <option value="final">Final/Complete</option>
+                        <option value="detail">Detail Shot</option>
+                    </select>
+                    <input type="text" class="notes-input" placeholder="Notes or project name...">
+                </div>
+            </div>
+        
+            <div class="image-card" data-file-index="852">
+                <div class="image-container">
+                    <img src="../media/archive/original-files-backup-20250706/archive/original-files/3/IMG_0122.JPG" alt="IMG_0122.JPG" 
+                         onclick="openModal(this)" 
+                         onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22><rect width=%22200%22 height=%22200%22 fill=%22%23f8f9fa%22/><text x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22>No Image</text></svg>'">
+                </div>
+                <div class="image-info">
+                    <div class="image-name">IMG_0122.JPG</div>
+                    <div class="image-path">media\archive\original-files-backup-20250706\archive\original-files\3\IMG_0122.JPG</div>
+                    <div>Size: 1.58 MB</div>
+                </div>
+                <div class="categorization">
+                    <div class="category-buttons">
+                        <button class="category-btn" data-category="dragonfly">🦋 Dragonfly</button>
+                        <button class="category-btn" data-category="butterfly">🦋 Butterfly</button>
+                        <button class="category-btn" data-category="fish">🐟 Fish</button>
+                        <button class="category-btn" data-category="duck">🦆 Duck</button>
+                        <button class="category-btn" data-category="eagle">🦅 Eagle</button>
+                        <button class="category-btn" data-category="stcollen">⛪ St Collen</button>
+                        <button class="category-btn" data-category="bass">🎸 Bass</button>
+                        <button class="category-btn" data-category="nessie">🐲 Nessie</button>
+                        <button class="category-btn" data-category="nature">🌿 Nature</button>
+                        <button class="category-btn" data-category="tools">🔧 Tools</button>
+                        <button class="category-btn" data-category="process">⚙️ Process</button>
+                        <button class="category-btn" data-category="other">❓ Other</button>
+                    </div>
+                    <select class="process-stage" style="width: 100%; margin-bottom: 5px;">
+                        <option value="">Select stage...</option>
+                        <option value="initial">Initial/Raw</option>
+                        <option value="process">Work in Progress</option>
+                        <option value="final">Final/Complete</option>
+                        <option value="detail">Detail Shot</option>
+                    </select>
+                    <input type="text" class="notes-input" placeholder="Notes or project name...">
+                </div>
+            </div>
+        
+            <div class="image-card" data-file-index="853">
+                <div class="image-container">
+                    <img src="../media/archive/original-files-backup-20250706/archive/original-files/3/IMG_0270.JPG" alt="IMG_0270.JPG" 
+                         onclick="openModal(this)" 
+                         onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22><rect width=%22200%22 height=%22200%22 fill=%22%23f8f9fa%22/><text x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22>No Image</text></svg>'">
+                </div>
+                <div class="image-info">
+                    <div class="image-name">IMG_0270.JPG</div>
+                    <div class="image-path">media\archive\original-files-backup-20250706\archive\original-files\3\IMG_0270.JPG</div>
+                    <div>Size: 2.39 MB</div>
+                </div>
+                <div class="categorization">
+                    <div class="category-buttons">
+                        <button class="category-btn" data-category="dragonfly">🦋 Dragonfly</button>
+                        <button class="category-btn" data-category="butterfly">🦋 Butterfly</button>
+                        <button class="category-btn" data-category="fish">🐟 Fish</button>
+                        <button class="category-btn" data-category="duck">🦆 Duck</button>
+                        <button class="category-btn" data-category="eagle">🦅 Eagle</button>
+                        <button class="category-btn" data-category="stcollen">⛪ St Collen</button>
+                        <button class="category-btn" data-category="bass">🎸 Bass</button>
+                        <button class="category-btn" data-category="nessie">🐲 Nessie</button>
+                        <button class="category-btn" data-category="nature">🌿 Nature</button>
+                        <button class="category-btn" data-category="tools">🔧 Tools</button>
+                        <button class="category-btn" data-category="process">⚙️ Process</button>
+                        <button class="category-btn" data-category="other">❓ Other</button>
+                    </div>
+                    <select class="process-stage" style="width: 100%; margin-bottom: 5px;">
+                        <option value="">Select stage...</option>
+                        <option value="initial">Initial/Raw</option>
+                        <option value="process">Work in Progress</option>
+                        <option value="final">Final/Complete</option>
+                        <option value="detail">Detail Shot</option>
+                    </select>
+                    <input type="text" class="notes-input" placeholder="Notes or project name...">
+                </div>
+            </div>
+        
+            <div class="image-card" data-file-index="854">
+                <div class="image-container">
+                    <img src="../media/archive/original-files-backup-20250706/archive/original-files/3/IMG_0612.JPG" alt="IMG_0612.JPG" 
+                         onclick="openModal(this)" 
+                         onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22><rect width=%22200%22 height=%22200%22 fill=%22%23f8f9fa%22/><text x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22>No Image</text></svg>'">
+                </div>
+                <div class="image-info">
+                    <div class="image-name">IMG_0612.JPG</div>
+                    <div class="image-path">media\archive\original-files-backup-20250706\archive\original-files\3\IMG_0612.JPG</div>
+                    <div>Size: 1.12 MB</div>
+                </div>
+                <div class="categorization">
+                    <div class="category-buttons">
+                        <button class="category-btn" data-category="dragonfly">🦋 Dragonfly</button>
+                        <button class="category-btn" data-category="butterfly">🦋 Butterfly</button>
+                        <button class="category-btn" data-category="fish">🐟 Fish</button>
+                        <button class="category-btn" data-category="duck">🦆 Duck</button>
+                        <button class="category-btn" data-category="eagle">🦅 Eagle</button>
+                        <button class="category-btn" data-category="stcollen">⛪ St Collen</button>
+                        <button class="category-btn" data-category="bass">🎸 Bass</button>
+                        <button class="category-btn" data-category="nessie">🐲 Nessie</button>
+                        <button class="category-btn" data-category="nature">🌿 Nature</button>
+                        <button class="category-btn" data-category="tools">🔧 Tools</button>
+                        <button class="category-btn" data-category="process">⚙️ Process</button>
+                        <button class="category-btn" data-category="other">❓ Other</button>
+                    </div>
+                    <select class="process-stage" style="width: 100%; margin-bottom: 5px;">
+                        <option value="">Select stage...</option>
+                        <option value="initial">Initial/Raw</option>
+                        <option value="process">Work in Progress</option>
+                        <option value="final">Final/Complete</option>
+                        <option value="detail">Detail Shot</option>
+                    </select>
+                    <input type="text" class="notes-input" placeholder="Notes or project name...">
+                </div>
+            </div>
+        
+            <div class="image-card" data-file-index="855">
+                <div class="image-container">
+                    <img src="../media/archive/original-files-backup-20250706/archive/original-files/3/IMG_0797.JPG" alt="IMG_0797.JPG" 
+                         onclick="openModal(this)" 
+                         onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22><rect width=%22200%22 height=%22200%22 fill=%22%23f8f9fa%22/><text x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22>No Image</text></svg>'">
+                </div>
+                <div class="image-info">
+                    <div class="image-name">IMG_0797.JPG</div>
+                    <div class="image-path">media\archive\original-files-backup-20250706\archive\original-files\3\IMG_0797.JPG</div>
+                    <div>Size: 2.02 MB</div>
+                </div>
+                <div class="categorization">
+                    <div class="category-buttons">
+                        <button class="category-btn" data-category="dragonfly">🦋 Dragonfly</button>
+                        <button class="category-btn" data-category="butterfly">🦋 Butterfly</button>
+                        <button class="category-btn" data-category="fish">🐟 Fish</button>
+                        <button class="category-btn" data-category="duck">🦆 Duck</button>
+                        <button class="category-btn" data-category="eagle">🦅 Eagle</button>
+                        <button class="category-btn" data-category="stcollen">⛪ St Collen</button>
+                        <button class="category-btn" data-category="bass">🎸 Bass</button>
+                        <button class="category-btn" data-category="nessie">🐲 Nessie</button>
+                        <button class="category-btn" data-category="nature">🌿 Nature</button>
+                        <button class="category-btn" data-category="tools">🔧 Tools</button>
+                        <button class="category-btn" data-category="process">⚙️ Process</button>
+                        <button class="category-btn" data-category="other">❓ Other</button>
+                    </div>
+                    <select class="process-stage" style="width: 100%; margin-bottom: 5px;">
+                        <option value="">Select stage...</option>
+                        <option value="initial">Initial/Raw</option>
+                        <option value="process">Work in Progress</option>
+                        <option value="final">Final/Complete</option>
+                        <option value="detail">Detail Shot</option>
+                    </select>
+                    <input type="text" class="notes-input" placeholder="Notes or project name...">
+                </div>
+            </div>
+        
+            <div class="image-card" data-file-index="856">
+                <div class="image-container">
+                    <img src="../media/archive/original-files-backup-20250706/archive/original-files/3/IMG_0830.JPG" alt="IMG_0830.JPG" 
+                         onclick="openModal(this)" 
+                         onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22><rect width=%22200%22 height=%22200%22 fill=%22%23f8f9fa%22/><text x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22>No Image</text></svg>'">
+                </div>
+                <div class="image-info">
+                    <div class="image-name">IMG_0830.JPG</div>
+                    <div class="image-path">media\archive\original-files-backup-20250706\archive\original-files\3\IMG_0830.JPG</div>
+                    <div>Size: 1.82 MB</div>
+                </div>
+                <div class="categorization">
+                    <div class="category-buttons">
+                        <button class="category-btn" data-category="dragonfly">🦋 Dragonfly</button>
+                        <button class="category-btn" data-category="butterfly">🦋 Butterfly</button>
+                        <button class="category-btn" data-category="fish">🐟 Fish</button>
+                        <button class="category-btn" data-category="duck">🦆 Duck</button>
+                        <button class="category-btn" data-category="eagle">🦅 Eagle</button>
+                        <button class="category-btn" data-category="stcollen">⛪ St Collen</button>
+                        <button class="category-btn" data-category="bass">🎸 Bass</button>
+                        <button class="category-btn" data-category="nessie">🐲 Nessie</button>
+                        <button class="category-btn" data-category="nature">🌿 Nature</button>
+                        <button class="category-btn" data-category="tools">🔧 Tools</button>
+                        <button class="category-btn" data-category="process">⚙️ Process</button>
+                        <button class="category-btn" data-category="other">❓ Other</button>
+                    </div>
+                    <select class="process-stage" style="width: 100%; margin-bottom: 5px;">
+                        <option value="">Select stage...</option>
+                        <option value="initial">Initial/Raw</option>
+                        <option value="process">Work in Progress</option>
+                        <option value="final">Final/Complete</option>
+                        <option value="detail">Detail Shot</option>
+                    </select>
+                    <input type="text" class="notes-input" placeholder="Notes or project name...">
+                </div>
+            </div>
+        
+            <div class="image-card" data-file-index="857">
+                <div class="image-container">
+                    <img src="../media/archive/original-files-backup-20250706/archive/original-files/3/IMG_0934.JPG" alt="IMG_0934.JPG" 
+                         onclick="openModal(this)" 
+                         onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22><rect width=%22200%22 height=%22200%22 fill=%22%23f8f9fa%22/><text x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22>No Image</text></svg>'">
+                </div>
+                <div class="image-info">
+                    <div class="image-name">IMG_0934.JPG</div>
+                    <div class="image-path">media\archive\original-files-backup-20250706\archive\original-files\3\IMG_0934.JPG</div>
+                    <div>Size: 280.23 KB</div>
+                </div>
+                <div class="categorization">
+                    <div class="category-buttons">
+                        <button class="category-btn" data-category="dragonfly">🦋 Dragonfly</button>
+                        <button class="category-btn" data-category="butterfly">🦋 Butterfly</button>
+                        <button class="category-btn" data-category="fish">🐟 Fish</button>
+                        <button class="category-btn" data-category="duck">🦆 Duck</button>
+                        <button class="category-btn" data-category="eagle">🦅 Eagle</button>
+                        <button class="category-btn" data-category="stcollen">⛪ St Collen</button>
+                        <button class="category-btn" data-category="bass">🎸 Bass</button>
+                        <button class="category-btn" data-category="nessie">🐲 Nessie</button>
+                        <button class="category-btn" data-category="nature">🌿 Nature</button>
+                        <button class="category-btn" data-category="tools">🔧 Tools</button>
+                        <button class="category-btn" data-category="process">⚙️ Process</button>
+                        <button class="category-btn" data-category="other">❓ Other</button>
+                    </div>
+                    <select class="process-stage" style="width: 100%; margin-bottom: 5px;">
+                        <option value="">Select stage...</option>
+                        <option value="initial">Initial/Raw</option>
+                        <option value="process">Work in Progress</option>
+                        <option value="final">Final/Complete</option>
+                        <option value="detail">Detail Shot</option>
+                    </select>
+                    <input type="text" class="notes-input" placeholder="Notes or project name...">
+                </div>
+            </div>
+        
+            <div class="image-card" data-file-index="858">
+                <div class="image-container">
+                    <img src="../media/archive/original-files-backup-20250706/archive/original-files/3/IMG_1148.JPG" alt="IMG_1148.JPG" 
+                         onclick="openModal(this)" 
+                         onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22><rect width=%22200%22 height=%22200%22 fill=%22%23f8f9fa%22/><text x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22>No Image</text></svg>'">
+                </div>
+                <div class="image-info">
+                    <div class="image-name">IMG_1148.JPG</div>
+                    <div class="image-path">media\archive\original-files-backup-20250706\archive\original-files\3\IMG_1148.JPG</div>
+                    <div>Size: 822.23 KB</div>
+                </div>
+                <div class="categorization">
+                    <div class="category-buttons">
+                        <button class="category-btn" data-category="dragonfly">🦋 Dragonfly</button>
+                        <button class="category-btn" data-category="butterfly">🦋 Butterfly</button>
+                        <button class="category-btn" data-category="fish">🐟 Fish</button>
+                        <button class="category-btn" data-category="duck">🦆 Duck</button>
+                        <button class="category-btn" data-category="eagle">🦅 Eagle</button>
+                        <button class="category-btn" data-category="stcollen">⛪ St Collen</button>
+                        <button class="category-btn" data-category="bass">🎸 Bass</button>
+                        <button class="category-btn" data-category="nessie">🐲 Nessie</button>
+                        <button class="category-btn" data-category="nature">🌿 Nature</button>
+                        <button class="category-btn" data-category="tools">🔧 Tools</button>
+                        <button class="category-btn" data-category="process">⚙️ Process</button>
+                        <button class="category-btn" data-category="other">❓ Other</button>
+                    </div>
+                    <select class="process-stage" style="width: 100%; margin-bottom: 5px;">
+                        <option value="">Select stage...</option>
+                        <option value="initial">Initial/Raw</option>
+                        <option value="process">Work in Progress</option>
+                        <option value="final">Final/Complete</option>
+                        <option value="detail">Detail Shot</option>
+                    </select>
+                    <input type="text" class="notes-input" placeholder="Notes or project name...">
+                </div>
+            </div>
+        
+            <div class="image-card" data-file-index="859">
+                <div class="image-container">
+                    <img src="../media/archive/original-files-backup-20250706/archive/original-files/3/IMG_1190.JPG" alt="IMG_1190.JPG" 
+                         onclick="openModal(this)" 
+                         onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22><rect width=%22200%22 height=%22200%22 fill=%22%23f8f9fa%22/><text x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22>No Image</text></svg>'">
+                </div>
+                <div class="image-info">
+                    <div class="image-name">IMG_1190.JPG</div>
+                    <div class="image-path">media\archive\original-files-backup-20250706\archive\original-files\3\IMG_1190.JPG</div>
+                    <div>Size: 1.01 MB</div>
+                </div>
+                <div class="categorization">
+                    <div class="category-buttons">
+                        <button class="category-btn" data-category="dragonfly">🦋 Dragonfly</button>
+                        <button class="category-btn" data-category="butterfly">🦋 Butterfly</button>
+                        <button class="category-btn" data-category="fish">🐟 Fish</button>
+                        <button class="category-btn" data-category="duck">🦆 Duck</button>
+                        <button class="category-btn" data-category="eagle">🦅 Eagle</button>
+                        <button class="category-btn" data-category="stcollen">⛪ St Collen</button>
+                        <button class="category-btn" data-category="bass">🎸 Bass</button>
+                        <button class="category-btn" data-category="nessie">🐲 Nessie</button>
+                        <button class="category-btn" data-category="nature">🌿 Nature</button>
+                        <button class="category-btn" data-category="tools">🔧 Tools</button>
+                        <button class="category-btn" data-category="process">⚙️ Process</button>
+                        <button class="category-btn" data-category="other">❓ Other</button>
+                    </div>
+                    <select class="process-stage" style="width: 100%; margin-bottom: 5px;">
+                        <option value="">Select stage...</option>
+                        <option value="initial">Initial/Raw</option>
+                        <option value="process">Work in Progress</option>
+                        <option value="final">Final/Complete</option>
+                        <option value="detail">Detail Shot</option>
+                    </select>
+                    <input type="text" class="notes-input" placeholder="Notes or project name...">
+                </div>
+            </div>
+        
+            <div class="image-card" data-file-index="860">
+                <div class="image-container">
+                    <img src="../media/archive/original-files-backup-20250706/archive/original-files/3/IMG_1227.JPG" alt="IMG_1227.JPG" 
+                         onclick="openModal(this)" 
+                         onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22><rect width=%22200%22 height=%22200%22 fill=%22%23f8f9fa%22/><text x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22>No Image</text></svg>'">
+                </div>
+                <div class="image-info">
+                    <div class="image-name">IMG_1227.JPG</div>
+                    <div class="image-path">media\archive\original-files-backup-20250706\archive\original-files\3\IMG_1227.JPG</div>
+                    <div>Size: 1.83 MB</div>
+                </div>
+                <div class="categorization">
+                    <div class="category-buttons">
+                        <button class="category-btn" data-category="dragonfly">🦋 Dragonfly</button>
+                        <button class="category-btn" data-category="butterfly">🦋 Butterfly</button>
+                        <button class="category-btn" data-category="fish">🐟 Fish</button>
+                        <button class="category-btn" data-category="duck">🦆 Duck</button>
+                        <button class="category-btn" data-category="eagle">🦅 Eagle</button>
+                        <button class="category-btn" data-category="stcollen">⛪ St Collen</button>
+                        <button class="category-btn" data-category="bass">🎸 Bass</button>
+                        <button class="category-btn" data-category="nessie">🐲 Nessie</button>
+                        <button class="category-btn" data-category="nature">🌿 Nature</button>
+                        <button class="category-btn" data-category="tools">🔧 Tools</button>
+                        <button class="category-btn" data-category="process">⚙️ Process</button>
+                        <button class="category-btn" data-category="other">❓ Other</button>
+                    </div>
+                    <select class="process-stage" style="width: 100%; margin-bottom: 5px;">
+                        <option value="">Select stage...</option>
+                        <option value="initial">Initial/Raw</option>
+                        <option value="process">Work in Progress</option>
+                        <option value="final">Final/Complete</option>
+                        <option value="detail">Detail Shot</option>
+                    </select>
+                    <input type="text" class="notes-input" placeholder="Notes or project name...">
+                </div>
+            </div>
+        
+            <div class="image-card" data-file-index="861">
+                <div class="image-container">
+                    <img src="../media/archive/original-files-backup-20250706/archive/original-files/3/IMG_1509.JPG" alt="IMG_1509.JPG" 
+                         onclick="openModal(this)" 
+                         onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22><rect width=%22200%22 height=%22200%22 fill=%22%23f8f9fa%22/><text x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22>No Image</text></svg>'">
+                </div>
+                <div class="image-info">
+                    <div class="image-name">IMG_1509.JPG</div>
+                    <div class="image-path">media\archive\original-files-backup-20250706\archive\original-files\3\IMG_1509.JPG</div>
+                    <div>Size: 386.26 KB</div>
+                </div>
+                <div class="categorization">
+                    <div class="category-buttons">
+                        <button class="category-btn" data-category="dragonfly">🦋 Dragonfly</button>
+                        <button class="category-btn" data-category="butterfly">🦋 Butterfly</button>
+                        <button class="category-btn" data-category="fish">🐟 Fish</button>
+                        <button class="category-btn" data-category="duck">🦆 Duck</button>
+                        <button class="category-btn" data-category="eagle">🦅 Eagle</button>
+                        <button class="category-btn" data-category="stcollen">⛪ St Collen</button>
+                        <button class="category-btn" data-category="bass">🎸 Bass</button>
+                        <button class="category-btn" data-category="nessie">🐲 Nessie</button>
+                        <button class="category-btn" data-category="nature">🌿 Nature</button>
+                        <button class="category-btn" data-category="tools">🔧 Tools</button>
+                        <button class="category-btn" data-category="process">⚙️ Process</button>
+                        <button class="category-btn" data-category="other">❓ Other</button>
+                    </div>
+                    <select class="process-stage" style="width: 100%; margin-bottom: 5px;">
+                        <option value="">Select stage...</option>
+                        <option value="initial">Initial/Raw</option>
+                        <option value="process">Work in Progress</option>
+                        <option value="final">Final/Complete</option>
+                        <option value="detail">Detail Shot</option>
+                    </select>
+                    <input type="text" class="notes-input" placeholder="Notes or project name...">
+                </div>
+            </div>
+        
+            <div class="image-card" data-file-index="862">
+                <div class="image-container">
+                    <img src="../media/archive/original-files-backup-20250706/archive/original-files/3/IMG_1566.JPG" alt="IMG_1566.JPG" 
+                         onclick="openModal(this)" 
+                         onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22><rect width=%22200%22 height=%22200%22 fill=%22%23f8f9fa%22/><text x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22>No Image</text></svg>'">
+                </div>
+                <div class="image-info">
+                    <div class="image-name">IMG_1566.JPG</div>
+                    <div class="image-path">media\archive\original-files-backup-20250706\archive\original-files\3\IMG_1566.JPG</div>
+                    <div>Size: 1.13 MB</div>
+                </div>
+                <div class="categorization">
+                    <div class="category-buttons">
+                        <button class="category-btn" data-category="dragonfly">🦋 Dragonfly</button>
+                        <button class="category-btn" data-category="butterfly">🦋 Butterfly</button>
+                        <button class="category-btn" data-category="fish">🐟 Fish</button>
+                        <button class="category-btn" data-category="duck">🦆 Duck</button>
+                        <button class="category-btn" data-category="eagle">🦅 Eagle</button>
+                        <button class="category-btn" data-category="stcollen">⛪ St Collen</button>
+                        <button class="category-btn" data-category="bass">🎸 Bass</button>
+                        <button class="category-btn" data-category="nessie">🐲 Nessie</button>
+                        <button class="category-btn" data-category="nature">🌿 Nature</button>
+                        <button class="category-btn" data-category="tools">🔧 Tools</button>
+                        <button class="category-btn" data-category="process">⚙️ Process</button>
+                        <button class="category-btn" data-category="other">❓ Other</button>
+                    </div>
+                    <select class="process-stage" style="width: 100%; margin-bottom: 5px;">
+                        <option value="">Select stage...</option>
+                        <option value="initial">Initial/Raw</option>
+                        <option value="process">Work in Progress</option>
+                        <option value="final">Final/Complete</option>
+                        <option value="detail">Detail Shot</option>
+                    </select>
+                    <input type="text" class="notes-input" placeholder="Notes or project name...">
+                </div>
+            </div>
+        
+            <div class="image-card" data-file-index="863">
+                <div class="image-container">
+                    <img src="../media/archive/original-files-backup-20250706/archive/original-files/3/IMG_1567.JPG" alt="IMG_1567.JPG" 
+                         onclick="openModal(this)" 
+                         onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22><rect width=%22200%22 height=%22200%22 fill=%22%23f8f9fa%22/><text x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22>No Image</text></svg>'">
+                </div>
+                <div class="image-info">
+                    <div class="image-name">IMG_1567.JPG</div>
+                    <div class="image-path">media\archive\original-files-backup-20250706\archive\original-files\3\IMG_1567.JPG</div>
+                    <div>Size: 1.44 MB</div>
+                </div>
+                <div class="categorization">
+                    <div class="category-buttons">
+                        <button class="category-btn" data-category="dragonfly">🦋 Dragonfly</button>
+                        <button class="category-btn" data-category="butterfly">🦋 Butterfly</button>
+                        <button class="category-btn" data-category="fish">🐟 Fish</button>
+                        <button class="category-btn" data-category="duck">🦆 Duck</button>
+                        <button class="category-btn" data-category="eagle">🦅 Eagle</button>
+                        <button class="category-btn" data-category="stcollen">⛪ St Collen</button>
+                        <button class="category-btn" data-category="bass">🎸 Bass</button>
+                        <button class="category-btn" data-category="nessie">🐲 Nessie</button>
+                        <button class="category-btn" data-category="nature">🌿 Nature</button>
+                        <button class="category-btn" data-category="tools">🔧 Tools</button>
+                        <button class="category-btn" data-category="process">⚙️ Process</button>
+                        <button class="category-btn" data-category="other">❓ Other</button>
+                    </div>
+                    <select class="process-stage" style="width: 100%; margin-bottom: 5px;">
+                        <option value="">Select stage...</option>
+                        <option value="initial">Initial/Raw</option>
+                        <option value="process">Work in Progress</option>
+                        <option value="final">Final/Complete</option>
+                        <option value="detail">Detail Shot</option>
+                    </select>
+                    <input type="text" class="notes-input" placeholder="Notes or project name...">
+                </div>
+            </div>
+        
+            <div class="image-card" data-file-index="864">
+                <div class="image-container">
+                    <img src="../media/archive/original-files-backup-20250706/archive/original-files/3/IMG_1586.JPG" alt="IMG_1586.JPG" 
+                         onclick="openModal(this)" 
+                         onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22><rect width=%22200%22 height=%22200%22 fill=%22%23f8f9fa%22/><text x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22>No Image</text></svg>'">
+                </div>
+                <div class="image-info">
+                    <div class="image-name">IMG_1586.JPG</div>
+                    <div class="image-path">media\archive\original-files-backup-20250706\archive\original-files\3\IMG_1586.JPG</div>
+                    <div>Size: 1004.79 KB</div>
+                </div>
+                <div class="categorization">
+                    <div class="category-buttons">
+                        <button class="category-btn" data-category="dragonfly">🦋 Dragonfly</button>
+                        <button class="category-btn" data-category="butterfly">🦋 Butterfly</button>
+                        <button class="category-btn" data-category="fish">🐟 Fish</button>
+                        <button class="category-btn" data-category="duck">🦆 Duck</button>
+                        <button class="category-btn" data-category="eagle">🦅 Eagle</button>
+                        <button class="category-btn" data-category="stcollen">⛪ St Collen</button>
+                        <button class="category-btn" data-category="bass">🎸 Bass</button>
+                        <button class="category-btn" data-category="nessie">🐲 Nessie</button>
+                        <button class="category-btn" data-category="nature">🌿 Nature</button>
+                        <button class="category-btn" data-category="tools">🔧 Tools</button>
+                        <button class="category-btn" data-category="process">⚙️ Process</button>
+                        <button class="category-btn" data-category="other">❓ Other</button>
+                    </div>
+                    <select class="process-stage" style="width: 100%; margin-bottom: 5px;">
+                        <option value="">Select stage...</option>
+                        <option value="initial">Initial/Raw</option>
+                        <option value="process">Work in Progress</option>
+                        <option value="final">Final/Complete</option>
+                        <option value="detail">Detail Shot</option>
+                    </select>
+                    <input type="text" class="notes-input" placeholder="Notes or project name...">
+                </div>
+            </div>
+        
+            <div class="image-card" data-file-index="865">
+                <div class="image-container">
+                    <img src="../media/archive/original-files-backup-20250706/archive/original-files/3/IMG_1648.JPG" alt="IMG_1648.JPG" 
+                         onclick="openModal(this)" 
+                         onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22><rect width=%22200%22 height=%22200%22 fill=%22%23f8f9fa%22/><text x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22>No Image</text></svg>'">
+                </div>
+                <div class="image-info">
+                    <div class="image-name">IMG_1648.JPG</div>
+                    <div class="image-path">media\archive\original-files-backup-20250706\archive\original-files\3\IMG_1648.JPG</div>
+                    <div>Size: 2.04 MB</div>
+                </div>
+                <div class="categorization">
+                    <div class="category-buttons">
+                        <button class="category-btn" data-category="dragonfly">🦋 Dragonfly</button>
+                        <button class="category-btn" data-category="butterfly">🦋 Butterfly</button>
+                        <button class="category-btn" data-category="fish">🐟 Fish</button>
+                        <button class="category-btn" data-category="duck">🦆 Duck</button>
+                        <button class="category-btn" data-category="eagle">🦅 Eagle</button>
+                        <button class="category-btn" data-category="stcollen">⛪ St Collen</button>
+                        <button class="category-btn" data-category="bass">🎸 Bass</button>
+                        <button class="category-btn" data-category="nessie">🐲 Nessie</button>
+                        <button class="category-btn" data-category="nature">🌿 Nature</button>
+                        <button class="category-btn" data-category="tools">🔧 Tools</button>
+                        <button class="category-btn" data-category="process">⚙️ Process</button>
+                        <button class="category-btn" data-category="other">❓ Other</button>
+                    </div>
+                    <select class="process-stage" style="width: 100%; margin-bottom: 5px;">
+                        <option value="">Select stage...</option>
+                        <option value="initial">Initial/Raw</option>
+                        <option value="process">Work in Progress</option>
+                        <option value="final">Final/Complete</option>
+                        <option value="detail">Detail Shot</option>
+                    </select>
+                    <input type="text" class="notes-input" placeholder="Notes or project name...">
+                </div>
+            </div>
+        
+            <div class="image-card" data-file-index="866">
+                <div class="image-container">
+                    <img src="../media/archive/original-files-backup-20250706/archive/original-files/3/IMG_1655.JPG" alt="IMG_1655.JPG" 
+                         onclick="openModal(this)" 
+                         onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22><rect width=%22200%22 height=%22200%22 fill=%22%23f8f9fa%22/><text x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22>No Image</text></svg>'">
+                </div>
+                <div class="image-info">
+                    <div class="image-name">IMG_1655.JPG</div>
+                    <div class="image-path">media\archive\original-files-backup-20250706\archive\original-files\3\IMG_1655.JPG</div>
+                    <div>Size: 3.08 MB</div>
+                </div>
+                <div class="categorization">
+                    <div class="category-buttons">
+                        <button class="category-btn" data-category="dragonfly">🦋 Dragonfly</button>
+                        <button class="category-btn" data-category="butterfly">🦋 Butterfly</button>
+                        <button class="category-btn" data-category="fish">🐟 Fish</button>
+                        <button class="category-btn" data-category="duck">🦆 Duck</button>
+                        <button class="category-btn" data-category="eagle">🦅 Eagle</button>
+                        <button class="category-btn" data-category="stcollen">⛪ St Collen</button>
+                        <button class="category-btn" data-category="bass">🎸 Bass</button>
+                        <button class="category-btn" data-category="nessie">🐲 Nessie</button>
+                        <button class="category-btn" data-category="nature">🌿 Nature</button>
+                        <button class="category-btn" data-category="tools">🔧 Tools</button>
+                        <button class="category-btn" data-category="process">⚙️ Process</button>
+                        <button class="category-btn" data-category="other">❓ Other</button>
+                    </div>
+                    <select class="process-stage" style="width: 100%; margin-bottom: 5px;">
+                        <option value="">Select stage...</option>
+                        <option value="initial">Initial/Raw</option>
+                        <option value="process">Work in Progress</option>
+                        <option value="final">Final/Complete</option>
+                        <option value="detail">Detail Shot</option>
+                    </select>
+                    <input type="text" class="notes-input" placeholder="Notes or project name...">
+                </div>
+            </div>
+        
+            <div class="image-card" data-file-index="867">
+                <div class="image-container">
+                    <img src="../media/archive/original-files-backup-20250706/archive/original-files/3/IMG_1660.JPG" alt="IMG_1660.JPG" 
+                         onclick="openModal(this)" 
+                         onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22><rect width=%22200%22 height=%22200%22 fill=%22%23f8f9fa%22/><text x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22>No Image</text></svg>'">
+                </div>
+                <div class="image-info">
+                    <div class="image-name">IMG_1660.JPG</div>
+                    <div class="image-path">media\archive\original-files-backup-20250706\archive\original-files\3\IMG_1660.JPG</div>
+                    <div>Size: 2.32 MB</div>
+                </div>
+                <div class="categorization">
+                    <div class="category-buttons">
+                        <button class="category-btn" data-category="dragonfly">🦋 Dragonfly</button>
+                        <button class="category-btn" data-category="butterfly">🦋 Butterfly</button>
+                        <button class="category-btn" data-category="fish">🐟 Fish</button>
+                        <button class="category-btn" data-category="duck">🦆 Duck</button>
+                        <button class="category-btn" data-category="eagle">🦅 Eagle</button>
+                        <button class="category-btn" data-category="stcollen">⛪ St Collen</button>
+                        <button class="category-btn" data-category="bass">🎸 Bass</button>
+                        <button class="category-btn" data-category="nessie">🐲 Nessie</button>
+                        <button class="category-btn" data-category="nature">🌿 Nature</button>
+                        <button class="category-btn" data-category="tools">🔧 Tools</button>
+                        <button class="category-btn" data-category="process">⚙️ Process</button>
+                        <button class="category-btn" data-category="other">❓ Other</button>
+                    </div>
+                    <select class="process-stage" style="width: 100%; margin-bottom: 5px;">
+                        <option value="">Select stage...</option>
+                        <option value="initial">Initial/Raw</option>
+                        <option value="process">Work in Progress</option>
+                        <option value="final">Final/Complete</option>
+                        <option value="detail">Detail Shot</option>
+                    </select>
+                    <input type="text" class="notes-input" placeholder="Notes or project name...">
+                </div>
+            </div>
+        
+            <div class="image-card" data-file-index="868">
+                <div class="image-container">
+                    <img src="../media/archive/original-files-backup-20250706/archive/original-files/3/IMG_2004.JPG" alt="IMG_2004.JPG" 
+                         onclick="openModal(this)" 
+                         onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22><rect width=%22200%22 height=%22200%22 fill=%22%23f8f9fa%22/><text x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22>No Image</text></svg>'">
+                </div>
+                <div class="image-info">
+                    <div class="image-name">IMG_2004.JPG</div>
+                    <div class="image-path">media\archive\original-files-backup-20250706\archive\original-files\3\IMG_2004.JPG</div>
+                    <div>Size: 3.28 MB</div>
+                </div>
+                <div class="categorization">
+                    <div class="category-buttons">
+                        <button class="category-btn" data-category="dragonfly">🦋 Dragonfly</button>
+                        <button class="category-btn" data-category="butterfly">🦋 Butterfly</button>
+                        <button class="category-btn" data-category="fish">🐟 Fish</button>
+                        <button class="category-btn" data-category="duck">🦆 Duck</button>
+                        <button class="category-btn" data-category="eagle">🦅 Eagle</button>
+                        <button class="category-btn" data-category="stcollen">⛪ St Collen</button>
+                        <button class="category-btn" data-category="bass">🎸 Bass</button>
+                        <button class="category-btn" data-category="nessie">🐲 Nessie</button>
+                        <button class="category-btn" data-category="nature">🌿 Nature</button>
+                        <button class="category-btn" data-category="tools">🔧 Tools</button>
+                        <button class="category-btn" data-category="process">⚙️ Process</button>
+                        <button class="category-btn" data-category="other">❓ Other</button>
+                    </div>
+                    <select class="process-stage" style="width: 100%; margin-bottom: 5px;">
+                        <option value="">Select stage...</option>
+                        <option value="initial">Initial/Raw</option>
+                        <option value="process">Work in Progress</option>
+                        <option value="final">Final/Complete</option>
+                        <option value="detail">Detail Shot</option>
+                    </select>
+                    <input type="text" class="notes-input" placeholder="Notes or project name...">
+                </div>
+            </div>
+        
+            <div class="image-card" data-file-index="869">
+                <div class="image-container">
+                    <img src="../media/archive/original-files-backup-20250706/archive/original-files/3/IMG_2028.JPG" alt="IMG_2028.JPG" 
+                         onclick="openModal(this)" 
+                         onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22><rect width=%22200%22 height=%22200%22 fill=%22%23f8f9fa%22/><text x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22>No Image</text></svg>'">
+                </div>
+                <div class="image-info">
+                    <div class="image-name">IMG_2028.JPG</div>
+                    <div class="image-path">media\archive\original-files-backup-20250706\archive\original-files\3\IMG_2028.JPG</div>
+                    <div>Size: 3.67 MB</div>
+                </div>
+                <div class="categorization">
+                    <div class="category-buttons">
+                        <button class="category-btn" data-category="dragonfly">🦋 Dragonfly</button>
+                        <button class="category-btn" data-category="butterfly">🦋 Butterfly</button>
+                        <button class="category-btn" data-category="fish">🐟 Fish</button>
+                        <button class="category-btn" data-category="duck">🦆 Duck</button>
+                        <button class="category-btn" data-category="eagle">🦅 Eagle</button>
+                        <button class="category-btn" data-category="stcollen">⛪ St Collen</button>
+                        <button class="category-btn" data-category="bass">🎸 Bass</button>
+                        <button class="category-btn" data-category="nessie">🐲 Nessie</button>
+                        <button class="category-btn" data-category="nature">🌿 Nature</button>
+                        <button class="category-btn" data-category="tools">🔧 Tools</button>
+                        <button class="category-btn" data-category="process">⚙️ Process</button>
+                        <button class="category-btn" data-category="other">❓ Other</button>
+                    </div>
+                    <select class="process-stage" style="width: 100%; margin-bottom: 5px;">
+                        <option value="">Select stage...</option>
+                        <option value="initial">Initial/Raw</option>
+                        <option value="process">Work in Progress</option>
+                        <option value="final">Final/Complete</option>
+                        <option value="detail">Detail Shot</option>
+                    </select>
+                    <input type="text" class="notes-input" placeholder="Notes or project name...">
+                </div>
+            </div>
+        
+            <div class="image-card" data-file-index="870">
+                <div class="image-container">
+                    <img src="../media/archive/original-files-backup-20250706/archive/original-files/3/IMG_2097-1.JPG" alt="IMG_2097-1.JPG" 
+                         onclick="openModal(this)" 
+                         onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22><rect width=%22200%22 height=%22200%22 fill=%22%23f8f9fa%22/><text x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22>No Image</text></svg>'">
+                </div>
+                <div class="image-info">
+                    <div class="image-name">IMG_2097-1.JPG</div>
+                    <div class="image-path">media\archive\original-files-backup-20250706\archive\original-files\3\IMG_2097-1.JPG</div>
+                    <div>Size: 3.4 MB</div>
+                </div>
+                <div class="categorization">
+                    <div class="category-buttons">
+                        <button class="category-btn" data-category="dragonfly">🦋 Dragonfly</button>
+                        <button class="category-btn" data-category="butterfly">🦋 Butterfly</button>
+                        <button class="category-btn" data-category="fish">🐟 Fish</button>
+                        <button class="category-btn" data-category="duck">🦆 Duck</button>
+                        <button class="category-btn" data-category="eagle">🦅 Eagle</button>
+                        <button class="category-btn" data-category="stcollen">⛪ St Collen</button>
+                        <button class="category-btn" data-category="bass">🎸 Bass</button>
+                        <button class="category-btn" data-category="nessie">🐲 Nessie</button>
+                        <button class="category-btn" data-category="nature">🌿 Nature</button>
+                        <button class="category-btn" data-category="tools">🔧 Tools</button>
+                        <button class="category-btn" data-category="process">⚙️ Process</button>
+                        <button class="category-btn" data-category="other">❓ Other</button>
+                    </div>
+                    <select class="process-stage" style="width: 100%; margin-bottom: 5px;">
+                        <option value="">Select stage...</option>
+                        <option value="initial">Initial/Raw</option>
+                        <option value="process">Work in Progress</option>
+                        <option value="final">Final/Complete</option>
+                        <option value="detail">Detail Shot</option>
+                    </select>
+                    <input type="text" class="notes-input" placeholder="Notes or project name...">
+                </div>
+            </div>
+        
+            <div class="image-card" data-file-index="871">
+                <div class="image-container">
+                    <img src="../media/archive/original-files-backup-20250706/archive/original-files/3/IMG_2097.JPG" alt="IMG_2097.JPG" 
+                         onclick="openModal(this)" 
+                         onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22><rect width=%22200%22 height=%22200%22 fill=%22%23f8f9fa%22/><text x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22>No Image</text></svg>'">
+                </div>
+                <div class="image-info">
+                    <div class="image-name">IMG_2097.JPG</div>
+                    <div class="image-path">media\archive\original-files-backup-20250706\archive\original-files\3\IMG_2097.JPG</div>
+                    <div>Size: 655.1 KB</div>
+                </div>
+                <div class="categorization">
+                    <div class="category-buttons">
+                        <button class="category-btn" data-category="dragonfly">🦋 Dragonfly</button>
+                        <button class="category-btn" data-category="butterfly">🦋 Butterfly</button>
+                        <button class="category-btn" data-category="fish">🐟 Fish</button>
+                        <button class="category-btn" data-category="duck">🦆 Duck</button>
+                        <button class="category-btn" data-category="eagle">🦅 Eagle</button>
+                        <button class="category-btn" data-category="stcollen">⛪ St Collen</button>
+                        <button class="category-btn" data-category="bass">🎸 Bass</button>
+                        <button class="category-btn" data-category="nessie">🐲 Nessie</button>
+                        <button class="category-btn" data-category="nature">🌿 Nature</button>
+                        <button class="category-btn" data-category="tools">🔧 Tools</button>
+                        <button class="category-btn" data-category="process">⚙️ Process</button>
+                        <button class="category-btn" data-category="other">❓ Other</button>
+                    </div>
+                    <select class="process-stage" style="width: 100%; margin-bottom: 5px;">
+                        <option value="">Select stage...</option>
+                        <option value="initial">Initial/Raw</option>
+                        <option value="process">Work in Progress</option>
+                        <option value="final">Final/Complete</option>
+                        <option value="detail">Detail Shot</option>
+                    </select>
+                    <input type="text" class="notes-input" placeholder="Notes or project name...">
+                </div>
+            </div>
+        
+            <div class="image-card" data-file-index="872">
+                <div class="image-container">
+                    <img src="../media/archive/original-files-backup-20250706/archive/original-files/3/IMG_2478.JPG" alt="IMG_2478.JPG" 
+                         onclick="openModal(this)" 
+                         onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22><rect width=%22200%22 height=%22200%22 fill=%22%23f8f9fa%22/><text x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22>No Image</text></svg>'">
+                </div>
+                <div class="image-info">
+                    <div class="image-name">IMG_2478.JPG</div>
+                    <div class="image-path">media\archive\original-files-backup-20250706\archive\original-files\3\IMG_2478.JPG</div>
+                    <div>Size: 316.9 KB</div>
+                </div>
+                <div class="categorization">
+                    <div class="category-buttons">
+                        <button class="category-btn" data-category="dragonfly">🦋 Dragonfly</button>
+                        <button class="category-btn" data-category="butterfly">🦋 Butterfly</button>
+                        <button class="category-btn" data-category="fish">🐟 Fish</button>
+                        <button class="category-btn" data-category="duck">🦆 Duck</button>
+                        <button class="category-btn" data-category="eagle">🦅 Eagle</button>
+                        <button class="category-btn" data-category="stcollen">⛪ St Collen</button>
+                        <button class="category-btn" data-category="bass">🎸 Bass</button>
+                        <button class="category-btn" data-category="nessie">🐲 Nessie</button>
+                        <button class="category-btn" data-category="nature">🌿 Nature</button>
+                        <button class="category-btn" data-category="tools">🔧 Tools</button>
+                        <button class="category-btn" data-category="process">⚙️ Process</button>
+                        <button class="category-btn" data-category="other">❓ Other</button>
+                    </div>
+                    <select class="process-stage" style="width: 100%; margin-bottom: 5px;">
+                        <option value="">Select stage...</option>
+                        <option value="initial">Initial/Raw</option>
+                        <option value="process">Work in Progress</option>
+                        <option value="final">Final/Complete</option>
+                        <option value="detail">Detail Shot</option>
+                    </select>
+                    <input type="text" class="notes-input" placeholder="Notes or project name...">
+                </div>
+            </div>
+        
+            <div class="image-card" data-file-index="873">
+                <div class="image-container">
+                    <img src="../media/archive/original-files-backup-20250706/archive/original-files/3/IMG_2489.JPG" alt="IMG_2489.JPG" 
+                         onclick="openModal(this)" 
+                         onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22><rect width=%22200%22 height=%22200%22 fill=%22%23f8f9fa%22/><text x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22>No Image</text></svg>'">
+                </div>
+                <div class="image-info">
+                    <div class="image-name">IMG_2489.JPG</div>
+                    <div class="image-path">media\archive\original-files-backup-20250706\archive\original-files\3\IMG_2489.JPG</div>
+                    <div>Size: 2.19 MB</div>
+                </div>
+                <div class="categorization">
+                    <div class="category-buttons">
+                        <button class="category-btn" data-category="dragonfly">🦋 Dragonfly</button>
+                        <button class="category-btn" data-category="butterfly">🦋 Butterfly</button>
+                        <button class="category-btn" data-category="fish">🐟 Fish</button>
+                        <button class="category-btn" data-category="duck">🦆 Duck</button>
+                        <button class="category-btn" data-category="eagle">🦅 Eagle</button>
+                        <button class="category-btn" data-category="stcollen">⛪ St Collen</button>
+                        <button class="category-btn" data-category="bass">🎸 Bass</button>
+                        <button class="category-btn" data-category="nessie">🐲 Nessie</button>
+                        <button class="category-btn" data-category="nature">🌿 Nature</button>
+                        <button class="category-btn" data-category="tools">🔧 Tools</button>
+                        <button class="category-btn" data-category="process">⚙️ Process</button>
+                        <button class="category-btn" data-category="other">❓ Other</button>
+                    </div>
+                    <select class="process-stage" style="width: 100%; margin-bottom: 5px;">
+                        <option value="">Select stage...</option>
+                        <option value="initial">Initial/Raw</option>
+                        <option value="process">Work in Progress</option>
+                        <option value="final">Final/Complete</option>
+                        <option value="detail">Detail Shot</option>
+                    </select>
+                    <input type="text" class="notes-input" placeholder="Notes or project name...">
+                </div>
+            </div>
+        
+            <div class="image-card" data-file-index="874">
+                <div class="image-container">
+                    <img src="../media/archive/original-files-backup-20250706/archive/original-files/3/IMG_2497.JPG" alt="IMG_2497.JPG" 
+                         onclick="openModal(this)" 
+                         onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22><rect width=%22200%22 height=%22200%22 fill=%22%23f8f9fa%22/><text x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22>No Image</text></svg>'">
+                </div>
+                <div class="image-info">
+                    <div class="image-name">IMG_2497.JPG</div>
+                    <div class="image-path">media\archive\original-files-backup-20250706\archive\original-files\3\IMG_2497.JPG</div>
+                    <div>Size: 1.33 MB</div>
+                </div>
+                <div class="categorization">
+                    <div class="category-buttons">
+                        <button class="category-btn" data-category="dragonfly">🦋 Dragonfly</button>
+                        <button class="category-btn" data-category="butterfly">🦋 Butterfly</button>
+                        <button class="category-btn" data-category="fish">🐟 Fish</button>
+                        <button class="category-btn" data-category="duck">🦆 Duck</button>
+                        <button class="category-btn" data-category="eagle">🦅 Eagle</button>
+                        <button class="category-btn" data-category="stcollen">⛪ St Collen</button>
+                        <button class="category-btn" data-category="bass">🎸 Bass</button>
+                        <button class="category-btn" data-category="nessie">🐲 Nessie</button>
+                        <button class="category-btn" data-category="nature">🌿 Nature</button>
+                        <button class="category-btn" data-category="tools">🔧 Tools</button>
+                        <button class="category-btn" data-category="process">⚙️ Process</button>
+                        <button class="category-btn" data-category="other">❓ Other</button>
+                    </div>
+                    <select class="process-stage" style="width: 100%; margin-bottom: 5px;">
+                        <option value="">Select stage...</option>
+                        <option value="initial">Initial/Raw</option>
+                        <option value="process">Work in Progress</option>
+                        <option value="final">Final/Complete</option>
+                        <option value="detail">Detail Shot</option>
+                    </select>
+                    <input type="text" class="notes-input" placeholder="Notes or project name...">
+                </div>
+            </div>
+        
+            <div class="image-card" data-file-index="875">
+                <div class="image-container">
+                    <img src="../media/archive/original-files-backup-20250706/archive/original-files/3/IMG_2498.JPG" alt="IMG_2498.JPG" 
+                         onclick="openModal(this)" 
+                         onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22><rect width=%22200%22 height=%22200%22 fill=%22%23f8f9fa%22/><text x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22>No Image</text></svg>'">
+                </div>
+                <div class="image-info">
+                    <div class="image-name">IMG_2498.JPG</div>
+                    <div class="image-path">media\archive\original-files-backup-20250706\archive\original-files\3\IMG_2498.JPG</div>
+                    <div>Size: 1.09 MB</div>
+                </div>
+                <div class="categorization">
+                    <div class="category-buttons">
+                        <button class="category-btn" data-category="dragonfly">🦋 Dragonfly</button>
+                        <button class="category-btn" data-category="butterfly">🦋 Butterfly</button>
+                        <button class="category-btn" data-category="fish">🐟 Fish</button>
+                        <button class="category-btn" data-category="duck">🦆 Duck</button>
+                        <button class="category-btn" data-category="eagle">🦅 Eagle</button>
+                        <button class="category-btn" data-category="stcollen">⛪ St Collen</button>
+                        <button class="category-btn" data-category="bass">🎸 Bass</button>
+                        <button class="category-btn" data-category="nessie">🐲 Nessie</button>
+                        <button class="category-btn" data-category="nature">🌿 Nature</button>
+                        <button class="category-btn" data-category="tools">🔧 Tools</button>
+                        <button class="category-btn" data-category="process">⚙️ Process</button>
+                        <button class="category-btn" data-category="other">❓ Other</button>
+                    </div>
+                    <select class="process-stage" style="width: 100%; margin-bottom: 5px;">
+                        <option value="">Select stage...</option>
+                        <option value="initial">Initial/Raw</option>
+                        <option value="process">Work in Progress</option>
+                        <option value="final">Final/Complete</option>
+                        <option value="detail">Detail Shot</option>
+                    </select>
+                    <input type="text" class="notes-input" placeholder="Notes or project name...">
+                </div>
+            </div>
+        
+            <div class="image-card" data-file-index="876">
+                <div class="image-container">
+                    <img src="../media/archive/original-files-backup-20250706/archive/original-files/3/IMG_2625.JPEG" alt="IMG_2625.JPEG" 
+                         onclick="openModal(this)" 
+                         onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22><rect width=%22200%22 height=%22200%22 fill=%22%23f8f9fa%22/><text x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22>No Image</text></svg>'">
+                </div>
+                <div class="image-info">
+                    <div class="image-name">IMG_2625.JPEG</div>
+                    <div class="image-path">media\archive\original-files-backup-20250706\archive\original-files\3\IMG_2625.JPEG</div>
+                    <div>Size: 510.62 KB</div>
+                </div>
+                <div class="categorization">
+                    <div class="category-buttons">
+                        <button class="category-btn" data-category="dragonfly">🦋 Dragonfly</button>
+                        <button class="category-btn" data-category="butterfly">🦋 Butterfly</button>
+                        <button class="category-btn" data-category="fish">🐟 Fish</button>
+                        <button class="category-btn" data-category="duck">🦆 Duck</button>
+                        <button class="category-btn" data-category="eagle">🦅 Eagle</button>
+                        <button class="category-btn" data-category="stcollen">⛪ St Collen</button>
+                        <button class="category-btn" data-category="bass">🎸 Bass</button>
+                        <button class="category-btn" data-category="nessie">🐲 Nessie</button>
+                        <button class="category-btn" data-category="nature">🌿 Nature</button>
+                        <button class="category-btn" data-category="tools">🔧 Tools</button>
+                        <button class="category-btn" data-category="process">⚙️ Process</button>
+                        <button class="category-btn" data-category="other">❓ Other</button>
+                    </div>
+                    <select class="process-stage" style="width: 100%; margin-bottom: 5px;">
+                        <option value="">Select stage...</option>
+                        <option value="initial">Initial/Raw</option>
+                        <option value="process">Work in Progress</option>
+                        <option value="final">Final/Complete</option>
+                        <option value="detail">Detail Shot</option>
+                    </select>
+                    <input type="text" class="notes-input" placeholder="Notes or project name...">
+                </div>
+            </div>
+        
+            <div class="image-card" data-file-index="877">
+                <div class="image-container">
+                    <img src="../media/archive/original-files-backup-20250706/archive/original-files/3/IMG_2713.JPG" alt="IMG_2713.JPG" 
+                         onclick="openModal(this)" 
+                         onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22><rect width=%22200%22 height=%22200%22 fill=%22%23f8f9fa%22/><text x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22>No Image</text></svg>'">
+                </div>
+                <div class="image-info">
+                    <div class="image-name">IMG_2713.JPG</div>
+                    <div class="image-path">media\archive\original-files-backup-20250706\archive\original-files\3\IMG_2713.JPG</div>
+                    <div>Size: 1.96 MB</div>
+                </div>
+                <div class="categorization">
+                    <div class="category-buttons">
+                        <button class="category-btn" data-category="dragonfly">🦋 Dragonfly</button>
+                        <button class="category-btn" data-category="butterfly">🦋 Butterfly</button>
+                        <button class="category-btn" data-category="fish">🐟 Fish</button>
+                        <button class="category-btn" data-category="duck">🦆 Duck</button>
+                        <button class="category-btn" data-category="eagle">🦅 Eagle</button>
+                        <button class="category-btn" data-category="stcollen">⛪ St Collen</button>
+                        <button class="category-btn" data-category="bass">🎸 Bass</button>
+                        <button class="category-btn" data-category="nessie">🐲 Nessie</button>
+                        <button class="category-btn" data-category="nature">🌿 Nature</button>
+                        <button class="category-btn" data-category="tools">🔧 Tools</button>
+                        <button class="category-btn" data-category="process">⚙️ Process</button>
+                        <button class="category-btn" data-category="other">❓ Other</button>
+                    </div>
+                    <select class="process-stage" style="width: 100%; margin-bottom: 5px;">
+                        <option value="">Select stage...</option>
+                        <option value="initial">Initial/Raw</option>
+                        <option value="process">Work in Progress</option>
+                        <option value="final">Final/Complete</option>
+                        <option value="detail">Detail Shot</option>
+                    </select>
+                    <input type="text" class="notes-input" placeholder="Notes or project name...">
+                </div>
+            </div>
+        
+            <div class="image-card" data-file-index="878">
+                <div class="image-container">
+                    <img src="../media/archive/original-files-backup-20250706/archive/original-files/3/IMG_2733.JPG" alt="IMG_2733.JPG" 
+                         onclick="openModal(this)" 
+                         onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22><rect width=%22200%22 height=%22200%22 fill=%22%23f8f9fa%22/><text x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22>No Image</text></svg>'">
+                </div>
+                <div class="image-info">
+                    <div class="image-name">IMG_2733.JPG</div>
+                    <div class="image-path">media\archive\original-files-backup-20250706\archive\original-files\3\IMG_2733.JPG</div>
+                    <div>Size: 1.08 MB</div>
+                </div>
+                <div class="categorization">
+                    <div class="category-buttons">
+                        <button class="category-btn" data-category="dragonfly">🦋 Dragonfly</button>
+                        <button class="category-btn" data-category="butterfly">🦋 Butterfly</button>
+                        <button class="category-btn" data-category="fish">🐟 Fish</button>
+                        <button class="category-btn" data-category="duck">🦆 Duck</button>
+                        <button class="category-btn" data-category="eagle">🦅 Eagle</button>
+                        <button class="category-btn" data-category="stcollen">⛪ St Collen</button>
+                        <button class="category-btn" data-category="bass">🎸 Bass</button>
+                        <button class="category-btn" data-category="nessie">🐲 Nessie</button>
+                        <button class="category-btn" data-category="nature">🌿 Nature</button>
+                        <button class="category-btn" data-category="tools">🔧 Tools</button>
+                        <button class="category-btn" data-category="process">⚙️ Process</button>
+                        <button class="category-btn" data-category="other">❓ Other</button>
+                    </div>
+                    <select class="process-stage" style="width: 100%; margin-bottom: 5px;">
+                        <option value="">Select stage...</option>
+                        <option value="initial">Initial/Raw</option>
+                        <option value="process">Work in Progress</option>
+                        <option value="final">Final/Complete</option>
+                        <option value="detail">Detail Shot</option>
+                    </select>
+                    <input type="text" class="notes-input" placeholder="Notes or project name...">
+                </div>
+            </div>
+        
+            <div class="image-card" data-file-index="879">
+                <div class="image-container">
+                    <img src="../media/archive/original-files-backup-20250706/archive/original-files/3/IMG_2736.JPG" alt="IMG_2736.JPG" 
+                         onclick="openModal(this)" 
+                         onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22><rect width=%22200%22 height=%22200%22 fill=%22%23f8f9fa%22/><text x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22>No Image</text></svg>'">
+                </div>
+                <div class="image-info">
+                    <div class="image-name">IMG_2736.JPG</div>
+                    <div class="image-path">media\archive\original-files-backup-20250706\archive\original-files\3\IMG_2736.JPG</div>
+                    <div>Size: 1.21 MB</div>
+                </div>
+                <div class="categorization">
+                    <div class="category-buttons">
+                        <button class="category-btn" data-category="dragonfly">🦋 Dragonfly</button>
+                        <button class="category-btn" data-category="butterfly">🦋 Butterfly</button>
+                        <button class="category-btn" data-category="fish">🐟 Fish</button>
+                        <button class="category-btn" data-category="duck">🦆 Duck</button>
+                        <button class="category-btn" data-category="eagle">🦅 Eagle</button>
+                        <button class="category-btn" data-category="stcollen">⛪ St Collen</button>
+                        <button class="category-btn" data-category="bass">🎸 Bass</button>
+                        <button class="category-btn" data-category="nessie">🐲 Nessie</button>
+                        <button class="category-btn" data-category="nature">🌿 Nature</button>
+                        <button class="category-btn" data-category="tools">🔧 Tools</button>
+                        <button class="category-btn" data-category="process">⚙️ Process</button>
+                        <button class="category-btn" data-category="other">❓ Other</button>
+                    </div>
+                    <select class="process-stage" style="width: 100%; margin-bottom: 5px;">
+                        <option value="">Select stage...</option>
+                        <option value="initial">Initial/Raw</option>
+                        <option value="process">Work in Progress</option>
+                        <option value="final">Final/Complete</option>
+                        <option value="detail">Detail Shot</option>
+                    </select>
+                    <input type="text" class="notes-input" placeholder="Notes or project name...">
+                </div>
+            </div>
+        
+            <div class="image-card" data-file-index="880">
+                <div class="image-container">
+                    <img src="../media/archive/original-files-backup-20250706/archive/original-files/3/IMG_2806.JPG" alt="IMG_2806.JPG" 
+                         onclick="openModal(this)" 
+                         onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22><rect width=%22200%22 height=%22200%22 fill=%22%23f8f9fa%22/><text x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22>No Image</text></svg>'">
+                </div>
+                <div class="image-info">
+                    <div class="image-name">IMG_2806.JPG</div>
+                    <div class="image-path">media\archive\original-files-backup-20250706\archive\original-files\3\IMG_2806.JPG</div>
+                    <div>Size: 1.21 MB</div>
+                </div>
+                <div class="categorization">
+                    <div class="category-buttons">
+                        <button class="category-btn" data-category="dragonfly">🦋 Dragonfly</button>
+                        <button class="category-btn" data-category="butterfly">🦋 Butterfly</button>
+                        <button class="category-btn" data-category="fish">🐟 Fish</button>
+                        <button class="category-btn" data-category="duck">🦆 Duck</button>
+                        <button class="category-btn" data-category="eagle">🦅 Eagle</button>
+                        <button class="category-btn" data-category="stcollen">⛪ St Collen</button>
+                        <button class="category-btn" data-category="bass">🎸 Bass</button>
+                        <button class="category-btn" data-category="nessie">🐲 Nessie</button>
+                        <button class="category-btn" data-category="nature">🌿 Nature</button>
+                        <button class="category-btn" data-category="tools">🔧 Tools</button>
+                        <button class="category-btn" data-category="process">⚙️ Process</button>
+                        <button class="category-btn" data-category="other">❓ Other</button>
+                    </div>
+                    <select class="process-stage" style="width: 100%; margin-bottom: 5px;">
+                        <option value="">Select stage...</option>
+                        <option value="initial">Initial/Raw</option>
+                        <option value="process">Work in Progress</option>
+                        <option value="final">Final/Complete</option>
+                        <option value="detail">Detail Shot</option>
+                    </select>
+                    <input type="text" class="notes-input" placeholder="Notes or project name...">
+                </div>
+            </div>
+        
+            <div class="image-card" data-file-index="881">
+                <div class="image-container">
+                    <img src="../media/archive/original-files-backup-20250706/archive/original-files/3/IMG_3177.JPG" alt="IMG_3177.JPG" 
+                         onclick="openModal(this)" 
+                         onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22><rect width=%22200%22 height=%22200%22 fill=%22%23f8f9fa%22/><text x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22>No Image</text></svg>'">
+                </div>
+                <div class="image-info">
+                    <div class="image-name">IMG_3177.JPG</div>
+                    <div class="image-path">media\archive\original-files-backup-20250706\archive\original-files\3\IMG_3177.JPG</div>
+                    <div>Size: 2.22 MB</div>
+                </div>
+                <div class="categorization">
+                    <div class="category-buttons">
+                        <button class="category-btn" data-category="dragonfly">🦋 Dragonfly</button>
+                        <button class="category-btn" data-category="butterfly">🦋 Butterfly</button>
+                        <button class="category-btn" data-category="fish">🐟 Fish</button>
+                        <button class="category-btn" data-category="duck">🦆 Duck</button>
+                        <button class="category-btn" data-category="eagle">🦅 Eagle</button>
+                        <button class="category-btn" data-category="stcollen">⛪ St Collen</button>
+                        <button class="category-btn" data-category="bass">🎸 Bass</button>
+                        <button class="category-btn" data-category="nessie">🐲 Nessie</button>
+                        <button class="category-btn" data-category="nature">🌿 Nature</button>
+                        <button class="category-btn" data-category="tools">🔧 Tools</button>
+                        <button class="category-btn" data-category="process">⚙️ Process</button>
+                        <button class="category-btn" data-category="other">❓ Other</button>
+                    </div>
+                    <select class="process-stage" style="width: 100%; margin-bottom: 5px;">
+                        <option value="">Select stage...</option>
+                        <option value="initial">Initial/Raw</option>
+                        <option value="process">Work in Progress</option>
+                        <option value="final">Final/Complete</option>
+                        <option value="detail">Detail Shot</option>
+                    </select>
+                    <input type="text" class="notes-input" placeholder="Notes or project name...">
+                </div>
+            </div>
+        
+            <div class="image-card" data-file-index="882">
+                <div class="image-container">
+                    <img src="../media/archive/original-files-backup-20250706/archive/original-files/3/IMG_3392.JPG" alt="IMG_3392.JPG" 
+                         onclick="openModal(this)" 
+                         onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22><rect width=%22200%22 height=%22200%22 fill=%22%23f8f9fa%22/><text x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22>No Image</text></svg>'">
+                </div>
+                <div class="image-info">
+                    <div class="image-name">IMG_3392.JPG</div>
+                    <div class="image-path">media\archive\original-files-backup-20250706\archive\original-files\3\IMG_3392.JPG</div>
+                    <div>Size: 3.82 MB</div>
+                </div>
+                <div class="categorization">
+                    <div class="category-buttons">
+                        <button class="category-btn" data-category="dragonfly">🦋 Dragonfly</button>
+                        <button class="category-btn" data-category="butterfly">🦋 Butterfly</button>
+                        <button class="category-btn" data-category="fish">🐟 Fish</button>
+                        <button class="category-btn" data-category="duck">🦆 Duck</button>
+                        <button class="category-btn" data-category="eagle">🦅 Eagle</button>
+                        <button class="category-btn" data-category="stcollen">⛪ St Collen</button>
+                        <button class="category-btn" data-category="bass">🎸 Bass</button>
+                        <button class="category-btn" data-category="nessie">🐲 Nessie</button>
+                        <button class="category-btn" data-category="nature">🌿 Nature</button>
+                        <button class="category-btn" data-category="tools">🔧 Tools</button>
+                        <button class="category-btn" data-category="process">⚙️ Process</button>
+                        <button class="category-btn" data-category="other">❓ Other</button>
+                    </div>
+                    <select class="process-stage" style="width: 100%; margin-bottom: 5px;">
+                        <option value="">Select stage...</option>
+                        <option value="initial">Initial/Raw</option>
+                        <option value="process">Work in Progress</option>
+                        <option value="final">Final/Complete</option>
+                        <option value="detail">Detail Shot</option>
+                    </select>
+                    <input type="text" class="notes-input" placeholder="Notes or project name...">
+                </div>
+            </div>
+        
+            <div class="image-card" data-file-index="883">
+                <div class="image-container">
+                    <img src="../media/archive/original-files-backup-20250706/archive/original-files/3/IMG_3402.JPG" alt="IMG_3402.JPG" 
+                         onclick="openModal(this)" 
+                         onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22><rect width=%22200%22 height=%22200%22 fill=%22%23f8f9fa%22/><text x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22>No Image</text></svg>'">
+                </div>
+                <div class="image-info">
+                    <div class="image-name">IMG_3402.JPG</div>
+                    <div class="image-path">media\archive\original-files-backup-20250706\archive\original-files\3\IMG_3402.JPG</div>
+                    <div>Size: 1.4 MB</div>
+                </div>
+                <div class="categorization">
+                    <div class="category-buttons">
+                        <button class="category-btn" data-category="dragonfly">🦋 Dragonfly</button>
+                        <button class="category-btn" data-category="butterfly">🦋 Butterfly</button>
+                        <button class="category-btn" data-category="fish">🐟 Fish</button>
+                        <button class="category-btn" data-category="duck">🦆 Duck</button>
+                        <button class="category-btn" data-category="eagle">🦅 Eagle</button>
+                        <button class="category-btn" data-category="stcollen">⛪ St Collen</button>
+                        <button class="category-btn" data-category="bass">🎸 Bass</button>
+                        <button class="category-btn" data-category="nessie">🐲 Nessie</button>
+                        <button class="category-btn" data-category="nature">🌿 Nature</button>
+                        <button class="category-btn" data-category="tools">🔧 Tools</button>
+                        <button class="category-btn" data-category="process">⚙️ Process</button>
+                        <button class="category-btn" data-category="other">❓ Other</button>
+                    </div>
+                    <select class="process-stage" style="width: 100%; margin-bottom: 5px;">
+                        <option value="">Select stage...</option>
+                        <option value="initial">Initial/Raw</option>
+                        <option value="process">Work in Progress</option>
+                        <option value="final">Final/Complete</option>
+                        <option value="detail">Detail Shot</option>
+                    </select>
+                    <input type="text" class="notes-input" placeholder="Notes or project name...">
+                </div>
+            </div>
+        
+            <div class="image-card" data-file-index="884">
+                <div class="image-container">
+                    <img src="../media/archive/original-files-backup-20250706/archive/original-files/3/IMG_3408.JPG" alt="IMG_3408.JPG" 
+                         onclick="openModal(this)" 
+                         onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22><rect width=%22200%22 height=%22200%22 fill=%22%23f8f9fa%22/><text x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22>No Image</text></svg>'">
+                </div>
+                <div class="image-info">
+                    <div class="image-name">IMG_3408.JPG</div>
+                    <div class="image-path">media\archive\original-files-backup-20250706\archive\original-files\3\IMG_3408.JPG</div>
+                    <div>Size: 1.98 MB</div>
+                </div>
+                <div class="categorization">
+                    <div class="category-buttons">
+                        <button class="category-btn" data-category="dragonfly">🦋 Dragonfly</button>
+                        <button class="category-btn" data-category="butterfly">🦋 Butterfly</button>
+                        <button class="category-btn" data-category="fish">🐟 Fish</button>
+                        <button class="category-btn" data-category="duck">🦆 Duck</button>
+                        <button class="category-btn" data-category="eagle">🦅 Eagle</button>
+                        <button class="category-btn" data-category="stcollen">⛪ St Collen</button>
+                        <button class="category-btn" data-category="bass">🎸 Bass</button>
+                        <button class="category-btn" data-category="nessie">🐲 Nessie</button>
+                        <button class="category-btn" data-category="nature">🌿 Nature</button>
+                        <button class="category-btn" data-category="tools">🔧 Tools</button>
+                        <button class="category-btn" data-category="process">⚙️ Process</button>
+                        <button class="category-btn" data-category="other">❓ Other</button>
+                    </div>
+                    <select class="process-stage" style="width: 100%; margin-bottom: 5px;">
+                        <option value="">Select stage...</option>
+                        <option value="initial">Initial/Raw</option>
+                        <option value="process">Work in Progress</option>
+                        <option value="final">Final/Complete</option>
+                        <option value="detail">Detail Shot</option>
+                    </select>
+                    <input type="text" class="notes-input" placeholder="Notes or project name...">
+                </div>
+            </div>
+        
+            <div class="image-card" data-file-index="885">
+                <div class="image-container">
+                    <img src="../media/archive/original-files-backup-20250706/archive/original-files/3/IMG_3410.JPG" alt="IMG_3410.JPG" 
+                         onclick="openModal(this)" 
+                         onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22><rect width=%22200%22 height=%22200%22 fill=%22%23f8f9fa%22/><text x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22>No Image</text></svg>'">
+                </div>
+                <div class="image-info">
+                    <div class="image-name">IMG_3410.JPG</div>
+                    <div class="image-path">media\archive\original-files-backup-20250706\archive\original-files\3\IMG_3410.JPG</div>
+                    <div>Size: 2.21 MB</div>
+                </div>
+                <div class="categorization">
+                    <div class="category-buttons">
+                        <button class="category-btn" data-category="dragonfly">🦋 Dragonfly</button>
+                        <button class="category-btn" data-category="butterfly">🦋 Butterfly</button>
+                        <button class="category-btn" data-category="fish">🐟 Fish</button>
+                        <button class="category-btn" data-category="duck">🦆 Duck</button>
+                        <button class="category-btn" data-category="eagle">🦅 Eagle</button>
+                        <button class="category-btn" data-category="stcollen">⛪ St Collen</button>
+                        <button class="category-btn" data-category="bass">🎸 Bass</button>
+                        <button class="category-btn" data-category="nessie">🐲 Nessie</button>
+                        <button class="category-btn" data-category="nature">🌿 Nature</button>
+                        <button class="category-btn" data-category="tools">🔧 Tools</button>
+                        <button class="category-btn" data-category="process">⚙️ Process</button>
+                        <button class="category-btn" data-category="other">❓ Other</button>
+                    </div>
+                    <select class="process-stage" style="width: 100%; margin-bottom: 5px;">
+                        <option value="">Select stage...</option>
+                        <option value="initial">Initial/Raw</option>
+                        <option value="process">Work in Progress</option>
+                        <option value="final">Final/Complete</option>
+                        <option value="detail">Detail Shot</option>
+                    </select>
+                    <input type="text" class="notes-input" placeholder="Notes or project name...">
+                </div>
+            </div>
+        
+            <div class="image-card" data-file-index="886">
+                <div class="image-container">
+                    <img src="../media/archive/original-files-backup-20250706/archive/original-files/3/IMG_3416.JPG" alt="IMG_3416.JPG" 
+                         onclick="openModal(this)" 
+                         onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22><rect width=%22200%22 height=%22200%22 fill=%22%23f8f9fa%22/><text x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22>No Image</text></svg>'">
+                </div>
+                <div class="image-info">
+                    <div class="image-name">IMG_3416.JPG</div>
+                    <div class="image-path">media\archive\original-files-backup-20250706\archive\original-files\3\IMG_3416.JPG</div>
+                    <div>Size: 2.27 MB</div>
+                </div>
+                <div class="categorization">
+                    <div class="category-buttons">
+                        <button class="category-btn" data-category="dragonfly">🦋 Dragonfly</button>
+                        <button class="category-btn" data-category="butterfly">🦋 Butterfly</button>
+                        <button class="category-btn" data-category="fish">🐟 Fish</button>
+                        <button class="category-btn" data-category="duck">🦆 Duck</button>
+                        <button class="category-btn" data-category="eagle">🦅 Eagle</button>
+                        <button class="category-btn" data-category="stcollen">⛪ St Collen</button>
+                        <button class="category-btn" data-category="bass">🎸 Bass</button>
+                        <button class="category-btn" data-category="nessie">🐲 Nessie</button>
+                        <button class="category-btn" data-category="nature">🌿 Nature</button>
+                        <button class="category-btn" data-category="tools">🔧 Tools</button>
+                        <button class="category-btn" data-category="process">⚙️ Process</button>
+                        <button class="category-btn" data-category="other">❓ Other</button>
+                    </div>
+                    <select class="process-stage" style="width: 100%; margin-bottom: 5px;">
+                        <option value="">Select stage...</option>
+                        <option value="initial">Initial/Raw</option>
+                        <option value="process">Work in Progress</option>
+                        <option value="final">Final/Complete</option>
+                        <option value="detail">Detail Shot</option>
+                    </select>
+                    <input type="text" class="notes-input" placeholder="Notes or project name...">
+                </div>
+            </div>
+        
+            <div class="image-card" data-file-index="887">
+                <div class="image-container">
+                    <img src="../media/archive/original-files-backup-20250706/archive/original-files/3/IMG_3538.JPG" alt="IMG_3538.JPG" 
+                         onclick="openModal(this)" 
+                         onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22><rect width=%22200%22 height=%22200%22 fill=%22%23f8f9fa%22/><text x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22>No Image</text></svg>'">
+                </div>
+                <div class="image-info">
+                    <div class="image-name">IMG_3538.JPG</div>
+                    <div class="image-path">media\archive\original-files-backup-20250706\archive\original-files\3\IMG_3538.JPG</div>
+                    <div>Size: 1.65 MB</div>
+                </div>
+                <div class="categorization">
+                    <div class="category-buttons">
+                        <button class="category-btn" data-category="dragonfly">🦋 Dragonfly</button>
+                        <button class="category-btn" data-category="butterfly">🦋 Butterfly</button>
+                        <button class="category-btn" data-category="fish">🐟 Fish</button>
+                        <button class="category-btn" data-category="duck">🦆 Duck</button>
+                        <button class="category-btn" data-category="eagle">🦅 Eagle</button>
+                        <button class="category-btn" data-category="stcollen">⛪ St Collen</button>
+                        <button class="category-btn" data-category="bass">🎸 Bass</button>
+                        <button class="category-btn" data-category="nessie">🐲 Nessie</button>
+                        <button class="category-btn" data-category="nature">🌿 Nature</button>
+                        <button class="category-btn" data-category="tools">🔧 Tools</button>
+                        <button class="category-btn" data-category="process">⚙️ Process</button>
+                        <button class="category-btn" data-category="other">❓ Other</button>
+                    </div>
+                    <select class="process-stage" style="width: 100%; margin-bottom: 5px;">
+                        <option value="">Select stage...</option>
+                        <option value="initial">Initial/Raw</option>
+                        <option value="process">Work in Progress</option>
+                        <option value="final">Final/Complete</option>
+                        <option value="detail">Detail Shot</option>
+                    </select>
+                    <input type="text" class="notes-input" placeholder="Notes or project name...">
+                </div>
+            </div>
+        
+            <div class="image-card" data-file-index="888">
+                <div class="image-container">
+                    <img src="../media/archive/original-files-backup-20250706/archive/original-files/3/IMG_3583.JPG" alt="IMG_3583.JPG" 
+                         onclick="openModal(this)" 
+                         onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22><rect width=%22200%22 height=%22200%22 fill=%22%23f8f9fa%22/><text x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22>No Image</text></svg>'">
+                </div>
+                <div class="image-info">
+                    <div class="image-name">IMG_3583.JPG</div>
+                    <div class="image-path">media\archive\original-files-backup-20250706\archive\original-files\3\IMG_3583.JPG</div>
+                    <div>Size: 196.93 KB</div>
+                </div>
+                <div class="categorization">
+                    <div class="category-buttons">
+                        <button class="category-btn" data-category="dragonfly">🦋 Dragonfly</button>
+                        <button class="category-btn" data-category="butterfly">🦋 Butterfly</button>
+                        <button class="category-btn" data-category="fish">🐟 Fish</button>
+                        <button class="category-btn" data-category="duck">🦆 Duck</button>
+                        <button class="category-btn" data-category="eagle">🦅 Eagle</button>
+                        <button class="category-btn" data-category="stcollen">⛪ St Collen</button>
+                        <button class="category-btn" data-category="bass">🎸 Bass</button>
+                        <button class="category-btn" data-category="nessie">🐲 Nessie</button>
+                        <button class="category-btn" data-category="nature">🌿 Nature</button>
+                        <button class="category-btn" data-category="tools">🔧 Tools</button>
+                        <button class="category-btn" data-category="process">⚙️ Process</button>
+                        <button class="category-btn" data-category="other">❓ Other</button>
+                    </div>
+                    <select class="process-stage" style="width: 100%; margin-bottom: 5px;">
+                        <option value="">Select stage...</option>
+                        <option value="initial">Initial/Raw</option>
+                        <option value="process">Work in Progress</option>
+                        <option value="final">Final/Complete</option>
+                        <option value="detail">Detail Shot</option>
+                    </select>
+                    <input type="text" class="notes-input" placeholder="Notes or project name...">
+                </div>
+            </div>
+        
+            <div class="image-card" data-file-index="889">
+                <div class="image-container">
+                    <img src="../media/archive/original-files-backup-20250706/archive/original-files/3/IMG_3637.JPG" alt="IMG_3637.JPG" 
+                         onclick="openModal(this)" 
+                         onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22><rect width=%22200%22 height=%22200%22 fill=%22%23f8f9fa%22/><text x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22>No Image</text></svg>'">
+                </div>
+                <div class="image-info">
+                    <div class="image-name">IMG_3637.JPG</div>
+                    <div class="image-path">media\archive\original-files-backup-20250706\archive\original-files\3\IMG_3637.JPG</div>
+                    <div>Size: 1.46 MB</div>
+                </div>
+                <div class="categorization">
+                    <div class="category-buttons">
+                        <button class="category-btn" data-category="dragonfly">🦋 Dragonfly</button>
+                        <button class="category-btn" data-category="butterfly">🦋 Butterfly</button>
+                        <button class="category-btn" data-category="fish">🐟 Fish</button>
+                        <button class="category-btn" data-category="duck">🦆 Duck</button>
+                        <button class="category-btn" data-category="eagle">🦅 Eagle</button>
+                        <button class="category-btn" data-category="stcollen">⛪ St Collen</button>
+                        <button class="category-btn" data-category="bass">🎸 Bass</button>
+                        <button class="category-btn" data-category="nessie">🐲 Nessie</button>
+                        <button class="category-btn" data-category="nature">🌿 Nature</button>
+                        <button class="category-btn" data-category="tools">🔧 Tools</button>
+                        <button class="category-btn" data-category="process">⚙️ Process</button>
+                        <button class="category-btn" data-category="other">❓ Other</button>
+                    </div>
+                    <select class="process-stage" style="width: 100%; margin-bottom: 5px;">
+                        <option value="">Select stage...</option>
+                        <option value="initial">Initial/Raw</option>
+                        <option value="process">Work in Progress</option>
+                        <option value="final">Final/Complete</option>
+                        <option value="detail">Detail Shot</option>
+                    </select>
+                    <input type="text" class="notes-input" placeholder="Notes or project name...">
+                </div>
+            </div>
+        
+            <div class="image-card" data-file-index="890">
+                <div class="image-container">
+                    <img src="../media/archive/original-files-backup-20250706/archive/original-files/3/IMG_3656.JPG" alt="IMG_3656.JPG" 
+                         onclick="openModal(this)" 
+                         onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22><rect width=%22200%22 height=%22200%22 fill=%22%23f8f9fa%22/><text x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22>No Image</text></svg>'">
+                </div>
+                <div class="image-info">
+                    <div class="image-name">IMG_3656.JPG</div>
+                    <div class="image-path">media\archive\original-files-backup-20250706\archive\original-files\3\IMG_3656.JPG</div>
+                    <div>Size: 1.46 MB</div>
+                </div>
+                <div class="categorization">
+                    <div class="category-buttons">
+                        <button class="category-btn" data-category="dragonfly">🦋 Dragonfly</button>
+                        <button class="category-btn" data-category="butterfly">🦋 Butterfly</button>
+                        <button class="category-btn" data-category="fish">🐟 Fish</button>
+                        <button class="category-btn" data-category="duck">🦆 Duck</button>
+                        <button class="category-btn" data-category="eagle">🦅 Eagle</button>
+                        <button class="category-btn" data-category="stcollen">⛪ St Collen</button>
+                        <button class="category-btn" data-category="bass">🎸 Bass</button>
+                        <button class="category-btn" data-category="nessie">🐲 Nessie</button>
+                        <button class="category-btn" data-category="nature">🌿 Nature</button>
+                        <button class="category-btn" data-category="tools">🔧 Tools</button>
+                        <button class="category-btn" data-category="process">⚙️ Process</button>
+                        <button class="category-btn" data-category="other">❓ Other</button>
+                    </div>
+                    <select class="process-stage" style="width: 100%; margin-bottom: 5px;">
+                        <option value="">Select stage...</option>
+                        <option value="initial">Initial/Raw</option>
+                        <option value="process">Work in Progress</option>
+                        <option value="final">Final/Complete</option>
+                        <option value="detail">Detail Shot</option>
+                    </select>
+                    <input type="text" class="notes-input" placeholder="Notes or project name...">
+                </div>
+            </div>
+        
+            <div class="image-card" data-file-index="891">
+                <div class="image-container">
+                    <img src="../media/archive/original-files-backup-20250706/archive/original-files/3/IMG_3665.JPG" alt="IMG_3665.JPG" 
+                         onclick="openModal(this)" 
+                         onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22><rect width=%22200%22 height=%22200%22 fill=%22%23f8f9fa%22/><text x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22>No Image</text></svg>'">
+                </div>
+                <div class="image-info">
+                    <div class="image-name">IMG_3665.JPG</div>
+                    <div class="image-path">media\archive\original-files-backup-20250706\archive\original-files\3\IMG_3665.JPG</div>
+                    <div>Size: 1.08 MB</div>
+                </div>
+                <div class="categorization">
+                    <div class="category-buttons">
+                        <button class="category-btn" data-category="dragonfly">🦋 Dragonfly</button>
+                        <button class="category-btn" data-category="butterfly">🦋 Butterfly</button>
+                        <button class="category-btn" data-category="fish">🐟 Fish</button>
+                        <button class="category-btn" data-category="duck">🦆 Duck</button>
+                        <button class="category-btn" data-category="eagle">🦅 Eagle</button>
+                        <button class="category-btn" data-category="stcollen">⛪ St Collen</button>
+                        <button class="category-btn" data-category="bass">🎸 Bass</button>
+                        <button class="category-btn" data-category="nessie">🐲 Nessie</button>
+                        <button class="category-btn" data-category="nature">🌿 Nature</button>
+                        <button class="category-btn" data-category="tools">🔧 Tools</button>
+                        <button class="category-btn" data-category="process">⚙️ Process</button>
+                        <button class="category-btn" data-category="other">❓ Other</button>
+                    </div>
+                    <select class="process-stage" style="width: 100%; margin-bottom: 5px;">
+                        <option value="">Select stage...</option>
+                        <option value="initial">Initial/Raw</option>
+                        <option value="process">Work in Progress</option>
+                        <option value="final">Final/Complete</option>
+                        <option value="detail">Detail Shot</option>
+                    </select>
+                    <input type="text" class="notes-input" placeholder="Notes or project name...">
+                </div>
+            </div>
+        
+            <div class="image-card" data-file-index="892">
+                <div class="image-container">
+                    <img src="../media/archive/original-files-backup-20250706/archive/original-files/3/IMG_3666.JPG" alt="IMG_3666.JPG" 
+                         onclick="openModal(this)" 
+                         onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22><rect width=%22200%22 height=%22200%22 fill=%22%23f8f9fa%22/><text x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22>No Image</text></svg>'">
+                </div>
+                <div class="image-info">
+                    <div class="image-name">IMG_3666.JPG</div>
+                    <div class="image-path">media\archive\original-files-backup-20250706\archive\original-files\3\IMG_3666.JPG</div>
+                    <div>Size: 1.96 MB</div>
+                </div>
+                <div class="categorization">
+                    <div class="category-buttons">
+                        <button class="category-btn" data-category="dragonfly">🦋 Dragonfly</button>
+                        <button class="category-btn" data-category="butterfly">🦋 Butterfly</button>
+                        <button class="category-btn" data-category="fish">🐟 Fish</button>
+                        <button class="category-btn" data-category="duck">🦆 Duck</button>
+                        <button class="category-btn" data-category="eagle">🦅 Eagle</button>
+                        <button class="category-btn" data-category="stcollen">⛪ St Collen</button>
+                        <button class="category-btn" data-category="bass">🎸 Bass</button>
+                        <button class="category-btn" data-category="nessie">🐲 Nessie</button>
+                        <button class="category-btn" data-category="nature">🌿 Nature</button>
+                        <button class="category-btn" data-category="tools">🔧 Tools</button>
+                        <button class="category-btn" data-category="process">⚙️ Process</button>
+                        <button class="category-btn" data-category="other">❓ Other</button>
+                    </div>
+                    <select class="process-stage" style="width: 100%; margin-bottom: 5px;">
+                        <option value="">Select stage...</option>
+                        <option value="initial">Initial/Raw</option>
+                        <option value="process">Work in Progress</option>
+                        <option value="final">Final/Complete</option>
+                        <option value="detail">Detail Shot</option>
+                    </select>
+                    <input type="text" class="notes-input" placeholder="Notes or project name...">
+                </div>
+            </div>
+        
+            <div class="image-card" data-file-index="893">
+                <div class="image-container">
+                    <img src="../media/archive/original-files-backup-20250706/archive/original-files/3/IMG_3694.JPG" alt="IMG_3694.JPG" 
+                         onclick="openModal(this)" 
+                         onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22><rect width=%22200%22 height=%22200%22 fill=%22%23f8f9fa%22/><text x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22>No Image</text></svg>'">
+                </div>
+                <div class="image-info">
+                    <div class="image-name">IMG_3694.JPG</div>
+                    <div class="image-path">media\archive\original-files-backup-20250706\archive\original-files\3\IMG_3694.JPG</div>
+                    <div>Size: 1.24 MB</div>
+                </div>
+                <div class="categorization">
+                    <div class="category-buttons">
+                        <button class="category-btn" data-category="dragonfly">🦋 Dragonfly</button>
+                        <button class="category-btn" data-category="butterfly">🦋 Butterfly</button>
+                        <button class="category-btn" data-category="fish">🐟 Fish</button>
+                        <button class="category-btn" data-category="duck">🦆 Duck</button>
+                        <button class="category-btn" data-category="eagle">🦅 Eagle</button>
+                        <button class="category-btn" data-category="stcollen">⛪ St Collen</button>
+                        <button class="category-btn" data-category="bass">🎸 Bass</button>
+                        <button class="category-btn" data-category="nessie">🐲 Nessie</button>
+                        <button class="category-btn" data-category="nature">🌿 Nature</button>
+                        <button class="category-btn" data-category="tools">🔧 Tools</button>
+                        <button class="category-btn" data-category="process">⚙️ Process</button>
+                        <button class="category-btn" data-category="other">❓ Other</button>
+                    </div>
+                    <select class="process-stage" style="width: 100%; margin-bottom: 5px;">
+                        <option value="">Select stage...</option>
+                        <option value="initial">Initial/Raw</option>
+                        <option value="process">Work in Progress</option>
+                        <option value="final">Final/Complete</option>
+                        <option value="detail">Detail Shot</option>
+                    </select>
+                    <input type="text" class="notes-input" placeholder="Notes or project name...">
+                </div>
+            </div>
+        
+            <div class="image-card" data-file-index="894">
+                <div class="image-container">
+                    <img src="../media/archive/original-files-backup-20250706/archive/original-files/3/IMG_3722.JPG" alt="IMG_3722.JPG" 
+                         onclick="openModal(this)" 
+                         onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22><rect width=%22200%22 height=%22200%22 fill=%22%23f8f9fa%22/><text x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22>No Image</text></svg>'">
+                </div>
+                <div class="image-info">
+                    <div class="image-name">IMG_3722.JPG</div>
+                    <div class="image-path">media\archive\original-files-backup-20250706\archive\original-files\3\IMG_3722.JPG</div>
+                    <div>Size: 1.58 MB</div>
+                </div>
+                <div class="categorization">
+                    <div class="category-buttons">
+                        <button class="category-btn" data-category="dragonfly">🦋 Dragonfly</button>
+                        <button class="category-btn" data-category="butterfly">🦋 Butterfly</button>
+                        <button class="category-btn" data-category="fish">🐟 Fish</button>
+                        <button class="category-btn" data-category="duck">🦆 Duck</button>
+                        <button class="category-btn" data-category="eagle">🦅 Eagle</button>
+                        <button class="category-btn" data-category="stcollen">⛪ St Collen</button>
+                        <button class="category-btn" data-category="bass">🎸 Bass</button>
+                        <button class="category-btn" data-category="nessie">🐲 Nessie</button>
+                        <button class="category-btn" data-category="nature">🌿 Nature</button>
+                        <button class="category-btn" data-category="tools">🔧 Tools</button>
+                        <button class="category-btn" data-category="process">⚙️ Process</button>
+                        <button class="category-btn" data-category="other">❓ Other</button>
+                    </div>
+                    <select class="process-stage" style="width: 100%; margin-bottom: 5px;">
+                        <option value="">Select stage...</option>
+                        <option value="initial">Initial/Raw</option>
+                        <option value="process">Work in Progress</option>
+                        <option value="final">Final/Complete</option>
+                        <option value="detail">Detail Shot</option>
+                    </select>
+                    <input type="text" class="notes-input" placeholder="Notes or project name...">
+                </div>
+            </div>
+        
+            <div class="image-card" data-file-index="895">
+                <div class="image-container">
+                    <img src="../media/archive/original-files-backup-20250706/archive/original-files/3/IMG_3723.JPG" alt="IMG_3723.JPG" 
+                         onclick="openModal(this)" 
+                         onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22><rect width=%22200%22 height=%22200%22 fill=%22%23f8f9fa%22/><text x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22>No Image</text></svg>'">
+                </div>
+                <div class="image-info">
+                    <div class="image-name">IMG_3723.JPG</div>
+                    <div class="image-path">media\archive\original-files-backup-20250706\archive\original-files\3\IMG_3723.JPG</div>
+                    <div>Size: 1.26 MB</div>
+                </div>
+                <div class="categorization">
+                    <div class="category-buttons">
+                        <button class="category-btn" data-category="dragonfly">🦋 Dragonfly</button>
+                        <button class="category-btn" data-category="butterfly">🦋 Butterfly</button>
+                        <button class="category-btn" data-category="fish">🐟 Fish</button>
+                        <button class="category-btn" data-category="duck">🦆 Duck</button>
+                        <button class="category-btn" data-category="eagle">🦅 Eagle</button>
+                        <button class="category-btn" data-category="stcollen">⛪ St Collen</button>
+                        <button class="category-btn" data-category="bass">🎸 Bass</button>
+                        <button class="category-btn" data-category="nessie">🐲 Nessie</button>
+                        <button class="category-btn" data-category="nature">🌿 Nature</button>
+                        <button class="category-btn" data-category="tools">🔧 Tools</button>
+                        <button class="category-btn" data-category="process">⚙️ Process</button>
+                        <button class="category-btn" data-category="other">❓ Other</button>
+                    </div>
+                    <select class="process-stage" style="width: 100%; margin-bottom: 5px;">
+                        <option value="">Select stage...</option>
+                        <option value="initial">Initial/Raw</option>
+                        <option value="process">Work in Progress</option>
+                        <option value="final">Final/Complete</option>
+                        <option value="detail">Detail Shot</option>
+                    </select>
+                    <input type="text" class="notes-input" placeholder="Notes or project name...">
+                </div>
+            </div>
+        
+            <div class="image-card" data-file-index="896">
+                <div class="image-container">
+                    <img src="../media/archive/original-files-backup-20250706/archive/original-files/3/IMG_3724.JPG" alt="IMG_3724.JPG" 
+                         onclick="openModal(this)" 
+                         onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22><rect width=%22200%22 height=%22200%22 fill=%22%23f8f9fa%22/><text x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22>No Image</text></svg>'">
+                </div>
+                <div class="image-info">
+                    <div class="image-name">IMG_3724.JPG</div>
+                    <div class="image-path">media\archive\original-files-backup-20250706\archive\original-files\3\IMG_3724.JPG</div>
+                    <div>Size: 2.58 MB</div>
+                </div>
+                <div class="categorization">
+                    <div class="category-buttons">
+                        <button class="category-btn" data-category="dragonfly">🦋 Dragonfly</button>
+                        <button class="category-btn" data-category="butterfly">🦋 Butterfly</button>
+                        <button class="category-btn" data-category="fish">🐟 Fish</button>
+                        <button class="category-btn" data-category="duck">🦆 Duck</button>
+                        <button class="category-btn" data-category="eagle">🦅 Eagle</button>
+                        <button class="category-btn" data-category="stcollen">⛪ St Collen</button>
+                        <button class="category-btn" data-category="bass">🎸 Bass</button>
+                        <button class="category-btn" data-category="nessie">🐲 Nessie</button>
+                        <button class="category-btn" data-category="nature">🌿 Nature</button>
+                        <button class="category-btn" data-category="tools">🔧 Tools</button>
+                        <button class="category-btn" data-category="process">⚙️ Process</button>
+                        <button class="category-btn" data-category="other">❓ Other</button>
+                    </div>
+                    <select class="process-stage" style="width: 100%; margin-bottom: 5px;">
+                        <option value="">Select stage...</option>
+                        <option value="initial">Initial/Raw</option>
+                        <option value="process">Work in Progress</option>
+                        <option value="final">Final/Complete</option>
+                        <option value="detail">Detail Shot</option>
+                    </select>
+                    <input type="text" class="notes-input" placeholder="Notes or project name...">
+                </div>
+            </div>
+        
+            <div class="image-card" data-file-index="897">
+                <div class="image-container">
+                    <img src="../media/archive/original-files-backup-20250706/archive/original-files/3/IMG_4252.JPEG" alt="IMG_4252.JPEG" 
+                         onclick="openModal(this)" 
+                         onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22><rect width=%22200%22 height=%22200%22 fill=%22%23f8f9fa%22/><text x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22>No Image</text></svg>'">
+                </div>
+                <div class="image-info">
+                    <div class="image-name">IMG_4252.JPEG</div>
+                    <div class="image-path">media\archive\original-files-backup-20250706\archive\original-files\3\IMG_4252.JPEG</div>
+                    <div>Size: 1.25 MB</div>
+                </div>
+                <div class="categorization">
+                    <div class="category-buttons">
+                        <button class="category-btn" data-category="dragonfly">🦋 Dragonfly</button>
+                        <button class="category-btn" data-category="butterfly">🦋 Butterfly</button>
+                        <button class="category-btn" data-category="fish">🐟 Fish</button>
+                        <button class="category-btn" data-category="duck">🦆 Duck</button>
+                        <button class="category-btn" data-category="eagle">🦅 Eagle</button>
+                        <button class="category-btn" data-category="stcollen">⛪ St Collen</button>
+                        <button class="category-btn" data-category="bass">🎸 Bass</button>
+                        <button class="category-btn" data-category="nessie">🐲 Nessie</button>
+                        <button class="category-btn" data-category="nature">🌿 Nature</button>
+                        <button class="category-btn" data-category="tools">🔧 Tools</button>
+                        <button class="category-btn" data-category="process">⚙️ Process</button>
+                        <button class="category-btn" data-category="other">❓ Other</button>
+                    </div>
+                    <select class="process-stage" style="width: 100%; margin-bottom: 5px;">
+                        <option value="">Select stage...</option>
+                        <option value="initial">Initial/Raw</option>
+                        <option value="process">Work in Progress</option>
+                        <option value="final">Final/Complete</option>
+                        <option value="detail">Detail Shot</option>
+                    </select>
+                    <input type="text" class="notes-input" placeholder="Notes or project name...">
+                </div>
+            </div>
+        
+            <div class="image-card" data-file-index="898">
+                <div class="image-container">
+                    <img src="../media/archive/original-files-backup-20250706/archive/original-files/3/IMG_4254.JPEG" alt="IMG_4254.JPEG" 
+                         onclick="openModal(this)" 
+                         onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22><rect width=%22200%22 height=%22200%22 fill=%22%23f8f9fa%22/><text x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22>No Image</text></svg>'">
+                </div>
+                <div class="image-info">
+                    <div class="image-name">IMG_4254.JPEG</div>
+                    <div class="image-path">media\archive\original-files-backup-20250706\archive\original-files\3\IMG_4254.JPEG</div>
+                    <div>Size: 1.36 MB</div>
+                </div>
+                <div class="categorization">
+                    <div class="category-buttons">
+                        <button class="category-btn" data-category="dragonfly">🦋 Dragonfly</button>
+                        <button class="category-btn" data-category="butterfly">🦋 Butterfly</button>
+                        <button class="category-btn" data-category="fish">🐟 Fish</button>
+                        <button class="category-btn" data-category="duck">🦆 Duck</button>
+                        <button class="category-btn" data-category="eagle">🦅 Eagle</button>
+                        <button class="category-btn" data-category="stcollen">⛪ St Collen</button>
+                        <button class="category-btn" data-category="bass">🎸 Bass</button>
+                        <button class="category-btn" data-category="nessie">🐲 Nessie</button>
+                        <button class="category-btn" data-category="nature">🌿 Nature</button>
+                        <button class="category-btn" data-category="tools">🔧 Tools</button>
+                        <button class="category-btn" data-category="process">⚙️ Process</button>
+                        <button class="category-btn" data-category="other">❓ Other</button>
+                    </div>
+                    <select class="process-stage" style="width: 100%; margin-bottom: 5px;">
+                        <option value="">Select stage...</option>
+                        <option value="initial">Initial/Raw</option>
+                        <option value="process">Work in Progress</option>
+                        <option value="final">Final/Complete</option>
+                        <option value="detail">Detail Shot</option>
+                    </select>
+                    <input type="text" class="notes-input" placeholder="Notes or project name...">
+                </div>
+            </div>
+        
+            <div class="image-card" data-file-index="899">
+                <div class="image-container">
+                    <img src="../media/archive/original-files-backup-20250706/archive/original-files/3/IMG_4297.JPEG" alt="IMG_4297.JPEG" 
+                         onclick="openModal(this)" 
+                         onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22><rect width=%22200%22 height=%22200%22 fill=%22%23f8f9fa%22/><text x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22>No Image</text></svg>'">
+                </div>
+                <div class="image-info">
+                    <div class="image-name">IMG_4297.JPEG</div>
+                    <div class="image-path">media\archive\original-files-backup-20250706\archive\original-files\3\IMG_4297.JPEG</div>
+                    <div>Size: 972.28 KB</div>
+                </div>
+                <div class="categorization">
+                    <div class="category-buttons">
+                        <button class="category-btn" data-category="dragonfly">🦋 Dragonfly</button>
+                        <button class="category-btn" data-category="butterfly">🦋 Butterfly</button>
+                        <button class="category-btn" data-category="fish">🐟 Fish</button>
+                        <button class="category-btn" data-category="duck">🦆 Duck</button>
+                        <button class="category-btn" data-category="eagle">🦅 Eagle</button>
+                        <button class="category-btn" data-category="stcollen">⛪ St Collen</button>
+                        <button class="category-btn" data-category="bass">🎸 Bass</button>
+                        <button class="category-btn" data-category="nessie">🐲 Nessie</button>
+                        <button class="category-btn" data-category="nature">🌿 Nature</button>
+                        <button class="category-btn" data-category="tools">🔧 Tools</button>
+                        <button class="category-btn" data-category="process">⚙️ Process</button>
+                        <button class="category-btn" data-category="other">❓ Other</button>
+                    </div>
+                    <select class="process-stage" style="width: 100%; margin-bottom: 5px;">
+                        <option value="">Select stage...</option>
+                        <option value="initial">Initial/Raw</option>
+                        <option value="process">Work in Progress</option>
+                        <option value="final">Final/Complete</option>
+                        <option value="detail">Detail Shot</option>
+                    </select>
+                    <input type="text" class="notes-input" placeholder="Notes or project name...">
+                </div>
+            </div>
+        
+    </div>
+
+    <!-- Modal for full-size image viewing -->
+    <div id="imageModal" class="modal">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <img class="modal-content" id="modalImage">
+    </div>
+
+    <script>
+        // Store categorization data
+        let categorizations = {};
+        
+        // Category button handling
+        document.querySelectorAll('.category-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const card = this.closest('.image-card');
+                const fileIndex = card.dataset.fileIndex;
+                const category = this.dataset.category;
+                
+                // Clear other selections in this card
+                card.querySelectorAll('.category-btn').forEach(b => b.classList.remove('selected'));
+                this.classList.add('selected');
+                
+                // Store categorization
+                if (!categorizations[fileIndex]) {
+                    categorizations[fileIndex] = {};
+                }
+                categorizations[fileIndex].category = category;
+                
+                updateProgress();
+            });
+        });
+        
+        // Process stage handling
+        document.querySelectorAll('.process-stage').forEach(select => {
+            select.addEventListener('change', function() {
+                const card = this.closest('.image-card');
+                const fileIndex = card.dataset.fileIndex;
+                
+                if (!categorizations[fileIndex]) {
+                    categorizations[fileIndex] = {};
+                }
+                categorizations[fileIndex].stage = this.value;
+                
+                updateProgress();
+            });
+        });
+        
+        // Notes handling
+        document.querySelectorAll('.notes-input').forEach(input => {
+            input.addEventListener('input', function() {
+                const card = this.closest('.image-card');
+                const fileIndex = card.dataset.fileIndex;
+                
+                if (!categorizations[fileIndex]) {
+                    categorizations[fileIndex] = {};
+                }
+                categorizations[fileIndex].notes = this.value;
+            });
+        });
+        
+        // Modal functions
+        function openModal(img) {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            modal.style.display = 'block';
+            modalImg.src = img.src;
+        }
+        
+        function closeModal() {
+            document.getElementById('imageModal').style.display = 'none';
+        }
+        
+        // Progress tracking
+        function updateProgress() {
+            const totalImages = document.querySelectorAll('.image-card').length;
+            const categorizedImages = Object.keys(categorizations).length;
+            
+            console.log(`Progress: ${categorizedImages}/${totalImages} images categorized`);
+        }
+        
+        // Save progress
+        function saveProgress() {
+            const progressData = {
+                batchNumber: 18,
+                totalBatches: 114,
+                categorizations: categorizations,
+                timestamp: new Date().toISOString()
+            };
+            
+            // Save to localStorage
+            localStorage.setItem('batch-18-progress', JSON.stringify(progressData));
+            
+            // Also try to save to file (this would need a server endpoint)
+            console.log('Progress saved:', progressData);
+            alert('Progress saved locally!');
+        }
+        
+        // Load saved progress
+        function loadProgress() {
+            const saved = localStorage.getItem('batch-18-progress');
+            if (saved) {
+                const data = JSON.parse(saved);
+                categorizations = data.categorizations || {};
+                
+                // Restore UI state
+                Object.keys(categorizations).forEach(fileIndex => {
+                    const card = document.querySelector(`[data-file-index="${fileIndex}"]`);
+                    if (card) {
+                        const cat = categorizations[fileIndex];
+                        
+                        // Restore category selection
+                        if (cat.category) {
+                            const btn = card.querySelector(`[data-category="${cat.category}"]`);
+                            if (btn) btn.classList.add('selected');
+                        }
+                        
+                        // Restore stage selection
+                        if (cat.stage) {
+                            const select = card.querySelector('.process-stage');
+                            if (select) select.value = cat.stage;
+                        }
+                        
+                        // Restore notes
+                        if (cat.notes) {
+                            const input = card.querySelector('.notes-input');
+                            if (input) input.value = cat.notes;
+                        }
+                    }
+                });
+                
+                updateProgress();
+            }
+        }
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            loadProgress();
+        });
+        
+        // Keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>

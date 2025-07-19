@@ -1,0 +1,76 @@
+{
+  "timestamp": "2025-07-07T20:33:23.171Z",
+  "totalImages": 5655,
+  "totalBatches": 114,
+  "reviewedBatches": 0,
+  "categorizedImages": 0,
+  "categorizations": {},
+  "projectSummary": {
+    "dragonfly": {
+      "count": 0,
+      "files": []
+    },
+    "butterfly": {
+      "count": 0,
+      "files": []
+    },
+    "fish": {
+      "count": 0,
+      "files": []
+    },
+    "duck": {
+      "count": 0,
+      "files": []
+    },
+    "eagle": {
+      "count": 0,
+      "files": []
+    },
+    "stcollen": {
+      "count": 0,
+      "files": []
+    },
+    "bass": {
+      "count": 0,
+      "files": []
+    },
+    "nessie": {
+      "count": 0,
+      "files": []
+    },
+    "nature": {
+      "count": 0,
+      "files": []
+    },
+    "tools": {
+      "count": 0,
+      "files": []
+    },
+    "process": {
+      "count": 0,
+      "files": []
+    },
+    "other": {
+      "count": 0,
+      "files": []
+    }
+  },
+  "stagesSummary": {
+    "initial": {
+      "count": 0,
+      "files": []
+    },
+    "process": {
+      "count": 0,
+      "files": []
+    },
+    "final": {
+      "count": 0,
+      "files": []
+    },
+    "detail": {
+      "count": 0,
+      "files": []
+    }
+  }
+}

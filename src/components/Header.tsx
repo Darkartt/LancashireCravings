@@ -1,17 +1,15 @@
 "use client";
 
 import Link from "next/link";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import OptimizedImage from "./OptimizedImage";
 import { navigation } from "../lib/data";
+import "./header.css";
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isClient, setIsClient] = useState(false);
-  const { scrollY } = useScroll();
-    // Use useTransform for smooth scroll-based changes
-  const headerPadding = useTransform(scrollY, [0, 100], ["1.5rem", "0.75rem"]);
 
   useEffect(() => {
     setIsClient(true);
@@ -51,16 +49,13 @@ export default function Header() {
   return (
     <>
       <motion.header 
-        className="px-6 sm:px-12 bg-background/95 backdrop-blur-sm border-b border-foreground/10 fixed top-0 left-0 right-0 z-50 header-container"
-        style={{ 
-          paddingTop: headerPadding, 
-          paddingBottom: headerPadding,
-        }}
+        className="px-6 sm:px-8 lg:px-12 py-6 bg-background/95 backdrop-blur-sm shadow-header-black fixed top-0 left-0 right-0 header-container"
+        style={{ zIndex: 60 }}
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
       >
-        <div className="container mx-auto flex justify-between items-center max-w-7xl">
+        <div className="container mx-auto flex justify-between items-center max-w-7xl px-4 lg:px-6">
           <div className="flex items-center">
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
@@ -68,12 +63,12 @@ export default function Header() {
               transition={{ duration: 0.6, ease: "easeOut" }}
               className="mr-4 header-logo"
             >
-              <Link href="/" aria-label="Elite Woodcraft - Home">
+              <Link href="/" aria-label="Lancaster Carving Limited - Home">
                 <OptimizedImage 
                   src="/logo.svg" 
-                  alt="Elite Woodcraft Logo" 
-                  width={40} 
-                  height={40}
+                  alt="Lancaster Carving Limited Logo" 
+                  width={32} 
+                  height={32}
                   priority
                 />
               </Link>          </motion.div>
@@ -83,7 +78,7 @@ export default function Header() {
             transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
             className="text-2xl font-serif font-bold text-accent-primary"
           >
-            <Link href="/">Elite Woodcraft</Link>
+            <Link href="/">Lancaster Carving Limited</Link>
           </motion.h1>
         </div>
 
@@ -93,7 +88,7 @@ export default function Header() {
             <Link
               key={item.name}
               href={item.href}
-              className="text-foreground/80 hover:text-accent-primary transition-colors font-medium header-nav-link focus:outline-none focus:ring-2 focus:ring-accent-primary focus:ring-offset-2 rounded-sm px-2 py-1"
+              className="text-foreground/80 hover:text-accent-primary transition-colors font-medium header-nav-link focus:outline-none focus:ring-2 focus:ring-accent-primary focus:ring-offset-2 rounded-md px-3 py-2"
             >
               {item.name}
             </Link>
@@ -103,7 +98,7 @@ export default function Header() {
         <div className="flex items-center">
           {/* Mobile Menu Button */}
           <button 
-            className="md:hidden mr-4 text-foreground/80 hover:text-accent-primary focus:outline-none focus:ring-2 focus:ring-accent-primary focus:ring-offset-2 rounded-sm p-2 mobile-menu-button"
+            className="md:hidden mr-4 text-foreground/80 hover:text-accent-primary focus:outline-none focus:ring-2 focus:ring-accent-primary focus:ring-offset-2 rounded-md p-2 mobile-menu-button"
             onClick={toggleMobileMenu}
             aria-expanded={isMobileMenuOpen}
             aria-controls="mobile-menu"
@@ -139,7 +134,7 @@ export default function Header() {
           {/* CTA Button */}
           <Link
             href="/commission"
-            className="bg-accent-primary text-background px-4 py-2 rounded-md font-medium header-cta-button hidden md:block hover:bg-accent-warm transition-colors focus:outline-none focus:ring-2 focus:ring-accent-primary focus:ring-offset-2"
+            className="bg-accent-primary text-background px-4 py-2 rounded-lg font-medium header-cta-button hidden md:block hover:bg-accent-warm transition-colors focus:outline-none focus:ring-2 focus:ring-accent-primary focus:ring-offset-2"
           >
             Commission a Piece
           </Link>
@@ -150,7 +145,7 @@ export default function Header() {
       {isMobileMenuOpen && (
         <div 
           id="mobile-menu"
-          className="md:hidden absolute top-full left-0 right-0 bg-background/95 backdrop-blur-sm border-b border-foreground/10 z-50 px-6 sm:px-12 py-4 mobile-menu"
+          className="md:hidden absolute top-full left-0 right-0 bg-background/95 backdrop-blur-sm shadow-separator-medium z-50 px-6 sm:px-8 lg:px-12 py-6 mobile-menu"
           role="navigation"
           aria-label="Mobile navigation"
         >
@@ -158,7 +153,7 @@ export default function Header() {
               <Link
                 key={item.name}
                 href={item.href}
-                className="text-foreground/80 hover:text-accent-primary transition-colors py-3 border-b border-foreground/10 font-medium focus:outline-none focus:ring-2 focus:ring-accent-primary focus:ring-offset-2 rounded-sm"
+                className="text-foreground/80 hover:text-accent-primary transition-colors py-3 shadow-separator-subtle font-medium focus:outline-none focus:ring-2 focus:ring-accent-primary focus:ring-offset-2 rounded-lg"
                 onClick={() => setIsMobileMenuOpen(false)}
                 tabIndex={isMobileMenuOpen ? 0 : -1}
               >
@@ -167,7 +162,7 @@ export default function Header() {
             ))}
             <Link
               href="/commission"
-              className="bg-accent-primary text-background px-4 py-3 rounded-md font-medium text-center mt-4 hover:bg-accent-warm transition-colors focus:outline-none focus:ring-2 focus:ring-accent-primary focus:ring-offset-2"
+              className="bg-accent-primary text-background px-4 py-3 rounded-lg font-medium text-center mt-4 hover:bg-accent-warm transition-colors focus:outline-none focus:ring-2 focus:ring-accent-primary focus:ring-offset-2"
               onClick={() => setIsMobileMenuOpen(false)}
               tabIndex={isMobileMenuOpen ? 0 : -1}
             >

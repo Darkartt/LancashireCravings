@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Image Test</title>
+    <style>
+        img { max-width: 500px; border: 2px solid red; }
+        .path { font-family: monospace; margin: 10px 0; }
+    </style>
+</head>
+<body>
+    <h1>Testing Bass Image</h1>
+    
+    <div class="path">Path: ../public/media/projects/bass/images/final/bass_bass_142.jpeg</div>
+    <img src="../public/media/projects/bass/images/final/bass_bass_142.jpeg" alt="bass_bass_142.jpeg" 
+         onload="console.log('SUCCESS: Image loaded')" 
+         onerror="console.log('ERROR: Image failed to load')">
+    
+    <h2>Alternative path test</h2>
+    <div class="path">Path: ../public/media/projects/bass/images/process/bass_bass_001.jpeg</div>
+    <img src="../public/media/projects/bass/images/process/bass_bass_001.jpeg" alt="bass_bass_001.jpeg" 
+         onload="console.log('SUCCESS: Process image loaded')" 
+         onerror="console.log('ERROR: Process image failed to load')">
+    
+    <script>
+        console.log('Current URL:', window.location.href);
+        console.log('Base URL:', document.baseURI);
+    </script>
+</body>
+</html>

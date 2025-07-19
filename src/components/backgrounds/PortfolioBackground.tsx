@@ -1,9 +1,9 @@
 'use client';
 
-import AnimatedBackground from '../AnimatedBackground';
+import CleanBackground from '../CleanBackground';
 
 const PortfolioBackground: React.FC = () => {
-  return <AnimatedBackground variant="portfolio" />;
+  return <CleanBackground variant="portfolio" />;
 };
 
 export default PortfolioBackground;

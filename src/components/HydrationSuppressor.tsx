@@ -14,9 +14,14 @@ export default function HydrationSuppressor({
     setIsMounted(true);
   }, []);
 
-  // During SSR and initial render, show a simplified version
+  // During SSR and initial render, show a simplified version but keep it visible
+  // Only suppress specific interactive elements that cause hydration issues
   if (!isMounted) {
-    return <div style={{ visibility: 'hidden' }}>{children}</div>;
+    return (
+      <div suppressHydrationWarning>
+        {children}
+      </div>
+    );
   }
 
   // After client-side hydration, show the real UI

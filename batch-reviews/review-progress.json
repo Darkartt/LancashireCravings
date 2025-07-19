@@ -1,0 +1,806 @@
+{
+  "totalBatches": 114,
+  "completedBatches": 0,
+  "categorizedFiles": 0,
+  "totalFiles": 5655,
+  "batches": [
+    {
+      "batchNumber": 1,
+      "fileName": "batch-1.html",
+      "imageCount": 50,
+      "startIndex": 0,
+      "endIndex": 50
+    },
+    {
+      "batchNumber": 2,
+      "fileName": "batch-2.html",
+      "imageCount": 50,
+      "startIndex": 50,
+      "endIndex": 100
+    },
+    {
+      "batchNumber": 3,
+      "fileName": "batch-3.html",
+      "imageCount": 50,
+      "startIndex": 100,
+      "endIndex": 150
+    },
+    {
+      "batchNumber": 4,
+      "fileName": "batch-4.html",
+      "imageCount": 50,
+      "startIndex": 150,
+      "endIndex": 200
+    },
+    {
+      "batchNumber": 5,
+      "fileName": "batch-5.html",
+      "imageCount": 50,
+      "startIndex": 200,
+      "endIndex": 250
+    },
+    {
+      "batchNumber": 6,
+      "fileName": "batch-6.html",
+      "imageCount": 50,
+      "startIndex": 250,
+      "endIndex": 300
+    },
+    {
+      "batchNumber": 7,
+      "fileName": "batch-7.html",
+      "imageCount": 50,
+      "startIndex": 300,
+      "endIndex": 350
+    },
+    {
+      "batchNumber": 8,
+      "fileName": "batch-8.html",
+      "imageCount": 50,
+      "startIndex": 350,
+      "endIndex": 400
+    },
+    {
+      "batchNumber": 9,
+      "fileName": "batch-9.html",
+      "imageCount": 50,
+      "startIndex": 400,
+      "endIndex": 450
+    },
+    {
+      "batchNumber": 10,
+      "fileName": "batch-10.html",
+      "imageCount": 50,
+      "startIndex": 450,
+      "endIndex": 500
+    },
+    {
+      "batchNumber": 11,
+      "fileName": "batch-11.html",
+      "imageCount": 50,
+      "startIndex": 500,
+      "endIndex": 550
+    },
+    {
+      "batchNumber": 12,
+      "fileName": "batch-12.html",
+      "imageCount": 50,
+      "startIndex": 550,
+      "endIndex": 600
+    },
+    {
+      "batchNumber": 13,
+      "fileName": "batch-13.html",
+      "imageCount": 50,
+      "startIndex": 600,
+      "endIndex": 650
+    },
+    {
+      "batchNumber": 14,
+      "fileName": "batch-14.html",
+      "imageCount": 50,
+      "startIndex": 650,
+      "endIndex": 700
+    },
+    {
+      "batchNumber": 15,
+      "fileName": "batch-15.html",
+      "imageCount": 50,
+      "startIndex": 700,
+      "endIndex": 750
+    },
+    {
+      "batchNumber": 16,
+      "fileName": "batch-16.html",
+      "imageCount": 50,
+      "startIndex": 750,
+      "endIndex": 800
+    },
+    {
+      "batchNumber": 17,
+      "fileName": "batch-17.html",
+      "imageCount": 50,
+      "startIndex": 800,
+      "endIndex": 850
+    },
+    {
+      "batchNumber": 18,
+      "fileName": "batch-18.html",
+      "imageCount": 50,
+      "startIndex": 850,
+      "endIndex": 900
+    },
+    {
+      "batchNumber": 19,
+      "fileName": "batch-19.html",
+      "imageCount": 50,
+      "startIndex": 900,
+      "endIndex": 950
+    },
+    {
+      "batchNumber": 20,
+      "fileName": "batch-20.html",
+      "imageCount": 50,
+      "startIndex": 950,
+      "endIndex": 1000
+    },
+    {
+      "batchNumber": 21,
+      "fileName": "batch-21.html",
+      "imageCount": 50,
+      "startIndex": 1000,
+      "endIndex": 1050
+    },
+    {
+      "batchNumber": 22,
+      "fileName": "batch-22.html",
+      "imageCount": 50,
+      "startIndex": 1050,
+      "endIndex": 1100
+    },
+    {
+      "batchNumber": 23,
+      "fileName": "batch-23.html",
+      "imageCount": 50,
+      "startIndex": 1100,
+      "endIndex": 1150
+    },
+    {
+      "batchNumber": 24,
+      "fileName": "batch-24.html",
+      "imageCount": 50,
+      "startIndex": 1150,
+      "endIndex": 1200
+    },
+    {
+      "batchNumber": 25,
+      "fileName": "batch-25.html",
+      "imageCount": 50,
+      "startIndex": 1200,
+      "endIndex": 1250
+    },
+    {
+      "batchNumber": 26,
+      "fileName": "batch-26.html",
+      "imageCount": 50,
+      "startIndex": 1250,
+      "endIndex": 1300
+    },
+    {
+      "batchNumber": 27,
+      "fileName": "batch-27.html",
+      "imageCount": 50,
+      "startIndex": 1300,
+      "endIndex": 1350
+    },
+    {
+      "batchNumber": 28,
+      "fileName": "batch-28.html",
+      "imageCount": 50,
+      "startIndex": 1350,
+      "endIndex": 1400
+    },
+    {
+      "batchNumber": 29,
+      "fileName": "batch-29.html",
+      "imageCount": 50,
+      "startIndex": 1400,
+      "endIndex": 1450
+    },
+    {
+      "batchNumber": 30,
+      "fileName": "batch-30.html",
+      "imageCount": 50,
+      "startIndex": 1450,
+      "endIndex": 1500
+    },
+    {
+      "batchNumber": 31,
+      "fileName": "batch-31.html",
+      "imageCount": 50,
+      "startIndex": 1500,
+      "endIndex": 1550
+    },
+    {
+      "batchNumber": 32,
+      "fileName": "batch-32.html",
+      "imageCount": 50,
+      "startIndex": 1550,
+      "endIndex": 1600
+    },
+    {
+      "batchNumber": 33,
+      "fileName": "batch-33.html",
+      "imageCount": 50,
+      "startIndex": 1600,
+      "endIndex": 1650
+    },
+    {
+      "batchNumber": 34,
+      "fileName": "batch-34.html",
+      "imageCount": 50,
+      "startIndex": 1650,
+      "endIndex": 1700
+    },
+    {
+      "batchNumber": 35,
+      "fileName": "batch-35.html",
+      "imageCount": 50,
+      "startIndex": 1700,
+      "endIndex": 1750
+    },
+    {
+      "batchNumber": 36,
+      "fileName": "batch-36.html",
+      "imageCount": 50,
+      "startIndex": 1750,
+      "endIndex": 1800
+    },
+    {
+      "batchNumber": 37,
+      "fileName": "batch-37.html",
+      "imageCount": 50,
+      "startIndex": 1800,
+      "endIndex": 1850
+    },
+    {
+      "batchNumber": 38,
+      "fileName": "batch-38.html",
+      "imageCount": 50,
+      "startIndex": 1850,
+      "endIndex": 1900
+    },
+    {
+      "batchNumber": 39,
+      "fileName": "batch-39.html",
+      "imageCount": 50,
+      "startIndex": 1900,
+      "endIndex": 1950
+    },
+    {
+      "batchNumber": 40,
+      "fileName": "batch-40.html",
+      "imageCount": 50,
+      "startIndex": 1950,
+      "endIndex": 2000
+    },
+    {
+      "batchNumber": 41,
+      "fileName": "batch-41.html",
+      "imageCount": 50,
+      "startIndex": 2000,
+      "endIndex": 2050
+    },
+    {
+      "batchNumber": 42,
+      "fileName": "batch-42.html",
+      "imageCount": 50,
+      "startIndex": 2050,
+      "endIndex": 2100
+    },
+    {
+      "batchNumber": 43,
+      "fileName": "batch-43.html",
+      "imageCount": 50,
+      "startIndex": 2100,
+      "endIndex": 2150
+    },
+    {
+      "batchNumber": 44,
+      "fileName": "batch-44.html",
+      "imageCount": 50,
+      "startIndex": 2150,
+      "endIndex": 2200
+    },
+    {
+      "batchNumber": 45,
+      "fileName": "batch-45.html",
+      "imageCount": 50,
+      "startIndex": 2200,
+      "endIndex": 2250
+    },
+    {
+      "batchNumber": 46,
+      "fileName": "batch-46.html",
+      "imageCount": 50,
+      "startIndex": 2250,
+      "endIndex": 2300
+    },
+    {
+      "batchNumber": 47,
+      "fileName": "batch-47.html",
+      "imageCount": 50,
+      "startIndex": 2300,
+      "endIndex": 2350
+    },
+    {
+      "batchNumber": 48,
+      "fileName": "batch-48.html",
+      "imageCount": 50,
+      "startIndex": 2350,
+      "endIndex": 2400
+    },
+    {
+      "batchNumber": 49,
+      "fileName": "batch-49.html",
+      "imageCount": 50,
+      "startIndex": 2400,
+      "endIndex": 2450
+    },
+    {
+      "batchNumber": 50,
+      "fileName": "batch-50.html",
+      "imageCount": 50,
+      "startIndex": 2450,
+      "endIndex": 2500
+    },
+    {
+      "batchNumber": 51,
+      "fileName": "batch-51.html",
+      "imageCount": 50,
+      "startIndex": 2500,
+      "endIndex": 2550
+    },
+    {
+      "batchNumber": 52,
+      "fileName": "batch-52.html",
+      "imageCount": 50,
+      "startIndex": 2550,
+      "endIndex": 2600
+    },
+    {
+      "batchNumber": 53,
+      "fileName": "batch-53.html",
+      "imageCount": 50,
+      "startIndex": 2600,
+      "endIndex": 2650
+    },
+    {
+      "batchNumber": 54,
+      "fileName": "batch-54.html",
+      "imageCount": 50,
+      "startIndex": 2650,
+      "endIndex": 2700
+    },
+    {
+      "batchNumber": 55,
+      "fileName": "batch-55.html",
+      "imageCount": 50,
+      "startIndex": 2700,
+      "endIndex": 2750
+    },
+    {
+      "batchNumber": 56,
+      "fileName": "batch-56.html",
+      "imageCount": 50,
+      "startIndex": 2750,
+      "endIndex": 2800
+    },
+    {
+      "batchNumber": 57,
+      "fileName": "batch-57.html",
+      "imageCount": 50,
+      "startIndex": 2800,
+      "endIndex": 2850
+    },
+    {
+      "batchNumber": 58,
+      "fileName": "batch-58.html",
+      "imageCount": 50,
+      "startIndex": 2850,
+      "endIndex": 2900
+    },
+    {
+      "batchNumber": 59,
+      "fileName": "batch-59.html",
+      "imageCount": 50,
+      "startIndex": 2900,
+      "endIndex": 2950
+    },
+    {
+      "batchNumber": 60,
+      "fileName": "batch-60.html",
+      "imageCount": 50,
+      "startIndex": 2950,
+      "endIndex": 3000
+    },
+    {
+      "batchNumber": 61,
+      "fileName": "batch-61.html",
+      "imageCount": 50,
+      "startIndex": 3000,
+      "endIndex": 3050
+    },
+    {
+      "batchNumber": 62,
+      "fileName": "batch-62.html",
+      "imageCount": 50,
+      "startIndex": 3050,
+      "endIndex": 3100
+    },
+    {
+      "batchNumber": 63,
+      "fileName": "batch-63.html",
+      "imageCount": 50,
+      "startIndex": 3100,
+      "endIndex": 3150
+    },
+    {
+      "batchNumber": 64,
+      "fileName": "batch-64.html",
+      "imageCount": 50,
+      "startIndex": 3150,
+      "endIndex": 3200
+    },
+    {
+      "batchNumber": 65,
+      "fileName": "batch-65.html",
+      "imageCount": 50,
+      "startIndex": 3200,
+      "endIndex": 3250
+    },
+    {
+      "batchNumber": 66,
+      "fileName": "batch-66.html",
+      "imageCount": 50,
+      "startIndex": 3250,
+      "endIndex": 3300
+    },
+    {
+      "batchNumber": 67,
+      "fileName": "batch-67.html",
+      "imageCount": 50,
+      "startIndex": 3300,
+      "endIndex": 3350
+    },
+    {
+      "batchNumber": 68,
+      "fileName": "batch-68.html",
+      "imageCount": 50,
+      "startIndex": 3350,
+      "endIndex": 3400
+    },
+    {
+      "batchNumber": 69,
+      "fileName": "batch-69.html",
+      "imageCount": 50,
+      "startIndex": 3400,
+      "endIndex": 3450
+    },
+    {
+      "batchNumber": 70,
+      "fileName": "batch-70.html",
+      "imageCount": 50,
+      "startIndex": 3450,
+      "endIndex": 3500
+    },
+    {
+      "batchNumber": 71,
+      "fileName": "batch-71.html",
+      "imageCount": 50,
+      "startIndex": 3500,
+      "endIndex": 3550
+    },
+    {
+      "batchNumber": 72,
+      "fileName": "batch-72.html",
+      "imageCount": 50,
+      "startIndex": 3550,
+      "endIndex": 3600
+    },
+    {
+      "batchNumber": 73,
+      "fileName": "batch-73.html",
+      "imageCount": 50,
+      "startIndex": 3600,
+      "endIndex": 3650
+    },
+    {
+      "batchNumber": 74,
+      "fileName": "batch-74.html",
+      "imageCount": 50,
+      "startIndex": 3650,
+      "endIndex": 3700
+    },
+    {
+      "batchNumber": 75,
+      "fileName": "batch-75.html",
+      "imageCount": 50,
+      "startIndex": 3700,
+      "endIndex": 3750
+    },
+    {
+      "batchNumber": 76,
+      "fileName": "batch-76.html",
+      "imageCount": 50,
+      "startIndex": 3750,
+      "endIndex": 3800
+    },
+    {
+      "batchNumber": 77,
+      "fileName": "batch-77.html",
+      "imageCount": 50,
+      "startIndex": 3800,
+      "endIndex": 3850
+    },
+    {
+      "batchNumber": 78,
+      "fileName": "batch-78.html",
+      "imageCount": 50,
+      "startIndex": 3850,
+      "endIndex": 3900
+    },
+    {
+      "batchNumber": 79,
+      "fileName": "batch-79.html",
+      "imageCount": 50,
+      "startIndex": 3900,
+      "endIndex": 3950
+    },
+    {
+      "batchNumber": 80,
+      "fileName": "batch-80.html",
+      "imageCount": 50,
+      "startIndex": 3950,
+      "endIndex": 4000
+    },
+    {
+      "batchNumber": 81,
+      "fileName": "batch-81.html",
+      "imageCount": 50,
+      "startIndex": 4000,
+      "endIndex": 4050
+    },
+    {
+      "batchNumber": 82,
+      "fileName": "batch-82.html",
+      "imageCount": 50,
+      "startIndex": 4050,
+      "endIndex": 4100
+    },
+    {
+      "batchNumber": 83,
+      "fileName": "batch-83.html",
+      "imageCount": 50,
+      "startIndex": 4100,
+      "endIndex": 4150
+    },
+    {
+      "batchNumber": 84,
+      "fileName": "batch-84.html",
+      "imageCount": 50,
+      "startIndex": 4150,
+      "endIndex": 4200
+    },
+    {
+      "batchNumber": 85,
+      "fileName": "batch-85.html",
+      "imageCount": 50,
+      "startIndex": 4200,
+      "endIndex": 4250
+    },
+    {
+      "batchNumber": 86,
+      "fileName": "batch-86.html",
+      "imageCount": 50,
+      "startIndex": 4250,
+      "endIndex": 4300
+    },
+    {
+      "batchNumber": 87,
+      "fileName": "batch-87.html",
+      "imageCount": 50,
+      "startIndex": 4300,
+      "endIndex": 4350
+    },
+    {
+      "batchNumber": 88,
+      "fileName": "batch-88.html",
+      "imageCount": 50,
+      "startIndex": 4350,
+      "endIndex": 4400
+    },
+    {
+      "batchNumber": 89,
+      "fileName": "batch-89.html",
+      "imageCount": 50,
+      "startIndex": 4400,
+      "endIndex": 4450
+    },
+    {
+      "batchNumber": 90,
+      "fileName": "batch-90.html",
+      "imageCount": 50,
+      "startIndex": 4450,
+      "endIndex": 4500
+    },
+    {
+      "batchNumber": 91,
+      "fileName": "batch-91.html",
+      "imageCount": 50,
+      "startIndex": 4500,
+      "endIndex": 4550
+    },
+    {
+      "batchNumber": 92,
+      "fileName": "batch-92.html",
+      "imageCount": 50,
+      "startIndex": 4550,
+      "endIndex": 4600
+    },
+    {
+      "batchNumber": 93,
+      "fileName": "batch-93.html",
+      "imageCount": 50,
+      "startIndex": 4600,
+      "endIndex": 4650
+    },
+    {
+      "batchNumber": 94,
+      "fileName": "batch-94.html",
+      "imageCount": 50,
+      "startIndex": 4650,
+      "endIndex": 4700
+    },
+    {
+      "batchNumber": 95,
+      "fileName": "batch-95.html",
+      "imageCount": 50,
+      "startIndex": 4700,
+      "endIndex": 4750
+    },
+    {
+      "batchNumber": 96,
+      "fileName": "batch-96.html",
+      "imageCount": 50,
+      "startIndex": 4750,
+      "endIndex": 4800
+    },
+    {
+      "batchNumber": 97,
+      "fileName": "batch-97.html",
+      "imageCount": 50,
+      "startIndex": 4800,
+      "endIndex": 4850
+    },
+    {
+      "batchNumber": 98,
+      "fileName": "batch-98.html",
+      "imageCount": 50,
+      "startIndex": 4850,
+      "endIndex": 4900
+    },
+    {
+      "batchNumber": 99,
+      "fileName": "batch-99.html",
+      "imageCount": 50,
+      "startIndex": 4900,
+      "endIndex": 4950
+    },
+    {
+      "batchNumber": 100,
+      "fileName": "batch-100.html",
+      "imageCount": 50,
+      "startIndex": 4950,
+      "endIndex": 5000
+    },
+    {
+      "batchNumber": 101,
+      "fileName": "batch-101.html",
+      "imageCount": 50,
+      "startIndex": 5000,
+      "endIndex": 5050
+    },
+    {
+      "batchNumber": 102,
+      "fileName": "batch-102.html",
+      "imageCount": 50,
+      "startIndex": 5050,
+      "endIndex": 5100
+    },
+    {
+      "batchNumber": 103,
+      "fileName": "batch-103.html",
+      "imageCount": 50,
+      "startIndex": 5100,
+      "endIndex": 5150
+    },
+    {
+      "batchNumber": 104,
+      "fileName": "batch-104.html",
+      "imageCount": 50,
+      "startIndex": 5150,
+      "endIndex": 5200
+    },
+    {
+      "batchNumber": 105,
+      "fileName": "batch-105.html",
+      "imageCount": 50,
+      "startIndex": 5200,
+      "endIndex": 5250
+    },
+    {
+      "batchNumber": 106,
+      "fileName": "batch-106.html",
+      "imageCount": 50,
+      "startIndex": 5250,
+      "endIndex": 5300
+    },
+    {
+      "batchNumber": 107,
+      "fileName": "batch-107.html",
+      "imageCount": 50,
+      "startIndex": 5300,
+      "endIndex": 5350
+    },
+    {
+      "batchNumber": 108,
+      "fileName": "batch-108.html",
+      "imageCount": 50,
+      "startIndex": 5350,
+      "endIndex": 5400
+    },
+    {
+      "batchNumber": 109,
+      "fileName": "batch-109.html",
+      "imageCount": 50,
+      "startIndex": 5400,
+      "endIndex": 5450
+    },
+    {
+      "batchNumber": 110,
+      "fileName": "batch-110.html",
+      "imageCount": 50,
+      "startIndex": 5450,
+      "endIndex": 5500
+    },
+    {
+      "batchNumber": 111,
+      "fileName": "batch-111.html",
+      "imageCount": 50,
+      "startIndex": 5500,
+      "endIndex": 5550
+    },
+    {
+      "batchNumber": 112,
+      "fileName": "batch-112.html",
+      "imageCount": 50,
+      "startIndex": 5550,
+      "endIndex": 5600
+    },
+    {
+      "batchNumber": 113,
+      "fileName": "batch-113.html",
+      "imageCount": 50,
+      "startIndex": 5600,
+      "endIndex": 5650
+    },
+    {
+      "batchNumber": 114,
+      "fileName": "batch-114.html",
+      "imageCount": 5,
+      "startIndex": 5650,
+      "endIndex": 5655
+    }
+  ]
+}

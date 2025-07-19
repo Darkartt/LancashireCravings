@@ -1,0 +1,20 @@
+{
+  "scanDate": "2025-07-07T20:29:25.545Z",
+  "totalFiles": 7239,
+  "totalImages": 5655,
+  "totalVideos": 1584,
+  "totalSizeFormatted": "15.48 GB",
+  "folderDistribution": {
+    "media": 7208,
+    ".": 31
+  },
+  "extensionDistribution": {
+    ".mp4": 140,
+    ".jpeg": 3213,
+    ".mov": 1444,
+    ".jpg": 2434,
+    ".svg": 8
+  },
+  "duplicateGroups": 1277,
+  "duplicateFiles": 2984
+}

@@ -1,0 +1,111 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Visual Review - Index</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .header {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .project-card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.2s;
+        }
+        .project-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        .project-title {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            color: #333;
+        }
+        .review-button {
+            display: inline-block;
+            padding: 12px 24px;
+            background: #2196f3;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background 0.2s;
+        }
+        .review-button:hover {
+            background: #1976d2;
+        }
+        .instructions {
+            background: #e8f5e8;
+            padding: 20px;
+            border-radius: 5px;
+            margin: 20px 0;
+            border-left: 4px solid #4caf50;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🎨 Woodcarving Project Visual Review</h1>
+        <p>Analyze and categorize images to separate different animals/sculptures into individual projects</p>
+    </div>
+    
+    <div class="instructions">
+        <h3>Goal:</h3>
+        <p>Review each project's images to identify different animals/sculptures that should be separated into individual projects. Each unique carving should have its own project folder with properly categorized process stages.</p>
+    </div>
+    
+    <div class="project-grid">
+
+        <div class="project-card">
+            <h2 class="project-title">BASS</h2>
+            <p>Review and categorize images in this project</p>
+            <a href="bass_review.html" class="review-button">Start Review →</a>
+        </div>
+
+        <div class="project-card">
+            <h2 class="project-title">EAGLE</h2>
+            <p>Review and categorize images in this project</p>
+            <a href="eagle_review.html" class="review-button">Start Review →</a>
+        </div>
+
+        <div class="project-card">
+            <h2 class="project-title">NESSIE</h2>
+            <p>Review and categorize images in this project</p>
+            <a href="nessie_review.html" class="review-button">Start Review →</a>
+        </div>
+
+        <div class="project-card">
+            <h2 class="project-title">STCOLLEN</h2>
+            <p>Review and categorize images in this project</p>
+            <a href="stcollen_review.html" class="review-button">Start Review →</a>
+        </div>
+
+    </div>
+    
+    <div style="text-align: center; margin-top: 40px; padding: 20px;">
+        <p><strong>After completing all reviews:</strong></p>
+        <p>Use the downloaded JSON files to reorganize the projects and update the media system.</p>
+    </div>
+</body>
+</html>

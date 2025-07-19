@@ -45,14 +45,14 @@ export default function Shop() {
   };
 
   const products = [
-    { id: 1, name: "Hand-Carved Wooden Bowl", description: "A beautifully crafted walnut bowl, perfect as a centerpiece or functional decor.", price: 129.00, category: "decorative", wood: "walnut", images: ["/placeholder.jpg"] },
-    { id: 2, name: "Oak Serving Tray", description: "A sleek oak tray with intricate edge detailing, ideal for entertaining or display.", price: 89.00, category: "kitchenware", wood: "oak", images: ["/placeholder.jpg"] },
-    { id: 3, name: "Cherry Wood Coasters (Set of 4)", description: "A set of four cherry wood coasters with natural grain patterns, protecting surfaces in style.", price: 45.00, category: "accessories", wood: "cherry", images: ["/placeholder.jpg"] },
-    { id: 4, name: "Wall-Mounted Wooden Shelf", description: "A compact walnut shelf with subtle carvings, perfect for displaying small decor items.", price: 79.00, category: "furniture", wood: "walnut", images: ["/placeholder.jpg"] },
-    { id: 5, name: "Carved Wooden Sculpture", description: "An abstract oak sculpture that adds a touch of artistry to any space.", price: 199.00, category: "sculptures", wood: "oak", images: ["/placeholder.jpg"] },
-    { id: 6, name: "Wooden Jewelry Box", description: "A cherry wood box with intricate lid carvings, lined with velvet for storing treasures.", price: 109.00, category: "gifts", wood: "cherry", images: ["/placeholder.jpg"] },
-    { id: 7, name: "Custom Memorial Plaque", description: "A personalized memorial plaque crafted from premium wood, perfect for honoring loved ones.", price: 149.00, category: "memorial", wood: "walnut", images: ["/placeholder.jpg"] },
-    { id: 8, name: "Decorative Wall Art", description: "Hand-carved wall art piece that brings warmth and character to any room.", price: 99.00, category: "decorative", wood: "oak", images: ["/placeholder.jpg"] }
+    { id: 1, name: "Hand-Carved Wooden Bowl", description: "A beautifully crafted walnut bowl, perfect as a centerpiece or functional decor.", price: 129.00, category: "decorative", wood: "walnut", images: ["/walnut_grain.jpeg"] },
+    { id: 2, name: "Oak Serving Tray", description: "A sleek oak tray with intricate edge detailing, ideal for entertaining or display.", price: 89.00, category: "kitchenware", wood: "oak", images: ["/oak_grain.jpeg"] },
+    { id: 3, name: "Cherry Wood Coasters (Set of 4)", description: "A set of four cherry wood coasters with natural grain patterns, protecting surfaces in style.", price: 45.00, category: "accessories", wood: "cherry", images: ["/cherry_grain.jpeg"] },
+    { id: 4, name: "Wall-Mounted Wooden Shelf", description: "A compact walnut shelf with subtle carvings, perfect for displaying small decor items.", price: 79.00, category: "furniture", wood: "walnut", images: ["/walnut_grain.jpeg"] },
+    { id: 5, name: "Carved Wooden Sculpture", description: "An abstract oak sculpture that adds a touch of artistry to any space.", price: 199.00, category: "sculptures", wood: "oak", images: ["/oak_grain.jpeg"] },
+    { id: 6, name: "Wooden Jewelry Box", description: "A cherry wood box with intricate lid carvings, lined with velvet for storing treasures.", price: 109.00, category: "gifts", wood: "cherry", images: ["/cherry_grain.jpeg"] },
+    { id: 7, name: "Custom Memorial Plaque", description: "A personalized memorial plaque crafted from premium wood, perfect for honoring loved ones.", price: 149.00, category: "memorial", wood: "walnut", images: ["/walnut_grain.jpeg"] },
+    { id: 8, name: "Decorative Wall Art", description: "Hand-carved wall art piece that brings warmth and character to any room.", price: 99.00, category: "decorative", wood: "oak", images: ["/oak_grain.jpeg"] }
   ];
 
   const filteredProducts = products.filter(product => 
@@ -79,7 +79,7 @@ export default function Shop() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
             viewport={{ once: true }}
-          >Shop Elite Woodcraft</motion.h2>
+          >Shop Lancaster Carving Limited</motion.h2>
           <motion.p 
             className="text-lg text-foreground/80 max-w-2xl"
             initial={{ opacity: 0, y: 20 }}
@@ -211,7 +211,7 @@ export default function Shop() {
             {filteredProducts.map((product, index) => (
               <motion.div 
                 key={product.id} 
-                className="product-item bg-background rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow"
+                className="product-card bg-background shadow-lg overflow-hidden hover:shadow-xl transition-shadow"
                 initial={{ y: 30, opacity: 0 }}
                 animate={isInView ? { y: 0, opacity: 1 } : { y: 30, opacity: 0 }}
                 transition={{ 
@@ -304,7 +304,7 @@ export default function Shop() {
             ) : (
               <ul className="space-y-4 mb-6">
                 {cartItems.map((item, index) => (
-                  <li key={index} className="flex justify-between items-center border-b border-foreground/10 pb-2">
+                  <li key={index} className="flex justify-between items-center shadow-separator-subtle pb-2">
                     <div>
                       <h4 className="font-medium text-foreground">{item.name}</h4>
                       <p className="text-foreground/70 text-sm">${item.price.toFixed(2)}</p>
@@ -314,7 +314,7 @@ export default function Shop() {
                 ))}
               </ul>
             )}
-            <div className="border-t border-foreground/10 pt-4">
+            <div className="shadow-separator-medium pt-4">
               <p className="text-foreground font-bold mb-4">Total: ${cartItems.reduce((total, item) => total + item.price, 0).toFixed(2)}</p>
               <Link href="/checkout" className="block w-full bg-accent-primary text-background px-4 py-2 rounded-md font-medium hover:bg-accent-primary/90 transition-colors text-center mb-2">Checkout</Link>
               <button 

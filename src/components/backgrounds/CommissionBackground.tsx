@@ -1,6 +1,6 @@
 'use client';
 
-import AnimatedBackground from '../AnimatedBackground';
+import CleanBackground from '../CleanBackground';
 
 interface CommissionBackgroundProps {
   woodType?: string;
@@ -8,20 +8,12 @@ interface CommissionBackgroundProps {
 }
 
 const CommissionBackground: React.FC<CommissionBackgroundProps> = ({ 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   woodType = 'oak', 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   finishType = 'matte'
 }) => {
-  // Convert string to the expected woodType format
-  const convertedWoodType = (woodType === 'walnut' || woodType === 'cherry' || woodType === 'maple')
-    ? woodType as 'walnut' | 'cherry' | 'maple'
-    : 'oak';
-      return (
-    <AnimatedBackground 
-      variant="commission" 
-      woodType={convertedWoodType}
-      finishType={finishType}
-    />
-  );
+  return <CleanBackground variant="commission" />;
 };
 
 export default CommissionBackground;

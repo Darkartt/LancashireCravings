@@ -1,9 +1,9 @@
 'use client';
 
-import AnimatedBackground from '../AnimatedBackground';
+import CleanBackground from '../CleanBackground';
 
 const ServicesBackground: React.FC = () => {
-  return <AnimatedBackground variant="services" />;
+  return <CleanBackground variant="services" />;
 };
 
 export default ServicesBackground;

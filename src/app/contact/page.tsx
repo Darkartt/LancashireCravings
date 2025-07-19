@@ -7,10 +7,10 @@ import Footer from "../../components/Footer";
 
 export default function Contact() {
   return (
-    <div className="flex flex-col min-h-screen bg-background text-foreground">
+    <div className="flex flex-col min-h-screen text-foreground" style={{ background: 'transparent' }}>
       <ContactBackground />
       <Header />      {/* Hero Section */}
-      <section className="relative py-16 px-4 sm:px-8 bg-transparent pt-24"> {/* Added top padding for header */}
+      <section className="relative py-16 px-4 sm:px-8 bg-transparent pt-40"> {/* Fixed header clearance */}
         <div className="container mx-auto relative" style={{ zIndex: 10 }}>
           <motion.h2 
             className="text-4xl font-serif font-bold text-accent-primary mb-6"
@@ -25,7 +25,7 @@ export default function Contact() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
             viewport={{ once: true }}
-          >Reach out to Elite Woodcraft for bespoke woodcarving commissions, consultations, or inquiries. We're here to bring your vision to life.</motion.p>
+          >Reach out to Lancaster Carving Limited for bespoke woodcarving commissions, consultations, or inquiries. We're here to bring your vision to life.</motion.p>
         </div>
       </section>
 
@@ -42,11 +42,11 @@ export default function Contact() {
             >
               <h3 className="text-xl font-serif font-semibold text-accent-primary mb-4">Contact Information</h3>
               <address className="text-foreground/80 not-italic space-y-3 mb-6">
-                <p>123 Timber Lane</p>
-                <p>Suite 456</p>
-                <p>Oakwood, CA 90210</p>
-                <p><a href="tel:+15551234567" className="hover:text-accent-primary transition-colors">(555) 123-4567</a></p>
-                <p><a href="mailto:info@elitewoodcraft.com" className="hover:text-accent-primary transition-colors">info@elitewoodcraft.com</a></p>
+                <p>Institute lane</p>
+                <p>Mold, United Kingdom</p>
+                <p><a href="tel:+447915998923" className="hover:text-accent-primary transition-colors">+44 7915 998923</a></p>
+                <p><a href="mailto:riverdeechris@gmail.com" className="hover:text-accent-primary transition-colors">riverdeechris@gmail.com</a></p>
+                <p><a href="https://youtube.com/@christianlancastersculptur8147" target="_blank" rel="noopener noreferrer" className="hover:text-accent-primary transition-colors">YouTube Channel</a></p>
               </address>
               <h3 className="text-xl font-serif font-semibold text-accent-primary mb-4">Hours</h3>
               <p className="text-foreground/80">Monday - Friday: 9am - 5pm PST</p>

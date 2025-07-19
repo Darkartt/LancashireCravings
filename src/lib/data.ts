@@ -177,37 +177,40 @@ export const projectTypes: ProjectType[] = [
 
 // Site navigation
 export const navigation = [
-  { name: 'Home', href: '/' },
   { name: 'About', href: '/about' },
   { name: 'Portfolio', href: '/portfolio' },
-  { name: 'Services', href: '/services' },
-  { name: 'Commission', href: '/commission' },
+  { name: 'Gallery', href: '/gallery' },
+  { name: 'Projects', href: '/projects' },
   { name: 'Process', href: '/process' },
+  { name: 'Time-lapse', href: '/timelapses' },
+  { name: 'Behind Scenes', href: '/behind-the-scenes' },
+  { name: 'Services', href: '/services' },
+  { name: 'Shop', href: '/shop' },
   { name: 'Blog', href: '/blog' },
   { name: 'Contact', href: '/contact' },
 ];
 
 // Company information
 export const companyInfo = {
-  name: 'Elite Woodcraft',
+  name: 'Lancaster Carving Limited',
   tagline: 'Master Craftsman Since 1987',
-  description: 'From our Liverpool workshop to discerning collectors worldwide, we transform sustainably-sourced hardwoods into one-of-a-kind sculptural treasures that tell your story.',
+  description: 'From our Mold, United Kingdom workshop to discerning collectors worldwide, we transform sustainably-sourced hardwoods into one-of-a-kind sculptural treasures that tell your story.',
   address: {
-    street: 'Workshop District',
-    city: 'Liverpool',
+    street: 'Institute lane',
+    city: 'Mold',
     country: 'United Kingdom',
-    postcode: 'L1 8JQ',
+    postcode: '',
   },
   contact: {
-    phone: '+44 151 123 4567',
-    email: 'hello@elitewoodcraft.co.uk',
+    phone: '+44 7915 998923',
+    email: 'riverdeechris@gmail.com',
     hours: 'Mon-Fri 9:00-17:00, Sat 10:00-16:00',
   },
   social: {
-    instagram: 'https://instagram.com/elitewoodcraft',
-    facebook: 'https://facebook.com/elitewoodcraft',
-    pinterest: 'https://pinterest.com/elitewoodcraft',
-    youtube: 'https://youtube.com/elitewoodcraft',
+    instagram: '',
+    facebook: '',
+    pinterest: '',
+    youtube: 'https://youtube.com/@christianlancastersculptur8147',
   },
   certifications: [
     'FSC Certified',

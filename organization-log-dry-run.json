@@ -1,0 +1,30 @@
+{
+  "timestamp": "2025-07-06T22:48:18.642Z",
+  "totalFiles": 3604,
+  "movedFiles": 3604,
+  "errors": [],
+  "summary": {
+    "projects": {
+      "eagle": 263,
+      "nessie": 167,
+      "bass": 195,
+      "stcollen": 501
+    },
+    "workshop": {
+      "tools": 0,
+      "techniques": 0,
+      "environment": 291
+    },
+    "nature": {
+      "insects": 2,
+      "birds": 0,
+      "fish": 1,
+      "mammals": 0,
+      "flowers": 0,
+      "landscapes": 0,
+      "portraits": 520,
+      "artistic": 2
+    },
+    "uncategorized": 1662
+  }
+}
