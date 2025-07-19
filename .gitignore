@@ -64,3 +64,6 @@ master-inventory*.json
 media-*.json
 nature-categorization*.json
 organized-visual-review*.json
+ffmpeg-master-latest-win64-gpl/
+*.exe
+ffmpeg.exe
