@@ -1,0 +1,370 @@
+name: 🎯 WoodCrave Quality Assurance
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+  schedule:
+    # Run tests daily at 2 AM UTC
+    - cron: '0 2 * * *'
+
+env:
+  NODE_VERSION: '18'
+  CACHE_VERSION: v1
+
+jobs:
+  # Lint and type check
+  lint-and-typecheck:
+    name: 🔍 Lint & TypeScript
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+
+      - name: 🏗️ Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      - name: 🔍 Run ESLint
+        run: npm run lint
+
+      - name: 🏷️ TypeScript type check
+        run: npx tsc --noEmit
+
+  # Unit and integration tests
+  unit-tests:
+    name: 🧪 Unit & Integration Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+
+      - name: 🏗️ Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      - name: 🧪 Run unit tests
+        run: npm run test:unit
+
+      - name: 🔗 Run integration tests
+        run: npm run test:integration
+
+      - name: ♿ Run accessibility tests
+        run: npm run test:accessibility
+
+      - name: ⚡ Run performance tests
+        run: npm run test:performance
+
+      - name: 📊 Generate coverage report
+        run: npm run test:coverage
+
+      - name: 📤 Upload coverage to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          file: ./coverage/lcov.info
+          fail_ci_if_error: false
+
+  # Build application
+  build:
+    name: 🏗️ Build Application
+    runs-on: ubuntu-latest
+    needs: [lint-and-typecheck, unit-tests]
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+
+      - name: 🏗️ Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      - name: 🏗️ Build application
+        run: npm run build
+        env:
+          NODE_ENV: production
+
+      - name: 📁 Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-artifacts
+          path: |
+            .next/
+            out/
+          retention-days: 7
+
+  # E2E tests across multiple browsers
+  e2e-tests:
+    name: 🎭 E2E Tests (${{ matrix.browser }})
+    runs-on: ubuntu-latest
+    needs: build
+    strategy:
+      fail-fast: false
+      matrix:
+        browser: [chromium, firefox, webkit]
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+
+      - name: 🏗️ Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      - name: 📁 Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: build-artifacts
+
+      - name: 🎭 Install Playwright browsers
+        run: npx playwright install --with-deps ${{ matrix.browser }}
+
+      - name: 🎭 Run E2E tests
+        run: npx playwright test --project=${{ matrix.browser }}
+        env:
+          CI: true
+
+      - name: 📤 Upload test results
+        uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: playwright-results-${{ matrix.browser }}
+          path: |
+            test-results/
+            playwright-report/
+          retention-days: 7
+
+  # Visual regression tests
+  visual-regression:
+    name: 👁️ Visual Regression Tests
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+
+      - name: 🏗️ Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      - name: 📁 Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: build-artifacts
+
+      - name: 🎭 Install Playwright browsers
+        run: npx playwright install --with-deps chromium
+
+      - name: 👁️ Run visual regression tests
+        run: npm run test:visual
+        continue-on-error: true
+
+      - name: 📤 Upload visual diff artifacts
+        uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: visual-regression-diffs
+          path: test-results/
+          retention-days: 7
+
+  # Performance auditing with Lighthouse
+  lighthouse-audit:
+    name: 💡 Lighthouse Performance Audit
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+
+      - name: 🏗️ Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      - name: 📁 Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: build-artifacts
+
+      - name: 💡 Run Lighthouse audit
+        run: npm run lighthouse
+        env:
+          CI: true
+
+      - name: 📤 Upload Lighthouse reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: lighthouse-reports
+          path: lighthouse-results/
+          retention-days: 30
+
+  # Accessibility auditing
+  accessibility-audit:
+    name: ♿ Accessibility Audit
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+
+      - name: 🏗️ Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      - name: 📁 Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: build-artifacts
+
+      - name: 🎭 Install Playwright browsers
+        run: npx playwright install --with-deps chromium
+
+      - name: ♿ Run accessibility tests
+        run: npx playwright test --project=accessibility
+
+      - name: 📤 Upload accessibility reports
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: accessibility-reports
+          path: test-results/
+          retention-days: 30
+
+  # Security scanning
+  security-scan:
+    name: 🔒 Security Scan
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+
+      - name: 🏗️ Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      - name: 🔒 Run npm audit
+        run: npm audit --audit-level=moderate
+
+      - name: 🔍 CodeQL Analysis
+        uses: github/codeql-action/analyze@v3
+        with:
+          languages: javascript
+
+  # Performance monitoring (production only)
+  performance-monitoring:
+    name: 📊 Performance Monitoring
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: [e2e-tests, lighthouse-audit]
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+
+      - name: 📊 Performance monitoring webhook
+        run: |
+          echo "🚀 Performance monitoring data would be sent to monitoring service"
+          echo "This could integrate with services like DataDog, New Relic, etc."
+
+  # Deployment (production)
+  deploy:
+    name: 🚀 Deploy to Production
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: [e2e-tests, visual-regression, lighthouse-audit, accessibility-audit, security-scan]
+    environment: production
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+
+      - name: 📁 Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: build-artifacts
+
+      - name: 🚀 Deploy to production
+        run: |
+          echo "🚀 Would deploy to production hosting service"
+          echo "This could be Vercel, Netlify, AWS, etc."
+          # Example for Vercel:
+          # npx vercel --prod --token ${{ secrets.VERCEL_TOKEN }}
+
+  # Notification on failure
+  notify-on-failure:
+    name: 📢 Notify on Failure
+    runs-on: ubuntu-latest
+    needs: [e2e-tests, visual-regression, lighthouse-audit, accessibility-audit]
+    if: failure()
+    steps:
+      - name: 📢 Send notification
+        run: |
+          echo "❌ WoodCrave QA pipeline failed"
+          echo "Failed job: ${{ needs.*.result }}"
+          # This could send notifications to Slack, Discord, email, etc.
+
+# Summary job that depends on all critical tests
+  qa-summary:
+    name: 📋 QA Summary
+    runs-on: ubuntu-latest
+    needs: [lint-and-typecheck, unit-tests, build, e2e-tests, lighthouse-audit, accessibility-audit]
+    if: always()
+    steps:
+      - name: 📋 Generate QA summary
+        run: |
+          echo "🎯 WoodCrave Quality Assurance Summary"
+          echo "======================================"
+          echo "Lint & TypeScript: ${{ needs.lint-and-typecheck.result }}"
+          echo "Unit Tests: ${{ needs.unit-tests.result }}"
+          echo "Build: ${{ needs.build.result }}"
+          echo "E2E Tests: ${{ needs.e2e-tests.result }}"
+          echo "Lighthouse: ${{ needs.lighthouse-audit.result }}"
+          echo "Accessibility: ${{ needs.accessibility-audit.result }}"
+          
+          if [[ "${{ needs.lint-and-typecheck.result }}" == "success" && 
+                "${{ needs.unit-tests.result }}" == "success" && 
+                "${{ needs.build.result }}" == "success" && 
+                "${{ needs.e2e-tests.result }}" == "success" && 
+                "${{ needs.lighthouse-audit.result }}" == "success" && 
+                "${{ needs.accessibility-audit.result }}" == "success" ]]; then
+            echo "✅ All quality checks passed!"
+          else
+            echo "❌ Some quality checks failed"
+            exit 1
+          fi
