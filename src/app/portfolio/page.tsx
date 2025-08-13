@@ -8,28 +8,27 @@ import ProjectCard from '@/components/ProjectCard';
 import MediaCard from '@/components/MediaCard';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import { getFeaturedProjectsLite, loadFullProjects } from '@/lib/media-core';
-import type { Project } from '@/lib/media-organized';
+import { loadMediaData } from '@/lib/media-loader';
+import type { Project } from '@/lib/media-types';
 // Featured media will be dynamically loaded; remove static heavy import.
 
 export default function PortfolioPage() {
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   
-  const [allProjects, setAllProjects] = useState<Project[]>(getFeaturedProjectsLite());
-  const [featuredProjects, setFeaturedProjects] = useState<Project[]>(getFeaturedProjectsLite());
+  const [allProjects, setAllProjects] = useState<Project[]>([]);
+  const [featuredProjects, setFeaturedProjects] = useState<Project[]>([]);
   const [featuredMedia, setFeaturedMedia] = useState<any[]>([]);
   const [mediaLoaded, setMediaLoaded] = useState(false);
   React.useEffect(() => {
-    (async () => {
-      try {
-        const full = await loadFullProjects();
-        setAllProjects(full.projects);
-        const fp = full.getFeaturedProjects?.();
-        if (fp) setFeaturedProjects(fp);
-      } catch (e) {
-        console.warn('Portfolio: full dataset load failed', e);
-      }
-    })();
+    let mounted = true;
+    loadMediaData()
+      .then(({ projects, getFeaturedProjects }) => {
+        if (!mounted) return;
+        setAllProjects(projects);
+        setFeaturedProjects(getFeaturedProjects ? getFeaturedProjects() : projects);
+      })
+      .catch((e) => console.warn('Portfolio: loadMediaData failed', e));
+    return () => { mounted = false; };
   }, []);
   // Defer featured media load until idle
   React.useEffect(() => {
@@ -37,9 +36,9 @@ export default function PortfolioPage() {
       const defer = (cb: () => void) => (typeof window !== 'undefined' && 'requestIdleCallback' in window ? (window as any).requestIdleCallback(cb) : setTimeout(cb, 250));
       defer(async () => {
         try {
-          const mod = await import('@/lib/media-organized');
-          const fm = mod.getFeaturedMedia?.();
-          if (fm) setFeaturedMedia(fm);
+          const { natureCollection } = await loadMediaData();
+          const items = Object.values(natureCollection).flatMap(n => n.items);
+          setFeaturedMedia(items.slice(0, 12));
           setMediaLoaded(true);
         } catch (e) {
           console.warn('Portfolio: featured media load failed', e);

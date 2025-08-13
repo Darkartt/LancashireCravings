@@ -1,0 +1,27 @@
+{
+  "eagle": {
+  "RawWood": "process:eagle_eagle_004.*",
+  "RoughShape": "process:eagle_eagle_044.*",
+  "Detailing": "process:eagle_eagle_176.*",
+  "Finished_1": "final:eagle_eagle_295.*",
+  "Finished_2": "final:eagle_eagle_294.*",
+  "Finished_3": "final:eagle_eagle_299.*",
+  "Finished_4": "final:eagle_eagle_293.*",
+  "Finished_5": "final:eagle_eagle_292.*",
+  "Detail_2": "final:eagle_eagle_291.*",
+  "Best_1": "final:eagle_eagle_295.*"
+  },
+  "nessie": {
+  "RawWood": "process:nessie_nessie_007.*",
+  "RoughShape": "process:nessie_nessie_013.*",
+    "DefiningForms": "process:nessie_nessie_049.*",
+    "Detailing": "process:nessie_nessie_080.*"
+  },
+  "stcollen": {
+    "RawWood": "process:stcollen_stcollen_002.*"
+  },
+  "bass": {
+  "Finished_2": "final:bass_bass_169.*",
+  "Finished_3": "final:bass_bass_172.*"
+  }
+}

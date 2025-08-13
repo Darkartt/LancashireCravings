@@ -1,0 +1,11 @@
+{
+  "fish": [
+    { "label": "RawWood", "source": "public/media/nature/portraits/images/portraits_portrait_011.*" },
+    { "label": "RoughShape", "source": "public/media/nature/portraits/images/portraits_portrait_012.*" },
+    { "label": "DefiningForms", "source": "public/media/nature/portraits/images/portraits_portrait_013.*" },
+    { "label": "Detailing", "source": "public/media/nature/portraits/images/portraits_portrait_014.*" },
+    { "label": "Finished_1", "source": "public/media/nature/portraits/images/portraits_portrait_003.*" },
+    { "label": "Finished_2", "source": "public/media/nature/portraits/images/portraits_portrait_004.*" },
+    { "label": "Detail_1", "source": "public/media/nature/portraits/images/portraits_portrait_005.*" }
+  ]
+}

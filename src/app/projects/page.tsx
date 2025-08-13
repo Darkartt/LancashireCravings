@@ -6,22 +6,18 @@ import CleanBackground from '@/components/CleanBackground';
 import ProjectCard from '@/components/ProjectCard';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import { getFeaturedProjectsLite, loadFullProjects } from '@/lib/media-core';
-import type { Project } from '@/lib/media-organized';
+import { loadMediaData } from '@/lib/media-loader';
+import type { Project } from '@/lib/media-types';
 
 export default function ProjectsPage() {
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
-  
-  const [allProjects, setAllProjects] = useState<Project[]>(getFeaturedProjectsLite());
+  const [allProjects, setAllProjects] = useState<Project[]>([]);
   React.useEffect(() => {
-    (async () => {
-      try {
-        const full = await loadFullProjects();
-        setAllProjects(full.projects);
-      } catch (e) {
-        console.warn('Projects: full dataset load failed', e);
-      }
-    })();
+    let mounted = true;
+    loadMediaData()
+      .then(({ projects }) => { if (mounted) setAllProjects(projects); })
+      .catch((e) => console.warn('Projects: loadMediaData failed', e));
+    return () => { mounted = false; };
   }, []);
   
   // Filter projects by category

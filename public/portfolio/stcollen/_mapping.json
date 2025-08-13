@@ -1,0 +1,57 @@
+[
+  {
+    "label": "RawWood",
+    "source": "public\\media\\projects\\stcollen\\images\\process\\stcollen_stcollen_002.jpeg",
+    "curated": "curated_output\\Woodcarvings\\stcollen\\stcollen_01_RawWood.jpeg"
+  },
+  {
+    "label": "RoughShape",
+    "source": "public\\media\\projects\\stcollen\\images\\process\\stcollen_stcollen_034.jpeg",
+    "curated": "curated_output\\Woodcarvings\\stcollen\\stcollen_02_RoughShape.jpeg"
+  },
+  {
+    "label": "DefiningForms",
+    "source": "public\\media\\projects\\stcollen\\images\\process\\stcollen_stcollen_083.jpeg",
+    "curated": "curated_output\\Woodcarvings\\stcollen\\stcollen_03_DefiningForms.jpeg"
+  },
+  {
+    "label": "Detailing",
+    "source": "public\\media\\projects\\stcollen\\images\\process\\stcollen_stcollen_138.jpeg",
+    "curated": "curated_output\\Woodcarvings\\stcollen\\stcollen_04_Detailing.jpeg"
+  },
+  {
+    "label": "Finished_1",
+    "source": "public\\media\\projects\\stcollen\\images\\final\\stcollen_stcollen_185.jpeg",
+    "curated": "curated_output\\Woodcarvings\\stcollen\\stcollen_05_Finished_1.jpeg"
+  },
+  {
+    "label": "Finished_2",
+    "source": "public\\media\\projects\\stcollen\\images\\final\\stcollen_stcollen_205.jpeg",
+    "curated": "curated_output\\Woodcarvings\\stcollen\\stcollen_06_Finished_2.jpeg"
+  },
+  {
+    "label": "Finished_3",
+    "source": "public\\media\\projects\\stcollen\\images\\final\\stcollen_stcollen_225.jpeg",
+    "curated": "curated_output\\Woodcarvings\\stcollen\\stcollen_07_Finished_3.jpeg"
+  },
+  {
+    "label": "Finished_4",
+    "source": "public\\media\\projects\\stcollen\\images\\final\\stcollen_stcollen_244.jpeg",
+    "curated": "curated_output\\Woodcarvings\\stcollen\\stcollen_08_Finished_4.jpeg"
+  },
+  {
+    "label": "Finished_5",
+    "source": "public\\media\\projects\\stcollen\\images\\final\\stcollen_stcollen_264.jpeg",
+    "curated": "curated_output\\Woodcarvings\\stcollen\\stcollen_09_Finished_5.jpeg"
+  },
+  {
+    "label": "Detail_1",
+    "source": "public\\media\\projects\\stcollen\\images\\final\\stcollen_stcollen_232.jpeg",
+    "curated": "curated_output\\Woodcarvings\\stcollen\\stcollen_10_Detail_1.jpeg"
+  },
+  {
+    "label": "Detail_2",
+    "source": "public\\media\\projects\\stcollen\\images\\final\\stcollen_stcollen_252.jpeg",
+    "curated": "curated_output\\Woodcarvings\\stcollen\\stcollen_11_Detail_2.jpeg"
+  }
+]

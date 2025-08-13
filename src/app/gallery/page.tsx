@@ -5,14 +5,14 @@ import MotionDiv from '@/components/MotionContainer';
 import CleanBackground from '@/components/CleanBackground';
 import TabbedMediaGallery from '@/components/TabbedMediaGallery';
 import ProjectCard from '@/components/ProjectCard';
-import { getFeaturedProjectsLite, loadFullProjects } from '@/lib/media-core';
-import type { Project } from '@/lib/media-organized';
+import { loadMediaData } from '@/lib/media-loader';
+import type { Project } from '@/lib/media-types';
 // Heavy media stats/items will be loaded dynamically; avoid static import to keep bundle slim.
 
 export default function GalleryPage() {
   const [selectedView, setSelectedView] = useState<'all' | 'projects' | 'media'>('all');
-  const [allProjects, setAllProjects] = useState<Project[]>(getFeaturedProjectsLite());
-  const [featuredProjects, setFeaturedProjects] = useState<Project[]>(getFeaturedProjectsLite());
+  const [allProjects, setAllProjects] = useState<Project[]>([]);
+  const [featuredProjects, setFeaturedProjects] = useState<Project[]>([]);
   const [projectsLoaded, setProjectsLoaded] = useState(false);
   const [allMediaItems, setAllMediaItems] = useState<any[]>([]);
   const [mediaStats, setMediaStats] = useState<any | null>(null);
@@ -24,13 +24,12 @@ export default function GalleryPage() {
       const defer = (cb: () => void) => (typeof window !== 'undefined' && 'requestIdleCallback' in window ? (window as any).requestIdleCallback(cb) : setTimeout(cb, 200));
       defer(async () => {
         try {
-          const full = await loadFullProjects();
-          setAllProjects(full.projects);
-          const fp = full.getFeaturedProjects?.();
-          if (fp) setFeaturedProjects(fp);
+          const { projects, getFeaturedProjects } = await loadMediaData();
+          setAllProjects(projects);
+          setFeaturedProjects(getFeaturedProjects ? getFeaturedProjects() : projects);
           setProjectsLoaded(true);
         } catch (e) {
-          console.warn('Gallery: full projects load failed', e);
+          console.warn('Gallery: loadMediaData failed', e);
         }
       });
     }
@@ -42,9 +41,10 @@ export default function GalleryPage() {
     if (needsMedia && !mediaLoaded) {
       (async () => {
         try {
-          const mod = await import('@/lib/media-organized');
-          setAllMediaItems(mod.getAllMediaItems());
-          setMediaStats(mod.getMediaStats());
+          const { natureCollection } = await loadMediaData();
+          const items = Object.values(natureCollection).flatMap(n => n.items);
+          setAllMediaItems(items);
+          setMediaStats({ projects: { count: Object.keys(natureCollection).length }, total: { images: items.length, videos: 0, files: items.length } });
           setMediaLoaded(true);
         } catch (e) {
           console.warn('Gallery: media load failed', e);
