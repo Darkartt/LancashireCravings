@@ -1,6 +1,6 @@
 'use client';
 
-import React, { createContext, useContext, useEffect, useRef, useState, useMemo } from 'react';
+import React, { createContext, useContext, useEffect, useRef, useState, useMemo, useCallback } from 'react';
 import { useAnimationReset } from '../hooks/useAnimationReset';
 import { ScrollProgressIndicator } from './ScrollProgressIndicator';
 import { ScrollTriggerProvider, useScrollTriggerContext } from './ScrollTriggerProvider';
@@ -76,10 +76,11 @@ const AnimationProviderInner: React.FC<AnimationProviderProps> = ({ children }) 
   }, []);
 
   // Enhanced scroll animation creator
-  const createScrollAnimation = (config: any) => {
+  // Stable reference for consumers to avoid unnecessary context churn
+  const createScrollAnimation = useCallback((config: any) => { // eslint-disable-line @typescript-eslint/no-explicit-any
     if (isReducedMotion) return null;
     return createScrollTrigger(config);
-  };
+  }, [isReducedMotion, createScrollTrigger]);
 
   // Use the animation reset hook to handle route changes
   useAnimationReset();
@@ -270,6 +271,11 @@ const AnimationProviderInner: React.FC<AnimationProviderProps> = ({ children }) 
         // Small delay to ensure DOM is ready
         setTimeout(() => {
           window.dispatchEvent(new Event('resize')); // Trigger layout recalculation
+          // Restore focus to main landmark for accessibility / keyboard users
+          const main = document.getElementById('main');
+          if (main) {
+            (main as HTMLElement).focus();
+          }
         }, 100);
       }
     };
