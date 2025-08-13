@@ -1,19 +1,28 @@
 'use client';
 
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import MotionDiv from '@/components/MotionContainer';
 import CleanBackground from '@/components/CleanBackground';
 import ProjectCard from '@/components/ProjectCard';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import { 
-  projects
-} from '@/lib/media-organized';
+import { getFeaturedProjectsLite, loadFullProjects } from '@/lib/media-core';
+import type { Project } from '@/lib/media-organized';
 
 export default function ProjectsPage() {
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   
-  const allProjects = projects;
+  const [allProjects, setAllProjects] = useState<Project[]>(getFeaturedProjectsLite());
+  React.useEffect(() => {
+    (async () => {
+      try {
+        const full = await loadFullProjects();
+        setAllProjects(full.projects);
+      } catch (e) {
+        console.warn('Projects: full dataset load failed', e);
+      }
+    })();
+  }, []);
   
   // Filter projects by category
   const filteredProjects = selectedCategory === 'all' 
@@ -60,7 +69,7 @@ export default function ProjectsPage() {
         {/* Hero Section */}
         <section className="pt-32 pb-16 px-4">
           <div className="max-w-7xl mx-auto text-center">
-            <motion.div
+            <MotionDiv
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
@@ -73,10 +82,10 @@ export default function ProjectsPage() {
                 Explore our complete collection of woodcarving projects. Each piece represents a unique journey 
                 from concept to completion, showcasing traditional craftsmanship and artistic innovation.
               </p>
-            </motion.div>
+            </MotionDiv>
 
             {/* Project Stats */}
-            <motion.div 
+            <MotionDiv 
               className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -98,14 +107,14 @@ export default function ProjectsPage() {
                 <div className="text-3xl font-bold text-[var(--accent-primary)]">{allProjects.filter(p => p.category === 'religious').length}</div>
                 <div className="text-sm text-[var(--text-muted)] uppercase tracking-wide">Religious</div>
               </div>
-            </motion.div>
+            </MotionDiv>
           </div>
         </section>
 
         {/* Category Filter Section */}
         <section className="px-4 mb-12">
           <div className="max-w-7xl mx-auto">
-            <motion.div
+            <MotionDiv
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
@@ -114,10 +123,10 @@ export default function ProjectsPage() {
               <h2 className="text-2xl font-bold text-[var(--foreground)] mb-4">
                 Browse by Category
               </h2>
-            </motion.div>
+            </MotionDiv>
 
             {/* Category Filters */}
-            <motion.div 
+            <MotionDiv 
               className="flex flex-wrap justify-center gap-3 mb-12"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -136,14 +145,14 @@ export default function ProjectsPage() {
                   {category.label} ({category.count})
                 </button>
               ))}
-            </motion.div>
+            </MotionDiv>
           </div>
         </section>
 
         {/* Projects Grid */}
         <section className="px-4 pb-16">
           <div className="max-w-7xl mx-auto">
-            <motion.div 
+      <MotionDiv 
               className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
               variants={containerVariants}
               initial="hidden"
@@ -152,7 +161,7 @@ export default function ProjectsPage() {
               key={selectedCategory}
             >
               {filteredProjects.map((project, index) => (
-                <motion.div 
+        <MotionDiv 
                   key={project.id}
                   variants={itemVariants}
                   layout
@@ -165,13 +174,13 @@ export default function ProjectsPage() {
                     variant="detailed"
                     className="h-full"
                   />
-                </motion.div>
+        </MotionDiv>
               ))}
-            </motion.div>
+      </MotionDiv>
 
             {/* No Results */}
             {filteredProjects.length === 0 && (
-              <motion.div
+              <MotionDiv
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 className="text-center py-12"
@@ -185,7 +194,7 @@ export default function ProjectsPage() {
                 >
                   View All Projects
                 </button>
-              </motion.div>
+              </MotionDiv>
             )}
           </div>
         </section>
@@ -193,7 +202,7 @@ export default function ProjectsPage() {
         {/* Featured Categories */}
         <section className="px-4 py-16 bg-[var(--surface-elevated)]/30 backdrop-blur-sm">
           <div className="max-w-7xl mx-auto">
-            <motion.div
+            <MotionDiv
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.6 }}
@@ -205,7 +214,7 @@ export default function ProjectsPage() {
               <p className="text-lg text-[var(--text-muted)]">
                 Discover our diverse specialties in woodcarving artistry
               </p>
-            </motion.div>
+            </MotionDiv>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {[
@@ -243,9 +252,10 @@ export default function ProjectsPage() {
                   count: allProjects.filter(p => p.category === 'religious').length
                 }
               ].map((cat, index) => (
-                <motion.button
+                <MotionDiv
                   key={cat.category}
                   onClick={() => setSelectedCategory(cat.category)}
+                  as='button'
                   className="text-left p-6 bg-[var(--surface-elevated)] rounded-2xl shadow-md hover:shadow-lg transition-all duration-300 border border-[var(--border-subtle)] hover:border-[var(--accent-primary)]/30"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -264,7 +274,7 @@ export default function ProjectsPage() {
                   <p className="text-[var(--text-muted)] text-sm leading-relaxed">
                     {cat.description}
                   </p>
-                </motion.button>
+                </MotionDiv>
               ))}
             </div>
           </div>
@@ -273,7 +283,7 @@ export default function ProjectsPage() {
         {/* Commission CTA */}
         <section className="px-4 py-16">
           <div className="max-w-4xl mx-auto text-center">
-            <motion.div
+            <MotionDiv
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.8 }}
@@ -286,8 +296,9 @@ export default function ProjectsPage() {
                 drawn to mythical themes, or seeking a meaningful religious piece, we bring your ideas to life.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <motion.a
+                <MotionDiv
                   href="/commission"
+                  as='a'
                   className="inline-flex items-center gap-2 bg-[var(--accent-primary)] text-white px-8 py-4 rounded-lg font-medium hover:bg-[var(--accent-warm)] transition-colors duration-300 shadow-lg hover:shadow-xl"
                   whileHover={{ y: -2 }}
                   whileTap={{ y: 0 }}
@@ -296,9 +307,10 @@ export default function ProjectsPage() {
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
-                </motion.a>
-                <motion.a
+                </MotionDiv>
+                <MotionDiv
                   href="/gallery"
+                  as='a'
                   className="inline-flex items-center gap-2 bg-[var(--surface-elevated)] text-[var(--foreground)] px-8 py-4 rounded-lg font-medium hover:bg-[var(--border-subtle)] transition-colors duration-300 border border-[var(--border-subtle)]"
                   whileHover={{ y: -2 }}
                   whileTap={{ y: 0 }}
@@ -307,9 +319,9 @@ export default function ProjectsPage() {
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                   </svg>
-                </motion.a>
+        </MotionDiv>
               </div>
-            </motion.div>
+      </MotionDiv>
           </div>
         </section>
       </main>

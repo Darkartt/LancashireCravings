@@ -1,31 +1,59 @@
 'use client';
 
-import React, { useState, useMemo } from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useEffect } from 'react';
+import MotionDiv from '@/components/MotionContainer';
 import CleanBackground from '@/components/CleanBackground';
 import TabbedMediaGallery from '@/components/TabbedMediaGallery';
 import ProjectCard from '@/components/ProjectCard';
-import { 
-  getAllMediaItems,
-  getMediaStats
-} from '@/lib/media-organized';
-import { 
-  projects,
-  getFeaturedProjects
-} from '@/lib/media-organized';
+import { getFeaturedProjectsLite, loadFullProjects } from '@/lib/media-core';
+import type { Project } from '@/lib/media-organized';
+// Heavy media stats/items will be loaded dynamically; avoid static import to keep bundle slim.
 
 export default function GalleryPage() {
   const [selectedView, setSelectedView] = useState<'all' | 'projects' | 'media'>('all');
-  
-  // Get all media items from all projects using organized media system
-  const allMediaItems = useMemo(() => {
-    return getAllMediaItems();
-  }, []);
+  const [allProjects, setAllProjects] = useState<Project[]>(getFeaturedProjectsLite());
+  const [featuredProjects, setFeaturedProjects] = useState<Project[]>(getFeaturedProjectsLite());
+  const [projectsLoaded, setProjectsLoaded] = useState(false);
+  const [allMediaItems, setAllMediaItems] = useState<any[]>([]);
+  const [mediaStats, setMediaStats] = useState<any | null>(null);
+  const [mediaLoaded, setMediaLoaded] = useState(false);
 
-  const mediaStats = getMediaStats();
+  // Defer full projects load until idle
+  useEffect(() => {
+    if (!projectsLoaded) {
+      const defer = (cb: () => void) => (typeof window !== 'undefined' && 'requestIdleCallback' in window ? (window as any).requestIdleCallback(cb) : setTimeout(cb, 200));
+      defer(async () => {
+        try {
+          const full = await loadFullProjects();
+          setAllProjects(full.projects);
+          const fp = full.getFeaturedProjects?.();
+          if (fp) setFeaturedProjects(fp);
+          setProjectsLoaded(true);
+        } catch (e) {
+          console.warn('Gallery: full projects load failed', e);
+        }
+      });
+    }
+  }, [projectsLoaded]);
 
-  const allProjects = projects;
-  const featuredProjects = getFeaturedProjects();
+  // Load media dataset only if user visits media/all view
+  useEffect(() => {
+    const needsMedia = selectedView === 'media' || selectedView === 'all';
+    if (needsMedia && !mediaLoaded) {
+      (async () => {
+        try {
+          const mod = await import('@/lib/media-organized');
+          setAllMediaItems(mod.getAllMediaItems());
+          setMediaStats(mod.getMediaStats());
+          setMediaLoaded(true);
+        } catch (e) {
+          console.warn('Gallery: media load failed', e);
+        }
+      })();
+    }
+  }, [selectedView, mediaLoaded]);
+
+  const displayStats = mediaStats || { projects: { count: allProjects.length }, total: { images: 0, videos: 0, files: 0 } };
 
   // Animation variants
   const containerVariants = {
@@ -57,7 +85,7 @@ export default function GalleryPage() {
         {/* Hero Section */}
         <section className="pt-24 pb-16 px-4">
           <div className="max-w-7xl mx-auto text-center">
-            <motion.div
+            <MotionDiv
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
@@ -70,39 +98,39 @@ export default function GalleryPage() {
                 Explore the complete collection of handcrafted masterpieces, from mystical creatures 
                 to wildlife artistry. Each piece tells a story of dedication, skill, and artisan passion.
               </p>
-            </motion.div>
+            </MotionDiv>
 
             {/* Stats Bar */}
-            <motion.div 
+            <MotionDiv 
               className="mt-12 grid grid-cols-1 md:grid-cols-4 gap-8 max-w-4xl mx-auto"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
               <div className="text-center">
-                <div className="text-3xl font-bold text-[var(--accent-primary)]">{mediaStats.projects.count}</div>
+                <div className="text-3xl font-bold text-[var(--accent-primary)]">{displayStats.projects.count}</div>
                 <div className="text-sm text-[var(--text-muted)] uppercase tracking-wide">Major Projects</div>
               </div>
               <div className="text-center">
-                <div className="text-3xl font-bold text-[var(--accent-primary)]">{mediaStats.total.images}+</div>
+                <div className="text-3xl font-bold text-[var(--accent-primary)]">{displayStats.total.images}{mediaLoaded?'+':''}</div>
                 <div className="text-sm text-[var(--text-muted)] uppercase tracking-wide">Photos</div>
               </div>
               <div className="text-center">
-                <div className="text-3xl font-bold text-[var(--accent-primary)]">{mediaStats.total.videos}+</div>
+                <div className="text-3xl font-bold text-[var(--accent-primary)]">{displayStats.total.videos}{mediaLoaded?'+':''}</div>
                 <div className="text-sm text-[var(--text-muted)] uppercase tracking-wide">Videos</div>
               </div>
               <div className="text-center">
-                <div className="text-3xl font-bold text-[var(--accent-primary)]">{mediaStats.total.files}+</div>
+                <div className="text-3xl font-bold text-[var(--accent-primary)]">{displayStats.total.files}{mediaLoaded?'+':''}</div>
                 <div className="text-sm text-[var(--text-muted)] uppercase tracking-wide">Total Media</div>
               </div>
-            </motion.div>
+            </MotionDiv>
           </div>
         </section>
 
         {/* View Toggle */}
         <section className="px-4 mb-12">
           <div className="max-w-7xl mx-auto">
-            <motion.div 
+            <MotionDiv 
               className="flex flex-wrap justify-center gap-2 mb-8"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -125,7 +153,7 @@ export default function GalleryPage() {
                   {view.label}
                 </button>
               ))}
-            </motion.div>
+            </MotionDiv>
           </div>
         </section>
 
@@ -133,7 +161,7 @@ export default function GalleryPage() {
         {(selectedView === 'all' || selectedView === 'projects') && (
           <section className="px-4 mb-16">
             <div className="max-w-7xl mx-auto">
-              <motion.div
+              <MotionDiv
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.5 }}
@@ -145,24 +173,24 @@ export default function GalleryPage() {
                 <p className="text-[var(--text-muted)]">
                   Masterpieces showcasing the pinnacle of woodcarving artistry
                 </p>
-              </motion.div>
+              </MotionDiv>
 
-              <motion.div 
+        <MotionDiv 
                 className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
                 variants={containerVariants}
                 initial="hidden"
                 animate="visible"
               >
                 {featuredProjects.map((project) => (
-                  <motion.div key={project.id} variants={itemVariants}>
+          <MotionDiv key={project.id} variants={itemVariants}>
                     <ProjectCard 
                       project={project} 
                       variant="detailed"
                       className="h-full"
                     />
-                  </motion.div>
+          </MotionDiv>
                 ))}
-              </motion.div>
+        </MotionDiv>
             </div>
           </section>
         )}
@@ -171,7 +199,7 @@ export default function GalleryPage() {
         {(selectedView === 'all' || selectedView === 'media') && (
           <section className="px-4 mb-16">
             <div className="max-w-7xl mx-auto">
-              <motion.div
+              <MotionDiv
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.6 }}
@@ -183,9 +211,9 @@ export default function GalleryPage() {
                 <p className="text-[var(--text-muted)]">
                   Browse through the entire collection of process photos and finished pieces
                 </p>
-              </motion.div>
+              </MotionDiv>
 
-              <motion.div
+              <MotionDiv
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.7 }}
@@ -197,7 +225,7 @@ export default function GalleryPage() {
                   columns={3}
                   className="modern-gallery"
                 />
-              </motion.div>
+              </MotionDiv>
             </div>
           </section>
         )}
@@ -206,7 +234,7 @@ export default function GalleryPage() {
         {selectedView === 'projects' && (
           <section className="px-4 mb-16">
             <div className="max-w-7xl mx-auto">
-              <motion.div
+              <MotionDiv
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.6 }}
@@ -218,24 +246,24 @@ export default function GalleryPage() {
                 <p className="text-[var(--text-muted)]">
                   Complete portfolio of woodcarving projects and commissions
                 </p>
-              </motion.div>
+              </MotionDiv>
 
-              <motion.div 
+        <MotionDiv 
                 className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
                 variants={containerVariants}
                 initial="hidden"
                 animate="visible"
               >
                 {allProjects.map((project) => (
-                  <motion.div key={project.id} variants={itemVariants}>
+          <MotionDiv key={project.id} variants={itemVariants}>
                     <ProjectCard 
                       project={project} 
                       variant="compact"
                       className="h-full"
                     />
-                  </motion.div>
+          </MotionDiv>
                 ))}
-              </motion.div>
+        </MotionDiv>
             </div>
           </section>
         )}
@@ -243,7 +271,7 @@ export default function GalleryPage() {
         {/* Call to Action */}
         <section className="px-4 py-16 bg-[var(--surface-elevated)]/50 backdrop-blur-sm">
           <div className="max-w-4xl mx-auto text-center">
-            <motion.div
+            <MotionDiv
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.8 }}
@@ -255,8 +283,9 @@ export default function GalleryPage() {
                 Ready to bring your vision to life? Each piece is handcrafted with meticulous 
                 attention to detail and decades of expertise.
               </p>
-              <motion.a
+              <MotionDiv
                 href="/commission"
+                as='a'
                 className="inline-flex items-center gap-2 bg-[var(--accent-primary)] text-white px-8 py-4 rounded-lg font-medium hover:bg-[var(--accent-warm)] transition-colors duration-300 shadow-lg hover:shadow-xl"
                 whileHover={{ y: -2 }}
                 whileTap={{ y: 0 }}
@@ -265,8 +294,8 @@ export default function GalleryPage() {
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
-              </motion.a>
-            </motion.div>
+              </MotionDiv>
+            </MotionDiv>
           </div>
         </section>
       </main>

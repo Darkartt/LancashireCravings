@@ -4,7 +4,7 @@ import { useLazyMotion } from '@/lib/lazyMotion';
 
 interface MotionContainerProps {
   as?: keyof JSX.IntrinsicElements;
-  children: ReactNode;
+  children?: ReactNode;
   initial?: any;
   animate?: any;
   exit?: any;

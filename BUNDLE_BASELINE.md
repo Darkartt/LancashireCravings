@@ -1,39 +1,63 @@
 # Bundle Baseline (Phase 1)
 
-Date: 2025-08-12
+Date: 2025-08-13
 Command: `npm run analyze`
 
-## Key Metrics
+## Key Metrics (Post Syntax + Lint Stabilization)
 - Shared First Load JS: 101 kB
-- Largest Route First Load: 210 kB (projects/[slug], process)
-- Typical Informational Routes: 149–159 kB
-- Static lightweight routes: ~101 kB (icon, sitemap)
+- Largest Route First Load: 198–196 kB (projects/[slug] 198 kB, process 196 kB)
+- Typical Informational Routes: 148–151 kB
+- Small Static Utility Routes: ~101 kB (icon, sitemap)
 
-## Largest Shared Chunks
-- 4bd1b696-46d2ec519b4f23f7.js: 53.2 kB
-- 684-2598bfeb396df75b.js: 45.9 kB
+## Largest Shared Chunks (Analyzer Reports)
+- 4bd1b696-46d2ec519b4f23f7.js: 53.2 kB (vendor composite)
+- 684-2598bfeb396df75b.js: 45.9 kB (vendor composite)
 
-## Likely Contributors
-- three / @react-three/fiber / @react-three/drei (3D configurator)
-- gsap + framer-motion (dual animation libs)
-- Lottie libraries (two variants) – consider consolidating
-- Massive `media-organized.ts` static object (loaded eagerly?)
+## Heavy Contributors (Inference)
+- Dual animation stacks: gsap + framer-motion
+- Potential 3D / rich media libs (validate in analyzer HTML – next action)
+- Large media dataset still bundled (need late-load path) though lint/type mitigations applied
 
-## Immediate Optimization Targets (Phase 1/2 Bridge)
-1. Lazy load 3D configurator (dynamic import, SSR false) – only on pages where used.
-2. Code-split large media dataset: dynamic import when gallery opens.
-3. Evaluate removing one Lottie implementation; load lazily (dynamic import) where used.
-4. Conditional import GSAP only when scroll-trigger components mount.
-5. Audit framer-motion usage for shared utilities; potentially create a lightweight motion wrapper.
+## Immediate Optimization Actions (Next 3 PRs)
+1. Split media dataset: create `media-core.ts` (featured subset) + dynamic import full dataset in galleries.
+2. Dynamic import GSAP + ScrollTrigger only inside components using scroll effects.
+3. Isolate framer-motion usage behind a tiny wrapper; tree-shake unused motion features.
+4. (Optional) Defer any three.js / heavy visual modules with `dynamic(() => import(...), { ssr: false })`.
+5. Remove unused eslint-disable lines to keep noise low (non-size but hygiene improvement).
 
-## Targets
-- Phase 2 Target Shared First Load: < 85 kB
-- Phase 2 Target Largest Route: < 170 kB
+## Phase Targets
+- Phase 2 Target Shared First Load: < 85 kB (−16 kB)
+- Phase 2 Target Largest Route: < 170 kB (−~25 kB)
 - Stretch (Phase 3): Shared < 70 kB, Largest < 150 kB
 
 ## Measurement Plan
-- Re-run `npm run analyze` after each refactor cluster.
-- Record deltas in CHANGELOG section below.
+- After each optimization cluster run `npm run analyze` and append delta entry.
+- Track: Shared First Load, Top 3 Routes, Largest Vendor Chunk, Added Async Chunks.
 
 ## Changelog
-- 2025-08-12: Baseline captured.
+- 2025-08-13: Clean successful baseline after fixing media-organized syntax & type issues; analyzer HTML generated for client/node/edge.
+- 2025-08-12: Initial (failed build due to syntax) partial reports; not canonical.
+
+### 2025-08-13 (Later) – Dynamic Animation & 3D Deferral Pass
+- Converted all remaining static `gsap` imports (ThreeBackground, WoodGrainTransition, useScrollTrigger, scrollAnimationConfigs) to dynamic loader `loadGsap()`; helper factories now async.
+- `three` + `OrbitControls` moved to dynamic import inside `ThreeBackground` effect; prevents automatic inclusion in shared chunk for routes not rendering it.
+- Removed unused eslint-disable directives in multiple files (hygiene only).
+- Shared first-load JS unchanged at 101 kB (indicates gsap + three were not dominating shared pre-pass or already route-split); no regression.
+- Encountered transient Windows EPERM file lock on `.next/trace`; retry succeeded (note for CI flake mitigation—potential solution: retry logic or clean `.next` before build).
+
+### Pending High-Impact Opportunities
+1. Inspect analyzer HTML to list top modules inside `chunks/4bd1b696` & `chunks/684` (expected: framer-motion, React/Next core, tailwind runtime, residual dataset pieces).
+2. Evaluate framer-motion: wrap or dynamically import; migrate simpler fades/transforms to CSS or gsap to drop its footprint if sizable.
+3. Further dataset segmentation: break `media-organized` into thematic shards loaded per route interaction.
+4. Introduce performance budget CI gate: fail if shared >105 kB or any route >200 kB (then tighten after reductions).
+5. Consider code splitting PageTransition / AnimationProvider if they pull motion libs on every route.
+6. Audit `projects/[slug]` and `process` pages (currently 198–196 kB) for large synchronous imports.
+
+### 2025-08-13 (Later) – Framer Motion Lazy Migration Wave 1
+- Introduced `MotionContainer` (MotionDiv) earlier; now migrated ProjectCard plus gallery, portfolio, and projects pages to use it—removing direct `framer-motion` static imports on those routes.
+- Added `LazyAnimatePresence` wrapper to defer AnimatePresence mounting; converted `TabbedMediaGallery` (including lightbox) to lazy motion usage.
+- Converted `WoodGrainTransition` to MotionDiv (removes direct motion dependency; all animation there is GSAP-driven + initial path animations now behind lazy loader once framer-motion loads).
+- Created self-closing support in MotionContainer (children optional) for SVG path/particle elements.
+- Remaining direct framer-motion imports (next wave): process page, timelapses pages, media galleries (ModernMediaGallery, MediaGallery variants), configurators, background parallax components (ModernBackground with useScroll/useTransform), timelines (EnhancedTimeline with useInView), PageTransition (core), video players, before/after components.
+- Expected Impact: No immediate shared reduction until last static import removed; partial conversion may add wrapper overhead (<1 kB). Final wave will allow framer-motion to be entirely async on initial load for routes not using advanced transitions.
+- Next Steps: Replace remaining motion imports; introduce lazy hook helpers for useScroll/useTransform/useInView to eliminate early hook import path; then re-run analyzer to capture delta.
