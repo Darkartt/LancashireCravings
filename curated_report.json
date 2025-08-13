@@ -1,0 +1,244 @@
+{
+  "root": "public\\media\\projects",
+  "dest": "curated_output\\Woodcarvings",
+  "mode": "copy",
+  "dry_run": false,
+  "projects": [
+    {
+      "project": "bass",
+      "counts": {
+        "process": 141,
+        "final": 61,
+        "exported": 11,
+        "bestof": 2
+      },
+      "exported": [
+        [
+          "RawWood",
+          "curated_output\\Woodcarvings\\bass\\bass_01_RawWood.jpeg"
+        ],
+        [
+          "RoughShape",
+          "curated_output\\Woodcarvings\\bass\\bass_02_RoughShape.jpeg"
+        ],
+        [
+          "DefiningForms",
+          "curated_output\\Woodcarvings\\bass\\bass_03_DefiningForms.jpeg"
+        ],
+        [
+          "Detailing",
+          "curated_output\\Woodcarvings\\bass\\bass_04_Detailing.jpeg"
+        ],
+        [
+          "Finished_1",
+          "curated_output\\Woodcarvings\\bass\\bass_05_Finished_1.jpeg"
+        ],
+        [
+          "Finished_2",
+          "curated_output\\Woodcarvings\\bass\\bass_06_Finished_2.jpeg"
+        ],
+        [
+          "Finished_3",
+          "curated_output\\Woodcarvings\\bass\\bass_07_Finished_3.jpeg"
+        ],
+        [
+          "Finished_4",
+          "curated_output\\Woodcarvings\\bass\\bass_08_Finished_4.jpeg"
+        ],
+        [
+          "Finished_5",
+          "curated_output\\Woodcarvings\\bass\\bass_09_Finished_5.jpeg"
+        ],
+        [
+          "Detail_1",
+          "curated_output\\Woodcarvings\\bass\\bass_10_Detail_1.jpeg"
+        ],
+        [
+          "Detail_2",
+          "curated_output\\Woodcarvings\\bass\\bass_11_Detail_2.jpeg"
+        ]
+      ],
+      "bestof": [
+        "curated_output\\Woodcarvings\\_Portfolio_BestOf\\bass_Best_1.jpeg",
+        "curated_output\\Woodcarvings\\_Portfolio_BestOf\\bass_Best_2.jpeg"
+      ]
+    },
+    {
+      "project": "eagle",
+      "counts": {
+        "process": 210,
+        "final": 78,
+        "exported": 11,
+        "bestof": 2
+      },
+      "exported": [
+        [
+          "RawWood",
+          "curated_output\\Woodcarvings\\eagle\\eagle_01_RawWood.jpeg"
+        ],
+        [
+          "RoughShape",
+          "curated_output\\Woodcarvings\\eagle\\eagle_02_RoughShape.jpg"
+        ],
+        [
+          "DefiningForms",
+          "curated_output\\Woodcarvings\\eagle\\eagle_03_DefiningForms.jpg"
+        ],
+        [
+          "Detailing",
+          "curated_output\\Woodcarvings\\eagle\\eagle_04_Detailing.jpg"
+        ],
+        [
+          "Finished_1",
+          "curated_output\\Woodcarvings\\eagle\\eagle_05_Finished_1.jpg"
+        ],
+        [
+          "Finished_2",
+          "curated_output\\Woodcarvings\\eagle\\eagle_06_Finished_2.jpg"
+        ],
+        [
+          "Finished_3",
+          "curated_output\\Woodcarvings\\eagle\\eagle_07_Finished_3.jpg"
+        ],
+        [
+          "Finished_4",
+          "curated_output\\Woodcarvings\\eagle\\eagle_08_Finished_4.jpg"
+        ],
+        [
+          "Finished_5",
+          "curated_output\\Woodcarvings\\eagle\\eagle_09_Finished_5.jpg"
+        ],
+        [
+          "Detail_1",
+          "curated_output\\Woodcarvings\\eagle\\eagle_10_Detail_1.jpg"
+        ],
+        [
+          "Detail_2",
+          "curated_output\\Woodcarvings\\eagle\\eagle_11_Detail_2.jpg"
+        ]
+      ],
+      "bestof": [
+        "curated_output\\Woodcarvings\\_Portfolio_BestOf\\eagle_Best_1.jpg",
+        "curated_output\\Woodcarvings\\_Portfolio_BestOf\\eagle_Best_2.jpg"
+      ]
+    },
+    {
+      "project": "nessie",
+      "counts": {
+        "process": 107,
+        "final": 46,
+        "exported": 11,
+        "bestof": 2
+      },
+      "exported": [
+        [
+          "RawWood",
+          "curated_output\\Woodcarvings\\nessie\\nessie_01_RawWood.jpg"
+        ],
+        [
+          "RoughShape",
+          "curated_output\\Woodcarvings\\nessie\\nessie_02_RoughShape.jpeg"
+        ],
+        [
+          "DefiningForms",
+          "curated_output\\Woodcarvings\\nessie\\nessie_03_DefiningForms.jpg"
+        ],
+        [
+          "Detailing",
+          "curated_output\\Woodcarvings\\nessie\\nessie_04_Detailing.jpg"
+        ],
+        [
+          "Finished_1",
+          "curated_output\\Woodcarvings\\nessie\\nessie_05_Finished_1.jpg"
+        ],
+        [
+          "Finished_2",
+          "curated_output\\Woodcarvings\\nessie\\nessie_06_Finished_2.jpg"
+        ],
+        [
+          "Finished_3",
+          "curated_output\\Woodcarvings\\nessie\\nessie_07_Finished_3.jpg"
+        ],
+        [
+          "Finished_4",
+          "curated_output\\Woodcarvings\\nessie\\nessie_08_Finished_4.jpg"
+        ],
+        [
+          "Finished_5",
+          "curated_output\\Woodcarvings\\nessie\\nessie_09_Finished_5.jpg"
+        ],
+        [
+          "Detail_1",
+          "curated_output\\Woodcarvings\\nessie\\nessie_10_Detail_1.jpg"
+        ],
+        [
+          "Detail_2",
+          "curated_output\\Woodcarvings\\nessie\\nessie_11_Detail_2.jpg"
+        ]
+      ],
+      "bestof": [
+        "curated_output\\Woodcarvings\\_Portfolio_BestOf\\nessie_Best_1.jpg",
+        "curated_output\\Woodcarvings\\_Portfolio_BestOf\\nessie_Best_2.jpg"
+      ]
+    },
+    {
+      "project": "stcollen",
+      "counts": {
+        "process": 184,
+        "final": 80,
+        "exported": 11,
+        "bestof": 2
+      },
+      "exported": [
+        [
+          "RawWood",
+          "curated_output\\Woodcarvings\\stcollen\\stcollen_01_RawWood.jpeg"
+        ],
+        [
+          "RoughShape",
+          "curated_output\\Woodcarvings\\stcollen\\stcollen_02_RoughShape.jpeg"
+        ],
+        [
+          "DefiningForms",
+          "curated_output\\Woodcarvings\\stcollen\\stcollen_03_DefiningForms.jpeg"
+        ],
+        [
+          "Detailing",
+          "curated_output\\Woodcarvings\\stcollen\\stcollen_04_Detailing.jpeg"
+        ],
+        [
+          "Finished_1",
+          "curated_output\\Woodcarvings\\stcollen\\stcollen_05_Finished_1.jpeg"
+        ],
+        [
+          "Finished_2",
+          "curated_output\\Woodcarvings\\stcollen\\stcollen_06_Finished_2.jpeg"
+        ],
+        [
+          "Finished_3",
+          "curated_output\\Woodcarvings\\stcollen\\stcollen_07_Finished_3.jpeg"
+        ],
+        [
+          "Finished_4",
+          "curated_output\\Woodcarvings\\stcollen\\stcollen_08_Finished_4.jpeg"
+        ],
+        [
+          "Finished_5",
+          "curated_output\\Woodcarvings\\stcollen\\stcollen_09_Finished_5.jpeg"
+        ],
+        [
+          "Detail_1",
+          "curated_output\\Woodcarvings\\stcollen\\stcollen_10_Detail_1.jpeg"
+        ],
+        [
+          "Detail_2",
+          "curated_output\\Woodcarvings\\stcollen\\stcollen_11_Detail_2.jpeg"
+        ]
+      ],
+      "bestof": [
+        "curated_output\\Woodcarvings\\_Portfolio_BestOf\\stcollen_Best_1.jpeg",
+        "curated_output\\Woodcarvings\\_Portfolio_BestOf\\stcollen_Best_2.jpeg"
+      ]
+    }
+  ]
+}

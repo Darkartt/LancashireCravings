@@ -8,10 +8,7 @@ import Footer from "../components/Footer";
 import Button from "../components/ui/Button";
 import ImageLightbox from "../components/ui/ImageLightbox";
 import { PageLoadingFallback } from "../components/ui/LoadingSpinner";
-import { 
-  projects,
-  getFeaturedProjects 
-} from "@/lib/media-organized";
+import { loadMediaData } from "@/lib/media-loader";
 
 // Lazy load heavy components
 const HomeBackground = lazy(() => import("../components/backgrounds/HomeBackground"));
@@ -23,8 +20,18 @@ export default function Home() {
   const [lightboxImage, setLightboxImage] = useState<{src: string, alt: string} | null>(null);
   const [isLoaded, setIsLoaded] = useState(false);
 
-  // Get featured projects with images
-  const featuredProjects = getFeaturedProjects();
+  // Lightweight initial featured list; hydrate with full dataset asynchronously
+  const [featuredProjects, setFeaturedProjects] = useState<any[]>([]);
+  useEffect(() => {
+    let mounted = true;
+    loadMediaData()
+      .then(({ getFeaturedProjects, projects }) => {
+        const list = getFeaturedProjects ? getFeaturedProjects() : projects;
+        if (mounted) setFeaturedProjects(list);
+      })
+      .catch((e) => console.warn('Home: loadMediaData failed', e));
+    return () => { mounted = false; };
+  }, []);
 
   useEffect(() => {
     // Set loaded state after mount to prevent hydration mismatch
@@ -368,14 +375,14 @@ export default function Home() {
               data-animate-fade-up
             >
               <div className="portfolio-showcase relative overflow-hidden shadow-xl bg-gradient-to-br from-accent-primary/20 to-accent-secondary/20 mb-6 group-hover:shadow-2xl transition-all duration-500">
-                {projects[0]?.coverImage ? (
+                {featuredProjects[0]?.coverImage ? (
                   <Image
-                    src={projects[0].coverImage}
-                    alt={projects[0].title}
+                    src={featuredProjects[0].coverImage}
+                    alt={featuredProjects[0].title}
                     width={400}
                     height={500}
                     className="aspect-[4/5] w-full object-cover group-hover:scale-110 transition-transform duration-500"
-                    onClick={() => openLightbox(projects[0].coverImage, projects[0].title)}
+                    onClick={() => openLightbox(featuredProjects[0].coverImage, featuredProjects[0].title)}
                   />
                 ) : (
                   <div className="aspect-[4/5] bg-foreground/10 flex items-center justify-center">

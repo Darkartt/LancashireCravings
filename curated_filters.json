@@ -1,0 +1,28 @@
+{
+  "eagle": {
+    "include": [
+      "process:eagle_eagle_*.*",
+      "final:eagle_eagle_*.*"
+    ],
+    "exclude": [
+      "process:*_butterfly_*.*",
+      "process:*_bass_*.*",
+      "process:*_owl_*.*",
+      "final:*_butterfly_*.*",
+      "final:*_bass_*.*",
+      "final:*_owl_*.*"
+    ]
+  },
+  "nessie": {
+    "include": [
+      "process:nessie_nessie_*.*",
+      "final:nessie_nessie_*.*"
+    ]
+  },
+  "stcollen": {
+    "include": [
+      "process:stcollen_stcollen_*.*",
+      "final:stcollen_stcollen_*.*"
+    ]
+  }
+}
