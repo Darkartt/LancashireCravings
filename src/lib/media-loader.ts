@@ -59,6 +59,36 @@ export async function loadMediaData(): Promise<MediaDataExport> {
     } catch {
       // ignore and fall back
     }
+
+    // Static export fallback: fetch prebuilt manifest
+    try {
+      const res = await fetch(`${prefixBasePath('/curated-manifest.json')}`, { cache: 'no-store' });
+      if (res.ok) {
+        const data = await res.json();
+        const projects = (data.projects || []) as Project[];
+        const items = (data.items || []) as MediaItem[];
+        if (projects.length && items.length) {
+          const natureCollection: Record<string, NatureCategory> = {
+            portfolio: {
+              title: 'Portfolio',
+              description: 'Curated Woodcarvings',
+              coverImage: projects[0]?.coverImage || '',
+              mediaFolder: '/portfolio',
+              mediaCount: { images: items.length, videos: 0 },
+              items
+            }
+          } as Record<string, NatureCategory>;
+          return {
+            projects,
+            natureCollection,
+            getAllMediaItems: () => items,
+            getFeaturedProjects: () => projects,
+          };
+        }
+      }
+    } catch {
+      // continue to fallback dataset
+    }
   }
 
   // Fallback: import generated dataset
@@ -69,6 +99,14 @@ export async function loadMediaData(): Promise<MediaDataExport> {
     getAllMediaItems: (mod as any).getAllMediaItems,
     getFeaturedProjects: (mod as any).getFeaturedProjects
   };
+}
+
+function prefixBasePath(pathname: string): string {
+  if (typeof window === 'undefined') return pathname;
+  // Detect if hosted under a subpath (GitHub Pages)
+  const base = (globalThis as any).__NEXT_DATA__?.assetPrefix || '';
+  if (!base) return pathname;
+  return `${base}${pathname}`.replace(/\/+/, '/');
 }
 
 // Helper to lazily fetch a single project by slug

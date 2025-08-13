@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "next dev --turbopack",
   "build": "next build",
+  "preexport": "node ./scripts/generate-curated-manifest.mjs",
   "export": "next export",
     "start": "next start",
     "lint": "next lint",
