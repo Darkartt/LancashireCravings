@@ -3,8 +3,9 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches:
-      - main
-      - master
+  - main
+  - master
+  - backup-pre-filter-20250813-064616
   workflow_dispatch: {}
 
 permissions:
@@ -38,7 +39,7 @@ jobs:
       - name: Build (Next.js static export)
         run: |
           npm run build
-          npx next export
+          npm run export
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
