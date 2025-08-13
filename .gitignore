@@ -67,3 +67,18 @@ organized-visual-review*.json
 ffmpeg-master-latest-win64-gpl/
 *.exe
 ffmpeg.exe
+
+# Raw originals and archives (prevent huge history bloat)
+public/media/**/*.original
+*.original
+ffmpeg.zip
+*.zip
+*.7z
+*.tar
+*.tar.gz
+
+# Do not version local sorting outputs
+sorted_animals/
+sorted_animals_reclassified/
+__pycache__/
+*.py[cod]
