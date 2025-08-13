@@ -1,0 +1,311 @@
+
+> professional-website@0.1.0 test
+> jest
+
+FAIL tests/performance/core-web-vitals.test.tsx
+  ● Console
+
+    console.error
+      Warning: A suspended resource finished loading inside a test, but the event was not wrapped in act(...).
+      
+      When testing, code that resolves suspended data should be wrapped into act(...):
+      
+      act(() => {
+        /* finish loading suspended data */
+      });
+      /* assert on the output */
+      
+      This ensures that you're testing the behavior the user would see in the browser. Learn more at https://reactjs.org/link/wrap-tests-with-act
+
+    [0m [90m 135 |[39m     [36mreturn[39m[33m;[39m
+     [90m 136 |[39m   }
+    [31m[1m>[22m[39m[90m 137 |[39m   originalConsoleError[33m.[39mcall(console[33m,[39m [33m...[39margs)[33m;[39m
+     [90m     |[39m                        [31m[1m^[22m[39m
+     [90m 138 |[39m }[33m;[39m
+     [90m 139 |[39m
+     [90m 140 |[39m [90m// Setup performance measurement helpers[39m[0m
+
+      at console.call [as error] (tests/setup.js:137:24)
+      at printWarning (node_modules/react-dom/cjs/react-dom.development.js:86:30)
+      at error (node_modules/react-dom/cjs/react-dom.development.js:60:7)
+      at warnIfSuspenseResolutionNotWrappedWithActDEV (node_modules/react-dom/cjs/react-dom.development.js:27643:7)
+      at pingSuspendedRoot (node_modules/react-dom/cjs/react-dom.development.js:27228:3)
+
+    console.log
+      clicked
+
+      at log (tests/performance/core-web-vitals.test.tsx:178:40)
+
+  ● Performance Tests - Core Web Vitals & Optimization › Largest Contentful Paint (LCP) › prioritizes above-the-fold content
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: "eager"
+    Received: undefined
+
+    [0m [90m 223 |[39m
+     [90m 224 |[39m       [36mconst[39m img [33m=[39m container[33m.[39mquerySelector([32m'img'[39m) [36mas[39m [33mHTMLImageElement[39m[33m;[39m
+    [31m[1m>[22m[39m[90m 225 |[39m       expect(img[33m.[39mloading)[33m.[39mtoBe([32m'eager'[39m)[33m;[39m
+     [90m     |[39m                           [31m[1m^[22m[39m
+     [90m 226 |[39m       
+     [90m 227 |[39m       [36mconst[39m heading [33m=[39m container[33m.[39mquerySelector([32m'h1'[39m)[33m;[39m
+     [90m 228 |[39m       expect(heading)[33m.[39mtoBeTruthy()[33m;[39m[0m
+
+      at Object.toBe (tests/performance/core-web-vitals.test.tsx:225:27)
+
+PASS tests/accessibility/wcag-compliance.test.tsx
+PASS tests/unit/Header.test.tsx
+  ● Console
+
+    console.error
+      Warning: Received `false` for a non-boolean attribute `fill`.
+      
+      If you want to write it to the DOM, pass a string instead: fill="false" or fill={value.toString()}.
+      
+      If you used to conditionally omit it with fill={condition && value}, pass fill={condition ? value : undefined} instead.
+          at img
+          at src (C:\gladen\FixtureSync\daniel\woodcrave\opit2\check2\tests\setup.js:48:27)
+          at div
+          at src (C:\gladen\FixtureSync\daniel\woodcrave\opit2\check2\src\components\OptimizedImage.tsx:21:3)
+          at a
+          at hrefProp (C:\gladen\FixtureSync\daniel\woodcrave\opit2\check2\node_modules\next\src\client\link.tsx:296:13)
+          at div
+          at useContext (C:\gladen\FixtureSync\daniel\woodcrave\opit2\check2\node_modules\framer-motion\dist\cjs\index.js:202:22)
+          at div
+          at div
+          at header
+          at useContext (C:\gladen\FixtureSync\daniel\woodcrave\opit2\check2\node_modules\framer-motion\dist\cjs\index.js:202:22)
+          at Header (C:\gladen\FixtureSync\daniel\woodcrave\opit2\check2\src\components\Header.tsx:11:59)
+
+    [0m [90m 135 |[39m     [36mreturn[39m[33m;[39m
+     [90m 136 |[39m   }
+    [31m[1m>[22m[39m[90m 137 |[39m   originalConsoleError[33m.[39mcall(console[33m,[39m [33m...[39margs)[33m;[39m
+     [90m     |[39m                        [31m[1m^[22m[39m
+     [90m 138 |[39m }[33m;[39m
+     [90m 139 |[39m
+     [90m 140 |[39m [90m// Setup performance measurement helpers[39m[0m
+
+      at console.call [as error] (tests/setup.js:137:24)
+      at printWarning (node_modules/react-dom/cjs/react-dom.development.js:86:30)
+      at error (node_modules/react-dom/cjs/react-dom.development.js:60:7)
+      at validateProperty$1 (node_modules/react-dom/cjs/react-dom.development.js:3767:9)
+      at warnUnknownProperties (node_modules/react-dom/cjs/react-dom.development.js:3803:21)
+      at validateProperties$2 (node_modules/react-dom/cjs/react-dom.development.js:3827:3)
+      at validatePropertiesInDevelopment (node_modules/react-dom/cjs/react-dom.development.js:9541:5)
+      at setInitialProperties (node_modules/react-dom/cjs/react-dom.development.js:9830:5)
+      at finalizeInitialChildren (node_modules/react-dom/cjs/react-dom.development.js:10950:3)
+      at completeWork (node_modules/react-dom/cjs/react-dom.development.js:22232:17)
+      at completeUnitOfWork (node_modules/react-dom/cjs/react-dom.development.js:26632:16)
+      at performUnitOfWork (node_modules/react-dom/cjs/react-dom.development.js:26607:5)
+      at workLoopSync (node_modules/react-dom/cjs/react-dom.development.js:26505:5)
+      at renderRootSync (node_modules/react-dom/cjs/react-dom.development.js:26473:7)
+      at performConcurrentWorkOnRoot (node_modules/react-dom/cjs/react-dom.development.js:25777:74)
+      at flushActQueue (node_modules/react/cjs/react.development.js:2667:24)
+      at act (node_modules/react/cjs/react.development.js:2582:11)
+      at node_modules/@testing-library/react/dist/act-compat.js:47:25
+      at renderRoot (node_modules/@testing-library/react/dist/pure.js:180:26)
+      at render (node_modules/@testing-library/react/dist/pure.js:271:10)
+      at Object.<anonymous> (tests/unit/Header.test.tsx:34:13)
+
+    console.error
+      Warning: Received `true` for a non-boolean attribute `priority`.
+      
+      If you want to write it to the DOM, pass a string instead: priority="true" or priority={value.toString()}.
+          at img
+          at src (C:\gladen\FixtureSync\daniel\woodcrave\opit2\check2\tests\setup.js:48:27)
+          at div
+          at src (C:\gladen\FixtureSync\daniel\woodcrave\opit2\check2\src\components\OptimizedImage.tsx:21:3)
+          at a
+          at hrefProp (C:\gladen\FixtureSync\daniel\woodcrave\opit2\check2\node_modules\next\src\client\link.tsx:296:13)
+          at div
+          at useContext (C:\gladen\FixtureSync\daniel\woodcrave\opit2\check2\node_modules\framer-motion\dist\cjs\index.js:202:22)
+          at div
+          at div
+          at header
+          at useContext (C:\gladen\FixtureSync\daniel\woodcrave\opit2\check2\node_modules\framer-motion\dist\cjs\index.js:202:22)
+          at Header (C:\gladen\FixtureSync\daniel\woodcrave\opit2\check2\src\components\Header.tsx:11:59)
+
+    [0m [90m 135 |[39m     [36mreturn[39m[33m;[39m
+     [90m 136 |[39m   }
+    [31m[1m>[22m[39m[90m 137 |[39m   originalConsoleError[33m.[39mcall(console[33m,[39m [33m...[39margs)[33m;[39m
+     [90m     |[39m                        [31m[1m^[22m[39m
+     [90m 138 |[39m }[33m;[39m
+     [90m 139 |[39m
+     [90m 140 |[39m [90m// Setup performance measurement helpers[39m[0m
+
+      at console.call [as error] (tests/setup.js:137:24)
+      at printWarning (node_modules/react-dom/cjs/react-dom.development.js:86:30)
+      at error (node_modules/react-dom/cjs/react-dom.development.js:60:7)
+      at validateProperty$1 (node_modules/react-dom/cjs/react-dom.development.js:3765:9)
+      at warnUnknownProperties (node_modules/react-dom/cjs/react-dom.development.js:3803:21)
+      at validateProperties$2 (node_modules/react-dom/cjs/react-dom.development.js:3827:3)
+      at validatePropertiesInDevelopment (node_modules/react-dom/cjs/react-dom.development.js:9541:5)
+      at setInitialProperties (node_modules/react-dom/cjs/react-dom.development.js:9830:5)
+      at finalizeInitialChildren (node_modules/react-dom/cjs/react-dom.development.js:10950:3)
+      at completeWork (node_modules/react-dom/cjs/react-dom.development.js:22232:17)
+      at completeUnitOfWork (node_modules/react-dom/cjs/react-dom.development.js:26632:16)
+      at performUnitOfWork (node_modules/react-dom/cjs/react-dom.development.js:26607:5)
+      at workLoopSync (node_modules/react-dom/cjs/react-dom.development.js:26505:5)
+      at renderRootSync (node_modules/react-dom/cjs/react-dom.development.js:26473:7)
+      at performConcurrentWorkOnRoot (node_modules/react-dom/cjs/react-dom.development.js:25777:74)
+      at flushActQueue (node_modules/react/cjs/react.development.js:2667:24)
+      at act (node_modules/react/cjs/react.development.js:2582:11)
+      at node_modules/@testing-library/react/dist/act-compat.js:47:25
+      at renderRoot (node_modules/@testing-library/react/dist/pure.js:180:26)
+      at render (node_modules/@testing-library/react/dist/pure.js:271:10)
+      at Object.<anonymous> (tests/unit/Header.test.tsx:34:13)
+
+    console.error
+      Warning: React does not recognize the `blurDataURL` prop on a DOM element. If you intentionally want it to appear in the DOM as a custom attribute, spell it as lowercase `blurdataurl` instead. If you accidentally passed it from a parent component, remove it from the DOM element.
+          at img
+          at src (C:\gladen\FixtureSync\daniel\woodcrave\opit2\check2\tests\setup.js:48:27)
+          at div
+          at src (C:\gladen\FixtureSync\daniel\woodcrave\opit2\check2\src\components\OptimizedImage.tsx:21:3)
+          at a
+          at hrefProp (C:\gladen\FixtureSync\daniel\woodcrave\opit2\check2\node_modules\next\src\client\link.tsx:296:13)
+          at div
+          at useContext (C:\gladen\FixtureSync\daniel\woodcrave\opit2\check2\node_modules\framer-motion\dist\cjs\index.js:202:22)
+          at div
+          at div
+          at header
+          at useContext (C:\gladen\FixtureSync\daniel\woodcrave\opit2\check2\node_modules\framer-motion\dist\cjs\index.js:202:22)
+          at Header (C:\gladen\FixtureSync\daniel\woodcrave\opit2\check2\src\components\Header.tsx:11:59)
+
+    [0m [90m 135 |[39m     [36mreturn[39m[33m;[39m
+     [90m 136 |[39m   }
+    [31m[1m>[22m[39m[90m 137 |[39m   originalConsoleError[33m.[39mcall(console[33m,[39m [33m...[39margs)[33m;[39m
+     [90m     |[39m                        [31m[1m^[22m[39m
+     [90m 138 |[39m }[33m;[39m
+     [90m 139 |[39m
+     [90m 140 |[39m [90m// Setup performance measurement helpers[39m[0m
+
+      at console.call [as error] (tests/setup.js:137:24)
+      at printWarning (node_modules/react-dom/cjs/react-dom.development.js:86:30)
+      at error (node_modules/react-dom/cjs/react-dom.development.js:60:7)
+      at validateProperty$1 (node_modules/react-dom/cjs/react-dom.development.js:3757:7)
+      at warnUnknownProperties (node_modules/react-dom/cjs/react-dom.development.js:3803:21)
+      at validateProperties$2 (node_modules/react-dom/cjs/react-dom.development.js:3827:3)
+      at validatePropertiesInDevelopment (node_modules/react-dom/cjs/react-dom.development.js:9541:5)
+      at setInitialProperties (node_modules/react-dom/cjs/react-dom.development.js:9830:5)
+      at finalizeInitialChildren (node_modules/react-dom/cjs/react-dom.development.js:10950:3)
+      at completeWork (node_modules/react-dom/cjs/react-dom.development.js:22232:17)
+      at completeUnitOfWork (node_modules/react-dom/cjs/react-dom.development.js:26632:16)
+      at performUnitOfWork (node_modules/react-dom/cjs/react-dom.development.js:26607:5)
+      at workLoopSync (node_modules/react-dom/cjs/react-dom.development.js:26505:5)
+      at renderRootSync (node_modules/react-dom/cjs/react-dom.development.js:26473:7)
+      at performConcurrentWorkOnRoot (node_modules/react-dom/cjs/react-dom.development.js:25777:74)
+      at flushActQueue (node_modules/react/cjs/react.development.js:2667:24)
+      at act (node_modules/react/cjs/react.development.js:2582:11)
+      at node_modules/@testing-library/react/dist/act-compat.js:47:25
+      at renderRoot (node_modules/@testing-library/react/dist/pure.js:180:26)
+      at render (node_modules/@testing-library/react/dist/pure.js:271:10)
+      at Object.<anonymous> (tests/unit/Header.test.tsx:34:13)
+
+PASS tests/integration/user-journeys.test.tsx (6.493 s)
+  ● Console
+
+    console.error
+      Error: Not implemented: navigation (except hash changes)
+          at module.exports (C:\gladen\FixtureSync\daniel\woodcrave\opit2\check2\node_modules\jsdom\lib\jsdom\browser\not-implemented.js:9:17)
+          at navigateFetch (C:\gladen\FixtureSync\daniel\woodcrave\opit2\check2\node_modules\jsdom\lib\jsdom\living\window\navigation.js:77:3)
+          at exports.navigate (C:\gladen\FixtureSync\daniel\woodcrave\opit2\check2\node_modules\jsdom\lib\jsdom\living\window\navigation.js:55:3)
+          at Timeout._onTimeout (C:\gladen\FixtureSync\daniel\woodcrave\opit2\check2\node_modules\jsdom\lib\jsdom\living\nodes\HTMLHyperlinkElementUtils-impl.js:81:7)
+          at listOnTimeout (node:internal/timers:573:17)
+          at processTimers (node:internal/timers:514:7) {
+        type: 'not implemented'
+      }
+
+    [0m [90m 135 |[39m     [36mreturn[39m[33m;[39m
+     [90m 136 |[39m   }
+    [31m[1m>[22m[39m[90m 137 |[39m   originalConsoleError[33m.[39mcall(console[33m,[39m [33m...[39margs)[33m;[39m
+     [90m     |[39m                        [31m[1m^[22m[39m
+     [90m 138 |[39m }[33m;[39m
+     [90m 139 |[39m
+     [90m 140 |[39m [90m// Setup performance measurement helpers[39m[0m
+
+      at console.call [as error] (tests/setup.js:137:24)
+      at module.exports (node_modules/jsdom/lib/jsdom/browser/not-implemented.js:12:26)
+      at navigateFetch (node_modules/jsdom/lib/jsdom/living/window/navigation.js:77:3)
+      at exports.navigate (node_modules/jsdom/lib/jsdom/living/window/navigation.js:55:3)
+      at Timeout._onTimeout (node_modules/jsdom/lib/jsdom/living/nodes/HTMLHyperlinkElementUtils-impl.js:81:7)
+
+    console.error
+      Error: Not implemented: HTMLFormElement.prototype.requestSubmit
+          at module.exports (C:\gladen\FixtureSync\daniel\woodcrave\opit2\check2\node_modules\jsdom\lib\jsdom\browser\not-implemented.js:9:17)
+          at HTMLFormElementImpl.requestSubmit (C:\gladen\FixtureSync\daniel\woodcrave\opit2\check2\node_modules\jsdom\lib\jsdom\living\nodes\HTMLFormElement-impl.js:113:5)
+          at HTMLFormElementImpl._doRequestSubmit (C:\gladen\FixtureSync\daniel\woodcrave\opit2\check2\node_modules\jsdom\lib\jsdom\living\nodes\HTMLFormElement-impl.js:79:10)
+          at HTMLButtonElementImpl._activationBehavior (C:\gladen\FixtureSync\daniel\woodcrave\opit2\check2\node_modules\jsdom\lib\jsdom\living\nodes\HTMLButtonElement-impl.js:23:14)
+          at HTMLButtonElementImpl._dispatch (C:\gladen\FixtureSync\daniel\woodcrave\opit2\check2\node_modules\jsdom\lib\jsdom\living\events\EventTarget-impl.js:252:26)
+          at HTMLButtonElementImpl.dispatchEvent (C:\gladen\FixtureSync\daniel\woodcrave\opit2\check2\node_modules\jsdom\lib\jsdom\living\events\EventTarget-impl.js:104:17)
+          at HTMLButtonElement.dispatchEvent (C:\gladen\FixtureSync\daniel\woodcrave\opit2\check2\node_modules\jsdom\lib\jsdom\living\generated\EventTarget.js:241:34)
+          at C:\gladen\FixtureSync\daniel\woodcrave\opit2\check2\node_modules\@testing-library\user-event\dist\cjs\event\dispatchEvent.js:45:43
+          at Object.eventWrapper (C:\gladen\FixtureSync\daniel\woodcrave\opit2\check2\node_modules\@testing-library\dom\dist\config.js:25:23)
+          at Object.wrapEvent (C:\gladen\FixtureSync\daniel\woodcrave\opit2\check2\node_modules\@testing-library\user-event\dist\cjs\event\wrapEvent.js:6:28)
+          at Object.dispatchEvent (C:\gladen\FixtureSync\daniel\woodcrave\opit2\check2\node_modules\@testing-library\user-event\dist\cjs\event\dispatchEvent.js:45:22)
+          at Object.dispatchUIEvent (C:\gladen\FixtureSync\daniel\woodcrave\opit2\check2\node_modules\@testing-library\user-event\dist\cjs\event\dispatchEvent.js:22:26)
+          at Mouse.up (C:\gladen\FixtureSync\daniel\woodcrave\opit2\check2\node_modules\@testing-library\user-event\dist\cjs\system\pointer\mouse.js:100:30)
+          at PointerHost.release (C:\gladen\FixtureSync\daniel\woodcrave\opit2\check2\node_modules\@testing-library\user-event\dist\cjs\system\pointer\index.js:87:24)
+          at pointerAction (C:\gladen\FixtureSync\daniel\woodcrave\opit2\check2\node_modules\@testing-library\user-event\dist\cjs\pointer\index.js:54:47)
+          at Object.pointer (C:\gladen\FixtureSync\daniel\woodcrave\opit2\check2\node_modules\@testing-library\user-event\dist\cjs\pointer\index.js:27:9)
+          at Object.<anonymous> (C:\gladen\FixtureSync\daniel\woodcrave\opit2\check2\tests\integration\user-journeys.test.tsx:199:7) {
+        type: 'not implemented'
+      }
+
+    [0m [90m 135 |[39m     [36mreturn[39m[33m;[39m
+     [90m 136 |[39m   }
+    [31m[1m>[22m[39m[90m 137 |[39m   originalConsoleError[33m.[39mcall(console[33m,[39m [33m...[39margs)[33m;[39m
+     [90m     |[39m                        [31m[1m^[22m[39m
+     [90m 138 |[39m }[33m;[39m
+     [90m 139 |[39m
+     [90m 140 |[39m [90m// Setup performance measurement helpers[39m[0m
+
+      at console.call [as error] (tests/setup.js:137:24)
+      at module.exports (node_modules/jsdom/lib/jsdom/browser/not-implemented.js:12:26)
+      at HTMLFormElementImpl.requestSubmit (node_modules/jsdom/lib/jsdom/living/nodes/HTMLFormElement-impl.js:113:5)
+      at HTMLFormElementImpl._doRequestSubmit (node_modules/jsdom/lib/jsdom/living/nodes/HTMLFormElement-impl.js:79:10)
+      at HTMLButtonElementImpl._activationBehavior (node_modules/jsdom/lib/jsdom/living/nodes/HTMLButtonElement-impl.js:23:14)
+      at HTMLButtonElementImpl._dispatch (node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:252:26)
+      at HTMLButtonElementImpl.dispatchEvent (node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:104:17)
+      at HTMLButtonElement.dispatchEvent (node_modules/jsdom/lib/jsdom/living/generated/EventTarget.js:241:34)
+      at node_modules/@testing-library/user-event/dist/cjs/event/dispatchEvent.js:45:43
+      at Object.eventWrapper (node_modules/@testing-library/dom/dist/config.js:25:23)
+      at Object.wrapEvent (node_modules/@testing-library/user-event/dist/cjs/event/wrapEvent.js:6:28)
+      at Object.dispatchEvent (node_modules/@testing-library/user-event/dist/cjs/event/dispatchEvent.js:45:22)
+      at Object.dispatchUIEvent (node_modules/@testing-library/user-event/dist/cjs/event/dispatchEvent.js:22:26)
+      at Mouse.up (node_modules/@testing-library/user-event/dist/cjs/system/pointer/mouse.js:100:30)
+      at PointerHost.release (node_modules/@testing-library/user-event/dist/cjs/system/pointer/index.js:87:24)
+      at pointerAction (node_modules/@testing-library/user-event/dist/cjs/pointer/index.js:54:47)
+      at Object.pointer (node_modules/@testing-library/user-event/dist/cjs/pointer/index.js:27:9)
+      at Object.<anonymous> (tests/integration/user-journeys.test.tsx:199:7)
+
+    console.error
+      Error: Not implemented: navigation (except hash changes)
+          at module.exports (C:\gladen\FixtureSync\daniel\woodcrave\opit2\check2\node_modules\jsdom\lib\jsdom\browser\not-implemented.js:9:17)
+          at navigateFetch (C:\gladen\FixtureSync\daniel\woodcrave\opit2\check2\node_modules\jsdom\lib\jsdom\living\window\navigation.js:77:3)
+          at exports.navigate (C:\gladen\FixtureSync\daniel\woodcrave\opit2\check2\node_modules\jsdom\lib\jsdom\living\window\navigation.js:55:3)
+          at Timeout._onTimeout (C:\gladen\FixtureSync\daniel\woodcrave\opit2\check2\node_modules\jsdom\lib\jsdom\living\nodes\HTMLHyperlinkElementUtils-impl.js:81:7)
+          at listOnTimeout (node:internal/timers:573:17)
+          at processTimers (node:internal/timers:514:7) {
+        type: 'not implemented'
+      }
+
+    [0m [90m 135 |[39m     [36mreturn[39m[33m;[39m
+     [90m 136 |[39m   }
+    [31m[1m>[22m[39m[90m 137 |[39m   originalConsoleError[33m.[39mcall(console[33m,[39m [33m...[39margs)[33m;[39m
+     [90m     |[39m                        [31m[1m^[22m[39m
+     [90m 138 |[39m }[33m;[39m
+     [90m 139 |[39m
+     [90m 140 |[39m [90m// Setup performance measurement helpers[39m[0m
+
+      at console.call [as error] (tests/setup.js:137:24)
+      at module.exports (node_modules/jsdom/lib/jsdom/browser/not-implemented.js:12:26)
+      at navigateFetch (node_modules/jsdom/lib/jsdom/living/window/navigation.js:77:3)
+      at exports.navigate (node_modules/jsdom/lib/jsdom/living/window/navigation.js:55:3)
+      at Timeout._onTimeout (node_modules/jsdom/lib/jsdom/living/nodes/HTMLHyperlinkElementUtils-impl.js:81:7)
+
+
+Test Suites: 1 failed, 3 passed, 4 total
+Tests:       1 failed, 68 passed, 69 total
+Snapshots:   0 total
+Time:        7.913 s
+Ran all test suites.

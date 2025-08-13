@@ -440,3 +440,136 @@ If you’d like, subsequent steps can implement the Phase 1 action items directl
 ---
 
 End of Report.
+
+---
+
+## 22. Supplemental Update (2025-08-13 Snapshot)
+
+This addendum refines and expands on sections after deeper inspection of providers (`AnimationProvider`, `ScrollTriggerProvider`), hooks (`useLenis`, `useScrollTrigger`), `metadata` implementation, and presence/absence of API routes.
+
+Key Deltas Since Prior Audit (2025-08-12):
+- Confirmed: No `/app/api/*` routes exist; contact form posts to `/api/contact` -> guaranteed 404. Elevate to Critical.
+- Security middleware now present in repo (Phase 1 baseline) but CSP uses `'unsafe-inline'` for scripts & styles. Plan hash/nonce migration.
+- `images.unoptimized: true` remains; re-evaluate if static export requirement still active. If not, revert to optimizer.
+- Large `AnimationProvider` (350+ LOC) directly manipulates DOM styles & CSS vars. Decomposition priority raised.
+- Context objects not memoized: re-renders propagate through tree on every state change (cursor/scroll). Introduce `useMemo` + granular contexts.
+- Duplicate component variant files (`*.new`, `page_old.tsx`) still unpruned.
+
+Refined Critical Path (Next 7 Days):
+1. Implement `/app/api/contact/route.ts` (POST) with Zod validation, honeypot, simple in-memory or edge KV rate limit, spam heuristics (e.g., message length entropy, URL count cap).
+2. Remove `'unsafe-inline'` for styles first (migrate inline styles to CSS). For scripts: wrap JSON-LD via `next/script` with nonce; update CSP to `script-src 'self' 'nonce-<RUNTIME_NONCE>'`.
+3. Re-enable `next/image` OR integrate build-time responsive image generator. Provide LCP priority hint `<Image priority />` for hero.
+4. Break `AnimationProvider` into: `useCursorTracker`, `useScrollProgress`, `useRevealObserver`, `useHeroParallax`. Combine with a lightweight composer provider; ensure each hook only updates minimal subscribed contexts.
+5. Add skip link + focus restoration on `pageTransitionComplete` event.
+6. Memoize context values (e.g., `const value = useMemo(()=>({...}), [deps])`).
+7. Prune legacy/backup files to reduce cognitive load and accidental import risk.
+
+Performance Micro-Optimizations Identified:
+- Replace repeated `document.querySelector` inside scroll handlers with cached refs (on initialization) where stable.
+- Batch CSS variable writes by constructing a single string or use `ElementCSSInlineStyle` interface: `const rootStyle = document.documentElement.style; rootStyle.setProperty(...)` already used—group operations in same rAF callback (currently done but ensure minimal property set per frame).
+- Debounce `resize` event dispatch after transition (currently using timeout). Convert to `requestAnimationFrame` loop with max 2 frames delay.
+
+Accessibility Enhancements Detailed:
+- Reveal animations: ensure hidden pre-reveal elements still accessible to screen readers. Add `aria-hidden="true"` until visible OR better: avoid removing elements from accessibility tree; rely on opacity transforms only (current approach okay if not `display:none`). Confirm no `visibility:hidden` usage.
+- Provide `role="status"` or `aria-live="polite"` for form submission feedback rather than unconditional `role="alert"` to avoid assertive interruption unless error.
+- Ensure focus style not suppressed by Tailwind resets (verify `outline-none` not overused on interactive elements).
+
+Security Hardening Roadmap Update:
+- Add integrity checking for third-party CDNs if later introduced.
+- Implement a nonce generator in middleware (when dynamic) or use `next/headers` for per-request nonce injection.
+- Add simple spam shield: reject messages containing >3 URLs or repeated suspicious keywords.
+- Add optional server-side email dispatch queue (e.g., storing payload in durable storage + background function) to avoid request latency spikes.
+
+Testing Expansion Plan (Concrete):
+- New Jest suites: `AnimationProvider` (reduced motion fallback), `useFormValidation` edge cases, metadata generation (canonical injection present when provided), and contact API (once added) with Zod success/failure cases.
+- Playwright flows: (1) Home -> Contact -> Submit (mock 200), (2) Reduced motion preference simulation verifying animations disabled, (3) Accessibility snapshot diff.
+- Add snapshot test of generated CSP header value (regex excluding nonce) to prevent regression.
+
+Proposed File Removals / Renames (Non-breaking):
+- Remove: `globals_backup.css`, `globals_new.css` (fold differences into main `globals.css` via git diff review).
+- Remove or archive outside src: `page_old.tsx`, `page_new.tsx` (retain `page.tsx` canonical).
+- Remove duplicate animation components with `.new` suffix after diff merge.
+
+Illustrative Refactor Sketch (Provider Decomposition):
+```
+// providers/AnimationState.tsx
+export const CursorContext = createContext(...);
+export const ScrollContext = createContext(...);
+// Each provider isolates its own rAF / listeners.
+```
+
+Contact API Anti-Spam (Pseudo):
+```
+const spamScore = (msg:string) => (msg.match(/https?:\/\//g)||[]).length * 2 + (msg.length < 30 ? 1 : 0);
+if (spamScore(message) > 4) return 400;
+```
+
+Updated Action Checklist Status Legend Proposal:
+- (N) Not Started  (IP) In Progress  (D) Done  (B) Blocked
+
+New Top-Level Checklist Instance:
+- [ ] (N) Contact API route
+- [ ] (N) CSP nonce migration
+- [ ] (N) Image optimization reactivation
+- [ ] (N) Provider decomposition
+- [ ] (N) Skip link & focus management
+- [ ] (N) Remove legacy files
+- [ ] (N) Memoize contexts
+- [ ] (N) Expanded a11y & e2e tests
+- [ ] (N) Bundle analyzer & size budgets
+- [ ] (N) Spam & rate limiting layer
+
+End Supplemental Update 2025-08-13.
+
+---
+
+## 23. In-Depth Execution Plan (2025-08-13 Initiated)
+
+(Consolidated here due to file creation constraint.)
+
+See section 22 for context deltas. This plan enumerates actionable items with priority, effort, and DoD. (Content mirrors intended standalone ACTION_PLAN file.)
+
+### Phase 1 (Days 1–5) – Critical
+- Implement Contact API route with validation, spam heuristics, honeypot, simple rate limit.
+- Integrate frontend form updates + honeypot field.
+- Add skip link & focus management.
+- Stage 1 CSP hardening (remove unsafe-inline for style).
+- Memoize animation context values.
+- Prune legacy duplicate files (page_new/page_old, globals backups) after diff review.
+- Add bundle analyzer & capture baseline.
+
+### Phase 2 (Days 6–15) – Performance & A11y
+- Image optimization strategy (re-enable next/image or responsive pipeline).
+- Decompose AnimationProvider into modular hooks.
+- Dynamic import heavy assets (three.js, lottie, complex backgrounds).
+- A11y regression suite (Playwright + axe).
+- Automated sitemap generation.
+
+### Phase 3 (Days 16–30) – Security & Observability
+- CSP Stage 2 (nonce/hashes, remove remaining unsafe-inline).
+- Error monitoring (Sentry) integration.
+- Rate limiter upgrade (pluggable store).
+- Structured logging strategy.
+
+### Phase 4 (Days 31–60) – Content & DX
+- Structured data expansion (Product, Breadcrumb, Service).
+- CMS / MDX integration for content.
+- Design tokens system.
+- Test coverage expansion (>70%).
+
+### Phase 5 (Days 61–90) – Progressive Enhancements
+- PWA service worker.
+- Web Vitals RUM.
+- Visual regression suite.
+- Advanced performance (route-level metrics, prefetch tuning).
+
+### Immediate Implementation Order (Now):
+1. Contact API route (critical user journey)
+2. Skip link + focus management (a11y baseline)
+3. Memoize context value & minimal refactor (perf foundation)
+4. Add bundle analyzer (measurement) 
+5. File pruning (reduce noise) — staged after baseline build passes
+
+The detailed breakdown (tasks, DoD, metrics) matches the preceding plan; future updates will mark status inline here.
+
+

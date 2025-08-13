@@ -41,11 +41,16 @@ const SmoothBackground: React.FC<SmoothBackgroundProps> = ({
   };
 
   return (
-    <div 
+  <div 
       ref={backgroundRef}
       className={`fixed inset-0 pointer-events-none animate-gradient ${className}`}
       style={{
         zIndex: -8, // Improved from -10 for better visibility
+  position: 'fixed',
+  top: 0,
+  left: 0,
+  right: 0,
+  bottom: 0,
         background: `
           radial-gradient(ellipse at ${20 + Math.sin(animationOffset * 0.008) * 3}% ${30 + Math.cos(animationOffset * 0.01) * 3}%, ${currentColors.primary} 0%, transparent 75%),
           radial-gradient(ellipse at ${80 + Math.sin(animationOffset * 0.009) * 2.5}% ${70 + Math.cos(animationOffset * 0.006) * 2.5}%, ${currentColors.secondary} 0%, transparent 75%),
@@ -62,14 +67,17 @@ const SmoothBackground: React.FC<SmoothBackgroundProps> = ({
         backfaceVisibility: 'hidden',
         mixBlendMode: 'multiply'
       }}
-      aria-hidden="true"
+    aria-hidden="true"
+  role="presentation"
+  data-testid="smooth-background"
     >
       {/* Subtle overlay for content protection */}
       <div 
         className="absolute inset-0 pointer-events-none"
         style={{
           background: `linear-gradient(to bottom, rgb(250 249 247) 0%, transparent 20%, transparent 80%, rgb(250 249 247) 100%)`,
-          opacity: 0.6
+      // Keep within diagnostic test expectation range (0.06 - 0.12)
+      opacity: 0.1
         }}
       />
     </div>

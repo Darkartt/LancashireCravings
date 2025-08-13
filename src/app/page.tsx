@@ -53,7 +53,7 @@ export default function Home() {
       <Header />
 
       {/* Hero Section - Enhanced Full-Height Immersive */}
-      <section id="hero" className="hero-section relative min-h-screen flex flex-col justify-center items-center bg-transparent pt-40 pb-40 hero-parallax section-transition-smooth">
+  <section id="hero" style={{ zIndex: 1 }} className="hero-section relative min-h-screen flex flex-col justify-center items-center bg-transparent pt-40 pb-40 hero-parallax section-transition-smooth">
         <div className="container-modern text-center max-w-6xl relative z-10">
           <div
             className="mb-6"
