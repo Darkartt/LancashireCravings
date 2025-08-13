@@ -89,16 +89,16 @@ describe('Accessibility Tests - WCAG 2.1 AAA Compliance', () => {
       });
     });
 
-    it('skip links are present for keyboard users', () => {
+  it('skip links are present for keyboard users', () => {
       const { container } = render(
         <div>
-          <a href="#main-content" className="sr-only">Skip to main content</a>
+      <a href="#main" className="sr-only">Skip to main content</a>
           <MockHeader />
           <MockHomePage />
         </div>
       );
 
-      const skipLink = container.querySelector('a[href="#main-content"]');
+    const skipLink = container.querySelector('a[href="#main"]');
       expect(skipLink).toBeInTheDocument();
     });
   });
