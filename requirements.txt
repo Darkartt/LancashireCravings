@@ -1,0 +1,18 @@
+# Requirements for Animal Photo Sorter Script
+# Install with: pip install -r requirements.txt
+
+# Core dependencies
+torch>=1.9.0
+torchvision>=0.10.0
+transformers>=4.20.0
+Pillow>=8.0.0
+numpy>=1.21.0
+
+# Optional: For better performance on GPU
+# Uncomment the line below if you have CUDA installed
+# torch[cuda]
+
+# Development dependencies (optional)
+# pytest>=6.0.0
+# black>=22.0.0
+# flake8>=4.0.0

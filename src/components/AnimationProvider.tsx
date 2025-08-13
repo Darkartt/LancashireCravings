@@ -1,6 +1,6 @@
 'use client';
 
-import React, { createContext, useContext, useEffect, useRef, useState } from 'react';
+import React, { createContext, useContext, useEffect, useRef, useState, useMemo } from 'react';
 import { useAnimationReset } from '../hooks/useAnimationReset';
 import { ScrollProgressIndicator } from './ScrollProgressIndicator';
 import { ScrollTriggerProvider, useScrollTriggerContext } from './ScrollTriggerProvider';
@@ -295,16 +295,18 @@ const AnimationProviderInner: React.FC<AnimationProviderProps> = ({ children }) 
     };
   }, [scrollTriggerReady]);
 
+  const contextValue = useMemo(() => ({
+    cursorPosition,
+    scrollProgress,
+    isDarkMode,
+    isReducedMotion,
+    scrollTriggerReady,
+    createScrollAnimation,
+    scrollTo
+  }), [cursorPosition, scrollProgress, isDarkMode, isReducedMotion, scrollTriggerReady, createScrollAnimation, scrollTo]);
+
   return (
-    <AnimationContext.Provider value={{ 
-      cursorPosition, 
-      scrollProgress, 
-      isDarkMode, 
-      isReducedMotion,
-      scrollTriggerReady,
-      createScrollAnimation,
-      scrollTo
-    }}>
+    <AnimationContext.Provider value={contextValue}>
       <ScrollProgressIndicator />
       {/* Sophisticated docking target that appears as background scales down */}
       <div 

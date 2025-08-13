@@ -101,11 +101,12 @@ export default function ContactForm({ onSubmit, className = '' }: ContactFormPro
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify(formData),
+          body: JSON.stringify({ ...formData, _hp: (document.getElementById('_hp') as HTMLInputElement)?.value || '' }),
         });
 
         if (!response.ok) {
-          throw new Error('Failed to send message');
+          const err = await response.json().catch(() => ({}));
+          throw new Error(err.error || 'Failed to send message');
         }
       }
 
@@ -242,6 +243,11 @@ export default function ContactForm({ onSubmit, className = '' }: ContactFormPro
           {submitMessage}
         </div>
       )}
+
+      {/* Honeypot field (hidden from users) */}
+      <div className="hidden" aria-hidden="true">
+        <label>Leave this field empty<input id="_hp" name="_hp" type="text" autoComplete="off" tabIndex={-1} /></label>
+      </div>
 
       <div className="flex flex-col sm:flex-row gap-4 sm:justify-end">
         <Button

@@ -42,11 +42,15 @@ export default function RootLayout({
           type="image/svg+xml"
         />
       </head><body className="antialiased" suppressHydrationWarning={true}>
+        {/* Skip link for keyboard users */}
+        <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 bg-accent-primary text-white px-4 py-2 rounded-md shadow-lg">Skip to content</a>
         <ErrorBoundary>
           <HydrationSuppressor>
             <AnimationProvider>
               <PageTransition>
-                {children}
+                <main id="main" tabIndex={-1}>
+                  {children}
+                </main>
               </PageTransition>
             </AnimationProvider>
           </HydrationSuppressor>

@@ -1,6 +1,9 @@
 import type { NextConfig } from "next";
+// Bundle analyzer (conditionally loaded)
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const withBundleAnalyzer = require('@next/bundle-analyzer')({ enabled: process.env.ANALYZE === 'true' });
 
-const nextConfig: NextConfig = {
+const baseConfig: NextConfig = {
   // output: 'export', // Enable static HTML export for GitHub Pages - temporarily disabled for dynamic routes
   images: {
     unoptimized: true // Required for static export
@@ -25,5 +28,7 @@ const nextConfig: NextConfig = {
     return config;
   }
 };
+
+const nextConfig: NextConfig = withBundleAnalyzer(baseConfig);
 
 export default nextConfig;
