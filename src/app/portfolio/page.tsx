@@ -2,24 +2,51 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
+import MotionDiv from '@/components/MotionContainer';
 import CleanBackground from '@/components/CleanBackground';
 import ProjectCard from '@/components/ProjectCard';
 import MediaCard from '@/components/MediaCard';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import { 
-  projects,
-  getFeaturedProjects,
-  getFeaturedMedia
-} from '@/lib/media-organized';
+import { getFeaturedProjectsLite, loadFullProjects } from '@/lib/media-core';
+import type { Project } from '@/lib/media-organized';
+// Featured media will be dynamically loaded; remove static heavy import.
 
 export default function PortfolioPage() {
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   
-  const allProjects = projects;
-  const featuredProjects = getFeaturedProjects();
-  const featuredMedia = getFeaturedMedia();
+  const [allProjects, setAllProjects] = useState<Project[]>(getFeaturedProjectsLite());
+  const [featuredProjects, setFeaturedProjects] = useState<Project[]>(getFeaturedProjectsLite());
+  const [featuredMedia, setFeaturedMedia] = useState<any[]>([]);
+  const [mediaLoaded, setMediaLoaded] = useState(false);
+  React.useEffect(() => {
+    (async () => {
+      try {
+        const full = await loadFullProjects();
+        setAllProjects(full.projects);
+        const fp = full.getFeaturedProjects?.();
+        if (fp) setFeaturedProjects(fp);
+      } catch (e) {
+        console.warn('Portfolio: full dataset load failed', e);
+      }
+    })();
+  }, []);
+  // Defer featured media load until idle
+  React.useEffect(() => {
+    if (!mediaLoaded) {
+      const defer = (cb: () => void) => (typeof window !== 'undefined' && 'requestIdleCallback' in window ? (window as any).requestIdleCallback(cb) : setTimeout(cb, 250));
+      defer(async () => {
+        try {
+          const mod = await import('@/lib/media-organized');
+          const fm = mod.getFeaturedMedia?.();
+          if (fm) setFeaturedMedia(fm);
+          setMediaLoaded(true);
+        } catch (e) {
+          console.warn('Portfolio: featured media load failed', e);
+        }
+      });
+    }
+  }, [mediaLoaded]);
   
   // Filter projects by category
   const filteredProjects = selectedCategory === 'all' 
@@ -66,7 +93,7 @@ export default function PortfolioPage() {
         {/* Hero Section */}
         <section className="pt-32 pb-16 px-4" style={{ background: 'transparent' }}>
           <div className="max-w-7xl mx-auto text-center">
-            <motion.div
+            <MotionDiv
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
@@ -79,10 +106,10 @@ export default function PortfolioPage() {
                 Explore decades of artisanal woodcarving excellence. From majestic wildlife to sacred religious pieces, 
                 each creation represents the pinnacle of traditional craftsmanship merged with contemporary artistry.
               </p>
-            </motion.div>
+            </MotionDiv>
 
             {/* Portfolio Stats */}
-            <motion.div 
+            <MotionDiv 
               className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -104,14 +131,14 @@ export default function PortfolioPage() {
                 <div className="text-3xl font-bold text-[var(--accent-primary)]">100%</div>
                 <div className="text-sm text-[var(--text-muted)] uppercase tracking-wide">Handcrafted</div>
               </div>
-            </motion.div>
+            </MotionDiv>
           </div>
         </section>
 
         {/* Featured Projects Section */}
         <section className="py-16 px-4 bg-transparent backdrop-blur-sm">
           <div className="max-w-7xl mx-auto">
-            <motion.div
+            <MotionDiv
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
@@ -123,27 +150,27 @@ export default function PortfolioPage() {
               <p className="text-lg text-[var(--text-muted)] max-w-2xl mx-auto">
                 Signature pieces that showcase the highest level of artisanal skill and creative vision
               </p>
-            </motion.div>
+            </MotionDiv>
 
-            <motion.div 
+      <MotionDiv 
               className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
               variants={containerVariants}
               initial="hidden"
               animate="visible"
             >
               {featuredProjects.map((project, index) => (
-                <motion.div key={`featured-${project.id}-${index}`} variants={itemVariants}>
+        <MotionDiv key={`featured-${project.id}-${index}`} variants={itemVariants}>
                   <ProjectCard 
                     project={project} 
                     variant="detailed"
                     className="h-full hover:scale-[1.02] transition-transform duration-300"
                   />
-                </motion.div>
+        </MotionDiv>
               ))}
-            </motion.div>
+      </MotionDiv>
 
             {/* View All Gallery Link */}
-            <motion.div 
+            <MotionDiv 
               className="text-center mt-12"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -158,14 +185,14 @@ export default function PortfolioPage() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
               </Link>
-            </motion.div>
+            </MotionDiv>
           </div>
         </section>
 
         {/* Category Filter Section */}
         <section className="py-16 px-4">
           <div className="max-w-7xl mx-auto">
-            <motion.div
+            <MotionDiv
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.5 }}
@@ -177,10 +204,10 @@ export default function PortfolioPage() {
               <p className="text-lg text-[var(--text-muted)]">
                 Discover our diverse range of woodcarving specialties
               </p>
-            </motion.div>
+            </MotionDiv>
 
             {/* Category Filters */}
-            <motion.div 
+            <MotionDiv 
               className="flex flex-wrap justify-center gap-3 mb-12"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -199,16 +226,16 @@ export default function PortfolioPage() {
                   {category.label} ({category.count})
                 </button>
               ))}
-            </motion.div>
+            </MotionDiv>
 
             {/* Filtered Projects Grid */}
-            <motion.div 
+      <MotionDiv 
               className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
               layout
               key={selectedCategory}
             >
               {filteredProjects.map((project, index) => (
-                <motion.div 
+        <MotionDiv 
                   key={`filtered-${project.id}-${selectedCategory}-${index}`}
                   layout
                   initial={{ opacity: 0, scale: 0.9 }}
@@ -220,16 +247,16 @@ export default function PortfolioPage() {
                     variant="compact"
                     className="h-full"
                   />
-                </motion.div>
+        </MotionDiv>
               ))}
-            </motion.div>
+      </MotionDiv>
           </div>
         </section>
 
         {/* Process Highlight Section */}
         <section className="py-16 px-4 bg-transparent backdrop-blur-sm">
           <div className="max-w-7xl mx-auto">
-            <motion.div
+            <MotionDiv
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.7 }}
@@ -241,31 +268,31 @@ export default function PortfolioPage() {
               <p className="text-lg text-[var(--text-muted)] max-w-2xl mx-auto">
                 Witness the transformation from raw wood to breathtaking sculpture through our documented process
               </p>
-            </motion.div>
+            </MotionDiv>
 
-            <motion.div 
+      <MotionDiv 
               className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
               variants={containerVariants}
               initial="hidden"
               animate="visible"
             >
-              {featuredMedia.slice(0, 6).map((media, index) => (
-                <motion.div key={`media-${media.id}-${index}`} variants={itemVariants}>
+              {(featuredMedia.length ? featuredMedia.slice(0, 6) : []).map((media, index) => (
+        <MotionDiv key={`media-${media.id}-${index}`} variants={itemVariants}>
                   <MediaCard 
                     media={media}
                     size="medium"
                     variant="detailed"
                   />
-                </motion.div>
+        </MotionDiv>
               ))}
-            </motion.div>
+      </MotionDiv>
           </div>
         </section>
 
         {/* Commission Call to Action */}
         <section className="py-16 px-4">
           <div className="max-w-4xl mx-auto text-center">
-            <motion.div
+            <MotionDiv
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.8 }}
@@ -298,7 +325,7 @@ export default function PortfolioPage() {
                   </svg>
                 </Link>
               </div>
-            </motion.div>
+            </MotionDiv>
           </div>
         </section>
       </main>

@@ -1,9 +1,9 @@
 'use client';
 
 import React, { useEffect, useRef } from 'react';
-import { gsap } from 'gsap';
+import { loadGsap } from '@/lib/gsapLoader';
 import { useScrollTrigger } from '../../hooks/useScrollTrigger';
-import { motion } from 'framer-motion';
+import MotionDiv from '@/components/MotionContainer';
 
 interface WoodGrainTransitionProps {
   fromWoodType: 'oak' | 'walnut' | 'cherry' | 'maple';
@@ -60,70 +60,72 @@ const WoodGrainTransition: React.FC<WoodGrainTransitionProps> = ({
   const toColors = woodColors[toWoodType];
 
   useEffect(() => {
+    let killed = false;
     if (!ScrollTrigger || !containerRef.current) return;
 
-    const container = containerRef.current;
-    const grainLines = container.querySelectorAll('.grain-line');
-    const morphingBg = container.querySelector('.morphing-background');
+    (async () => {
+      const { gsap } = await loadGsap();
+      if (killed) return;
 
-    // Create scroll-triggered wood grain transition
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: triggerElement,
-        start: 'top 80%',
-        end: 'bottom 20%',
-        scrub: 1,
-        onUpdate: (self) => {
-          const progress = self.progress;
-          
-          // Interpolate colors based on scroll progress
-          const r1 = parseInt(fromColors.base.slice(1, 3), 16);
-          const g1 = parseInt(fromColors.base.slice(3, 5), 16);
-          const b1 = parseInt(fromColors.base.slice(5, 7), 16);
-          
-          const r2 = parseInt(toColors.base.slice(1, 3), 16);
-          const g2 = parseInt(toColors.base.slice(3, 5), 16);
-          const b2 = parseInt(toColors.base.slice(5, 7), 16);
-          
-          const r = Math.round(r1 + (r2 - r1) * progress);
-          const g = Math.round(g1 + (g2 - g1) * progress);
-          const b = Math.round(b1 + (b2 - b1) * progress);
-          
-          if (morphingBg) {
-            (morphingBg as HTMLElement).style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
+      const container = containerRef.current!;
+      const grainLines = container.querySelectorAll('.grain-line');
+      const morphingBg = container.querySelector('.morphing-background');
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: triggerElement,
+          start: 'top 80%',
+          end: 'bottom 20%',
+            scrub: 1,
+          onUpdate: (self: any) => {
+            const progress = self.progress;
+            const r1 = parseInt(fromColors.base.slice(1, 3), 16);
+            const g1 = parseInt(fromColors.base.slice(3, 5), 16);
+            const b1 = parseInt(fromColors.base.slice(5, 7), 16);
+            const r2 = parseInt(toColors.base.slice(1, 3), 16);
+            const g2 = parseInt(toColors.base.slice(3, 5), 16);
+            const b2 = parseInt(toColors.base.slice(5, 7), 16);
+            const r = Math.round(r1 + (r2 - r1) * progress);
+            const g = Math.round(g1 + (g2 - g1) * progress);
+            const b = Math.round(b1 + (b2 - b1) * progress);
+            if (morphingBg) {
+              (morphingBg as HTMLElement).style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
+            }
           }
         }
-      }
-    });
+      });
 
-    // Animate grain lines with staggered timing
-    tl.to(grainLines, {
-      duration: 1,
-      y: direction === 'vertical' ? -100 : 0,
-      x: direction === 'horizontal' ? -100 : 0,
-      opacity: 0,
-      stagger: 0.1,
-      ease: 'power2.inOut'
-    })
-    .set(grainLines, {
-      y: direction === 'vertical' ? 100 : 0,
-      x: direction === 'horizontal' ? 100 : 0,
-    })
-    .to(grainLines, {
-      duration: 1,
-      y: 0,
-      x: 0,
-      opacity: settings.opacity,
-      stagger: 0.1,
-      ease: 'power2.inOut'
-    });
+      tl.to(grainLines, {
+        duration: 1,
+        y: direction === 'vertical' ? -100 : 0,
+        x: direction === 'horizontal' ? -100 : 0,
+        opacity: 0,
+        stagger: 0.1,
+        ease: 'power2.inOut'
+      })
+      .set(grainLines, {
+        y: direction === 'vertical' ? 100 : 0,
+        x: direction === 'horizontal' ? 100 : 0,
+      })
+      .to(grainLines, {
+        duration: 1,
+        y: 0,
+        x: 0,
+        opacity: settings.opacity,
+        stagger: 0.1,
+        ease: 'power2.inOut'
+      });
+    })();
 
     return () => {
-      ScrollTrigger.getAll().forEach((trigger: any) => {
-        if (trigger.trigger === triggerElement) {
-          trigger.kill();
-        }
-      });
+      killed = true;
+      if (ScrollTrigger) {
+        ScrollTrigger.getAll().forEach((trigger: any) => {
+          if (trigger.trigger === triggerElement) {
+            trigger.kill();
+          }
+        });
+      }
     };
   }, [ScrollTrigger, triggerElement, direction, settings, fromColors, toColors]);
 
@@ -134,7 +136,7 @@ const WoodGrainTransition: React.FC<WoodGrainTransitionProps> = ({
       style={{ zIndex: -1 }}
     >
       {/* Morphing background */}
-      <motion.div
+  <MotionDiv
         className="morphing-background absolute inset-0"
         initial={{ backgroundColor: fromColors.base }}
         style={{ 
@@ -158,7 +160,7 @@ const WoodGrainTransition: React.FC<WoodGrainTransitionProps> = ({
           >
             {/* Vertical grain lines */}
             {Array.from({ length: 12 }).map((_, i) => (
-              <motion.path
+              <MotionDiv as='path'
                 key={`v-${i}`}
                 className="grain-line"
                 d={`M${8 + i * 8},0 Q${10 + i * 8},50 ${8 + i * 8},100`}
@@ -178,7 +180,7 @@ const WoodGrainTransition: React.FC<WoodGrainTransitionProps> = ({
             
             {/* Horizontal grain details */}
             {Array.from({ length: 6 }).map((_, i) => (
-              <motion.path
+              <MotionDiv as='path'
                 key={`h-${i}`}
                 className="grain-line"
                 d={`M0,${15 + i * 15} Q50,${12 + i * 15} 100,${15 + i * 15}`}
@@ -207,7 +209,7 @@ const WoodGrainTransition: React.FC<WoodGrainTransitionProps> = ({
 
       {/* Transition particles */}
       {Array.from({ length: 8 }).map((_, i) => (
-        <motion.div
+  <MotionDiv
           key={`particle-${i}`}
           className="absolute w-1 h-1 rounded-full"
           style={{

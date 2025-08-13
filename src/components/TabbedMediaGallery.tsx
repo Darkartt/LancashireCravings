@@ -2,7 +2,8 @@
 
 import React, { useState, useMemo } from 'react';
 import Image from 'next/image';
-import { motion, AnimatePresence } from 'framer-motion';
+import MotionDiv from '@/components/MotionContainer';
+import { LazyAnimatePresence } from '@/components/LazyAnimatePresence';
 import { MediaItem, Project } from '@/lib/media-organized';
 import { Play, Image as ImageIcon, Video } from 'lucide-react';
 
@@ -195,8 +196,8 @@ const TabbedMediaGallery: React.FC<TabbedMediaGalleryProps> = ({
             <p className="text-sm">Try adjusting your category or project filters.</p>
           </div>
         ) : (
-          <AnimatePresence mode="wait">
-            <motion.div
+          <LazyAnimatePresence mode="wait">
+            <MotionDiv
               key={`${activeTab}-${selectedCategory}-${selectedProject}`}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -205,7 +206,7 @@ const TabbedMediaGallery: React.FC<TabbedMediaGalleryProps> = ({
               className={`grid ${gridClass} gap-6`}
             >
               {currentItems.map((item, index) => (
-                <motion.div
+                <MotionDiv
                   key={`${item.id}-${index}`}
                   initial={{ opacity: 0, scale: 0.9 }}
                   animate={{ opacity: 1, scale: 1 }}
@@ -249,29 +250,29 @@ const TabbedMediaGallery: React.FC<TabbedMediaGalleryProps> = ({
                       <span className="capitalize">{item.project}</span>
                     </div>
                   </div>
-                </motion.div>
+                </MotionDiv>
               ))}
-            </motion.div>
-          </AnimatePresence>
+            </MotionDiv>
+          </LazyAnimatePresence>
         )}
       </div>
 
       {/* Lightbox for Images */}
-      <AnimatePresence>
+      <LazyAnimatePresence>
         {lightboxItem && (
-          <motion.div
+          <MotionDiv
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             className="fixed inset-0 z-50 flex items-center justify-center bg-black/90"
             onClick={closeLightbox}
           >
-            <motion.div
+            <MotionDiv
               initial={{ scale: 0.9 }}
               animate={{ scale: 1 }}
               exit={{ scale: 0.9 }}
               className="relative max-w-4xl max-h-[90vh] mx-4"
-              onClick={(e) => e.stopPropagation()}
+              onClick={(e: React.MouseEvent) => e.stopPropagation()}
             >
               <Image
                 src={lightboxItem.src}
@@ -292,10 +293,10 @@ const TabbedMediaGallery: React.FC<TabbedMediaGalleryProps> = ({
                   {lightboxItem.category} • {lightboxItem.project}
                 </p>
               </div>
-            </motion.div>
-          </motion.div>
+            </MotionDiv>
+          </MotionDiv>
         )}
-      </AnimatePresence>
+      </LazyAnimatePresence>
     </div>
   );
 };

@@ -3,7 +3,7 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
+import MotionDiv from '@/components/MotionContainer';
 import { Project } from '@/lib/media-organized';
 
 interface ProjectCardProps {
@@ -80,7 +80,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   };
 
   return (
-    <motion.div
+  <MotionDiv
       className={`group relative overflow-hidden rounded-2xl bg-white shadow-[0_1px_3px_rgba(0,0,0,0.1)] hover:shadow-[0_12px_40px_rgba(0,0,0,0.15)] transition-all duration-500 ${variantClasses[variant]} ${className}`}
       variants={cardVariants}
       initial="hidden"
@@ -107,7 +107,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
 
           {/* Featured Badge */}
           {project.featured && (
-            <motion.div 
+            <MotionDiv 
               className="absolute top-4 left-4"
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -116,7 +116,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
               <span className="bg-[var(--accent-primary)] text-white px-3 py-1.5 rounded-full text-xs font-medium backdrop-blur-sm">
                 Featured
               </span>
-            </motion.div>
+            </MotionDiv>
           )}
 
           {/* Video Play Button */}
@@ -188,19 +188,19 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
               </div>
 
               {/* Arrow */}
-              <motion.div 
+              <MotionDiv 
                 className="w-6 h-6 text-white/70 group-hover:text-white group-hover:translate-x-1 transition-all duration-300"
                 whileHover={{ x: 4 }}
               >
                 <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                 </svg>
-              </motion.div>
+              </MotionDiv>
             </div>
           </div>
         </div>
       </Link>
-    </motion.div>
+    </MotionDiv>
   );
 };
 
