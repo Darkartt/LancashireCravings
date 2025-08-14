@@ -1,4 +1,8 @@
 import { NextResponse } from 'next/server';
+
+// Allow static export to include this route as a prebuilt asset
+export const dynamic = 'force-static';
+export const revalidate = false;
 import type { Project, NatureCategory, MediaItem } from '@/lib/media-types';
 
 // GET /api/portfolio
