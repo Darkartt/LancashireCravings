@@ -2,8 +2,9 @@
 
 import React, { useState, useMemo } from 'react';
 import Image from 'next/image';
-import { motion, AnimatePresence } from 'framer-motion';
-import { MediaItem, Project } from '@/lib/media-organized';
+import MotionDiv from '@/components/MotionContainer';
+import { LazyAnimatePresence } from '@/components/LazyAnimatePresence';
+import type { MediaItem, Project } from '@/lib/media-types';
 
 interface ModernMediaGalleryProps {
   items: MediaItem[];
@@ -55,7 +56,7 @@ const ModernMediaGallery: React.FC<ModernMediaGalleryProps> = ({
     <div className={`modern-media-gallery ${className}`}>
       {/* Filters */}
       {showFilters && (
-        <motion.div 
+  <MotionDiv 
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           className="mb-8 space-y-4"
@@ -113,17 +114,17 @@ const ModernMediaGallery: React.FC<ModernMediaGalleryProps> = ({
               </button>
             ))}
           </div>
-        </motion.div>
+  </MotionDiv>
       )}
 
       {/* Gallery Grid */}
-      <motion.div 
+      <MotionDiv 
         layout
         className={`grid gap-6 ${gridClass}`}
       >
-        <AnimatePresence>
+        <LazyAnimatePresence>
           {filteredItems.map((item, index) => (
-            <motion.div
+            <MotionDiv
               key={item.id}
               layout
               initial={{ opacity: 0, scale: 0.9 }}
@@ -171,27 +172,27 @@ const ModernMediaGallery: React.FC<ModernMediaGalleryProps> = ({
                   </p>
                 </div>
               </div>
-            </motion.div>
+            </MotionDiv>
           ))}
-        </AnimatePresence>
-      </motion.div>
+        </LazyAnimatePresence>
+      </MotionDiv>
 
       {/* Lightbox Modal */}
-      <AnimatePresence>
+      <LazyAnimatePresence>
         {lightboxItem && (
-          <motion.div
+          <MotionDiv
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4"
             onClick={() => setLightboxItem(null)}
           >
-            <motion.div
+            <MotionDiv
               initial={{ scale: 0.5 }}
               animate={{ scale: 1 }}
               exit={{ scale: 0.5 }}
               className="relative max-w-5xl max-h-[90vh] w-full h-full"
-              onClick={(e) => e.stopPropagation()}
+              onClick={(e: React.MouseEvent<HTMLDivElement>) => e.stopPropagation()}
             >
               {lightboxItem.type === 'image' ? (
                 <Image
@@ -227,14 +228,14 @@ const ModernMediaGallery: React.FC<ModernMediaGalleryProps> = ({
                   {lightboxItem.category.replace('-', ' ')} • {lightboxItem.project.replace('-', ' ')}
                 </p>
               </div>
-            </motion.div>
-          </motion.div>
+            </MotionDiv>
+          </MotionDiv>
         )}
-      </AnimatePresence>
+      </LazyAnimatePresence>
 
       {/* No Results Message */}
       {filteredItems.length === 0 && (
-        <motion.div
+  <MotionDiv
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           className="text-center py-12"
@@ -249,7 +250,7 @@ const ModernMediaGallery: React.FC<ModernMediaGalleryProps> = ({
           >
             Clear Filters
           </button>
-        </motion.div>
+  </MotionDiv>
       )}
     </div>
   );

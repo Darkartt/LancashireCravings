@@ -61,3 +61,38 @@ Command: `npm run analyze`
 - Remaining direct framer-motion imports (next wave): process page, timelapses pages, media galleries (ModernMediaGallery, MediaGallery variants), configurators, background parallax components (ModernBackground with useScroll/useTransform), timelines (EnhancedTimeline with useInView), PageTransition (core), video players, before/after components.
 - Expected Impact: No immediate shared reduction until last static import removed; partial conversion may add wrapper overhead (<1 kB). Final wave will allow framer-motion to be entirely async on initial load for routes not using advanced transitions.
 - Next Steps: Replace remaining motion imports; introduce lazy hook helpers for useScroll/useTransform/useInView to eliminate early hook import path; then re-run analyzer to capture delta.
+
+### 2025-08-13 (Even Later) – Framer Motion Lazy Migration Wave 2 Complete
+- Completed conversions for: services, shop, shop/[category], contact, blog, about, gallery (page-new), behind-the-scenes, timelapses (page_new), legacy home (page_old), and InteractiveConfigurator (AnimatePresence → LazyAnimatePresence, motion.* → MotionDiv).
+- Enhanced MotionDiv fallback to strip whileInView/viewport props to avoid DOM warnings before framer-motion loads.
+- Analyzer rerun results:
+	- Shared First Load JS: 101 kB (no regression)
+	- Example routes: / 122 kB, /behind-the-scenes 161 kB, /process 162 kB, /projects/[slug] 164 kB
+	- Client analyzer highlights large async chunk: static/chunks/253… includes media-organized.ts (~710 kB parsed) but remains async on several routes.
+- Impact: Direct framer-motion is no longer included in the initial shared chunk; it's loaded lazily when animations mount. Shared remains 101 kB due to other vendors; the benefit is reduction for routes that do not trigger motion immediately and less TTI pressure.
+- Next: Segment media-organized.ts and wire dynamic slices per route; set CI budgets and track reductions.
+
+### 2025-08-13 (Night) – Post-Lint Fix Re-run (Clean Analyze)
+- Command: `npm run analyze`
+- Outcome: Compiled successfully in ~32s; analyzer HTML generated for client/node/edge.
+- ESLint: Only one warning remains (react-hooks/exhaustive-deps) in `src/components/PageTransition.tsx`; informational only.
+- Shared First Load JS: 101 kB (unchanged)
+- Route sizes (sample):
+	- / 122 kB
+	- /timelapses 123 kB
+	- /gallery 118 kB
+	- /behind-the-scenes 125 kB
+	- /process 126 kB
+	- /projects/[slug] 128 kB
+- Largest shared vendor chunks remain:
+	- chunks/4bd1b696-46d2ec519b4f23f7.js – 53.2 kB
+	- chunks/684-2598bfeb396df75b.js – 45.9 kB
+- Notes:
+	- Clean baseline achieved after repairing `timelapses/page_new.tsx` and removing ESLint blockers.
+	- PageTransition dependency warning to be revisited when we evaluate splitting/rewriting that component.
+
+### 2025-08-13 (Night, later) – Slice-aware loader scaffolding
+- Added `src/lib/media-slices/` with pilot slices and README.
+- Extended `media-loader` with slice-aware helpers: `loadNatureCategorySlice`, `loadProjectSlice`, `loadNatureCategory`, `loadProjectByIdOrSlug` (with graceful fallback to `media-organized`).
+- Added tiny pilot slices for `nature/artistic` and `projects/golden-eagle`.
+- Re-ran analyze: shared still 101 kB; route sizes unchanged (as expected—no consumers are wired yet). This enables incremental sharding without regressions.

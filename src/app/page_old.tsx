@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { MotionDiv } from "@/components/MotionContainer";
 import HomeBackground from "../components/backgrounds/HomeBackground";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
@@ -82,20 +82,20 @@ export default function Home() {
       {/* Enhanced Process Section with Timeline */}
       <section id="process" className="py-32 px-6 sm:px-12 bg-gradient-to-br from-accent-primary/5 to-accent-secondary/5 border-t border-foreground/10">
         <div className="container mx-auto max-w-7xl">
-          <motion.div className="text-center mb-20" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} viewport={{ once: true }}>
+          <MotionDiv className="text-center mb-20" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} viewport={{ once: true }}>
             <h2 className="text-5xl md:text-6xl font-serif font-bold text-accent-primary mb-8">
               From Vision to Heirloom
             </h2>
             <p className="text-xl text-foreground/70 max-w-3xl mx-auto leading-relaxed">
               Every masterpiece begins with a conversation and culminates in a legacy piece that will be treasured for generations.
             </p>
-          </motion.div>
+          </MotionDiv>
 
           {/* Process Timeline */}
           <div className="relative">
             <div className="space-y-24">
               {/* Step 1 */}
-              <motion.div 
+              <MotionDiv 
                 className="flex flex-col lg:flex-row items-center gap-12"
                 initial={{ opacity: 0, x: -50 }}
                 whileInView={{ opacity: 1, x: 0 }}
@@ -118,10 +118,10 @@ export default function Home() {
                     </div>
                   </div>
                 </div>
-              </motion.div>
+              </MotionDiv>
 
               {/* Step 2 */}
-              <motion.div 
+              <MotionDiv 
                 className="flex flex-col lg:flex-row-reverse items-center gap-12"
                 initial={{ opacity: 0, x: 50 }}
                 whileInView={{ opacity: 1, x: 0 }}
@@ -144,10 +144,10 @@ export default function Home() {
                     </div>
                   </div>
                 </div>
-              </motion.div>
+              </MotionDiv>
 
               {/* Step 3 */}
-              <motion.div 
+              <MotionDiv 
                 className="flex flex-col lg:flex-row items-center gap-12"
                 initial={{ opacity: 0, x: -50 }}
                 whileInView={{ opacity: 1, x: 0 }}
@@ -170,7 +170,7 @@ export default function Home() {
                     </div>
                   </div>
                 </div>
-              </motion.div>
+              </MotionDiv>
             </div>
           </div>          {/* Sustainability Commitment */}
           <div 
@@ -488,7 +488,7 @@ export default function Home() {
       {/* Enhanced Testimonials Section */}
       <section id="testimonials" className="py-32 px-6 sm:px-12 bg-gradient-to-br from-accent-secondary/5 to-accent-primary/5 border-t border-foreground/10">
         <div className="container mx-auto max-w-7xl">
-          <motion.div 
+          <MotionDiv 
             className="text-center mb-20"
             initial={{ opacity: 0, y: 20 }} 
             whileInView={{ opacity: 1, y: 0 }} 
@@ -501,10 +501,10 @@ export default function Home() {
             <p className="text-xl text-foreground/70 max-w-3xl mx-auto leading-relaxed">
               Our greatest pride comes from the relationships we build and the satisfaction of clients who become part of our extended family.
             </p>
-          </motion.div>
+          </MotionDiv>
 
           {/* Featured Testimonial */}
-          <motion.div 
+          <MotionDiv 
             className="mb-20 p-8 md:p-12 bg-background rounded-3xl shadow-xl border border-foreground/10"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -533,11 +533,11 @@ export default function Home() {
                 </div>
               </div>
             </div>
-          </motion.div>
+          </MotionDiv>
 
           {/* Client Showcase Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-            <motion.div 
+            <MotionDiv 
               className="p-8 rounded-2xl shadow-lg bg-background border border-foreground/10 hover:shadow-xl transition-all duration-300"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -556,9 +556,9 @@ export default function Home() {
               <blockquote className="italic text-foreground/80 leading-relaxed">
                 "The custom dining table from Elite Woodcraft is a masterpiece. The craftsmanship and attention to detail exceeded our highest expectations."
               </blockquote>
-            </motion.div>
+            </MotionDiv>
 
-            <motion.div 
+            <MotionDiv 
               className="p-8 rounded-2xl shadow-lg bg-background border border-foreground/10 hover:shadow-xl transition-all duration-300"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -577,9 +577,9 @@ export default function Home() {
               <blockquote className="italic text-foreground/80 leading-relaxed">
                 "We commissioned a carved mantel for our estate, and the result is breathtaking. Their expertise transformed our vision into reality."
               </blockquote>
-            </motion.div>
+            </MotionDiv>
 
-            <motion.div 
+            <MotionDiv 
               className="p-8 rounded-2xl shadow-lg bg-background border border-foreground/10 hover:shadow-xl transition-all duration-300"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -598,13 +598,13 @@ export default function Home() {
               <blockquote className="italic text-foreground/80 leading-relaxed">
                 "Elite Woodcraft's attention to detail and artistry is unmatched. Our custom sculpture is the centerpiece of our home."
               </blockquote>
-            </motion.div>
+            </MotionDiv>
           </div>
         </div>
       </section>      {/* Enhanced Call to Action Section */}
       <section id="cta" className="py-32 px-6 sm:px-12 bg-gradient-to-br from-accent-primary/10 to-accent-secondary/10 border-t border-foreground/10">
         <div className="container mx-auto max-w-6xl">
-          <motion.div 
+          <MotionDiv 
             className="text-center mb-16" 
             initial={{ opacity: 0, y: 20 }} 
             whileInView={{ opacity: 1, y: 0 }} 
@@ -621,9 +621,9 @@ export default function Home() {
             <p className="text-lg text-foreground/60 mb-12">
               From concept to completion, we guide you through every step of creating your unique heirloom.
             </p>
-          </motion.div>
+          </MotionDiv>
 
-          <motion.div 
+          <MotionDiv 
             className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -659,9 +659,9 @@ export default function Home() {
                 Your completed masterpiece comes with authentication, care instructions, and our lifetime craftsmanship warranty.
               </p>
             </div>
-          </motion.div>
+          </MotionDiv>
 
-          <motion.div 
+          <MotionDiv 
             className="text-center"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -694,7 +694,7 @@ export default function Home() {
                 email <span className="font-semibold text-accent-primary">hello@elitewoodcraft.co.uk</span>
               </p>
             </div>
-          </motion.div>
+          </MotionDiv>
         </div>
       </section>
 

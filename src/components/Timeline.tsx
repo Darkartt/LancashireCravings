@@ -1,9 +1,9 @@
 'use client';
 
 import React from 'react';
-import { motion } from 'framer-motion';
+import MotionDiv from '@/components/MotionContainer';
 import Image from 'next/image';
-import { MediaItem } from '@/lib/media-organized';
+import type { MediaItem } from '@/lib/media-types';
 
 interface TimelineStep {
   id: string;
@@ -80,7 +80,7 @@ const Timeline: React.FC<TimelineProps> = ({
                 <span>{completedSteps} of {steps.length} steps</span>
               </div>
               <div className="w-full bg-neutral-200 rounded-full h-2">
-                <motion.div
+                <MotionDiv
                   className="bg-accent-primary h-2 rounded-full"
                   initial={{ width: 0 }}
                   animate={{ width: `${progressPercentage}%` }}
@@ -92,7 +92,7 @@ const Timeline: React.FC<TimelineProps> = ({
         </div>
 
         {/* Horizontal Timeline */}
-        <motion.div
+  <MotionDiv
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
@@ -101,7 +101,7 @@ const Timeline: React.FC<TimelineProps> = ({
         >
           {/* Timeline Line */}
           <div className="absolute top-8 left-0 right-0 h-0.5 bg-neutral-200 z-0" />
-          <motion.div
+          <MotionDiv
             className="absolute top-8 left-0 h-0.5 bg-accent-primary z-10"
             initial={{ width: 0 }}
             animate={{ width: `${progressPercentage}%` }}
@@ -110,7 +110,7 @@ const Timeline: React.FC<TimelineProps> = ({
 
           <div className="flex justify-between relative z-20">
             {steps.map((step, index) => (
-              <motion.div
+              <MotionDiv
                 key={step.id}
                 variants={stepVariants}
                 className="flex flex-col items-center max-w-xs"
@@ -154,10 +154,10 @@ const Timeline: React.FC<TimelineProps> = ({
                     />
                   </div>
                 )}
-              </motion.div>
+      </MotionDiv>
             ))}
           </div>
-        </motion.div>
+    </MotionDiv>
       </div>
     );
   }
@@ -181,7 +181,7 @@ const Timeline: React.FC<TimelineProps> = ({
               <span>{completedSteps} of {steps.length} steps</span>
             </div>
             <div className="w-full bg-neutral-200 rounded-full h-2">
-              <motion.div
+              <MotionDiv
                 className="bg-accent-primary h-2 rounded-full"
                 initial={{ width: 0 }}
                 animate={{ width: `${progressPercentage}%` }}
@@ -193,7 +193,7 @@ const Timeline: React.FC<TimelineProps> = ({
       </div>
 
       {/* Vertical Timeline */}
-      <motion.div
+  <MotionDiv
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"
@@ -202,7 +202,7 @@ const Timeline: React.FC<TimelineProps> = ({
       >
         {/* Timeline Line */}
         <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-neutral-200 z-0" />
-        <motion.div
+  <MotionDiv
           className="absolute left-8 top-0 w-0.5 bg-accent-primary z-10"
           initial={{ height: 0 }}
           animate={{ height: `${progressPercentage}%` }}
@@ -211,7 +211,7 @@ const Timeline: React.FC<TimelineProps> = ({
 
         <div className="space-y-12">
           {steps.map((step, index) => (
-            <motion.div
+            <MotionDiv
               key={step.id}
               variants={stepVariants}
               className="relative flex items-start"
@@ -260,10 +260,10 @@ const Timeline: React.FC<TimelineProps> = ({
                   </div>
                 </div>
               </div>
-            </motion.div>
+    </MotionDiv>
           ))}
         </div>
-      </motion.div>
+  </MotionDiv>
     </div>
   );
 };

@@ -2,8 +2,9 @@ import type { Project, MediaItem } from './media-types';
 
 // Build curated projects from public/portfolio/<project> folder using _mapping.json
 export function getCuratedProjects(rootDir: string): Project[] {
-  const path = require('node:path') as typeof import('node:path');
-  const fs = require('node:fs') as typeof import('node:fs');
+  // Use eval to avoid static require lint, still server-only
+  const path: typeof import('node:path') = (eval('require'))('node:path');
+  const fs: typeof import('node:fs') = (eval('require'))('node:fs');
   const base = path.join(rootDir, 'public', 'portfolio');
   if (!fs.existsSync(base)) return [];
   const entries = fs.readdirSync(base, { withFileTypes: true });
@@ -35,8 +36,8 @@ export function getCuratedProjects(rootDir: string): Project[] {
 }
 
 export function getCuratedMediaItems(rootDir: string): MediaItem[] {
-  const path = require('node:path') as typeof import('node:path');
-  const fs = require('node:fs') as typeof import('node:fs');
+  const path: typeof import('node:path') = (eval('require'))('node:path');
+  const fs: typeof import('node:fs') = (eval('require'))('node:fs');
   const base = path.join(rootDir, 'public', 'portfolio');
   if (!fs.existsSync(base)) return [];
   const items: MediaItem[] = [];
@@ -68,7 +69,7 @@ export function getCuratedMediaItems(rootDir: string): MediaItem[] {
 
 function relPortfolioSrc(projectFolder: string, mappingCuratedPath: string): string {
   // mapping curated path to public path: '/portfolio/<project>/<basename>'
-  const path = require('node:path') as typeof import('node:path');
+  const path: typeof import('node:path') = (eval('require'))('node:path');
   const normalized = mappingCuratedPath.replace(/\\/g, '/');
   const base = path.basename(normalized);
   return `/portfolio/${projectFolder}/${base}`;

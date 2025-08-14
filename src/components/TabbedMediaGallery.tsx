@@ -4,7 +4,7 @@ import React, { useState, useMemo } from 'react';
 import Image from 'next/image';
 import MotionDiv from '@/components/MotionContainer';
 import { LazyAnimatePresence } from '@/components/LazyAnimatePresence';
-import { MediaItem, Project } from '@/lib/media-organized';
+import type { MediaItem, Project } from '@/lib/media-types';
 import { Play, Image as ImageIcon, Video } from 'lucide-react';
 
 interface TabbedMediaGalleryProps {

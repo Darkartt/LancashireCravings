@@ -1,9 +1,10 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import MotionDiv from '@/components/MotionContainer';
+import { LazyAnimatePresence } from '@/components/LazyAnimatePresence';
 import Image from 'next/image';
-import { MediaItem } from '@/lib/media-organized';
+import type { MediaItem } from '@/lib/media-types';
 
 interface ProcessStep {
   id: string;
@@ -108,7 +109,7 @@ const InteractiveProcessGallery: React.FC<InteractiveProcessGalleryProps> = ({
   if (variant === 'grid') {
     return (
       <div className="w-full max-w-7xl mx-auto">
-        <motion.div
+  <MotionDiv
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
@@ -121,11 +122,11 @@ const InteractiveProcessGallery: React.FC<InteractiveProcessGalleryProps> = ({
           <p className="text-lg text-foreground/70 max-w-2xl mx-auto">
             Explore the transformation through detailed documentation of each step
           </p>
-        </motion.div>
+  </MotionDiv>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8">
           {steps.map((step, stepIndex) => (
-            <motion.div
+            <MotionDiv
               key={step.id}
               variants={itemVariants}
               className="bg-background rounded-xl border border-neutral-200 overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300"
@@ -144,7 +145,7 @@ const InteractiveProcessGallery: React.FC<InteractiveProcessGalleryProps> = ({
               <div className="p-4">
                 <div className="grid grid-cols-2 gap-2">
                   {step.media.slice(0, 4).map((media, mediaIndex) => (
-                    <motion.div
+                    <MotionDiv
                       key={media.id}
                       whileHover={{ scale: 1.05 }}
                       className="aspect-square relative rounded-lg overflow-hidden cursor-pointer"
@@ -164,30 +165,30 @@ const InteractiveProcessGallery: React.FC<InteractiveProcessGalleryProps> = ({
                           +{step.media.length - 4}
                         </div>
                       )}
-                    </motion.div>
+        </MotionDiv>
                   ))}
                 </div>
               </div>
-            </motion.div>
+      </MotionDiv>
           ))}
         </div>
 
         {/* Lightbox Modal */}
-        <AnimatePresence>
+        <LazyAnimatePresence>
           {activeMedia && (
-            <motion.div
+            <MotionDiv
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-4"
               onClick={() => setActiveMediaIndex(-1)}
             >
-              <motion.div
+              <MotionDiv
                 initial={{ scale: 0.9 }}
                 animate={{ scale: 1 }}
                 exit={{ scale: 0.9 }}
                 className="bg-background rounded-xl max-w-4xl w-full max-h-[90vh] overflow-hidden"
-                onClick={(e) => e.stopPropagation()}
+                onClick={(e: React.MouseEvent<HTMLDivElement>) => e.stopPropagation()}
               >
                 <div className="aspect-video relative">
                   <Image
@@ -205,10 +206,10 @@ const InteractiveProcessGallery: React.FC<InteractiveProcessGalleryProps> = ({
                     {activeMedia.alt}
                   </p>
                 </div>
-              </motion.div>
-            </motion.div>
+              </MotionDiv>
+            </MotionDiv>
           )}
-        </AnimatePresence>
+        </LazyAnimatePresence>
       </div>
     );
   }
@@ -216,7 +217,7 @@ const InteractiveProcessGallery: React.FC<InteractiveProcessGalleryProps> = ({
   // Tabs variant (default)
   return (
     <div className="w-full max-w-6xl mx-auto">
-      <motion.div
+  <MotionDiv
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"
@@ -229,7 +230,7 @@ const InteractiveProcessGallery: React.FC<InteractiveProcessGalleryProps> = ({
         <p className="text-lg text-foreground/70 max-w-2xl mx-auto">
           Follow the step-by-step transformation with interactive photo documentation
         </p>
-      </motion.div>
+  </MotionDiv>
 
       {/* Step Navigation */}
       <div className="flex flex-wrap justify-center gap-2 mb-8">
@@ -252,7 +253,7 @@ const InteractiveProcessGallery: React.FC<InteractiveProcessGalleryProps> = ({
       </div>
 
       {/* Main Content */}
-      <motion.div
+  <MotionDiv
         key={activeStepIndex}
         variants={itemVariants}
         initial="hidden"
@@ -261,9 +262,9 @@ const InteractiveProcessGallery: React.FC<InteractiveProcessGalleryProps> = ({
       >
         {/* Main Image Display */}
         <div className="aspect-video relative bg-neutral-100">
-          <AnimatePresence mode="wait">
+      <LazyAnimatePresence mode="wait">
             {activeMedia && (
-              <motion.div
+        <MotionDiv
                 key={`${activeStepIndex}-${activeMediaIndex}`}
                 variants={mediaVariants}
                 initial="enter"
@@ -278,9 +279,9 @@ const InteractiveProcessGallery: React.FC<InteractiveProcessGalleryProps> = ({
                   fill
                   className="object-cover"
                 />
-              </motion.div>
+        </MotionDiv>
             )}
-          </AnimatePresence>
+      </LazyAnimatePresence>
 
           {/* Media Controls */}
           <div className="absolute top-4 right-4 flex items-center space-x-2">
@@ -375,7 +376,7 @@ const InteractiveProcessGallery: React.FC<InteractiveProcessGalleryProps> = ({
             )}
           </div>
         </div>
-      </motion.div>
+  </MotionDiv>
     </div>
   );
 };

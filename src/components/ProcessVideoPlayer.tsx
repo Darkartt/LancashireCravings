@@ -1,9 +1,10 @@
 'use client';
 
 import React, { useState, useRef, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import MotionDiv from '@/components/MotionContainer';
+import { LazyAnimatePresence } from '@/components/LazyAnimatePresence';
 import Image from 'next/image';
-import { MediaItem } from '@/lib/media-organized';
+import type { MediaItem } from '@/lib/media-types';
 
 interface VideoChapter {
   id: string;
@@ -202,7 +203,7 @@ const ProcessVideoPlayer: React.FC<ProcessVideoPlayerProps> = ({
   };
 
   return (
-    <motion.div
+  <MotionDiv
       variants={containerVariants}
       initial="hidden"
       whileInView="visible"
@@ -255,7 +256,7 @@ const ProcessVideoPlayer: React.FC<ProcessVideoPlayerProps> = ({
 
             {/* Play Button Overlay */}
             {!isPlaying && isLoaded && (
-              <motion.button
+              <MotionDiv as="button"
                 initial={{ scale: 0.5, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 exit={{ scale: 0.5, opacity: 0 }}
@@ -267,13 +268,13 @@ const ProcessVideoPlayer: React.FC<ProcessVideoPlayerProps> = ({
                     <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clipRule="evenodd" />
                   </svg>
                 </div>
-              </motion.button>
+              </MotionDiv>
             )}
 
             {/* Active Chapter Indicator */}
-            <AnimatePresence>
+      <LazyAnimatePresence>
               {activeChapter && isPlaying && (
-                <motion.div
+        <MotionDiv
                   variants={overlayVariants}
                   initial="hidden"
                   animate="visible"
@@ -282,14 +283,14 @@ const ProcessVideoPlayer: React.FC<ProcessVideoPlayerProps> = ({
                 >
                   <h4 className="font-semibold text-sm">{activeChapter.title}</h4>
                   <p className="text-xs opacity-90">{activeChapter.description}</p>
-                </motion.div>
+        </MotionDiv>
               )}
-            </AnimatePresence>
+      </LazyAnimatePresence>
 
             {/* Controls Overlay */}
-            <AnimatePresence>
+      <LazyAnimatePresence>
               {showControls && showControlsOverlay && (
-                <motion.div
+        <MotionDiv
                   variants={overlayVariants}
                   initial="hidden"
                   animate="visible"
@@ -391,9 +392,9 @@ const ProcessVideoPlayer: React.FC<ProcessVideoPlayerProps> = ({
                       </svg>
                     </button>
                   </div>
-                </motion.div>
+        </MotionDiv>
               )}
-            </AnimatePresence>
+      </LazyAnimatePresence>
           </div>
         </div>
 
@@ -446,7 +447,7 @@ const ProcessVideoPlayer: React.FC<ProcessVideoPlayerProps> = ({
           </div>
         )}
       </div>
-    </motion.div>
+  </MotionDiv>
   );
 };
 

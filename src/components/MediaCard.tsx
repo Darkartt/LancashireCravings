@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Image from 'next/image';
-import { MediaItem } from '@/lib/media-organized';
+import type { MediaItem } from '@/lib/media-types';
 
 interface MediaCardProps {
   media: MediaItem;

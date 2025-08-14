@@ -1,0 +1,57 @@
+[
+  {
+    "label": "RawWood",
+    "source": "public\\media\\projects\\eagle\\images\\process\\eagle_eagle_004.jpeg",
+    "curated": "curated_output\\Woodcarvings\\eagle\\eagle_01_RawWood.jpeg"
+  },
+  {
+    "label": "RoughShape",
+    "source": "public\\media\\projects\\eagle\\images\\process\\eagle_eagle_044.jpg",
+    "curated": "curated_output\\Woodcarvings\\eagle\\eagle_02_RoughShape.jpg"
+  },
+  {
+    "label": "DefiningForms",
+    "source": "public\\media\\projects\\eagle\\images\\process\\eagle_eagle_108.jpg",
+    "curated": "curated_output\\Woodcarvings\\eagle\\eagle_03_DefiningForms.jpg"
+  },
+  {
+    "label": "Detailing",
+    "source": "public\\media\\projects\\eagle\\images\\process\\eagle_eagle_176.jpg",
+    "curated": "curated_output\\Woodcarvings\\eagle\\eagle_04_Detailing.jpg"
+  },
+  {
+    "label": "Finished_1",
+    "source": "public\\media\\projects\\eagle\\images\\final\\eagle_eagle_295.jpg",
+    "curated": "curated_output\\Woodcarvings\\eagle\\eagle_05_Finished_1.jpg"
+  },
+  {
+    "label": "Finished_2",
+    "source": "public\\media\\projects\\eagle\\images\\final\\eagle_eagle_294.jpg",
+    "curated": "curated_output\\Woodcarvings\\eagle\\eagle_06_Finished_2.jpg"
+  },
+  {
+    "label": "Finished_3",
+    "source": "public\\media\\projects\\eagle\\images\\final\\eagle_eagle_299.jpg",
+    "curated": "curated_output\\Woodcarvings\\eagle\\eagle_07_Finished_3.jpg"
+  },
+  {
+    "label": "Finished_4",
+    "source": "public\\media\\projects\\eagle\\images\\final\\eagle_eagle_293.jpg",
+    "curated": "curated_output\\Woodcarvings\\eagle\\eagle_08_Finished_4.jpg"
+  },
+  {
+    "label": "Finished_5",
+    "source": "public\\media\\projects\\eagle\\images\\final\\eagle_eagle_292.jpg",
+    "curated": "curated_output\\Woodcarvings\\eagle\\eagle_09_Finished_5.jpg"
+  },
+  {
+    "label": "Detail_1",
+    "source": "public\\media\\projects\\eagle\\images\\final\\eagle_eagle_270.jpg",
+    "curated": "curated_output\\Woodcarvings\\eagle\\eagle_10_Detail_1.jpg"
+  },
+  {
+    "label": "Detail_2",
+    "source": "public\\media\\projects\\eagle\\images\\final\\eagle_eagle_291.jpg",
+    "curated": "curated_output\\Woodcarvings\\eagle\\eagle_11_Detail_2.jpg"
+  }
+]

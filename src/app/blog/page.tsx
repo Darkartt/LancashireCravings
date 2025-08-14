@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { MotionDiv } from "@/components/MotionContainer";
 import Header from "../../components/Header";
 import BlogBackground from "../../components/backgrounds/BlogBackground";
 import Footer from "../../components/Footer";
@@ -15,27 +15,27 @@ export default function Blog() {
       <Header />      {/* Hero Section */}
       <section className="relative py-16 px-4 sm:px-8 bg-foreground/5 overflow-hidden pt-40" style={{ zIndex: 5 }}> {/* Fixed header clearance */}
         <div className="container mx-auto relative">
-          <motion.h2 
+          <MotionDiv as="h2" 
             className="text-4xl font-serif font-bold text-accent-primary mb-6"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
             viewport={{ once: true }}
-          >Woodcraft Chronicles</motion.h2>
-          <motion.p 
+          >Woodcraft Chronicles</MotionDiv>
+          <MotionDiv as="p" 
             className="text-lg text-foreground/80 max-w-2xl"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
             viewport={{ once: true }}
-          >Dive into the world of Elite Woodcraft with insights on craftsmanship, design inspiration, and the art of bespoke woodcarving.</motion.p>
+          >Dive into the world of Elite Woodcraft with insights on craftsmanship, design inspiration, and the art of bespoke woodcarving.</MotionDiv>
         </div>
       </section>
 
       {/* Blog Posts Section */}
       <section className="py-16 px-4 sm:px-8 bg-background">
         <div className="container mx-auto max-w-4xl">
-          <motion.div 
+          <MotionDiv 
             className="flex justify-between items-center mb-8"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -49,10 +49,10 @@ export default function Blog() {
               <button className="text-foreground/70 hover:text-foreground border border-foreground/20 px-3 py-1 rounded-md text-sm">Design</button>
               <button className="text-foreground/70 hover:text-foreground border border-foreground/20 px-3 py-1 rounded-md text-sm">Projects</button>
             </div>
-          </motion.div>
+          </MotionDiv>
           <div className="space-y-12">
             {/* Blog Post 1 */}
-            <motion.article 
+            <MotionDiv as="article" 
               className="group"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -75,9 +75,9 @@ export default function Blog() {
                   <button className="text-accent-primary font-medium opacity-0 group-hover:opacity-100 transition-opacity">Read More →</button>
                 </div>
               </div>
-            </motion.article>
+            </MotionDiv>
             {/* Blog Post 2 */}
-            <motion.article 
+            <MotionDiv as="article" 
               className="group"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -100,9 +100,9 @@ export default function Blog() {
                   <button className="text-accent-primary font-medium opacity-0 group-hover:opacity-100 transition-opacity">Read More →</button>
                 </div>
               </div>
-            </motion.article>
+            </MotionDiv>
             {/* Blog Post 3 */}
-            <motion.article 
+            <MotionDiv as="article" 
               className="group"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -126,9 +126,9 @@ export default function Blog() {
                   <button className="text-accent-primary font-medium opacity-0 group-hover:opacity-100 transition-opacity">Read More →</button>
                 </div>
               </div>
-            </motion.article>
+            </MotionDiv>
             {/* Blog Post 4 */}
-            <motion.article 
+            <MotionDiv as="article" 
               className="group"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -151,7 +151,7 @@ export default function Blog() {
                   <button className="text-accent-primary font-medium opacity-0 group-hover:opacity-100 transition-opacity">Read More →</button>
                 </div>
               </div>
-            </motion.article>
+            </MotionDiv>
           </div>
           <div className="mt-12 flex justify-center">
             <div className="flex space-x-2">
@@ -165,7 +165,7 @@ export default function Blog() {
 
       {/* Newsletter Section */}
       <section className="py-16 px-4 sm:px-8 bg-accent-primary/10">
-        <motion.div 
+  <MotionDiv 
           className="container mx-auto text-center max-w-2xl"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -178,7 +178,7 @@ export default function Blog() {
             <input type="email" placeholder="Your Email Address" className="flex-1 px-4 py-3 border border-foreground/20 rounded-md focus:outline-none focus:ring-2 focus:ring-accent-primary/50 bg-background text-foreground" required />
             <button type="submit" className="bg-accent-primary text-background px-6 py-3 rounded-md font-medium hover:bg-accent-primary/90 transition-colors">Subscribe</button>
           </form>
-          <p className="text-foreground/60 text-sm mt-3">We respect your privacy and will never share your information.</p>        </motion.div>
+          <p className="text-foreground/60 text-sm mt-3">We respect your privacy and will never share your information.</p>        </MotionDiv>
       </section>
 
       <Footer />

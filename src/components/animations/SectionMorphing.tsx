@@ -1,7 +1,8 @@
 'use client';
 
 import React, { useEffect, useRef, useState, useMemo } from 'react';
-import { gsap } from 'gsap';
+// Dynamically load gsap only when component runs on client
+import { loadGsap } from '@/lib/gsapLoader';
 import { useScrollTrigger } from '../../hooks/useScrollTrigger';
 import WoodGrainTransition from './WoodGrainTransition';
 
@@ -71,8 +72,11 @@ const SectionMorphing: React.FC<SectionMorphingProps> = ({
 
     if (!currentSection || !nextSection) return;
 
-    // Create the morphing timeline
-    const tl = gsap.timeline({
+  // Load gsap lazily
+    (async () => {
+  const { gsap } = await loadGsap();
+      // Create the morphing timeline
+      const tl = gsap.timeline({
       scrollTrigger: {
         trigger: currentSection,
         start: 'bottom 60%',
@@ -94,7 +98,7 @@ const SectionMorphing: React.FC<SectionMorphingProps> = ({
     // Animation-specific effects
     switch (config.animationType) {
       case 'carving-reveal':
-        tl.to('.carving-tool', {
+  tl.to('.carving-tool', {
           rotation: 360,
           duration: config.duration,
           ease: 'power2.inOut'
@@ -146,12 +150,17 @@ const SectionMorphing: React.FC<SectionMorphingProps> = ({
         break;
     }
 
+    })();
+
     return () => {
-      ScrollTrigger.getAll().forEach((trigger: any) => {
-        if (trigger.trigger === currentSection) {
-          trigger.kill();
-        }
-      });
+      try {
+        ScrollTrigger.getAll().forEach((trigger: any) => {
+          if (trigger.trigger === currentSection) {
+            trigger.kill();
+          }
+        });
+        // No explicit gsap cleanup needed beyond ScrollTrigger kills
+      } catch {}
     };
   }, [ScrollTrigger, sectionId, nextSectionId, config, morphingType]);
 

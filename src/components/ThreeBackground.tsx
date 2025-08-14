@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
-import * as THREE from 'three';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
-import { gsap } from 'gsap';
+// Three.js now loaded dynamically to avoid pulling it into shared bundle for routes that don't render this component
+import { loadGsap } from '@/lib/gsapLoader';
 
 interface ThreeBackgroundProps {
   sceneType: 'home' | 'about' | 'portfolio' | 'shop' | 'blog' | 'contact';
@@ -16,68 +15,76 @@ const ThreeBackground = ({ sceneType }: ThreeBackgroundProps) => {
   }, []);
 
   useEffect(() => {
-    const currentMount = mountRef.current; // Capture ref value
-    if (!isClient || !currentMount || typeof window === 'undefined' || typeof document === 'undefined') return; // Added typeof document check
+    let animationTimeline: any | null = null; // only used for home owl animation
+    let cleanupFns: Array<() => void> = [];
 
-    console.log(`ThreeBackground: Initializing scene for ${sceneType}`);
-    if (sceneType === 'blog') {
-      console.log("Blog scene: Setting up rotating scroll animation.");
-      console.log("Blog scene: Component mounted, checking renderer and DOM element.");
-      if (currentMount) { // Use currentMount
-        console.log("Blog scene: Mount ref is available, appending renderer DOM element.");
-      } else {
-        console.error("Blog scene: Mount ref is not available, rendering may fail.");
+  (async () => {
+      const currentMount = mountRef.current; // Capture ref value
+      if (!isClient || !currentMount || typeof window === 'undefined' || typeof document === 'undefined') return; // Added typeof document check
+
+      console.log(`ThreeBackground: Initializing scene for ${sceneType}`);
+      if (sceneType === 'blog') {
+        console.log("Blog scene: Setting up rotating scroll animation.");
+        console.log("Blog scene: Component mounted, checking renderer and DOM element.");
+        if (currentMount) { // Use currentMount
+          console.log("Blog scene: Mount ref is available, appending renderer DOM element.");
+        } else {
+          console.error("Blog scene: Mount ref is not available, rendering may fail.");
+        }
       }
-    }
 
-    // Scene setup
-    const scene = new THREE.Scene();
-    scene.background = new THREE.Color(sceneType === 'blog' ? 0x3c2f1a : 0x2c2416); // Slightly lighter for blog to contrast
+  // Dynamically import three & controls only when component actually mounts in browser
+  const THREE = await import('three');
+  const { OrbitControls } = await import('three/examples/jsm/controls/OrbitControls.js');
 
-    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    camera.position.set(0, 1.5, 6); // Adjusted camera position for better centering and view
+  // Scene setup
+  const scene = new THREE.Scene();
+      scene.background = new THREE.Color(sceneType === 'blog' ? 0x3c2f1a : 0x2c2416); // Slightly lighter for blog to contrast
 
-    const renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: "high-performance" }); // Enabled antialiasing and high performance
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    currentMount.innerHTML = ''; // Clear any existing content
-    currentMount.appendChild(renderer.domElement);
+  const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+      camera.position.set(0, 1.5, 6); // Adjusted camera position for better centering and view
 
-    // Add OrbitControls for interaction
-    const controls = new OrbitControls(camera, renderer.domElement);
-    controls.enableDamping = true;
-    controls.dampingFactor = 0.05;
-    controls.enableZoom = false;
-    controls.enablePan = false;
-    if (sceneType === 'home') {
-      controls.minPolarAngle = Math.PI / 3; // Allow more vertical rotation
-      controls.maxPolarAngle = Math.PI * 2 / 3;
-      controls.minAzimuthAngle = -Math.PI / 3; // Allow more horizontal rotation
-      controls.maxAzimuthAngle = Math.PI / 3;
-    } else {
-      controls.enableRotate = false;
-    }
+  const renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: "high-performance" }); // Enabled antialiasing and high performance
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      currentMount.innerHTML = ''; // Clear any existing content
+      currentMount.appendChild(renderer.domElement);
 
-    // Enhanced Lighting
-    const ambientLight = new THREE.AmbientLight(0xe8e4da, 0.8); // Slightly brighter ambient light
-    scene.add(ambientLight);
+      // Add OrbitControls for interaction
+      const controls = new OrbitControls(camera, renderer.domElement);
+      controls.enableDamping = true;
+      controls.dampingFactor = 0.05;
+      controls.enableZoom = false;
+      controls.enablePan = false;
+      if (sceneType === 'home') {
+        controls.minPolarAngle = Math.PI / 3; // Allow more vertical rotation
+        controls.maxPolarAngle = Math.PI * 2 / 3;
+        controls.minAzimuthAngle = -Math.PI / 3; // Allow more horizontal rotation
+        controls.maxAzimuthAngle = Math.PI / 3;
+      } else {
+        controls.enableRotate = false;
+      }
 
-    const directionalLight = new THREE.DirectionalLight(0xffffff, 1.2); // Brighter directional light
-    directionalLight.position.set(5, 10, 7);
-    directionalLight.castShadow = true; // Enable shadows
-    scene.add(directionalLight);
+      // Enhanced Lighting
+      const ambientLight = new THREE.AmbientLight(0xe8e4da, 0.8); // Slightly brighter ambient light
+      scene.add(ambientLight);
 
-    const pointLight = new THREE.PointLight(0xffa500, 1.5, 30); // Warmer point light
-    pointLight.position.set(-5, 5, 5);
-    scene.add(pointLight);
-    
-    renderer.shadowMap.enabled = true; // Enable shadow mapping in the renderer
+      const directionalLight = new THREE.DirectionalLight(0xffffff, 1.2); // Brighter directional light
+      directionalLight.position.set(5, 10, 7);
+      directionalLight.castShadow = true; // Enable shadows
+      scene.add(directionalLight);
 
-    // Scene-specific content
-    let animateFunction: () => void;
-    const clock = new THREE.Clock(); // Clock for time-based animations
+      const pointLight = new THREE.PointLight(0xffa500, 1.5, 30); // Warmer point light
+      pointLight.position.set(-5, 5, 5);
+      scene.add(pointLight);
+      
+      renderer.shadowMap.enabled = true; // Enable shadow mapping in the renderer
 
-    switch (sceneType) {
+      // Scene-specific content
+      let animateFunction: () => void;
+      const clock = new THREE.Clock(); // Clock for time-based animations
+
+      switch (sceneType) {
       case 'home':
         // Ultra-detailed owl carving animation with intricate stages for master craftsmanship
         // Procedural wood texture
@@ -179,7 +186,9 @@ const ThreeBackground = ({ sceneType }: ThreeBackgroundProps) => {
         }
 
 
-        const animationTimeline = gsap.timeline({ repeat: -1, repeatDelay: 2 });
+  // Dynamically load GSAP only for the heavy home owl carving animation
+  const { gsap } = await loadGsap();
+  animationTimeline = gsap.timeline({ repeat: -1, repeatDelay: 2 });
 
         // Stage 0: Rough block visible
         animationTimeline.to(block.scale, { x: 1, y: 1, z: 1, duration: 0.1 }, 0);
@@ -222,7 +231,9 @@ const ThreeBackground = ({ sceneType }: ThreeBackgroundProps) => {
 
         animateFunction = () => {
           const delta = clock.getDelta();
-          animationTimeline.time(animationTimeline.time() + delta); // Manually advance timeline
+          if (animationTimeline) {
+            animationTimeline.time(animationTimeline.time() + delta); // Manually advance timeline
+          }
           controls.update();
           renderer.render(scene, camera);
         };
@@ -275,50 +286,57 @@ const ThreeBackground = ({ sceneType }: ThreeBackgroundProps) => {
         break;
       default:
         animateFunction = () => { renderer.render(scene, camera); };
-    }
-
-    // Animation loop with visibility check
-    let isVisible = true;
-    const animate = () => {
-      if (isVisible) {
-        requestAnimationFrame(animate);
-        animateFunction();
       }
-    };
-    animate();
 
-    // Ensure animation continues even after page visibility changes
-    const handleVisibilityChange = () => {
-      if (document.visibilityState === 'visible') {
-        isVisible = true;
-        if (currentMount && !currentMount.querySelector('canvas')) { // Use currentMount
-          currentMount.innerHTML = '';
-          currentMount.appendChild(renderer.domElement);
+      // Animation loop with visibility check
+      let isVisible = true;
+      const animate = () => {
+        if (isVisible) {
+          requestAnimationFrame(animate);
+          animateFunction();
         }
-        animate();
-      } else {
-        isVisible = false;
-      }
-    };
-    document.addEventListener('visibilitychange', handleVisibilityChange);
+      };
+      animate();
 
-    // Handle window resize
-    const handleResize = () => {
-      camera.aspect = window.innerWidth / window.innerHeight;
-      camera.updateProjectionMatrix();
-      renderer.setSize(window.innerWidth, window.innerHeight);
-    };
-    window.addEventListener('resize', handleResize);
+      // Ensure animation continues even after page visibility changes
+      const handleVisibilityChange = () => {
+        if (document.visibilityState === 'visible') {
+          isVisible = true;
+          if (currentMount && !currentMount.querySelector('canvas')) { // Use currentMount
+            currentMount.innerHTML = '';
+            currentMount.appendChild(renderer.domElement);
+          }
+          animate();
+        } else {
+          isVisible = false;
+        }
+      };
+      document.addEventListener('visibilitychange', handleVisibilityChange);
+      cleanupFns.push(() => document.removeEventListener('visibilitychange', handleVisibilityChange));
 
-    // Cleanup on unmount
+      // Handle window resize
+      const handleResize = () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      };
+      window.addEventListener('resize', handleResize);
+      cleanupFns.push(() => window.removeEventListener('resize', handleResize));
+
+      // Cleanup on unmount
+      cleanupFns.push(() => {
+        if (currentMount) { // Use currentMount for consistency
+          currentMount.innerHTML = '';
+        }
+        renderer.dispose();
+        controls.dispose();
+      });
+    })();
+
     return () => {
-      window.removeEventListener('resize', handleResize);
-      document.removeEventListener('visibilitychange', handleVisibilityChange);
-      if (currentMount) { // Use currentMount for consistency
-        currentMount.innerHTML = '';
-      }
-      renderer.dispose();
-      controls.dispose();
+      cleanupFns.forEach(fn => {
+        try { fn(); } catch {}
+      });
     };
   }, [sceneType, isClient]); // Added isClient to dependency array
 

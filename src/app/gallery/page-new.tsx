@@ -1,26 +1,35 @@
 'use client';
 
-import React, { useState, useMemo } from 'react';
-import { motion } from 'framer-motion';
+import React, { useState } from 'react';
+import { MotionDiv } from '@/components/MotionContainer';
 import CleanBackground from '@/components/CleanBackground';
 import ModernMediaGallery from '@/components/ModernMediaGallery';
 import ProjectCard from '@/components/ProjectCard';
-import { projects, getMediaItemsForProject, getFeaturedProjects, MediaItem } from '@/lib/media-organized';
+import type { MediaItem, Project } from '@/lib/media-types';
+import { loadMediaData, loadAllMediaItems } from '@/lib/media-loader';
 
 export default function GalleryPage() {
   const [selectedView, setSelectedView] = useState<'all' | 'projects' | 'media'>('all');
   
-  // Get all media items from all projects
-  const allMediaItems = useMemo(() => {
-    const items: MediaItem[] = [];
-    projects.forEach(project => {
-      const projectMedia = getMediaItemsForProject(project.id);
-      items.push(...projectMedia);
-    });
-    return items;
+  // Lazily load all projects and media items
+  const [projectsState, setProjectsState] = useState<Project[]>([]);
+  const [allMediaItems, setAllMediaItems] = useState<MediaItem[]>([]);
+  React.useEffect(() => {
+    let mounted = true;
+    loadMediaData().then(({ projects }) => { if (mounted) setProjectsState(projects); });
+    loadAllMediaItems().then(items => { if (mounted) setAllMediaItems(items); });
+    return () => { mounted = false; };
   }, []);
 
-  const featuredProjects = getFeaturedProjects();
+  const [featuredProjects, setFeaturedProjects] = React.useState<Project[]>([]);
+  React.useEffect(() => {
+    let mounted = true;
+    loadMediaData().then(({ projects }) => {
+      if (!mounted) return;
+      setFeaturedProjects(projects.filter(p => p.featured));
+    });
+    return () => { mounted = false; };
+  }, []);
 
   // Animation variants
   const containerVariants = {
@@ -52,7 +61,7 @@ export default function GalleryPage() {
         {/* Hero Section */}
         <section className="pt-24 pb-16 px-4">
           <div className="max-w-7xl mx-auto text-center">
-            <motion.div
+            <MotionDiv
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
@@ -65,17 +74,17 @@ export default function GalleryPage() {
                 Explore the complete collection of handcrafted masterpieces, from mystical creatures 
                 to wildlife artistry. Each piece tells a story of dedication, skill, and artisan passion.
               </p>
-            </motion.div>
+            </MotionDiv>
 
             {/* Stats Bar */}
-            <motion.div 
+            <MotionDiv 
               className="mt-12 grid grid-cols-1 md:grid-cols-4 gap-8 max-w-4xl mx-auto"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
               <div className="text-center">
-                <div className="text-3xl font-bold text-[var(--accent-primary)]">{projects.length}</div>
+                <div className="text-3xl font-bold text-[var(--accent-primary)]">{projectsState.length}</div>
                 <div className="text-sm text-[var(--text-muted)] uppercase tracking-wide">Projects</div>
               </div>
               <div className="text-center">
@@ -90,14 +99,14 @@ export default function GalleryPage() {
                 <div className="text-3xl font-bold text-[var(--accent-primary)]">15+</div>
                 <div className="text-sm text-[var(--text-muted)] uppercase tracking-wide">Years Experience</div>
               </div>
-            </motion.div>
+            </MotionDiv>
           </div>
         </section>
 
         {/* View Toggle */}
         <section className="px-4 mb-12">
           <div className="max-w-7xl mx-auto">
-            <motion.div 
+            <MotionDiv 
               className="flex flex-wrap justify-center gap-2 mb-8"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -120,7 +129,7 @@ export default function GalleryPage() {
                   {view.label}
                 </button>
               ))}
-            </motion.div>
+            </MotionDiv>
           </div>
         </section>
 
@@ -128,7 +137,7 @@ export default function GalleryPage() {
         {(selectedView === 'all' || selectedView === 'projects') && (
           <section className="px-4 mb-16">
             <div className="max-w-7xl mx-auto">
-              <motion.div
+              <MotionDiv
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.5 }}
@@ -140,24 +149,24 @@ export default function GalleryPage() {
                 <p className="text-[var(--text-muted)]">
                   Masterpieces showcasing the pinnacle of woodcarving artistry
                 </p>
-              </motion.div>
+              </MotionDiv>
 
-              <motion.div 
+        <MotionDiv 
                 className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
                 variants={containerVariants}
                 initial="hidden"
                 animate="visible"
               >
                 {featuredProjects.map((project) => (
-                  <motion.div key={project.id} variants={itemVariants}>
+          <MotionDiv key={project.id} variants={itemVariants}>
                     <ProjectCard 
                       project={project} 
                       variant="detailed"
                       className="h-full"
                     />
-                  </motion.div>
+          </MotionDiv>
                 ))}
-              </motion.div>
+        </MotionDiv>
             </div>
           </section>
         )}
@@ -166,7 +175,7 @@ export default function GalleryPage() {
         {(selectedView === 'all' || selectedView === 'media') && (
           <section className="px-4 mb-16">
             <div className="max-w-7xl mx-auto">
-              <motion.div
+              <MotionDiv
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.6 }}
@@ -178,21 +187,21 @@ export default function GalleryPage() {
                 <p className="text-[var(--text-muted)]">
                   Browse through the entire collection of process photos and finished pieces
                 </p>
-              </motion.div>
+              </MotionDiv>
 
-              <motion.div
+              <MotionDiv
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.7 }}
               >
                 <ModernMediaGallery 
                   items={allMediaItems}
-                  projects={projects}
+                  projects={projectsState}
                   showFilters={true}
                   columns={3}
                   className="modern-gallery"
                 />
-              </motion.div>
+              </MotionDiv>
             </div>
           </section>
         )}
@@ -201,7 +210,7 @@ export default function GalleryPage() {
         {selectedView === 'projects' && (
           <section className="px-4 mb-16">
             <div className="max-w-7xl mx-auto">
-              <motion.div
+              <MotionDiv
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.6 }}
@@ -213,24 +222,24 @@ export default function GalleryPage() {
                 <p className="text-[var(--text-muted)]">
                   Complete portfolio of woodcarving projects and commissions
                 </p>
-              </motion.div>
+              </MotionDiv>
 
-              <motion.div 
+        <MotionDiv 
                 className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
                 variants={containerVariants}
                 initial="hidden"
                 animate="visible"
               >
-                {projects.map((project) => (
-                  <motion.div key={project.id} variants={itemVariants}>
+                {projectsState.map((project) => (
+          <MotionDiv key={project.id} variants={itemVariants}>
                     <ProjectCard 
                       project={project} 
                       variant="compact"
                       className="h-full"
                     />
-                  </motion.div>
+          </MotionDiv>
                 ))}
-              </motion.div>
+        </MotionDiv>
             </div>
           </section>
         )}
@@ -238,7 +247,7 @@ export default function GalleryPage() {
         {/* Call to Action */}
         <section className="px-4 py-16 bg-[var(--surface-elevated)]/50 backdrop-blur-sm">
           <div className="max-w-4xl mx-auto text-center">
-            <motion.div
+            <MotionDiv
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.8 }}
@@ -250,7 +259,7 @@ export default function GalleryPage() {
                 Ready to bring your vision to life? Each piece is handcrafted with meticulous 
                 attention to detail and decades of expertise.
               </p>
-              <motion.a
+              <MotionDiv as="a"
                 href="/commission"
                 className="inline-flex items-center gap-2 bg-[var(--accent-primary)] text-white px-8 py-4 rounded-lg font-medium hover:bg-[var(--accent-warm)] transition-colors duration-300 shadow-lg hover:shadow-xl"
                 whileHover={{ y: -2 }}
@@ -260,8 +269,8 @@ export default function GalleryPage() {
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
-              </motion.a>
-            </motion.div>
+              </MotionDiv>
+            </MotionDiv>
           </div>
         </section>
       </main>

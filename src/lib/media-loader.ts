@@ -102,11 +102,13 @@ export async function loadMediaData(): Promise<MediaDataExport> {
 }
 
 function prefixBasePath(pathname: string): string {
-  if (typeof window === 'undefined') return pathname;
-  // Detect if hosted under a subpath (GitHub Pages)
-  const base = (globalThis as any).__NEXT_DATA__?.assetPrefix || '';
-  if (!base) return pathname;
-  return `${base}${pathname}`.replace(/\/+/, '/');
+  if (typeof window === 'undefined') {
+    const base = process.env.NEXT_PUBLIC_BASE_PATH || '';
+    return `${base}${pathname}`.replace(/\/\/+/, '/');
+  }
+  const envBase = (window as any)?.__NEXT_DATA__?.assetPrefix || process.env.NEXT_PUBLIC_BASE_PATH || '';
+  if (!envBase) return pathname;
+  return `${envBase}${pathname}`.replace(/\/\/+/, '/');
 }
 
 // Helper to lazily fetch a single project by slug

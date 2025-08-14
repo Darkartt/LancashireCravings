@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { motion } from "framer-motion";
+import MotionDiv from '@/components/MotionContainer';
 import { useState, useEffect } from "react";
 import OptimizedImage from "./OptimizedImage";
 import { navigation } from "../lib/data";
@@ -48,7 +48,7 @@ export default function Header() {
 
   return (
     <>
-      <motion.header 
+  <MotionDiv 
         className="px-6 sm:px-8 lg:px-12 py-6 bg-background/95 backdrop-blur-sm shadow-header-black fixed top-0 left-0 right-0 header-container"
         style={{ zIndex: 60 }}
         initial={{ y: -100 }}
@@ -57,7 +57,7 @@ export default function Header() {
       >
         <div className="container mx-auto flex justify-between items-center max-w-7xl px-4 lg:px-6">
           <div className="flex items-center">
-            <motion.div
+            <MotionDiv
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6, ease: "easeOut" }}
@@ -71,15 +71,16 @@ export default function Header() {
                   height={32}
                   priority
                 />
-              </Link>          </motion.div>
-          <motion.h1
+              </Link>
+            </MotionDiv>
+          <MotionDiv
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
             className="text-2xl font-serif font-bold text-accent-primary"
           >
             <Link href="/">Lancaster Carving Limited</Link>
-          </motion.h1>
+          </MotionDiv>
         </div>
 
         {/* Desktop Navigation */}
@@ -171,7 +172,7 @@ export default function Header() {
           </nav>
         </div>
       )}
-    </motion.header>
+  </MotionDiv>
     </>
   );
 }

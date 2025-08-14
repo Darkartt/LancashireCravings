@@ -1,7 +1,8 @@
 'use client';
 
 import React from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import MotionDiv from '@/components/MotionContainer';
+import { useLazyScroll, useLazyTransform } from '@/lib/lazyMotionHooks';
 
 type BackgroundVariant = 'home' | 'about' | 'portfolio' | 'shop' | 'commission' | 'contact' | 'blog' | 'services' | 'process';
 
@@ -21,11 +22,11 @@ const ModernBackground: React.FC<ModernBackgroundProps> = ({
   variant, 
   className = ''
 }) => {
-  const { scrollY } = useScroll();
+  const { scrollY } = useLazyScroll();
   
   // Subtle parallax effects
-  const y1 = useTransform(scrollY, [0, 1000], [0, -100]);
-  const y2 = useTransform(scrollY, [0, 1000], [0, -50]);
+  const y1 = useLazyTransform(scrollY, [0, 1000], [0, -100]);
+  const y2 = useLazyTransform(scrollY, [0, 1000], [0, -50]);
   
   // Professional configuration for each page
   const backgroundConfig: Record<BackgroundVariant, BackgroundConfig> = {
@@ -153,10 +154,12 @@ const ModernBackground: React.FC<ModernBackgroundProps> = ({
   
   const AnimationWrapper = ({ children }: { children: React.ReactNode }) => {
     if (config.animation === 'parallax') {
-      return <motion.div style={{ y: y1 }}>{children}</motion.div>;
+  // @ts-expect-error motion style prop
+  return <MotionDiv style={{ y: y1 }}>{children}</MotionDiv>;
     }
     if (config.animation === 'gentle') {
-      return <motion.div style={{ y: y2 }}>{children}</motion.div>;
+  // @ts-expect-error motion style prop
+  return <MotionDiv style={{ y: y2 }}>{children}</MotionDiv>;
     }
     return <div>{children}</div>;
   };
@@ -178,7 +181,7 @@ const ModernBackground: React.FC<ModernBackgroundProps> = ({
       
       {/* Subtle ambient light effect for home page */}
       {variant === 'home' && (
-        <motion.div
+  <MotionDiv
           className="absolute inset-0"
           style={{
             background: 'radial-gradient(circle at 30% 20%, rgba(139, 69, 19, 0.02) 0%, transparent 50%)',
@@ -196,7 +199,7 @@ const ModernBackground: React.FC<ModernBackgroundProps> = ({
       
       {/* Gentle highlight for portfolio */}
       {variant === 'portfolio' && (
-        <motion.div
+  <MotionDiv
           className="absolute inset-0"
           style={{
             background: 'linear-gradient(45deg, transparent 0%, rgba(139, 69, 19, 0.01) 50%, transparent 100%)',
@@ -214,7 +217,7 @@ const ModernBackground: React.FC<ModernBackgroundProps> = ({
       
       {/* Commission page wood warmth */}
       {variant === 'commission' && (
-        <motion.div
+  <MotionDiv
           className="absolute inset-0"
           style={{
             background: 'radial-gradient(ellipse at center, rgba(232, 212, 173, 0.05) 0%, transparent 70%)',

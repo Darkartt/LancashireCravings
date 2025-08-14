@@ -1,4 +1,4 @@
-import { gsap } from 'gsap';
+import { loadGsap } from '@/lib/gsapLoader';
 
 export interface ScrollAnimationConfig {
   trigger: string;
@@ -167,24 +167,27 @@ export const performanceSettings = {
 } as const;
 
 // Utility functions for creating scroll animations
-export const createScrollTriggerAnimation = (
+export const createScrollTriggerAnimation = async (
   targetElement: string | Element,
   config: ScrollAnimationConfig,
-  animation: gsap.core.Tween | gsap.core.Timeline
+  animation: any
 ) => {
-  return gsap.timeline({
-    scrollTrigger: {
-      ...config,
-      trigger: targetElement
-    }
-  }).add(animation);
+  const { gsap } = await loadGsap();
+  return gsap
+    .timeline({
+      scrollTrigger: {
+        ...config,
+        trigger: targetElement
+      }
+    })
+    .add(animation);
 };
 
-export const createWoodGrainMorph = (
+export const createWoodGrainMorph = async (
   fromWood: keyof typeof woodGrainMorphing
 ) => {
   const config = woodGrainMorphing[fromWood];
-  
+  const { gsap } = await loadGsap();
   return gsap.timeline({
     duration: config.duration,
     ease: config.ease
@@ -213,7 +216,7 @@ export const getOptimalPerformanceSettings = () => {
 };
 
 // Animation factory functions
-export const createSectionTransition = (
+export const createSectionTransition = async (
   fromSection: string,
   toSection: string,
   transitionType: 'carving' | 'polishing' | 'assembly' | 'finishing'
@@ -221,9 +224,11 @@ export const createSectionTransition = (
   const settings = getOptimalPerformanceSettings();
   
   if (settings.disableScrollTrigger) {
+    const { gsap } = await loadGsap();
     return gsap.timeline(); // Return empty timeline for reduced motion
   }
   
+  const { gsap } = await loadGsap();
   const tl = gsap.timeline({
     scrollTrigger: {
       trigger: fromSection,

@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useRef, useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import MotionDiv from '@/components/MotionContainer';
 
 interface ProcessVideoProps {
   src: string;
@@ -118,7 +118,7 @@ const ProcessVideo: React.FC<ProcessVideoProps> = ({
   const progress = totalDuration > 0 ? (currentTime / totalDuration) * 100 : 0;
 
   return (
-    <motion.div 
+  <MotionDiv 
       className={`process-video relative bg-[var(--surface-elevated)] rounded-2xl overflow-hidden shadow-lg ${className}`}
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
@@ -153,7 +153,7 @@ const ProcessVideo: React.FC<ProcessVideoProps> = ({
 
         {/* Custom Play Button Overlay */}
         {!isPlaying && (
-          <motion.button
+          <MotionDiv as="button"
             className="absolute inset-0 flex items-center justify-center bg-black/20 hover:bg-black/30 transition-colors duration-300"
             onClick={togglePlayPause}
             initial={{ opacity: 0 }}
@@ -166,7 +166,7 @@ const ProcessVideo: React.FC<ProcessVideoProps> = ({
                 <path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z"/>
               </svg>
             </div>
-          </motion.button>
+          </MotionDiv>
         )}
 
         {/* Loading Indicator */}
@@ -284,7 +284,7 @@ const ProcessVideo: React.FC<ProcessVideoProps> = ({
           box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         }
       `}</style>
-    </motion.div>
+  </MotionDiv> 
   );
 };
 

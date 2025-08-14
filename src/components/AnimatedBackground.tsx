@@ -1,7 +1,8 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import MotionDiv from '@/components/MotionContainer';
+import { useLazyScroll, useLazyTransform } from '@/lib/lazyMotionHooks';
 import { useAnimation } from './AnimationProvider';
 import WoodDustParticles from './backgrounds/WoodDustParticles';
 import WoodGrainBackground from './backgrounds/WoodGrainBackground';
@@ -36,13 +37,13 @@ const AnimatedBackground: React.FC<AnimatedBackgroundProps> = ({
   finishType
 }) => {
   const [isClient, setIsClient] = useState(false);
-  const { scrollY } = useScroll();
+  const { scrollY } = useLazyScroll();
   const animation = useAnimation();
   
   // Parallax effects with different intensities
-  const y1 = useTransform(scrollY, [0, 1000], [0, -50]);
-  const y2 = useTransform(scrollY, [0, 1000], [0, -25]);
-  const y3 = useTransform(scrollY, [0, 1000], [0, -75]);
+  const y1 = useLazyTransform(scrollY, [0, 1000], [0, -50]);
+  const y2 = useLazyTransform(scrollY, [0, 1000], [0, -25]);
+  const y3 = useLazyTransform(scrollY, [0, 1000], [0, -75]);
   
   // Get cursor position for interactive elements - used in child components
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -150,29 +151,30 @@ const AnimatedBackground: React.FC<AnimatedBackgroundProps> = ({
   return (
     <div className={`fixed inset-0 overflow-hidden ${className}`} style={{ zIndex: -9 }}>
       {/* Base gradient */}
-      <motion.div 
+      <MotionDiv 
         className={`absolute inset-0 bg-gradient-to-br ${config.baseGradient}`}
-        style={{ y: y1, opacity: 0.8 }} // Increased opacity for better visibility
+        // Cast to any to allow motion transform prop 'y'
+        style={{ y: y1, opacity: 0.8 } as any} // Increased opacity for better visibility
       />
       
       {/* Wood grain pattern appropriate for the section */}
-      <motion.div style={{ y: y2 }}>
+  <MotionDiv style={{ y: y2 } as any}>
         <WoodGrainBackground
           woodType={config.customWoodType || woodType}
           intensity={config.woodGrainIntensity}
           animated={config.interactive}
         />
-      </motion.div>
+  </MotionDiv>
       
       {/* Floating wood dust particles */}
       {config.showDust && (
-        <motion.div style={{ y: y3 }}>
+  <MotionDiv style={{ y: y3 } as any}>
           <WoodDustParticles
             count={config.particleCount}
             colorScheme={config.particleColor}
             interactive={config.interactive}
           />
-        </motion.div>
+  </MotionDiv>
       )}
       
       {/* Tool outlines for relevant sections */}
@@ -183,7 +185,7 @@ const AnimatedBackground: React.FC<AnimatedBackgroundProps> = ({
           preserveAspectRatio="xMidYMid slice"
         >
           {variant === 'about' && (
-            <motion.path 
+            <MotionDiv as="path"
               d="M30,50 L70,50 M30,30 L70,30 M30,70 L70,70" 
               stroke="currentColor"
               strokeWidth="0.5"
@@ -202,7 +204,7 @@ const AnimatedBackground: React.FC<AnimatedBackgroundProps> = ({
           {variant === 'services' && (
             <>
               {/* Hammer outline */}
-              <motion.path
+              <MotionDiv as="path"
                 d="M40,30 L50,30 L50,40 L70,60 L65,65 L45,45 L40,45 Z"
                 stroke="currentColor"
                 strokeWidth="0.3"
@@ -219,7 +221,7 @@ const AnimatedBackground: React.FC<AnimatedBackgroundProps> = ({
               />
               
               {/* Saw outline */}
-              <motion.path
+              <MotionDiv as="path"
                 d="M30,55 L70,55 L70,60 L65,55 L60,60 L55,55 L50,60 L45,55 L40,60 L35,55 L30,60 Z"
                 stroke="currentColor"
                 strokeWidth="0.3"
@@ -239,7 +241,7 @@ const AnimatedBackground: React.FC<AnimatedBackgroundProps> = ({
           {variant === 'process' && (
             <>
               {/* Flowing process path */}
-              <motion.path
+              <MotionDiv as="path"
                 d="M20,50 C30,40 40,60 50,50 C60,40 70,60 80,50"
                 stroke="currentColor"
                 strokeWidth="0.5"
@@ -256,7 +258,7 @@ const AnimatedBackground: React.FC<AnimatedBackgroundProps> = ({
               
               {/* Process nodes */}
               {[20, 50, 80].map((x, i) => (
-                <motion.circle
+                <MotionDiv as="circle"
                   key={i}
                   cx={x}
                   cy="50"
@@ -282,7 +284,7 @@ const AnimatedBackground: React.FC<AnimatedBackgroundProps> = ({
       
       {/* Commission-specific interactive elements */}
       {variant === 'commission' && (
-        <motion.div 
+  <MotionDiv 
           className="absolute inset-0 opacity-10"
           animate={{
             background: woodType === 'walnut' 
@@ -317,7 +319,7 @@ const AnimatedBackground: React.FC<AnimatedBackgroundProps> = ({
       {variant === 'shop' && (
         <div className="absolute inset-x-0 top-1/4 bottom-0">
           {[1, 2, 3].map((i) => (
-            <motion.div
+            <MotionDiv
               key={i}
               className="absolute left-0 right-0 h-px bg-amber-950/10"
               style={{ top: `${i * 25}%` }}

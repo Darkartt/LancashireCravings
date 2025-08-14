@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useRef, useState } from "react";
-import { motion } from "framer-motion";
+import { MotionDiv } from "@/components/MotionContainer";
 import { useParams } from "next/navigation";
 import Header from "../../../components/Header";
 import ProductGalleryBackground from "../../../components/backgrounds/ProductGalleryBackground";
@@ -63,37 +63,37 @@ export default function ShopCategoryClient() {
       <Header />      {/* Hero Section */}
       <section className="relative py-16 px-4 sm:px-8 bg-transparent pt-24"> {/* Added top padding for header */}
         <div className="container mx-auto relative" style={{ zIndex: 10 }}>
-          <motion.h2
+          <MotionDiv as="h2"
             className="text-4xl font-serif font-bold text-accent-primary mb-6"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
             viewport={{ once: true }}
-          >Shop {categoryTitle}</motion.h2>
-          <motion.p 
+          >Shop {categoryTitle}</MotionDiv>
+          <MotionDiv as="p" 
             className="text-lg text-foreground/80 max-w-2xl"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
             viewport={{ once: true }}
-          >Explore our handcrafted wooden pieces in the {categoryTitle.toLowerCase()} category, crafted with the same dedication as our bespoke commissions.</motion.p>
+          >Explore our handcrafted wooden pieces in the {categoryTitle.toLowerCase()} category, crafted with the same dedication as our bespoke commissions.</MotionDiv>
         </div>
       </section>
 
       {/* Featured Products Section */}
       <section className="py-16 px-4 sm:px-8 bg-foreground/5" ref={productsRef}>
         <div className="container mx-auto">
-          <motion.h3 
+          <MotionDiv as="h3" 
             className="text-3xl font-serif font-bold text-accent-primary mb-8 text-center"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
             viewport={{ once: true }}
-          >Our Collection</motion.h3>
+          >Our Collection</MotionDiv>
           
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {filteredProducts.map((product) => (
-              <motion.div 
+              <MotionDiv 
                 key={product.id}
                 className="bg-background rounded-lg overflow-hidden shadow-md transition-all duration-300 hover:shadow-lg"
                 initial={{ opacity: 0, y: 20 }}
@@ -133,7 +133,7 @@ export default function ShopCategoryClient() {
                     <span className="text-xs text-foreground/60 capitalize">{product.category}</span>
                   </div>
                 </div>
-              </motion.div>
+              </MotionDiv>
             ))}
           </div>
         </div>
@@ -142,7 +142,7 @@ export default function ShopCategoryClient() {
       {/* Quick View Modal */}
       {quickViewProduct && (
         <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4">
-          <motion.div 
+          <MotionDiv 
             className="bg-background rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto"
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -209,7 +209,7 @@ export default function ShopCategoryClient() {
                 </div>
               </div>
             </div>
-          </motion.div>
+          </MotionDiv>
         </div>
       )}
 

@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import { MotionDiv } from '@/components/MotionContainer';
 import Image from 'next/image';
 import CleanBackground from '@/components/CleanBackground';
 import Header from '@/components/Header';
@@ -10,17 +10,25 @@ import TabbedMediaGallery from '@/components/TabbedMediaGallery';
 import Timeline from '@/components/Timeline';
 import BeforeAfterComparison from '@/components/BeforeAfterComparison';
 import WorkshopShowcase from '@/components/WorkshopShowcase';
-import { 
-  getAllMediaItems
-} from '@/lib/media-organized';
+import { loadAllMediaItems } from '@/lib/media-loader';
+import type { MediaItem } from '@/lib/media-types';
 
 export default function BehindTheScenesPage() {
   const [activeSection, setActiveSection] = useState<'workshop' | 'process' | 'techniques' | 'tools'>('workshop');
   
-  // Get behind-the-scenes media using organized media system
-  const allMedia = getAllMediaItems();
-  const behindScenesMedia = allMedia.filter((media: any) => media.category === 'behind-scenes');
-  const processMedia = allMedia.filter((media: any) => media.category === 'process');
+  // Lazily load media for behind-the-scenes
+  // Note: we don't need to keep a full copy in state; filter directly into per-section buckets
+  const [behindScenesMedia, setBehindScenesMedia] = React.useState<MediaItem[]>([]);
+  const [processMedia, setProcessMedia] = React.useState<MediaItem[]>([]);
+  React.useEffect(() => {
+    let mounted = true;
+    loadAllMediaItems().then(items => {
+      if (!mounted) return;
+      setBehindScenesMedia(items.filter(m => m.category === 'behind-scenes'));
+      setProcessMedia(items.filter(m => m.category === 'process'));
+    });
+    return () => { mounted = false; };
+  }, []);
   
   // Create timeline data for the carving process
   const processSteps = [
@@ -162,7 +170,7 @@ export default function BehindTheScenesPage() {
         {/* Hero Section */}
         <section className="py-16 md:py-24">
           <div className="container mx-auto px-6 lg:px-8">
-            <motion.div
+            <MotionDiv
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
@@ -179,7 +187,7 @@ export default function BehindTheScenesPage() {
                 to life. From initial design to final finish, witness the transformation of 
                 raw wood into extraordinary sculptures.
               </p>
-            </motion.div>
+            </MotionDiv>
           </div>
         </section>
 
@@ -208,7 +216,7 @@ export default function BehindTheScenesPage() {
         </section>
 
         {/* Content Sections */}
-        <motion.div
+    <MotionDiv
           variants={containerVariants}
           initial="hidden"
           animate="visible"
@@ -217,7 +225,7 @@ export default function BehindTheScenesPage() {
         >
           {activeSection === 'workshop' && (
             <section className="container mx-auto px-6 lg:px-8">
-              <motion.div variants={itemVariants}>
+      <MotionDiv variants={itemVariants}>
                 <div className="text-center mb-12">
                   <h2 className="text-3xl font-serif font-bold text-accent-primary mb-4">
                     Workshop Tour
@@ -228,13 +236,13 @@ export default function BehindTheScenesPage() {
                   </p>
                 </div>
                 <WorkshopShowcase />
-              </motion.div>
+      </MotionDiv>
             </section>
           )}
 
           {activeSection === 'process' && (
             <section className="container mx-auto px-6 lg:px-8">
-              <motion.div variants={itemVariants}>
+              <MotionDiv variants={itemVariants}>
                 <Timeline
                   steps={processSteps}
                   title="The Carving Journey"
@@ -242,11 +250,11 @@ export default function BehindTheScenesPage() {
                   variant="vertical"
                   showProgress={true}
                 />
-              </motion.div>
+              </MotionDiv>
 
               {/* Before/After Example */}
               {processMedia.length >= 2 && (
-                <motion.div variants={itemVariants} className="mt-20">
+                <MotionDiv variants={itemVariants} className="mt-20">
                   <BeforeAfterComparison
                     beforeImage={processMedia[0]}
                     afterImage={processMedia[processMedia.length - 1]}
@@ -254,14 +262,14 @@ export default function BehindTheScenesPage() {
                     description="See the incredible transformation from a simple piece of wood to a work of art"
                     variant="slider"
                   />
-                </motion.div>
+                </MotionDiv>
               )}
             </section>
           )}
 
           {activeSection === 'techniques' && (
             <section className="container mx-auto px-6 lg:px-8">
-              <motion.div variants={itemVariants}>
+              <MotionDiv variants={itemVariants}>
                 <div className="text-center mb-12">
                   <h2 className="text-3xl font-serif font-bold text-accent-primary mb-4">
                     Traditional Techniques
@@ -289,7 +297,7 @@ export default function BehindTheScenesPage() {
                       image: processMedia[2]
                     }
                   ].map((technique, index) => (
-                    <motion.div
+                    <MotionDiv
                       key={index}
                       variants={itemVariants}
                       className="bg-background rounded-lg border border-neutral-200 overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300"
@@ -312,16 +320,16 @@ export default function BehindTheScenesPage() {
                           {technique.description}
                         </p>
                       </div>
-                    </motion.div>
+        </MotionDiv>
                   ))}
                 </div>
-              </motion.div>
+      </MotionDiv>
             </section>
           )}
 
           {activeSection === 'tools' && (
             <section className="container mx-auto px-6 lg:px-8">
-              <motion.div variants={itemVariants}>
+              <MotionDiv variants={itemVariants}>
                 <div className="text-center mb-12">
                   <h2 className="text-3xl font-serif font-bold text-accent-primary mb-4">
                     Tools & Materials
@@ -382,15 +390,15 @@ export default function BehindTheScenesPage() {
                     </div>
                   </div>
                 </div>
-              </motion.div>
+      </MotionDiv>
             </section>
           )}
-        </motion.div>
+    </MotionDiv>
 
         {/* Process Media Gallery */}
         <section className="py-16 bg-neutral-50">
           <div className="container mx-auto px-6 lg:px-8">
-            <motion.div
+            <MotionDiv
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -409,7 +417,7 @@ export default function BehindTheScenesPage() {
                 showFilters={true}
                 columns={3}
               />
-            </motion.div>
+            </MotionDiv>
           </div>
         </section>        </main>
         <Footer />

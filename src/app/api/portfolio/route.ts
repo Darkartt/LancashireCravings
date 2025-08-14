@@ -20,7 +20,7 @@ export async function GET() {
     } as Record<string, NatureCategory>;
 
     return NextResponse.json({ projects, natureCollection });
-  } catch (err) {
+  } catch {
     return NextResponse.json({ projects: [], natureCollection: {} }, { status: 200 });
   }
 }

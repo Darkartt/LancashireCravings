@@ -1,18 +1,14 @@
 'use client';
 
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import MotionDiv from '@/components/MotionContainer';
 import CleanBackground from '@/components/CleanBackground';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import ProcessVideoPlayer from '@/components/ProcessVideoPlayer';
 import TabbedMediaGallery from '@/components/TabbedMediaGallery';
-import { 
-  getAllMediaItems,
-  projects,
-  Project,
-  MediaItem 
-} from '@/lib/media-organized';
+import type { Project, MediaItem } from '@/lib/media-types';
+import { loadAllMediaItems, loadMediaData } from '@/lib/media-loader';
 
 interface TimelapseShowcaseProps {
   project: Project;
@@ -28,7 +24,7 @@ const TimelapseShowcase: React.FC<TimelapseShowcaseProps> = ({
   processSteps 
 }) => {
   return (
-    <motion.div
+  <MotionDiv
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6 }}
@@ -75,7 +71,7 @@ const TimelapseShowcase: React.FC<TimelapseShowcaseProps> = ({
           </div>
         </div>
       </div>
-    </motion.div>
+  </MotionDiv>
   );
 };
 
@@ -83,13 +79,21 @@ export default function TimelapsePage() {
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [viewMode, setViewMode] = useState<'grid' | 'featured'>('featured');
   
-  // Get all video media items
-  const allVideos = getAllMediaItems().filter((item: any) => item.type === 'video');
+  // Lazy-load projects and videos
+  const [projectsState, setProjectsState] = useState<Project[]>([]);
+  const [allVideos, setAllVideos] = useState<MediaItem[]>([]);
+  React.useEffect(() => {
+    let mounted = true;
+    // Load projects and all media items lazily
+    loadMediaData().then(({ projects }) => { if (mounted) setProjectsState(projects); });
+    loadAllMediaItems().then(items => { if (mounted) setAllVideos(items.filter(i => i.type === 'video')); });
+    return () => { mounted = false; };
+  }, []);
   
   // Featured time-lapse projects
   const featuredTimelapses = [
     {
-      project: projects.find(p => p.id === 'golden-eagle') || projects[0],
+      project: projectsState.find(p => p.id === 'golden-eagle') || projectsState[0],
       video: {
         id: 'eagle-timelapse',
         type: 'video' as const,
@@ -104,7 +108,7 @@ export default function TimelapsePage() {
       processSteps: 8
     },
     {
-      project: projects.find(p => p.id === 'richard-peacock-bass') || projects[1],
+      project: projectsState.find(p => p.id === 'richard-peacock-bass') || projectsState[1],
       video: {
         id: 'bass-process',
         type: 'video' as const,
@@ -119,7 +123,7 @@ export default function TimelapsePage() {
       processSteps: 6
     },
     {
-      project: projects.find(p => p.id === 'nature-collection') || projects[2],
+      project: projectsState.find(p => p.id === 'nature-collection') || projectsState[2],
       video: {
         id: 'butterflies-dragonflies',
         type: 'video' as const,
@@ -156,7 +160,7 @@ export default function TimelapsePage() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             
             {/* Hero Section */}
-            <motion.div 
+            <MotionDiv 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
@@ -190,10 +194,10 @@ export default function TimelapsePage() {
                   <div className="text-sm text-neutral-600">Process Steps</div>
                 </div>
               </div>
-            </motion.div>
+            </MotionDiv>
 
             {/* View Toggle */}
-            <motion.div 
+            <MotionDiv 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
@@ -221,11 +225,11 @@ export default function TimelapsePage() {
                   All Videos
                 </button>
               </div>
-            </motion.div>
+            </MotionDiv>
 
             {/* Featured Time-lapses */}
             {viewMode === 'featured' && (
-              <motion.div
+              <MotionDiv
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.3 }}
@@ -236,22 +240,22 @@ export default function TimelapsePage() {
                 </h2>
                 <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
                   {featuredTimelapses.map((showcase, index) => (
-                    <motion.div
+        <MotionDiv
                       key={showcase.project.id}
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.6, delay: 0.1 * index }}
                     >
                       <TimelapseShowcase {...showcase} />
-                    </motion.div>
+        </MotionDiv>
                   ))}
                 </div>
-              </motion.div>
+      </MotionDiv>
             )}
 
             {/* Video Gallery */}
             {viewMode === 'grid' && (
-              <motion.div
+              <MotionDiv
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.3 }}
@@ -280,7 +284,7 @@ export default function TimelapsePage() {
                   showFilters={false}
                   className="mt-8"
                 />
-              </motion.div>
+              </MotionDiv>
             )}
 
           </div>

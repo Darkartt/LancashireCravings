@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Image from 'next/image';
-import { motion } from 'framer-motion';
+import MotionDiv from '@/components/MotionContainer';
 
 interface WorkshopShowcaseProps {
   className?: string;
@@ -66,7 +66,7 @@ const WorkshopShowcase: React.FC<WorkshopShowcaseProps> = ({ className = '' }) =
   return (
     <section className={`workshop-showcase ${className}`}>
       <div className="max-w-7xl mx-auto px-4 py-16">
-        <motion.div
+  <MotionDiv
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
@@ -79,16 +79,16 @@ const WorkshopShowcase: React.FC<WorkshopShowcaseProps> = ({ className = '' }) =
             Behind every masterpiece lies countless hours of dedication, precision, and artisanal craftsmanship. 
             Explore the workshop where magic happens and witness the artisan at work.
           </p>
-        </motion.div>
+  </MotionDiv>
 
-        <motion.div
+    <MotionDiv
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
           variants={containerVariants}
           initial="hidden"
           animate="visible"
         >
           {workshopImages.map((image, index) => (
-            <motion.div
+      <MotionDiv
               key={index}
               variants={itemVariants}
               className="group relative overflow-hidden rounded-2xl bg-[var(--surface-elevated)] shadow-md hover:shadow-xl transition-all duration-300"
@@ -121,12 +121,12 @@ const WorkshopShowcase: React.FC<WorkshopShowcaseProps> = ({ className = '' }) =
                   </h3>
                 </div>
               </div>
-            </motion.div>
+      </MotionDiv>
           ))}
-        </motion.div>
+    </MotionDiv>
 
         {/* Wood Grain Process Showcase */}
-        <motion.div
+  <MotionDiv
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.4 }}
@@ -154,7 +154,7 @@ const WorkshopShowcase: React.FC<WorkshopShowcaseProps> = ({ className = '' }) =
                 description: 'Premium dark wood with beautiful grain patterns'
               }
             ].map((wood, index) => (
-              <motion.div
+              <MotionDiv
                 key={index}
                 className="text-center"
                 initial={{ opacity: 0, y: 20 }}
@@ -176,10 +176,10 @@ const WorkshopShowcase: React.FC<WorkshopShowcaseProps> = ({ className = '' }) =
                 <p className="text-sm text-[var(--text-muted)]">
                   {wood.description}
                 </p>
-              </motion.div>
+      </MotionDiv>
             ))}
           </div>
-        </motion.div>
+    </MotionDiv>
       </div>
     </section>
   );

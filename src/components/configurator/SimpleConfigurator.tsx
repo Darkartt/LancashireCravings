@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import MotionDiv from '@/components/MotionContainer';
 
 interface ConfigurationState {
   woodType: string;
@@ -52,7 +52,7 @@ const SimpleConfigurator: React.FC<SimpleConfiguratorProps> = ({ onConfigChange 
 
   return (
     <div className="w-full bg-foreground/5 rounded-lg p-6">
-      <motion.div
+  <MotionDiv
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         className="space-y-6"
@@ -64,7 +64,7 @@ const SimpleConfigurator: React.FC<SimpleConfiguratorProps> = ({ onConfigChange 
           <label className="block text-sm font-medium text-foreground mb-2">Wood Type</label>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
             {woodTypes.map((wood) => (
-              <motion.button
+              <MotionDiv as="button"
                 key={wood.id}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
@@ -77,7 +77,7 @@ const SimpleConfigurator: React.FC<SimpleConfiguratorProps> = ({ onConfigChange 
               >
                 <div className="font-medium">{wood.name}</div>
                 <div className="text-sm opacity-70">£{wood.price}/sqft</div>
-              </motion.button>
+              </MotionDiv>
             ))}
           </div>
         </div>
@@ -87,7 +87,7 @@ const SimpleConfigurator: React.FC<SimpleConfiguratorProps> = ({ onConfigChange 
           <label className="block text-sm font-medium text-foreground mb-2">Product Type</label>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
             {productTypes.map((product) => (
-              <motion.button
+              <MotionDiv as="button"
                 key={product.id}
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
@@ -100,7 +100,7 @@ const SimpleConfigurator: React.FC<SimpleConfiguratorProps> = ({ onConfigChange 
               >
                 <div className="font-medium">{product.name}</div>
                 <div className="text-sm opacity-70">From £{product.basePrice}</div>
-              </motion.button>
+              </MotionDiv>
             ))}
           </div>
         </div>
@@ -146,7 +146,7 @@ const SimpleConfigurator: React.FC<SimpleConfiguratorProps> = ({ onConfigChange 
         </div>
 
         {/* Preview and Summary */}
-        <motion.div
+  <MotionDiv
           className="bg-accent-primary/10 rounded-lg p-4 border border-accent-primary/20"
           layout
         >
@@ -160,8 +160,8 @@ const SimpleConfigurator: React.FC<SimpleConfiguratorProps> = ({ onConfigChange 
               <div>Estimated Time: <span className="font-medium text-accent-primary">{config.estimatedTime} weeks</span></div>
             </div>
           </div>
-        </motion.div>
-      </motion.div>
+        </MotionDiv>
+      </MotionDiv>
     </div>
   );
 };

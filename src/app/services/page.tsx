@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { MotionDiv } from "@/components/MotionContainer";
 import "./services.css";
 import Header from "../../components/Header";
 import ServicesBackground from "../../components/backgrounds/ServicesBackground";
@@ -18,36 +18,36 @@ export default function Services() {
       <Header />      {/* Hero Section */}
       <section className="relative py-24 px-4 sm:px-8 bg-foreground/5 overflow-hidden pt-40" style={{ zIndex: 5 }}> {/* Fixed header clearance */}
         <div className="container mx-auto relative">
-          <motion.h2 
+          <MotionDiv as="h2"
             className="text-4xl font-serif font-bold text-accent-primary mb-6"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: "easeOut" }}
             viewport={{ once: true }}
-          >Our Craftsmanship Services</motion.h2>
-          <motion.p 
+          >Our Craftsmanship Services</MotionDiv>
+          <MotionDiv as="p"
             className="text-lg text-foreground/80 max-w-2xl"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
             viewport={{ once: true }}
-          >Discover the range of bespoke woodcarving services offered by Lancaster Carving Limited, based in Mold, United Kingdom, tailored to bring your vision to life with unparalleled artistry for clients worldwide.</motion.p>
+          >Discover the range of bespoke woodcarving services offered by Lancaster Carving Limited, based in Mold, United Kingdom, tailored to bring your vision to life with unparalleled artistry for clients worldwide.</MotionDiv>
         </div>
       </section>
 
       {/* Services Section */}
       <section className="py-24 px-4 sm:px-8 bg-background">
         <div className="container mx-auto max-w-5xl">
-          <motion.h3 
+          <MotionDiv as="h3"
             className="text-3xl font-serif font-bold text-accent-primary mb-12 text-center"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: "easeOut" }}
             viewport={{ once: true }}
-          >Our Services</motion.h3>
+          >Our Services</MotionDiv>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {/* Service 1: Custom Furniture */}
-            <motion.div 
+            <MotionDiv 
               className="p-6 rounded-lg shadow-md bg-foreground/5"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -59,9 +59,9 @@ export default function Services() {
               <p className="text-foreground/80 mb-4">Placeholder: Benefits include personalized design, exceptional craftsmanship, and pieces that become family heirlooms. Examples include custom oak dining sets and walnut desks.</p>
               <p className="text-foreground/80 mb-2">Placeholder: Starting Price: $2,500 (varies by complexity and materials).</p>
               <Link href="/commission" className="text-accent-primary font-medium hover:underline">Request a Custom Piece →</Link>
-            </motion.div>
+            </MotionDiv>
             {/* Service 2: Decorative Carvings */}
-            <motion.div 
+            <MotionDiv 
               className="p-6 rounded-lg shadow-md bg-foreground/5"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -73,9 +73,9 @@ export default function Services() {
               <p className="text-foreground/80 mb-4">Placeholder: Benefits include unique aesthetic enhancements and custom designs that reflect personal style. Examples include cherry wood wall art and maple figurines.</p>
               <p className="text-foreground/80 mb-2">Placeholder: Starting Price: $800 (varies by size and intricacy).</p>
               <Link href="/commission" className="text-accent-primary font-medium hover:underline">Commission a Piece →</Link>
-            </motion.div>
+            </MotionDiv>
             {/* Service 3: Architectural Elements */}
-            <motion.div 
+            <MotionDiv 
               className="p-6 rounded-lg shadow-md bg-foreground/5"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -87,9 +87,9 @@ export default function Services() {
               <p className="text-foreground/80 mb-4">Placeholder: Benefits include seamless integration with existing architecture and elevated property value. Examples include mahogany stair balustrades and oak door surrounds.</p>
               <p className="text-foreground/80 mb-2">Placeholder: Starting Price: $3,000 (varies by scope and materials).</p>
               <Link href="/commission" className="text-accent-primary font-medium hover:underline">Explore Options →</Link>
-            </motion.div>
+            </MotionDiv>
             {/* Service 4: Restoration */}
-            <motion.div 
+            <MotionDiv 
               className="p-6 rounded-lg shadow-md bg-foreground/5"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -101,7 +101,7 @@ export default function Services() {
               <p className="text-foreground/80 mb-4">Placeholder: Benefits include maintaining heritage, expert matching of original techniques, and sustainable preservation. Examples include restoring Victorian furniture and colonial door frames.</p>
               <p className="text-foreground/80 mb-2">Placeholder: Starting Price: $1,000 (varies by condition and complexity).</p>
               <Link href="/contact" className="text-accent-primary font-medium hover:underline">Request Restoration →</Link>
-            </motion.div>
+            </MotionDiv>
           </div>
         </div>
       </section>
@@ -109,14 +109,14 @@ export default function Services() {
       {/* Workshops Section */}
       <section className="py-24 px-4 sm:px-8 bg-foreground/5">
         <div className="container mx-auto max-w-4xl">
-          <motion.h3 
+          <MotionDiv as="h3"
             className="text-3xl font-serif font-bold text-accent-primary mb-10 text-center"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: "easeOut" }}
             viewport={{ once: true }}
-          >Workshops & Classes</motion.h3>
-          <motion.div 
+          >Workshops & Classes</MotionDiv>
+          <MotionDiv 
             className="p-6 rounded-lg shadow-md bg-background"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -128,13 +128,13 @@ export default function Services() {
             <p className="text-foreground/80 mb-4">Placeholder: Benefits include hands-on learning, personalized instruction from master artisans, and the opportunity to create your own wooden piece. Classes are held monthly at our Liverpool studio.</p>
             <p className="text-foreground/80 mb-2">Placeholder: Workshop Fee: $250 for a weekend session (materials included).</p>
             <Link href="/contact" className="text-accent-primary font-medium hover:underline">Register Interest →</Link>
-          </motion.div>
+          </MotionDiv>
         </div>
       </section>
 
       {/* Call to Action Section */}
       <section className="py-24 px-4 sm:px-8 bg-accent-primary/10">
-        <motion.div 
+        <MotionDiv 
           className="container mx-auto text-center"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -143,14 +143,14 @@ export default function Services() {
         >
           <h3 className="text-3xl font-serif font-bold text-accent-primary mb-6">Ready to Begin Your Project?</h3>
           <p className="text-lg text-foreground/80 max-w-2xl mx-auto mb-8">Placeholder: Contact us to discuss your vision for a custom woodcarving piece or to enroll in one of our upcoming workshops. Let’s create something extraordinary together.</p>
-          <motion.div
+          <MotionDiv
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
             viewport={{ once: true }}
           >
             <Link href="/commission" className="inline-block bg-accent-primary text-background px-8 py-3 rounded-md font-medium hover:bg-accent-primary/90 transition-colors">Commission a Piece</Link>
-          </motion.div>        </motion.div>
+          </MotionDiv>        </MotionDiv>
       </section>
 
       <Footer />

@@ -2,9 +2,10 @@
 
 import React, { useState } from 'react';
 import Image from 'next/image';
-import { motion, AnimatePresence } from 'framer-motion';
+import MotionDiv from '@/components/MotionContainer';
+import { LazyAnimatePresence } from '@/components/LazyAnimatePresence';
 import MediaCard from '@/components/MediaCard';
-import { MediaItem } from '@/lib/media-organized';
+import type { MediaItem } from '@/lib/media-types';
 
 interface MediaGalleryProps {
   items: MediaItem[];
@@ -38,13 +39,13 @@ const MediaGallery: React.FC<MediaGalleryProps> = ({
   return (
     <div className={`media-gallery ${className}`}>
       {/* Gallery Grid */}
-      <motion.div 
+      <MotionDiv 
         className={`grid gap-6 ${gridClasses[columns]}`}
         layout
       >
-        <AnimatePresence>
+        <LazyAnimatePresence>
           {items.map((item) => (
-            <motion.div
+            <MotionDiv
               key={item.id}
               layout
               initial={{ opacity: 0, scale: 0.9 }}
@@ -58,27 +59,27 @@ const MediaGallery: React.FC<MediaGalleryProps> = ({
                 size="medium"
                 variant={variant}
               />
-            </motion.div>
+            </MotionDiv>
           ))}
-        </AnimatePresence>
-      </motion.div>
+        </LazyAnimatePresence>
+      </MotionDiv>
 
       {/* Lightbox Modal */}
-      <AnimatePresence>
+      <LazyAnimatePresence>
         {lightboxItem && (
-          <motion.div
+          <MotionDiv
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4"
             onClick={handleLightboxClose}
           >
-            <motion.div
+            <MotionDiv
               initial={{ scale: 0.5, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.5, opacity: 0 }}
               className="relative max-w-5xl max-h-[90vh] w-full"
-              onClick={(e) => e.stopPropagation()}
+              onClick={(e: React.MouseEvent<HTMLDivElement>) => e.stopPropagation()}
             >
               {lightboxItem.type === 'image' ? (
                 <div className="relative w-full h-full">
@@ -124,10 +125,10 @@ const MediaGallery: React.FC<MediaGalleryProps> = ({
                   )}
                 </div>
               </div>
-            </motion.div>
-          </motion.div>
+            </MotionDiv>
+          </MotionDiv>
         )}
-      </AnimatePresence>
+      </LazyAnimatePresence>
 
       {/* No Items Message */}
       {items.length === 0 && (

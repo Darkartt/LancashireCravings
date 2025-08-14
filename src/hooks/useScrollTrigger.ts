@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import { gsap } from 'gsap';
+import { loadGsap } from '@/lib/gsapLoader';
 
 // Dynamic import for ScrollTrigger to ensure it works with SSR
 let ScrollTrigger: any = null;
@@ -42,10 +42,11 @@ export const useScrollTrigger = (): UseScrollTriggerReturn => {
         if (typeof window === 'undefined') return;
 
         // Dynamic import
-        const { ScrollTrigger: ST } = await import('gsap/ScrollTrigger');
+        const [{ ScrollTrigger: ST }, { gsap }] = await Promise.all([
+          import('gsap/ScrollTrigger'),
+          loadGsap()
+        ]);
         ScrollTrigger = ST;
-
-        // Register the plugin
         gsap.registerPlugin(ScrollTrigger);
 
         // Configure ScrollTrigger defaults for better performance

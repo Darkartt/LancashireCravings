@@ -4,7 +4,7 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import MotionDiv from '@/components/MotionContainer';
-import { Project } from '@/lib/media-organized';
+import type { Project } from '@/lib/media-types';
 
 interface ProjectCardProps {
   project: Project;

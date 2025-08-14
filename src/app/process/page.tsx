@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import MotionDiv from '@/components/MotionContainer';
 import CleanBackground from '@/components/CleanBackground';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -9,16 +9,19 @@ import InteractiveProcessGallery from '@/components/InteractiveProcessGallery';
 import EnhancedTimeline from '@/components/EnhancedTimeline';
 import EnhancedBeforeAfter from '@/components/EnhancedBeforeAfter';
 import ProcessVideoPlayer from '@/components/ProcessVideoPlayer';
-import { 
-  getAllMediaItems
-} from '@/lib/media-organized';
-import { MediaItem } from '@/lib/media-organized';
+import type { MediaItem } from '@/lib/media-types';
+import { loadAllMediaItems } from '@/lib/media-loader';
 
 export default function ProcessDocumentationPage() {
   const [activeProject, setActiveProject] = useState<'eagle' | 'nessie' | 'bass'>('eagle');
   
-  // Get media for different projects using organized media system
-  const allMedia = getAllMediaItems();
+  // Lazily load media items when component mounts
+  const [allMedia, setAllMedia] = useState<MediaItem[]>([]);
+  React.useEffect(() => {
+    let mounted = true;
+    loadAllMediaItems().then(items => { if (mounted) setAllMedia(items); });
+    return () => { mounted = false; };
+  }, []);
   const eagleMedia = allMedia.filter((media: any) => media.project === 'golden-eagle');
   
   // Create process steps data for Interactive Process Gallery
@@ -275,7 +278,7 @@ export default function ProcessDocumentationPage() {
           {/* Hero Section */}
           <section className="py-16 md:py-24">
             <div className="container mx-auto px-6 lg:px-8">
-              <motion.div
+              <MotionDiv
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8 }}
@@ -291,7 +294,7 @@ export default function ProcessDocumentationPage() {
                   Experience the transformation from raw wood to finished masterpiece through 
                   interactive galleries, detailed timelines, and immersive documentation.
                 </p>
-              </motion.div>
+              </MotionDiv>
             </div>
           </section>
 
@@ -325,14 +328,14 @@ export default function ProcessDocumentationPage() {
           </section>
 
           {/* Content Sections */}
-          <motion.div
+          <MotionDiv
             variants={containerVariants}
             initial="hidden"
             animate="visible"
             className="space-y-24 py-16"
           >
             {/* Interactive Process Gallery */}
-            <motion.section variants={itemVariants} className="container mx-auto px-6 lg:px-8">
+            <MotionDiv as="section" variants={itemVariants} className="container mx-auto px-6 lg:px-8">
               <InteractiveProcessGallery
                 projectTitle="Golden Eagle"
                 steps={eagleProcessSteps}
@@ -340,10 +343,10 @@ export default function ProcessDocumentationPage() {
                 showThumbnails={true}
                 variant="tabs"
               />
-            </motion.section>
+            </MotionDiv>
 
             {/* Enhanced Timeline */}
-            <motion.section variants={itemVariants} className="container mx-auto px-6 lg:px-8">
+            <MotionDiv as="section" variants={itemVariants} className="container mx-auto px-6 lg:px-8">
               <EnhancedTimeline
                 steps={timelineSteps}
                 title="Detailed Process Timeline"
@@ -353,10 +356,10 @@ export default function ProcessDocumentationPage() {
                 interactive={true}
                 autoPlay={false}
               />
-            </motion.section>
+            </MotionDiv>
 
             {/* Enhanced Before/After Comparison */}
-            <motion.section variants={itemVariants} className="bg-neutral-50 py-16">
+            <MotionDiv as="section" variants={itemVariants} className="bg-neutral-50 py-16">
               <div className="container mx-auto px-6 lg:px-8">
                 <EnhancedBeforeAfter
                   stages={comparisonStages}
@@ -368,10 +371,10 @@ export default function ProcessDocumentationPage() {
                   showProgress={true}
                 />
               </div>
-            </motion.section>
+            </MotionDiv>
 
             {/* Process Video Player */}
-            <motion.section variants={itemVariants} className="container mx-auto px-6 lg:px-8">
+            <MotionDiv as="section" variants={itemVariants} className="container mx-auto px-6 lg:px-8">
               <ProcessVideoPlayer
                 video={processVideo}
                 title="Time-Lapse Documentation"
@@ -384,10 +387,10 @@ export default function ProcessDocumentationPage() {
                 posterImage={eagleMedia[0]}
                 variant="cinematic"
               />
-            </motion.section>
+            </MotionDiv>
 
             {/* Alternative Before/After - Slider */}
-            <motion.section variants={itemVariants} className="container mx-auto px-6 lg:px-8">
+            <MotionDiv as="section" variants={itemVariants} className="container mx-auto px-6 lg:px-8">
               <EnhancedBeforeAfter
                 stages={[comparisonStages[0], comparisonStages[3]]}
                 title="Before & After Comparison"
@@ -395,10 +398,10 @@ export default function ProcessDocumentationPage() {
                 variant="slider"
                 showLabels={true}
               />
-            </motion.section>
+            </MotionDiv>
 
             {/* Grid Process Gallery */}
-            <motion.section variants={itemVariants} className="bg-neutral-50 py-16">
+            <MotionDiv as="section" variants={itemVariants} className="bg-neutral-50 py-16">
               <div className="container mx-auto px-6 lg:px-8">
                 <InteractiveProcessGallery
                   projectTitle="Process Overview"
@@ -406,13 +409,13 @@ export default function ProcessDocumentationPage() {
                   variant="grid"
                 />
               </div>
-            </motion.section>
-          </motion.div>
+            </MotionDiv>
+          </MotionDiv>
 
           {/* Call to Action */}
           <section className="py-16 bg-accent-primary text-white">
             <div className="container mx-auto px-6 lg:px-8 text-center">
-              <motion.div
+              <MotionDiv
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -432,7 +435,7 @@ export default function ProcessDocumentationPage() {
                     View Portfolio
                   </button>
                 </div>
-              </motion.div>
+              </MotionDiv>
             </div>
           </section>
         </main>

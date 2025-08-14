@@ -1,18 +1,14 @@
 'use client';
 
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import MotionDiv from '@/components/MotionContainer';
 import CleanBackground from '@/components/CleanBackground';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import ProcessVideoPlayer from '@/components/ProcessVideoPlayer';
 import ModernMediaGallery from '@/components/ModernMediaGallery';
-import { 
-  getAllMediaItems,
-  projects,
-  Project,
-  MediaItem 
-} from '@/lib/media-organized';
+import type { Project, MediaItem } from '@/lib/media-types';
+import { loadAllMediaItems, loadMediaData } from '@/lib/media-loader';
 
 interface TimelapseShowcaseProps {
   project: Project;
@@ -26,70 +22,74 @@ const TimelapseShowcase: React.FC<TimelapseShowcaseProps> = ({
   video, 
   duration, 
   processSteps 
-}) => {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6 }}
-      className="bg-white rounded-2xl shadow-lg overflow-hidden"
-    >
-      <div className="aspect-video w-full">
-        <ProcessVideoPlayer
-          video={video}
-          title={`${project.title} - Time-lapse`}
-          chapters={[
-            { id: '1', title: 'Initial Design', startTime: 0, endTime: 30, description: 'Design phase' },
-            { id: '2', title: 'Rough Carving', startTime: 30, endTime: 120, description: 'Initial carving' },
-            { id: '3', title: 'Detail Work', startTime: 120, endTime: 240, description: 'Fine details' },
-            { id: '4', title: 'Finishing', startTime: 240, endTime: 300, description: 'Final touches' }
-          ]}
-        />
-      </div>
-      
-      <div className="p-6">
-        <div className="flex items-center space-x-3 mb-4">
-          <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center">
-            <span className="text-white font-bold text-lg">{project.title.charAt(0)}</span>
-          </div>
-          <div>
-            <h3 className="text-xl font-bold text-neutral-900">{project.title}</h3>
-            <p className="text-neutral-600">{project.category}</p>
-          </div>
+}) => (
+  <MotionDiv
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.6 }}
+    className="bg-white rounded-2xl shadow-lg overflow-hidden"
+  >
+    <div className="aspect-video w-full">
+      <ProcessVideoPlayer
+        video={video}
+        title={`${project.title} - Time-lapse`}
+        chapters={[
+          { id: '1', title: 'Initial Design', startTime: 0, endTime: 30, description: 'Design phase' },
+          { id: '2', title: 'Rough Carving', startTime: 30, endTime: 120, description: 'Initial carving' },
+          { id: '3', title: 'Detail Work', startTime: 120, endTime: 240, description: 'Fine details' },
+          { id: '4', title: 'Finishing', startTime: 240, endTime: 300, description: 'Final touches' }
+        ]}
+      />
+    </div>
+
+    <div className="p-6">
+      <div className="flex items-center space-x-3 mb-4">
+        <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center">
+          <span className="text-white font-bold text-lg">{project.title.charAt(0)}</span>
         </div>
-        
-        <p className="text-neutral-700 mb-4">{project.description}</p>
-        
-        <div className="grid grid-cols-3 gap-4 text-center">
-          <div className="p-3 bg-neutral-50 rounded-lg">
-            <div className="text-2xl font-bold text-amber-600">{duration}</div>
-            <div className="text-sm text-neutral-600">Duration</div>
-          </div>
-          <div className="p-3 bg-neutral-50 rounded-lg">
-            <div className="text-2xl font-bold text-amber-600">{processSteps}</div>
-            <div className="text-sm text-neutral-600">Steps</div>
-          </div>
-          <div className="p-3 bg-neutral-50 rounded-lg">
-            <div className="text-2xl font-bold text-amber-600">{project.mediaCount.images + project.mediaCount.videos}</div>
-            <div className="text-sm text-neutral-600">Media</div>
-          </div>
+        <div>
+          <h3 className="text-xl font-bold text-neutral-900">{project.title}</h3>
+          <p className="text-neutral-600">{project.category}</p>
         </div>
       </div>
-    </motion.div>
-  );
-};
+
+      <p className="text-neutral-700 mb-4">{project.description}</p>
+
+      <div className="grid grid-cols-3 gap-4 text-center">
+        <div className="p-3 bg-neutral-50 rounded-lg">
+          <div className="text-2xl font-bold text-amber-600">{duration}</div>
+          <div className="text-sm text-neutral-600">Duration</div>
+        </div>
+        <div className="p-3 bg-neutral-50 rounded-lg">
+          <div className="text-2xl font-bold text-amber-600">{processSteps}</div>
+          <div className="text-sm text-neutral-600">Steps</div>
+        </div>
+        <div className="p-3 bg-neutral-50 rounded-lg">
+          <div className="text-2xl font-bold text-amber-600">{project.mediaCount.images + project.mediaCount.videos}</div>
+          <div className="text-sm text-neutral-600">Media</div>
+        </div>
+      </div>
+    </div>
+  </MotionDiv>
+);
 
 export default function TimelapsePage() {
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [viewMode, setViewMode] = useState<'grid' | 'featured'>('featured');
-  
-  // Get all video media items
-  const allVideos = getAllMediaItems().filter((item: any) => item.type === 'video');
-  
-  // Featured time-lapse projects
+
+  // Lazy-load projects and videos
+  const [projectsState, setProjectsState] = useState<Project[]>([]);
+  const [allVideos, setAllVideos] = useState<MediaItem[]>([]);
+  React.useEffect(() => {
+    let mounted = true;
+    loadMediaData().then(({ projects }) => { if (mounted) setProjectsState(projects); });
+    loadAllMediaItems().then(items => { if (mounted) setAllVideos(items.filter(i => i.type === 'video')); });
+    return () => { mounted = false; };
+  }, []);
+
   const featuredTimelapses = [
     {
-      project: projects.find(p => p.id === 'golden-eagle')!,
+      project: projectsState.find(p => p.id === 'golden-eagle') || projectsState[0],
       video: {
         id: 'eagle-timelapse',
         type: 'video' as const,
@@ -104,7 +104,7 @@ export default function TimelapsePage() {
       processSteps: 8
     },
     {
-      project: projects.find(p => p.id === 'richard-peacock-bass')!,
+      project: projectsState.find(p => p.id === 'richard-peacock-bass') || projectsState[1],
       video: {
         id: 'bass-process',
         type: 'video' as const,
@@ -119,7 +119,7 @@ export default function TimelapsePage() {
       processSteps: 6
     },
     {
-      project: projects.find(p => p.id === 'nature-collection')!,
+      project: projectsState.find(p => p.id === 'nature-collection') || projectsState[2],
       video: {
         id: 'butterflies-dragonflies',
         type: 'video' as const,
@@ -133,12 +133,9 @@ export default function TimelapsePage() {
       duration: '12 mins',
       processSteps: 7
     }
-  ];
+  ].filter(item => item.project);
 
-  // Filter videos based on selected category
-  const filteredVideos = selectedCategory === 'all' 
-    ? allVideos 
-    : allVideos.filter(video => video.project === selectedCategory);
+  const filteredVideos = selectedCategory === 'all' ? allVideos : allVideos.filter(v => v.project === selectedCategory);
 
   const categories = [
     { id: 'all', name: 'All Videos', count: allVideos.length },
@@ -149,13 +146,14 @@ export default function TimelapsePage() {
 
   return (
     <>
-      <CleanBackground variant="portfolio" />
       <Header />
-      <div className="relative z-10 min-h-screen py-16">
+      <div className="min-h-screen bg-gradient-to-br from-neutral-50 to-amber-50/30 relative overflow-hidden">
+        <CleanBackground variant="home" />
+        <div className="relative z-10 py-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             
             {/* Hero Section */}
-            <motion.div 
+            <MotionDiv 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
@@ -169,7 +167,7 @@ export default function TimelapsePage() {
                 Each time-lapse captures hours of meticulous craftsmanship compressed into 
                 captivating moments of artistic creation.
               </p>
-              
+            
               {/* Stats */}
               <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-2xl mx-auto">
                 <div className="text-center">
@@ -189,10 +187,10 @@ export default function TimelapsePage() {
                   <div className="text-sm text-neutral-600">Process Steps</div>
                 </div>
               </div>
-            </motion.div>
+            </MotionDiv>
 
             {/* View Toggle */}
-            <motion.div 
+            <MotionDiv 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
@@ -220,11 +218,11 @@ export default function TimelapsePage() {
                   All Videos
                 </button>
               </div>
-            </motion.div>
+            </MotionDiv>
 
             {/* Featured Time-lapses */}
             {viewMode === 'featured' && (
-              <motion.div
+              <MotionDiv
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.3 }}
@@ -235,22 +233,22 @@ export default function TimelapsePage() {
                 </h2>
                 <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
                   {featuredTimelapses.map((showcase, index) => (
-                    <motion.div
+                    <MotionDiv
                       key={showcase.project.id}
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.6, delay: 0.1 * index }}
                     >
                       <TimelapseShowcase {...showcase} />
-                    </motion.div>
+                    </MotionDiv>
                   ))}
                 </div>
-              </motion.div>
+              </MotionDiv>
             )}
 
             {/* Video Gallery */}
             {viewMode === 'grid' && (
-              <motion.div
+              <MotionDiv
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.3 }}
@@ -279,11 +277,12 @@ export default function TimelapsePage() {
                   showFilters={false}
                   className="video-gallery"
                 />
-              </motion.div>
+              </MotionDiv>
             )}
 
           </div>
         </div>
+      </div>
       <Footer />
     </>
   );

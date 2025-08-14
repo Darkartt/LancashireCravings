@@ -28,7 +28,7 @@ export function MotionDiv({ as = 'div', children, ...rest }: MotionContainerProp
   }
   // Strip motion-only props for fallback
   // Omit motion-only props to avoid React DOM warnings (extract then ignore)
-  const { initial, animate, exit, transition, whileHover, whileTap, layout, variants, ...clean } = rest; // eslint-disable-line @typescript-eslint/no-unused-vars
+  const { initial, animate, exit, transition, whileHover, whileTap, layout, variants, whileInView, viewport, onViewportEnter, onViewportLeave, ...clean } = rest; // eslint-disable-line @typescript-eslint/no-unused-vars
   return <Element {...clean}>{children}</Element>;
 }
 

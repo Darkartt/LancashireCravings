@@ -77,7 +77,7 @@ const AnimationProviderInner: React.FC<AnimationProviderProps> = ({ children }) 
 
   // Enhanced scroll animation creator
   // Stable reference for consumers to avoid unnecessary context churn
-  const createScrollAnimation = useCallback((config: any) => { // eslint-disable-line @typescript-eslint/no-explicit-any
+  const createScrollAnimation = useCallback((config: any) => {
     if (isReducedMotion) return null;
     return createScrollTrigger(config);
   }, [isReducedMotion, createScrollTrigger]);
