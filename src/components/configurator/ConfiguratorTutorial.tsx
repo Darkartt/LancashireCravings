@@ -1,7 +1,8 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import MotionDiv from '@/components/MotionContainer';
+import { LazyAnimatePresence } from '@/components/LazyAnimatePresence';
 
 interface TutorialStep {
   title: string;
@@ -91,7 +92,7 @@ export default function ConfiguratorTutorial({ onComplete }: ConfiguratorTutoria
     <>
       {/* Tutorial trigger button for returning users */}
       {!showTutorial && (
-        <motion.button
+        <MotionDiv as="button"
           onClick={restartTutorial}
           className="fixed bottom-6 right-6 bg-accent-primary text-white p-3 rounded-full shadow-lg hover:bg-accent-primary/90 transition-colors z-40 flex items-center gap-2"
           whileHover={{ scale: 1.05 }}
@@ -102,19 +103,19 @@ export default function ConfiguratorTutorial({ onComplete }: ConfiguratorTutoria
         >
           <span className="text-lg">💡</span>
           <span className="hidden sm:inline text-sm font-medium">Tutorial</span>
-        </motion.button>
+        </MotionDiv>
       )}
 
       {/* Tutorial Overlay */}
-      <AnimatePresence>
+      <LazyAnimatePresence>
         {showTutorial && (
-          <motion.div
+          <MotionDiv
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50"
           >
-            <motion.div
+            <MotionDiv
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
@@ -139,7 +140,7 @@ export default function ConfiguratorTutorial({ onComplete }: ConfiguratorTutoria
               </div>
 
               {/* Step Content */}
-              <motion.div
+              <MotionDiv
                 key={currentStep}
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
@@ -155,7 +156,7 @@ export default function ConfiguratorTutorial({ onComplete }: ConfiguratorTutoria
                 <p className="text-lg text-foreground/80 leading-relaxed">
                   {tutorialSteps[currentStep].description}
                 </p>
-              </motion.div>
+              </MotionDiv>
 
               {/* Navigation */}
               <div className="flex justify-between items-center">
@@ -167,14 +168,14 @@ export default function ConfiguratorTutorial({ onComplete }: ConfiguratorTutoria
                     Skip Tutorial
                   </button>
                   {currentStep > 0 && (
-                    <motion.button
+                    <MotionDiv as="button"
                       onClick={prevStep}
                       className="px-4 py-2 text-accent-primary hover:text-accent-primary/80 transition-colors"
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
                     >
                       Previous
-                    </motion.button>
+                    </MotionDiv>
                   )}
                 </div>
 
@@ -182,20 +183,20 @@ export default function ConfiguratorTutorial({ onComplete }: ConfiguratorTutoria
                   <span className="text-sm text-foreground/60">
                     {currentStep + 1} of {tutorialSteps.length}
                   </span>
-                  <motion.button
+                  <MotionDiv as="button"
                     onClick={nextStep}
                     className="px-6 py-2 bg-accent-primary text-white rounded-lg hover:bg-accent-primary/90 transition-colors font-medium"
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                   >
                     {currentStep === tutorialSteps.length - 1 ? 'Get Started' : 'Next'}
-                  </motion.button>
+                  </MotionDiv>
                 </div>
               </div>
 
               {/* Additional Features Notice */}
               {currentStep === tutorialSteps.length - 1 && (
-                <motion.div
+                <MotionDiv
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.3 }}
@@ -210,12 +211,12 @@ export default function ConfiguratorTutorial({ onComplete }: ConfiguratorTutoria
                     <div>• CAD file downloads</div>
                     <div>• Progress tracking</div>
                   </div>
-                </motion.div>
+                </MotionDiv>
               )}
-            </motion.div>
-          </motion.div>
+            </MotionDiv>
+          </MotionDiv>
         )}
-      </AnimatePresence>
+      </LazyAnimatePresence>
     </>
   );
 }

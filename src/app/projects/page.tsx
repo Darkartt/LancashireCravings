@@ -326,3 +326,5 @@ export default function ProjectsPage() {
     </div>
   );
 }
+
+// (No static params needed for index)

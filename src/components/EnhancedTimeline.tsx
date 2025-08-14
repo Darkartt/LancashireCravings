@@ -1,9 +1,11 @@
 'use client';
 
 import React, { useState, useRef, useEffect } from 'react';
-import { motion, AnimatePresence, useInView } from 'framer-motion';
+import MotionDiv from '@/components/MotionContainer';
+import { LazyAnimatePresence } from '@/components/LazyAnimatePresence';
+import { useLazyInView } from '@/lib/lazyMotionHooks';
 import Image from 'next/image';
-import { MediaItem } from '@/lib/media-organized';
+import type { MediaItem } from '@/lib/media-types';
 
 interface TimelineStep {
   id: string;
@@ -43,7 +45,7 @@ const EnhancedTimeline: React.FC<EnhancedTimelineProps> = ({
   const [isPlaying, setIsPlaying] = useState(autoPlay);
   const [expandedStep, setExpandedStep] = useState<string | null>(null);
   const timelineRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(timelineRef, { once: true, margin: "-100px" });
+  const isInView = useLazyInView(timelineRef, { once: true, margin: "-100px" });
 
   const completedSteps = steps.filter(step => step.isCompleted).length;
   const progressPercentage = (completedSteps / steps.length) * 100;
@@ -124,7 +126,7 @@ const EnhancedTimeline: React.FC<EnhancedTimelineProps> = ({
     return (
       <div ref={timelineRef} className="w-full max-w-7xl mx-auto">
         {/* Header */}
-        <motion.div
+  <MotionDiv
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
@@ -144,7 +146,7 @@ const EnhancedTimeline: React.FC<EnhancedTimelineProps> = ({
                 <span>{completedSteps} of {steps.length} steps completed</span>
               </div>
               <div className="w-full bg-neutral-200 rounded-full h-3 overflow-hidden">
-                <motion.div
+                <MotionDiv
                   className="h-full bg-gradient-to-r from-accent-primary to-accent-secondary rounded-full"
                   initial={{ width: 0 }}
                   animate={isInView ? { width: `${progressPercentage}%` } : {}}
@@ -182,20 +184,20 @@ const EnhancedTimeline: React.FC<EnhancedTimelineProps> = ({
               </span>
             </div>
           )}
-        </motion.div>
+  </MotionDiv>
 
         {/* Interactive Timeline */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Steps Navigation */}
           <div className="lg:col-span-1">
-            <motion.div
+      <MotionDiv
               variants={containerVariants}
               initial="hidden"
               animate={isInView ? "visible" : "hidden"}
               className="space-y-4"
             >
               {steps.map((step, index) => (
-                <motion.div
+        <MotionDiv
                   key={step.id}
                   variants={stepVariants}
                   className={`
@@ -211,7 +213,7 @@ const EnhancedTimeline: React.FC<EnhancedTimelineProps> = ({
                   
                   {/* Animated Progress Line */}
                   {index < activeStepIndex && (
-                    <motion.div
+                    <MotionDiv
                       className="absolute left-6 top-12 bottom-0 w-px bg-accent-primary z-10"
                       initial={{ height: 0 }}
                       animate={{ height: "100%" }}
@@ -258,7 +260,7 @@ const EnhancedTimeline: React.FC<EnhancedTimelineProps> = ({
                     </div>
 
                     {/* Expand Icon */}
-                    <motion.div
+                    <MotionDiv
                       animate={{ rotate: expandedStep === step.id ? 180 : 0 }}
                       transition={{ duration: 0.2 }}
                       className="text-foreground/40"
@@ -266,13 +268,13 @@ const EnhancedTimeline: React.FC<EnhancedTimelineProps> = ({
                       <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                         <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
                       </svg>
-                    </motion.div>
+                    </MotionDiv>
                   </div>
 
                   {/* Expanded Details */}
-                  <AnimatePresence>
+                  <LazyAnimatePresence>
                     {expandedStep === step.id && (
-                      <motion.div
+                      <MotionDiv
                         initial={{ opacity: 0, height: 0 }}
                         animate={{ opacity: 1, height: "auto" }}
                         exit={{ opacity: 0, height: 0 }}
@@ -308,18 +310,18 @@ const EnhancedTimeline: React.FC<EnhancedTimelineProps> = ({
                             </div>
                           </div>
                         )}
-                      </motion.div>
+                      </MotionDiv>
                     )}
-                  </AnimatePresence>
-                </motion.div>
+                  </LazyAnimatePresence>
+                </MotionDiv>
               ))}
-            </motion.div>
+            </MotionDiv>
           </div>
 
           {/* Active Step Content */}
           <div className="lg:col-span-2">
-            <AnimatePresence mode="wait">
-              <motion.div
+            <LazyAnimatePresence mode="wait">
+              <MotionDiv
                 key={activeStepIndex}
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
@@ -388,8 +390,8 @@ const EnhancedTimeline: React.FC<EnhancedTimelineProps> = ({
                     </div>
                   )}
                 </div>
-              </motion.div>
-            </AnimatePresence>
+              </MotionDiv>
+            </LazyAnimatePresence>
           </div>
         </div>
       </div>
@@ -399,7 +401,7 @@ const EnhancedTimeline: React.FC<EnhancedTimelineProps> = ({
   // Fallback to original Timeline for non-interactive variants
   return (
     <div className="w-full max-w-4xl mx-auto">
-      <motion.div
+  <MotionDiv
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"
@@ -421,7 +423,7 @@ const EnhancedTimeline: React.FC<EnhancedTimelineProps> = ({
                 <span>{completedSteps} of {steps.length} steps</span>
               </div>
               <div className="w-full bg-neutral-200 rounded-full h-2">
-                <motion.div
+                <MotionDiv
                   className="bg-accent-primary h-2 rounded-full"
                   variants={progressVariants}
                   initial="hidden"
@@ -439,7 +441,7 @@ const EnhancedTimeline: React.FC<EnhancedTimelineProps> = ({
           
           <div className="space-y-12">
             {steps.map((step, index) => (
-              <motion.div
+              <MotionDiv
                 key={step.id}
                 variants={stepVariants}
                 className="relative flex items-start"
@@ -472,11 +474,11 @@ const EnhancedTimeline: React.FC<EnhancedTimelineProps> = ({
                     </span>
                   </div>
                 </div>
-              </motion.div>
+        </MotionDiv>
             ))}
           </div>
         </div>
-      </motion.div>
+      </MotionDiv>
     </div>
   );
 };

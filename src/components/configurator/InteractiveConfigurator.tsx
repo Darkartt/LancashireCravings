@@ -2,7 +2,8 @@
 
 import React, { useState, useCallback, useMemo } from 'react';
 import { default as NextImage } from 'next/image';
-import { motion, AnimatePresence } from 'framer-motion';
+import { MotionDiv } from '@/components/MotionContainer';
+import { LazyAnimatePresence } from '@/components/LazyAnimatePresence';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { OrbitControls, Environment, ContactShadows, Text, Plane } from '@react-three/drei';
 import * as THREE from 'three';
@@ -961,10 +962,10 @@ export default function InteractiveConfigurator({ onConfigChange }: Configurator
 
         {/* Tab Content */}
         <div className="p-6 h-[480px] overflow-y-auto">
-          <AnimatePresence mode="wait">
+          <LazyAnimatePresence mode="wait">
             {/* Product Tab */}
             {activeTab === 'product' && (
-              <motion.div
+              <MotionDiv
                 key="product"
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
@@ -973,7 +974,7 @@ export default function InteractiveConfigurator({ onConfigChange }: Configurator
               >                <h3 className="font-serif font-semibold text-accent-primary mb-4">Product Type</h3>
                 <div className="grid grid-cols-1 gap-3">
                   {Object.entries(productTypes).map(([key, product]) => (
-                    <motion.button
+                    <MotionDiv as="button"
                       key={key}
                       onClick={() => updateConfig({ productType: key as keyof typeof productTypes })}
                       className={`p-4 rounded-lg border-2 transition-all text-left ${
@@ -1000,7 +1001,7 @@ export default function InteractiveConfigurator({ onConfigChange }: Configurator
                           </div>
                         </div>
                       </div>
-                    </motion.button>
+                    </MotionDiv>
                   ))}
                 </div>
 
@@ -1037,12 +1038,12 @@ export default function InteractiveConfigurator({ onConfigChange }: Configurator
                     })}
                   </div>
                 </div>
-              </motion.div>
+              </MotionDiv>
             )}
 
             {/* Materials Tab */}
             {activeTab === 'materials' && (
-              <motion.div
+              <MotionDiv
                 key="materials"
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
@@ -1054,7 +1055,7 @@ export default function InteractiveConfigurator({ onConfigChange }: Configurator
                   <h3 className="font-serif font-semibold text-accent-primary mb-4">Wood Type</h3>
                   <div className="space-y-2">
                     {Object.entries(woodTextures).map(([key, wood]) => (
-                      <motion.button
+                      <MotionDiv as="button"
                         key={key}
                         onClick={() => updateConfig({ woodType: key as keyof typeof woodTextures })}
                         className={`w-full p-3 rounded-lg border-2 transition-all text-left ${
@@ -1074,7 +1075,7 @@ export default function InteractiveConfigurator({ onConfigChange }: Configurator
                             ${wood.price}/ft²
                           </div>
                         </div>
-                      </motion.button>
+                      </MotionDiv>
                     ))}
                   </div>
                 </div>
@@ -1084,7 +1085,7 @@ export default function InteractiveConfigurator({ onConfigChange }: Configurator
                   <h3 className="font-serif font-semibold text-accent-primary mb-4">Finish</h3>
                   <div className="space-y-2">
                     {Object.entries(finishProperties).map(([key, finish]) => (
-                      <motion.button
+                      <MotionDiv as="button"
                         key={key}
                         onClick={() => updateConfig({ finishType: key as keyof typeof finishProperties })}
                         className={`w-full p-3 rounded-lg border-2 transition-all text-left ${
@@ -1106,14 +1107,14 @@ export default function InteractiveConfigurator({ onConfigChange }: Configurator
                             +${finish.price}
                           </div>
                         </div>
-                      </motion.button>
+                      </MotionDiv>
                     ))}
                   </div>
                 </div>
-              </motion.div>
+              </MotionDiv>
             )}            {/* Design Tab */}
             {activeTab === 'design' && (
-              <motion.div
+              <MotionDiv
                 key="design"
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
@@ -1125,7 +1126,7 @@ export default function InteractiveConfigurator({ onConfigChange }: Configurator
                   <h3 className="font-serif font-semibold text-accent-primary mb-4">Carving Technique</h3>
                   <div className="space-y-2">
                     {Object.entries(carvingTechniques).map(([key, technique]) => (
-                      <motion.button
+                      <MotionDiv as="button"
                         key={key}
                         onClick={() => updateConfig({ carvingTechnique: key as keyof typeof carvingTechniques })}
                         className={`w-full p-3 rounded-lg border-2 transition-all text-left ${
@@ -1150,7 +1151,7 @@ export default function InteractiveConfigurator({ onConfigChange }: Configurator
                             </div>
                           </div>
                         </div>
-                      </motion.button>
+                      </MotionDiv>
                     ))}
                   </div>
                 </div>
@@ -1161,7 +1162,7 @@ export default function InteractiveConfigurator({ onConfigChange }: Configurator
                     <h3 className="font-serif font-semibold text-accent-primary mb-4">Carving Style</h3>
                     <div className="space-y-2">
                       {Object.entries(carvingStyles).map(([key, style]) => (
-                        <motion.button
+                        <MotionDiv as="button"
                           key={key}
                           onClick={() => updateConfig({ carvingStyle: key as keyof typeof carvingStyles })}
                           className={`w-full p-3 rounded-lg border-2 transition-all text-left ${
@@ -1181,7 +1182,7 @@ export default function InteractiveConfigurator({ onConfigChange }: Configurator
                               +{((style.priceMultiplier - 1) * 100).toFixed(0)}%
                             </div>
                           </div>
-                        </motion.button>
+                        </MotionDiv>
                       ))}
                     </div>
                   </div>
@@ -1193,7 +1194,7 @@ export default function InteractiveConfigurator({ onConfigChange }: Configurator
                     <h3 className="font-serif font-semibold text-accent-primary mb-4">Carving Pattern</h3>
                     <div className="space-y-2">
                       {Object.entries(carvingPatterns).map(([key, pattern]) => (
-                        <motion.button
+                        <MotionDiv as="button"
                           key={key}
                           onClick={() => updateConfig({ pattern: key as keyof typeof carvingPatterns })}
                           className={`w-full p-3 rounded-lg border-2 transition-all text-left ${
@@ -1218,7 +1219,7 @@ export default function InteractiveConfigurator({ onConfigChange }: Configurator
                               </div>
                             </div>
                           </div>
-                        </motion.button>
+                        </MotionDiv>
                       ))}
                     </div>
                   </div>
@@ -1330,12 +1331,12 @@ export default function InteractiveConfigurator({ onConfigChange }: Configurator
                     Up to 50 characters. Additional cost may apply for complex engravings.
                   </p>
                 </div>
-              </motion.div>
+              </MotionDiv>
             )}
 
             {/* Options Tab */}
             {activeTab === 'options' && (
-              <motion.div
+              <MotionDiv
                 key="options"
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
@@ -1466,9 +1467,9 @@ export default function InteractiveConfigurator({ onConfigChange }: Configurator
                     </div>
                   </div>
                 </div>
-              </motion.div>
+              </MotionDiv>
             )}
-          </AnimatePresence>
+          </LazyAnimatePresence>
         </div>
       </div>
     </div>

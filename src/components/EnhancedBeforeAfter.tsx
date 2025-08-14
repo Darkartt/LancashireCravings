@@ -1,9 +1,10 @@
 'use client';
 
 import React, { useState, useRef, useCallback } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import MotionDiv from '@/components/MotionContainer';
+import { LazyAnimatePresence } from '@/components/LazyAnimatePresence';
 import Image from 'next/image';
-import { MediaItem } from '@/lib/media-organized';
+import type { MediaItem } from '@/lib/media-types';
 
 interface ComparisonStage {
   id: string;
@@ -151,7 +152,7 @@ const EnhancedBeforeAfter: React.FC<EnhancedBeforeAfterProps> = ({
               <span>{currentStageIndex + 1} of {stages.length}</span>
             </div>
             <div className="w-full bg-neutral-200 rounded-full h-2">
-              <motion.div
+              <MotionDiv
                 className="bg-gradient-to-r from-accent-primary to-accent-secondary h-2 rounded-full"
                 animate={{ width: `${((currentStageIndex + 1) / stages.length) * 100}%` }}
                 transition={{ duration: 0.5 }}
@@ -161,8 +162,8 @@ const EnhancedBeforeAfter: React.FC<EnhancedBeforeAfterProps> = ({
         )}
 
         {/* Stage Display */}
-        <AnimatePresence mode="wait">
-          <motion.div
+        <LazyAnimatePresence mode="wait">
+          <MotionDiv
             key={currentStageIndex}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -229,8 +230,8 @@ const EnhancedBeforeAfter: React.FC<EnhancedBeforeAfterProps> = ({
                 )}
               </button>
             </div>
-          </motion.div>
-        </AnimatePresence>
+          </MotionDiv>
+        </LazyAnimatePresence>
 
         {/* Stage Thumbnails */}
         <div className="mt-6 flex justify-center">
@@ -409,8 +410,8 @@ const EnhancedBeforeAfter: React.FC<EnhancedBeforeAfterProps> = ({
         </div>
 
         {/* Content */}
-        <AnimatePresence mode="wait">
-          <motion.div
+        <LazyAnimatePresence mode="wait">
+          <MotionDiv
             key={currentStageIndex}
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
@@ -439,8 +440,8 @@ const EnhancedBeforeAfter: React.FC<EnhancedBeforeAfterProps> = ({
                 </span>
               )}
             </div>
-          </motion.div>
-        </AnimatePresence>
+          </MotionDiv>
+        </LazyAnimatePresence>
       </div>
     );
   }

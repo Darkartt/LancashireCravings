@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { motion } from 'framer-motion';
+import MotionDiv from '@/components/MotionContainer';
 import { useAnimation } from '../AnimationProvider';
 
 interface WoodGrainBackgroundProps {
@@ -99,7 +99,7 @@ export const WoodGrainBackground: React.FC<WoodGrainBackgroundProps> = ({
           <pattern id={`wood-grain-${woodType}`} patternUnits="userSpaceOnUse" width="200" height="200">
             {/* Vertical grain lines */}
             {Array.from({ length: 8 }).map((_, i) => (
-              <motion.path
+              <MotionDiv as="path"
                 key={`v-${i}`}
                 d={`M${30 + i * 25},0 Q${35 + i * 25},100 ${30 + i * 25},200`}
                 stroke={colors.grain}
@@ -125,7 +125,7 @@ export const WoodGrainBackground: React.FC<WoodGrainBackgroundProps> = ({
             
             {/* Horizontal grain details */}
             {Array.from({ length: 6 }).map((_, i) => (
-              <motion.path
+              <MotionDiv as="path"
                 key={`h-${i}`}
                 d={`M0,${40 + i * 30} Q100,${35 + i * 30} 200,${40 + i * 30}`}
                 stroke={colors.accent}
@@ -150,7 +150,7 @@ export const WoodGrainBackground: React.FC<WoodGrainBackgroundProps> = ({
             ))}
           </pattern>
         </defs>
-        <motion.rect
+  <MotionDiv as="rect"
           width="100%" 
           height="100%"
           fill={`url(#wood-grain-${woodType})`}
@@ -170,7 +170,7 @@ export const WoodGrainBackground: React.FC<WoodGrainBackgroundProps> = ({
       
       {/* Enhanced wood grain lines */}
       {Array.from({ length: settings.lineCount }).map((_, i) => (
-        <motion.div
+  <MotionDiv
           key={i}
           className="absolute h-full"
           style={{ 

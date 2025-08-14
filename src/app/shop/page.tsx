@@ -3,7 +3,8 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useRef, useState } from "react";
-import { motion, useInView } from "framer-motion";
+import { MotionDiv } from "@/components/MotionContainer";
+import { useLazyInView } from "@/lib/lazyMotionHooks";
 import Header from "../../components/Header";
 import ShopBackground from "../../components/backgrounds/ShopBackground";
 import Footer from "../../components/Footer";
@@ -26,7 +27,7 @@ export default function Shop() {
   const [quickViewProduct, setQuickViewProduct] = useState<Product | null>(null);
   const [cartItems, setCartItems] = useState<Product[]>([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
-  const isInView = useInView(productsRef, { once: true, amount: 0.3 });
+  const isInView = useLazyInView(productsRef, { once: true, amount: 0.3 });
   const handleQuickView = (product: Product) => {
     setQuickViewProduct(product);
   };
@@ -73,35 +74,35 @@ export default function Shop() {
       <Header />      {/* Hero Section */}
       <section className="relative py-16 px-4 sm:px-8 bg-foreground/5 pt-24"> {/* Added top padding for header */}
         <div className="container mx-auto relative" style={{ zIndex: 10 }}>
-          <motion.h2 
+          <MotionDiv as="h2" 
             className="text-4xl font-serif font-bold text-accent-primary mb-6"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
             viewport={{ once: true }}
-          >Shop Lancaster Carving Limited</motion.h2>
-          <motion.p 
+          >Shop Lancaster Carving Limited</MotionDiv>
+          <MotionDiv as="p" 
             className="text-lg text-foreground/80 max-w-2xl"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
             viewport={{ once: true }}
-          >Browse our collection of handcrafted wooden pieces, from elegant decor to functional art, all crafted with the same dedication as our bespoke commissions.</motion.p>
+          >Browse our collection of handcrafted wooden pieces, from elegant decor to functional art, all crafted with the same dedication as our bespoke commissions.</MotionDiv>
         </div>
       </section>
 
       {/* Categories Section */}
       <section className="py-16 px-4 sm:px-8 bg-background">
         <div className="container mx-auto">
-          <motion.h3 
+          <MotionDiv as="h3" 
             className="text-3xl font-serif font-bold text-accent-primary mb-8 text-center"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
             viewport={{ once: true }}
-          >Shop by Category</motion.h3>
+          >Shop by Category</MotionDiv>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-4xl mx-auto">
-            <motion.div 
+            <MotionDiv 
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
@@ -111,8 +112,8 @@ export default function Shop() {
                 <div className="absolute inset-0 bg-gradient-to-t from-foreground/80 to-transparent opacity-70 group-hover:opacity-50 transition-opacity"></div>
                 <h4 className="absolute bottom-0 left-0 p-6 text-background text-xl font-serif font-semibold">Decorative Pieces</h4>
               </Link>
-            </motion.div>
-            <motion.div 
+            </MotionDiv>
+            <MotionDiv 
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
@@ -122,8 +123,8 @@ export default function Shop() {
                 <div className="absolute inset-0 bg-gradient-to-t from-foreground/80 to-transparent opacity-70 group-hover:opacity-50 transition-opacity"></div>
                 <h4 className="absolute bottom-0 left-0 p-6 text-background text-xl font-serif font-semibold">Small Furniture</h4>
               </Link>
-            </motion.div>
-            <motion.div 
+            </MotionDiv>
+            <MotionDiv 
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.3 }}
@@ -133,7 +134,7 @@ export default function Shop() {
                 <div className="absolute inset-0 bg-gradient-to-t from-foreground/80 to-transparent opacity-70 group-hover:opacity-50 transition-opacity"></div>
                 <h4 className="absolute bottom-0 left-0 p-6 text-background text-xl font-serif font-semibold">Wooden Accessories</h4>
               </Link>
-            </motion.div>
+            </MotionDiv>
           </div>
         </div>
       </section>
@@ -141,7 +142,7 @@ export default function Shop() {
       {/* Filtering and Sorting Section */}
       <section className="py-8 px-4 sm:px-8 bg-foreground/5">
         <div className="container mx-auto">
-          <motion.div 
+          <MotionDiv 
             className="flex flex-col md:flex-row justify-center gap-6"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -194,22 +195,22 @@ export default function Shop() {
                 <option value="cherry">Cherry</option>
               </select>
             </div>
-          </motion.div>
+          </MotionDiv>
         </div>
       </section>
 
       {/* Featured Products Section */}
       <section className="py-16 px-4 sm:px-8 bg-foreground/5" ref={productsRef}>
         <div className="container mx-auto">
-          <motion.h3 
+      <MotionDiv as="h3" 
             className="text-3xl font-serif font-bold text-accent-primary mb-8 text-center"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
             viewport={{ once: true }}
-          >Featured Products</motion.h3>          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
+      >Featured Products</MotionDiv>          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
             {filteredProducts.map((product, index) => (
-              <motion.div 
+        <MotionDiv 
                 key={product.id} 
                 className="product-card bg-background shadow-lg overflow-hidden hover:shadow-xl transition-shadow"
                 initial={{ y: 30, opacity: 0 }}
@@ -245,10 +246,10 @@ export default function Shop() {
                   >                    Add to Cart
                   </button>
                 </div>
-              </motion.div>
+        </MotionDiv>
             ))}
           </div>
-          <motion.div 
+      <MotionDiv 
             className="text-center mt-12"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -256,7 +257,7 @@ export default function Shop() {
             viewport={{ once: true }}
           >
             <Link href="/shop/all" className="inline-block border-2 border-accent-primary text-accent-primary px-8 py-3 rounded-md font-medium hover:bg-accent-primary/10 transition-colors">View All Products</Link>
-          </motion.div>
+      </MotionDiv>
         </div>
       </section>
 
@@ -330,7 +331,7 @@ export default function Shop() {
 
       {/* Call to Action Section with Custom Order Form */}
       <section className="py-16 px-4 sm:px-8 bg-accent-primary/10">
-        <motion.div 
+  <MotionDiv 
           className="container mx-auto text-center"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -360,7 +361,7 @@ export default function Shop() {
                 </button>
               </div>
             </form>
-          </div>        </motion.div>
+          </div>        </MotionDiv>
       </section>
 
       <Footer />

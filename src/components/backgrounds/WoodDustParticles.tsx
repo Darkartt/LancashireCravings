@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useState, useMemo } from 'react';
-import { motion } from 'framer-motion';
+import MotionDiv from '@/components/MotionContainer';
 import { useAnimation } from '../AnimationProvider';
 
 interface Particle {
@@ -65,7 +65,7 @@ export const WoodDustParticles: React.FC<WoodDustParticlesProps> = ({
           : 0;
           
         return (
-          <motion.div
+          <MotionDiv
             key={particle.id}
             className="absolute rounded-full"
             style={{

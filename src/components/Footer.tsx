@@ -2,14 +2,14 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import MotionDiv from '@/components/MotionContainer';
 
 export default function Footer() {
   return (
     <footer className="section-padding-lg bg-foreground/5 shadow-separator-medium relative z-10">
       <div className="container-modern">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
-          <motion.div
+          <MotionDiv
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: "easeOut" }}
@@ -23,9 +23,9 @@ export default function Footer() {
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-2C18.88 4 12 4 12 4s-6.88 0-8.59.42a2.78 2.78 0 0 0-1.95 2A29.94 29.94 0 0 0 1 12a29.94 29.94 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 2C5.12 20 12 20 12 20s6.88 0 8.59-.42a2.78 2.78 0 0 0 1.95-2A29.94 29.94 0 0 0 23 12a29.94 29.94 0 0 0-.46-5.58zM10 15V9l6 3-6 3z"></path></svg>
               </a>
             </div>
-          </motion.div>
+          </MotionDiv>
           
-          <motion.div
+          <MotionDiv
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: "easeOut", delay: 0.1 }}
@@ -40,9 +40,9 @@ export default function Footer() {
               <li><Link href="/blog" className="text-foreground/70 hover:text-accent-primary transition-colors">Blog</Link></li>
               <li><Link href="/about" className="text-foreground/70 hover:text-accent-primary transition-colors">About Us</Link></li>
             </ul>
-          </motion.div>
+          </MotionDiv>
           
-          <motion.div
+          <MotionDiv
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
@@ -55,9 +55,9 @@ export default function Footer() {
               <li><Link href="/services/architectural-elements" className="text-foreground/70 hover:text-accent-primary transition-colors">Architectural Elements</Link></li>
               <li><Link href="/services/restoration" className="text-foreground/70 hover:text-accent-primary transition-colors">Restoration</Link></li>
             </ul>
-          </motion.div>
+          </MotionDiv>
           
-          <motion.div
+          <MotionDiv
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: "easeOut", delay: 0.3 }}
@@ -71,9 +71,9 @@ export default function Footer() {
               <p><a href="mailto:riverdeechris@gmail.com" className="hover:text-accent-primary transition-colors">riverdeechris@gmail.com</a></p>
               <p><a href="https://wa.me/447915998923" className="hover:text-accent-primary transition-colors" target="_blank" rel="noopener noreferrer">WhatsApp</a></p>
             </address>
-          </motion.div>
+          </MotionDiv>
 
-          <motion.div
+          <MotionDiv
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: "easeOut", delay: 0.4 }}
@@ -112,10 +112,10 @@ export default function Footer() {
                 </div>
               </div>
             </div>
-          </motion.div>
+          </MotionDiv>
         </div>
         
-        <motion.div 
+  <MotionDiv 
           className="shadow-separator-medium pt-6 flex flex-col md:flex-row justify-between items-center"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -127,7 +127,7 @@ export default function Footer() {
             <Link href="/privacy" className="text-foreground/50 text-sm hover:text-foreground/80 transition-colors">Privacy Policy</Link>
             <Link href="/terms" className="text-foreground/50 text-sm hover:text-foreground/80 transition-colors">Terms of Service</Link>
           </div>
-        </motion.div>
+  </MotionDiv>
       </div>
     </footer>
   );

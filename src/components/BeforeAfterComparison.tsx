@@ -1,9 +1,9 @@
 'use client';
 
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import MotionDiv from '@/components/MotionContainer';
 import Image from 'next/image';
-import { MediaItem } from '@/lib/media-organized';
+import type { MediaItem } from '@/lib/media-types';
 
 interface BeforeAfterProps {
   beforeImage: MediaItem;
@@ -70,7 +70,7 @@ const BeforeAfterComparison: React.FC<BeforeAfterProps> = ({
 
         {/* Image Display */}
         <div className="relative w-full aspect-[4/3] rounded-lg overflow-hidden shadow-lg">
-          <motion.div
+          <MotionDiv
             key={isAfter ? 'after' : 'before'}
             initial={{ opacity: 0, scale: 1.05 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -83,7 +83,7 @@ const BeforeAfterComparison: React.FC<BeforeAfterProps> = ({
               className="object-cover"
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 800px"
             />
-          </motion.div>
+          </MotionDiv>
 
           {/* Label */}
           <div className="absolute top-4 left-4 bg-black/70 text-white px-3 py-1 rounded-full text-sm font-medium">

@@ -2,7 +2,8 @@
 
 import React, { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
-import { motion, AnimatePresence } from 'framer-motion';
+import MotionDiv from '@/components/MotionContainer';
+import { LazyAnimatePresence } from '@/components/LazyAnimatePresence';
 
 interface PageTransitionProps {
   children: React.ReactNode;
@@ -13,20 +14,17 @@ const PageTransition: React.FC<PageTransitionProps> = ({ children }) => {
   const [displayChildren, setDisplayChildren] = useState(children);
   const [isTransitioning, setIsTransitioning] = useState(false);
 
-  // Only trigger transitions on actual pathname changes (different pages)
+  // Trigger transitions on pathname/children change without stale deps warnings
   useEffect(() => {
-    if (children !== displayChildren) {
-      setIsTransitioning(true);
-      
-      // Delay to allow exit animation
-      const timeout = setTimeout(() => {
-        setDisplayChildren(children);
-        setIsTransitioning(false);
-      }, 300);
+    setIsTransitioning(true);
 
-      return () => clearTimeout(timeout);
-    }
-  }, [pathname]); // Changed from [children, displayChildren] to [pathname]
+    const timeout = setTimeout(() => {
+      setDisplayChildren(children);
+      setIsTransitioning(false);
+    }, 300);
+
+    return () => clearTimeout(timeout);
+  }, [pathname, children]);
 
   // Enhanced page variants that work well with scroll
   const pageVariants = {
@@ -55,8 +53,8 @@ const PageTransition: React.FC<PageTransitionProps> = ({ children }) => {
 
   return (
     <div className="page-transition-container">
-      <AnimatePresence mode="wait" initial={false}>
-        <motion.div
+      <LazyAnimatePresence mode="wait" initial={false}>
+        <MotionDiv
           key={pathname}
           initial="initial"
           animate="in"
@@ -74,7 +72,7 @@ const PageTransition: React.FC<PageTransitionProps> = ({ children }) => {
             // Temporarily pause scroll updates during transition
             document.body.style.pointerEvents = 'none';
           }}
-          onAnimationComplete={(definition) => {
+          onAnimationComplete={(definition: string) => {
             // Re-enable interactions after transition
             document.body.style.pointerEvents = '';
             
@@ -92,8 +90,8 @@ const PageTransition: React.FC<PageTransitionProps> = ({ children }) => {
           }}
         >
           {isTransitioning ? displayChildren : children}
-        </motion.div>
-      </AnimatePresence>
+        </MotionDiv>
+      </LazyAnimatePresence>
     </div>
   );
 };

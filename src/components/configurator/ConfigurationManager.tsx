@@ -1,7 +1,8 @@
 'use client';
 
 import React, { useState, useCallback } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import MotionDiv from '@/components/MotionContainer';
+import { LazyAnimatePresence } from '@/components/LazyAnimatePresence';
 
 interface ConfiguratorState {
   productType: 'chair' | 'table' | 'cabinet' | 'sculpture' | 'reliefPanel' | 'carvedBox' | 'mantelpiece' | 'bowl';
@@ -105,7 +106,7 @@ export default function ConfigurationManager({
   return (
     <div className="flex flex-wrap gap-2">
       {/* Save Configuration */}
-      <motion.button
+  <MotionDiv as="button"
         onClick={() => setShowSaveDialog(true)}
         className="px-4 py-2 bg-accent-primary text-white rounded-lg hover:bg-accent-primary/90 transition-colors font-medium flex items-center gap-2"
         whileHover={{ scale: 1.02 }}
@@ -113,11 +114,11 @@ export default function ConfigurationManager({
       >
         <span>💾</span>
         Save Design
-      </motion.button>
+  </MotionDiv>
 
       {/* Load Configuration */}
       {savedConfigs.length > 0 && (
-        <motion.button
+  <MotionDiv as="button"
           onClick={() => setShowLoadDialog(true)}
           className="px-4 py-2 bg-foreground/10 text-foreground rounded-lg hover:bg-foreground/20 transition-colors font-medium flex items-center gap-2"
           whileHover={{ scale: 1.02 }}
@@ -125,11 +126,11 @@ export default function ConfigurationManager({
         >
           <span>📂</span>
           Load Design ({savedConfigs.length})
-        </motion.button>
+  </MotionDiv>
       )}
 
       {/* Share Configuration */}
-      <motion.button
+  <MotionDiv as="button"
         onClick={shareConfiguration}
         className="px-4 py-2 bg-accent-secondary text-white rounded-lg hover:bg-accent-secondary/90 transition-colors font-medium flex items-center gap-2"
         whileHover={{ scale: 1.02 }}
@@ -137,24 +138,24 @@ export default function ConfigurationManager({
       >
         <span>🔗</span>
         Share Design
-      </motion.button>
+  </MotionDiv>
 
       {/* Save Dialog */}
-      <AnimatePresence>
+      <LazyAnimatePresence>
         {showSaveDialog && (
-          <motion.div
+          <MotionDiv
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50"
             onClick={() => setShowSaveDialog(false)}
           >
-            <motion.div
+            <MotionDiv
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
               className="bg-background rounded-2xl p-6 w-full max-w-md mx-4 shadow-2xl"
-              onClick={(e) => e.stopPropagation()}
+              onClick={(e: React.MouseEvent) => e.stopPropagation()}
             >
               <h3 className="text-xl font-serif font-bold text-accent-primary mb-4">
                 Save Configuration
@@ -203,34 +204,34 @@ export default function ConfigurationManager({
                   </button>
                 </div>
               </div>
-            </motion.div>
-          </motion.div>
+            </MotionDiv>
+          </MotionDiv>
         )}
-      </AnimatePresence>
+      </LazyAnimatePresence>
 
       {/* Load Dialog */}
-      <AnimatePresence>
+      <LazyAnimatePresence>
         {showLoadDialog && (
-          <motion.div
+          <MotionDiv
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50"
             onClick={() => setShowLoadDialog(false)}
           >
-            <motion.div
+            <MotionDiv
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
               className="bg-background rounded-2xl p-6 w-full max-w-2xl mx-4 shadow-2xl max-h-[80vh] overflow-y-auto"
-              onClick={(e) => e.stopPropagation()}
+              onClick={(e: React.MouseEvent) => e.stopPropagation()}
             >
               <h3 className="text-xl font-serif font-bold text-accent-primary mb-4">
                 Load Saved Configuration
               </h3>
               <div className="space-y-3">
                 {savedConfigs.map((config) => (
-                  <motion.div
+                  <MotionDiv
                     key={config.id}
                     className="bg-foreground/5 rounded-lg p-4 hover:bg-foreground/10 transition-colors"
                     whileHover={{ scale: 1.01 }}
@@ -238,22 +239,22 @@ export default function ConfigurationManager({
                     <div className="flex justify-between items-start mb-2">
                       <h4 className="font-medium text-foreground">{config.name}</h4>
                       <div className="flex gap-2">
-                        <motion.button
+                        <MotionDiv as="button"
                           onClick={() => loadConfiguration(config)}
                           className="px-3 py-1 bg-accent-primary text-white rounded text-sm hover:bg-accent-primary/90 transition-colors"
                           whileHover={{ scale: 1.05 }}
                           whileTap={{ scale: 0.95 }}
                         >
                           Load
-                        </motion.button>
-                        <motion.button
+                        </MotionDiv>
+                        <MotionDiv as="button"
                           onClick={() => deleteConfiguration(config.id)}
                           className="px-3 py-1 bg-red-500 text-white rounded text-sm hover:bg-red-600 transition-colors"
                           whileHover={{ scale: 1.05 }}
                           whileTap={{ scale: 0.95 }}
                         >
                           Delete
-                        </motion.button>
+                        </MotionDiv>
                       </div>
                     </div>
                     <div className="grid grid-cols-2 gap-4 text-sm text-foreground/70">
@@ -273,7 +274,7 @@ export default function ConfigurationManager({
                     <div className="text-xs text-foreground/50 mt-2">
                       Saved: {new Date(config.createdAt).toLocaleDateString()}
                     </div>
-                  </motion.div>
+                  </MotionDiv>
                 ))}
               </div>
               <div className="mt-6 flex justify-end">
@@ -284,10 +285,10 @@ export default function ConfigurationManager({
                   Close
                 </button>
               </div>
-            </motion.div>
-          </motion.div>
+            </MotionDiv>
+          </MotionDiv>
         )}
-      </AnimatePresence>
+      </LazyAnimatePresence>
     </div>
   );
 }

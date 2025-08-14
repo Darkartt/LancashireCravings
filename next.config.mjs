@@ -6,6 +6,9 @@ const nextConfig = {
   images: {
     unoptimized: isGitHubPages,
   },
+  env: {
+    NEXT_PUBLIC_BASE_PATH: isGitHubPages ? `/${repoName}` : '',
+  },
   ...(isGitHubPages
     ? {
         output: 'export',
