@@ -41,7 +41,7 @@ export async function loadMediaData(): Promise<MediaDataExport> {
   } else {
     // Client: fetch curated via API to avoid bundling fs
     try {
-      const res = await fetch('/api/portfolio/', { cache: 'no-store' });
+      const res = await fetch(prefixBasePath('/api/portfolio/'), { cache: 'no-store' });
       if (res.ok) {
         const data = await res.json();
         const projects = (data.projects || []) as Project[];
