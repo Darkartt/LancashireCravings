@@ -69,6 +69,8 @@ export default function OptimizedImage({
         fill={fill}
         priority={priority}
   loading={priority ? 'eager' : 'lazy'}
+  fetchPriority={priority ? 'high' : 'auto'}
+  decoding={priority ? 'async' : 'auto'}
         sizes={sizes}
         quality={quality}
         placeholder={placeholder}

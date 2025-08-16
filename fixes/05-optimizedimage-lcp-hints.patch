@@ -1,0 +1,22 @@
+*** Begin Patch
+*** Update File: src/components/OptimizedImage.tsx
+@@
+   return (
+     <div className={`relative ${className}`}>
+       <Image
+         src={src}
+         alt={alt}
+         width={width}
+         height={height}
+         fill={fill}
+         priority={priority}
+-        loading={priority ? 'eager' : 'lazy'}
++        loading={priority ? 'eager' : 'lazy'}
++        fetchPriority={priority ? 'high' : 'auto'}
++        decoding={priority ? 'async' : 'auto'}
+         sizes={sizes}
+         quality={quality}
+         placeholder={placeholder}
+         blurDataURL={blurDataURL}
+         style={{ width: 'auto', height: 'auto' }}
+*** End Patch

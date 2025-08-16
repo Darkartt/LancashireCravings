@@ -1,0 +1,8 @@
+*** Begin Patch
+*** Update File: public/robots.txt
+@@
+-Disallow: *.json$
++# Remove blanket JSON block; allow PWA and curated manifest
++Allow: /manifest.json
++Allow: /curated-manifest.json
+*** End Patch

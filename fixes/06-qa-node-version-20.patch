@@ -1,0 +1,8 @@
+*** Begin Patch
+*** Update File: .github/workflows/qa.yml
+@@
+-env:
+-  NODE_VERSION: '18'
++env:
++  NODE_VERSION: '20'
+*** End Patch

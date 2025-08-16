@@ -8,7 +8,9 @@ Sitemap: https://exampledesign.co.uk/sitemap.xml
 Disallow: /api/
 Disallow: /_next/
 Disallow: /admin/
-Disallow: *.json$
+# Note: Allow required JSON resources
+Allow: /manifest.json
+Allow: /curated-manifest.json
 
 # Allow important pages
 Allow: /
