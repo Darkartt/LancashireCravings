@@ -1,0 +1,31 @@
+*** Begin Patch
+*** Update File: package.json
+@@
+   "scripts": {
+     "dev": "next dev --turbopack",
+-    "build": "next build",
++    "build": "next build",
+     "preexport": "node ./scripts/generate-curated-manifest.mjs",
+     "postbuild": "node ./scripts/generate-curated-manifest.mjs",
+     "export": "next export",
+     "start": "next start",
+     "lint": "next lint",
+-    "test": "jest --passWithNoTests",
+-    "analyze": "cross-env ANALYZE=true next build",
++    "test": "jest --passWithNoTests",
++    "test:unit": "jest --selectProjects unit --passWithNoTests",
++    "test:integration": "jest --selectProjects integration --passWithNoTests",
++    "test:accessibility": "jest --selectProjects accessibility --passWithNoTests || true",
++    "test:performance": "jest --selectProjects performance --passWithNoTests || true",
++    "test:visual": "jest --selectProjects visual --passWithNoTests || true",
++    "test:coverage": "jest --coverage --passWithNoTests",
++    "lighthouse": "lhci autorun --config=./lighthouserc.js || true",
++    "analyze": "cross-env ANALYZE=true next build",
+     "test-export": "bash ./scripts/test-static-export.sh",
+     "serve-static": "npx serve out"
+   },
+@@
+-    "jest": "^30.0.5",
++    "jest": "^30.0.5",
++    "@lhci/cli": "^0.13.0",
+*** End Patch

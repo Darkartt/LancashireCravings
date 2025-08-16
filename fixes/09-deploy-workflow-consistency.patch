@@ -1,0 +1,19 @@
+*** Begin Patch
+*** Update File: .github/workflows/deploy-gh-pages.yml
+@@
+-      - name: Build (Next.js static export)
+-        run: npm run build
++      - name: Build (Next.js static export)
++        run: |
++          npm run build
++          npm run export
+@@
+-      - name: Upload artifact
+-        uses: actions/upload-pages-artifact@v3
+-        with:
+-          path: ./.next/export
++      - name: Upload artifact
++        uses: actions/upload-pages-artifact@v3
++        with:
++          path: ./out
+*** End Patch

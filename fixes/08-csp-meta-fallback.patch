@@ -1,0 +1,10 @@
+*** Begin Patch
+*** Update File: src/app/layout.tsx
+@@
+   return (
+     <html lang="en">
+       <head>
++        {/* Basic CSP fallback for static hosting (GH Pages) */}
++        <meta httpEquiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: blob: https:; style-src 'self' 'unsafe-inline'; script-src 'self'; font-src 'self' data:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'self';" />
+         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+*** End Patch

@@ -1,0 +1,76 @@
+*** Begin Patch
+*** Update File: next.config.mjs
+@@
+-import fs from 'node:fs';
+-
+-const isGitHubPages = process.env.GITHUB_PAGES === 'true';
+-const repoName = process.env.GITHUB_REPOSITORY?.split('/')[1] || '';
+-// If a CNAME file exists, we're using a custom domain and should not set basePath/assetPrefix
+-const hasCNAME = fs.existsSync('./CNAME');
+-const useSubpath = isGitHubPages && !hasCNAME;
+-
+-/** @type {import('next').NextConfig} */
+-const nextConfig = {
+-  images: {
+-    unoptimized: isGitHubPages,
+-  },
+-  env: {
+-    NEXT_PUBLIC_BASE_PATH: useSubpath ? `/${repoName}` : '',
+-  },
+-  ...(useSubpath
+-    ? {
+-        output: 'export',
+-        trailingSlash: true,
+-        basePath: `/${repoName}`,
+-        assetPrefix: `/${repoName}/`,
+-      }
+-    : (isGitHubPages
+-        ? {
+-            output: 'export',
+-            trailingSlash: true,
+-          }
+-        : {})),
+-};
+-
+-export default nextConfig;
++import fs from 'node:fs';
++// Bring in bundle analyzer from TS config to consolidate in one place
++// eslint-disable-next-line @typescript-eslint/no-var-requires
++const withBundleAnalyzer = require('@next/bundle-analyzer')({ enabled: process.env.ANALYZE === 'true' });
++
++const isGitHubPages = process.env.GITHUB_PAGES === 'true';
++const repoName = process.env.GITHUB_REPOSITORY?.split('/')[1] || '';
++const hasCNAME = fs.existsSync('./CNAME');
++const useSubpath = isGitHubPages && !hasCNAME;
++
++/** @type {import('next').NextConfig} */
++const baseConfig = {
++  images: {
++    unoptimized: isGitHubPages,
++  },
++  env: {
++    NEXT_PUBLIC_BASE_PATH: useSubpath ? `/${repoName}` : '',
++  },
++  experimental: {
++    scrollRestoration: true,
++    cssChunking: true,
++  },
++  ...(useSubpath
++    ? {
++        output: 'export',
++        trailingSlash: true,
++        basePath: `/${repoName}`,
++        assetPrefix: `/${repoName}/`,
++      }
++    : (isGitHubPages
++        ? {
++            output: 'export',
++            trailingSlash: true,
++          }
++        : {})),
++};
++
++const nextConfig = withBundleAnalyzer(baseConfig);
++
++export default nextConfig;
+*** End Patch

@@ -1,18 +1,24 @@
 import fs from 'node:fs';
+import { createRequire } from 'node:module';
+const require = createRequire(import.meta.url);
+const withBundleAnalyzer = require('@next/bundle-analyzer')({ enabled: process.env.ANALYZE === 'true' });
 
 const isGitHubPages = process.env.GITHUB_PAGES === 'true';
 const repoName = process.env.GITHUB_REPOSITORY?.split('/')[1] || '';
-// If a CNAME file exists, we're using a custom domain and should not set basePath/assetPrefix
 const hasCNAME = fs.existsSync('./CNAME');
 const useSubpath = isGitHubPages && !hasCNAME;
 
 /** @type {import('next').NextConfig} */
-const nextConfig = {
+const baseConfig = {
   images: {
     unoptimized: isGitHubPages,
   },
   env: {
     NEXT_PUBLIC_BASE_PATH: useSubpath ? `/${repoName}` : '',
+  },
+  experimental: {
+    scrollRestoration: true,
+    cssChunking: true,
   },
   ...(useSubpath
     ? {
@@ -28,5 +34,7 @@ const nextConfig = {
           }
         : {})),
 };
+
+const nextConfig = withBundleAnalyzer(baseConfig);
 
 export default nextConfig;
