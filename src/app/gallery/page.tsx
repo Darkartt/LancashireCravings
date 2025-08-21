@@ -5,6 +5,8 @@ import MotionDiv from '@/components/MotionContainer';
 import CleanBackground from '@/components/CleanBackground';
 import TabbedMediaGallery from '@/components/TabbedMediaGallery';
 import ProjectCard from '@/components/ProjectCard';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
 import { loadMediaData } from '@/lib/media-loader';
 import type { Project } from '@/lib/media-types';
 // Heavy media stats/items will be loaded dynamically; avoid static import to keep bundle slim.
@@ -77,11 +79,13 @@ export default function GalleryPage() {
   };
 
   return (
-    <div className="min-h-screen">
+    <div className="flex flex-col min-h-screen">
       {/* Background Layer */}
       <CleanBackground variant="portfolio" />
       
-      <main className="relative z-10">
+      <Header />
+
+      <main className="relative z-10 flex-1">
         {/* Hero Section */}
         <section className="pt-24 pb-16 px-4">
           <div className="max-w-7xl mx-auto text-center">
@@ -299,6 +303,8 @@ export default function GalleryPage() {
           </div>
         </section>
       </main>
+
+      <Footer />
     </div>
   );
 }

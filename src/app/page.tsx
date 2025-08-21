@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useState, useEffect, Suspense, lazy } from "react";
+import { useState, useEffect, Suspense, useRef } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Button from "../components/ui/Button";
@@ -10,32 +10,88 @@ import ImageLightbox from "../components/ui/ImageLightbox";
 import { PageLoadingFallback } from "../components/ui/LoadingSpinner";
 import { loadMediaData } from "@/lib/media-loader";
 
-// Lazy load heavy components
-const HomeBackground = lazy(() => import("../components/backgrounds/HomeBackground"));
-const SectionMorphing = lazy(() => import("../components/animations/SectionMorphing"));
+// Animations removed for a cleaner, professional experience
 
 import { companyInfo } from "../lib/data";
 
 export default function Home() {
   const [lightboxImage, setLightboxImage] = useState<{src: string, alt: string} | null>(null);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [showBackground, setShowBackground] = useState(true);
+  const [currentSection, setCurrentSection] = useState<string>('hero');
 
-  // Lightweight initial featured list; hydrate with full dataset asynchronously
-  const [featuredProjects, setFeaturedProjects] = useState<any[]>([]);
+  // Static featured projects for immediate loading
+  const [featuredProjects, setFeaturedProjects] = useState<any[]>([
+    {
+      title: "Golden Eagle Masterpiece",
+      description: "Majestic golden eagle carved with incredible detail, showcasing the power and grace of this magnificent bird of prey.",
+      category: "wildlife",
+      coverImage: "/OwlAtNight.jpg",
+      difficulty: "Expert",
+      materials: ["Premium Hardwood"],
+      completionTime: "6-8 weeks"
+    },
+    {
+      title: "Bass Sculpture",
+      description: "Detailed fish carving showing intricate scales and flowing fins, perfect for aquatic-themed collections.",
+      category: "commissioned",
+      coverImage: "/FishesOnTopOfTable.jpg",
+      difficulty: "Advanced",
+      materials: ["Premium Hardwood"],
+      completionTime: "4-6 weeks"
+    },
+    {
+      title: "Saint Collen Statue",
+      description: "Religious sculpture with flowing robes and detailed facial features, capturing spiritual essence in wood.",
+      category: "religious",
+      coverImage: "/Dog.jpg",
+      difficulty: "Master",
+      materials: ["Premium Hardwood"],
+      completionTime: "8-12 weeks"
+    }
+  ]);
+
+  // Load additional data in background without blocking
   useEffect(() => {
-    let mounted = true;
     loadMediaData()
       .then(({ getFeaturedProjects, projects }) => {
         const list = getFeaturedProjects ? getFeaturedProjects() : projects;
-        if (mounted) setFeaturedProjects(list);
+        if (list.length > 0) {
+          setFeaturedProjects(list.slice(0, 3)); // Update with real data if available
+        }
       })
-      .catch((e) => console.warn('Home: loadMediaData failed', e));
-    return () => { mounted = false; };
+      .catch((e) => console.warn('Home: loadMediaData failed, using fallback', e));
   }, []);
 
+  // Background visibility control based on scroll position
   useEffect(() => {
-    // Set loaded state after mount to prevent hydration mismatch
-    setIsLoaded(true);
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      const windowHeight = window.innerHeight;
+
+      // Check which section is currently in view
+      const sections = ['hero', 'process', 'portfolio', 'about', 'testimonials'];
+      let current = 'hero';
+
+      sections.forEach(sectionId => {
+        const element = document.getElementById(sectionId);
+        if (element) {
+          const rect = element.getBoundingClientRect();
+          if (rect.top <= windowHeight / 2 && rect.bottom >= windowHeight / 2) {
+            current = sectionId;
+          }
+        }
+      });
+
+      setCurrentSection(current);
+      // Hide background for portfolio and about sections, show for others
+      setShowBackground(current === 'hero' || current === 'process');
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll(); // Initial check
+
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const openLightbox = (src: string, alt: string) => {
@@ -46,21 +102,18 @@ export default function Home() {
     setLightboxImage(null);
   };
 
-  // Show loading fallback during initial render
-  if (!isLoaded) {
-    return <PageLoadingFallback />;
-  }
-
   return (
-    <div className="flex flex-col min-h-screen text-foreground relative" style={{ background: 'transparent' }}>
-      <Suspense fallback={<div className="fixed inset-0 bg-[var(--background)]" />}>
-        <HomeBackground />
-      </Suspense>
+    <div className="flex flex-col min-h-screen text-foreground relative" style={{
+      background: 'transparent',
+      zIndex: 10,
+      position: 'relative'
+    }}>
+      {/* Background animation removed completely from landing page */}
       
       <Header />
 
       {/* Hero Section - Enhanced Full-Height Immersive */}
-  <section id="hero" style={{ zIndex: 1 }} className="hero-section relative min-h-screen flex flex-col justify-center items-center bg-transparent pt-40 pb-40 hero-parallax section-transition-smooth">
+  <section id="hero" style={{ zIndex: 10, position: 'relative' }} className="hero-section relative min-h-screen flex flex-col justify-center items-center bg-transparent pt-40 pb-40 hero-parallax section-transition-smooth">
         <div className="container-modern text-center max-w-6xl relative z-10">
           <div
             className="mb-6"
@@ -101,15 +154,11 @@ export default function Home() {
             className="flex flex-col sm:flex-row gap-6 justify-center hero-buttons max-w-2xl mx-auto"
             data-animate-fade-up
           >
-            <Link href="/commission">
-              <Button variant="primary" size="lg-plus" fullWidth className="sm:w-auto">
-                Commission Custom Piece
-              </Button>
+            <Link href="/commission" className="btn btn-lg-plus btn-primary sm:w-auto">
+              Commission Custom Piece
             </Link>
-            <Link href="/portfolio">
-              <Button variant="outline" size="lg-plus" fullWidth className="sm:w-auto">
-                Explore Collection
-              </Button>
+            <Link href="/portfolio" className="btn btn-lg-plus btn-outline sm:w-auto">
+              Explore Collection
             </Link>
           </div>
           
@@ -128,17 +177,16 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Hero to Process Transition */}
-      <SectionMorphing 
-        sectionId="hero" 
-        nextSectionId="process" 
-        morphingType="hero-to-process"
-        className="section-transition-trigger"
-      />
+      {/* Transition removed */}
+
+      {/* Section Divider */}
+      <div className="section-divider" />
 
       {/* Enhanced Process Section with Timeline */}
-      <section id="process" className="process-section section-padding-xl bg-transparent shadow-separator-medium relative section-transition-smooth" style={{ 
-        background: 'linear-gradient(to bottom right, transparent 0%, rgba(var(--accent-secondary-rgb, 85, 107, 47), 0.05) 100%)'
+      <section id="process" className="process-section section-padding-xl bg-transparent shadow-separator-medium relative section-transition-smooth" style={{
+        background: 'linear-gradient(to bottom right, transparent 0%, rgba(var(--accent-secondary-rgb, 85, 107, 47), 0.05) 100%)',
+        zIndex: 10,
+        position: 'relative'
       }}>
         <div className="mb-24"> {/* Empty space for scroll animation trigger */}</div>
         <div className="container-modern max-w-7xl">
@@ -241,16 +289,17 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Process to Portfolio Transition */}
-      <SectionMorphing 
-        sectionId="process" 
-        nextSectionId="portfolio" 
-        morphingType="process-to-portfolio"
-        className="section-transition-trigger"
-      />
+      {/* Transition removed */}
+
+      {/* Section Divider */}
+      <div className="section-divider" />
 
       {/* Enhanced Portfolio Section with Case Studies */}
-      <section id="portfolio" className="portfolio-section section-padding-xl shadow-separator-medium relative section-transition-smooth" style={{ background: 'transparent' }}>
+      <section id="portfolio" className="portfolio-section section-padding-xl shadow-separator-medium relative section-transition-smooth" style={{
+        background: 'transparent',
+        zIndex: 10,
+        position: 'relative'
+      }}>
         <div className="mb-24"> {/* Empty space for scroll animation trigger */}</div>
         <div className="container-modern max-w-7xl">
           <h2 
@@ -486,9 +535,14 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Section Divider */}
+      <div className="section-divider" />
+
       {/* Enhanced About Section with Craftsman Story */}
       <section id="about" className="about-section section-padding-xl bg-transparent shadow-separator-medium section-transition-smooth" style={{
-        background: 'linear-gradient(to bottom right, transparent 0%, rgba(var(--accent-primary-rgb, 139, 69, 19), 0.05) 100%)'
+        background: 'linear-gradient(to bottom right, transparent 0%, rgba(var(--accent-primary-rgb, 139, 69, 19), 0.05) 100%)',
+        zIndex: 10,
+        position: 'relative'
       }}>
         <div className="mb-24"> {/* Empty space for scroll animation trigger */}</div>
         <div className="container-modern max-w-7xl">
@@ -582,8 +636,14 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Section Divider */}
+      <div className="section-divider" />
+
       {/* Enhanced Testimonials Section */}
-      <section id="testimonials" className="testimonials-section section-padding-xl bg-transparent shadow-separator-medium section-transition-smooth">
+      <section id="testimonials" className="testimonials-section section-padding-xl bg-transparent shadow-separator-medium section-transition-smooth" style={{
+        zIndex: 10,
+        position: 'relative'
+      }}>
         <div className="mb-24"> {/* Empty space for scroll animation trigger */}</div>
         <div className="container-modern max-w-7xl">
           <h2 
@@ -655,8 +715,14 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Section Divider */}
+      <div className="section-divider" />
+
       {/* Social Highlights / Latest from Facebook */}
-      <section className="py-32 px-6 sm:px-12 bg-foreground/5 shadow-separator-medium">
+      <section className="py-32 px-6 sm:px-12 bg-foreground/5 shadow-separator-medium" style={{
+        zIndex: 10,
+        position: 'relative'
+      }}>
         <div className="container mx-auto max-w-7xl">
           <h2 
             className="text-5xl md:text-6xl font-serif font-bold text-accent-primary mb-16 text-center"
@@ -843,8 +909,14 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Section Divider */}
+      <div className="section-divider" />
+
       {/* Enhanced Call-to-Action Section */}
-      <section className="py-32 px-6 sm:px-12 bg-gradient-to-br from-accent-primary/10 to-accent-secondary/10 shadow-separator-medium">
+      <section className="py-32 px-6 sm:px-12 bg-gradient-to-br from-accent-primary/10 to-accent-secondary/10 shadow-separator-medium" style={{
+        zIndex: 10,
+        position: 'relative'
+      }}>
         <div className="container mx-auto max-w-4xl text-center">
           <div data-animate-fade-up>
             <h2 className="text-5xl md:text-6xl font-serif font-bold text-accent-primary mb-8">

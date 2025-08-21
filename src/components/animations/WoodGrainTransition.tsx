@@ -67,9 +67,14 @@ const WoodGrainTransition: React.FC<WoodGrainTransitionProps> = ({
       const { gsap } = await loadGsap();
       if (killed) return;
 
-      const container = containerRef.current!;
+      const container = containerRef.current;
+      if (!container) return;
+
       const grainLines = container.querySelectorAll('.grain-line');
       const morphingBg = container.querySelector('.morphing-background');
+
+      // Check if elements exist
+      if (!grainLines.length || !morphingBg) return;
 
       const tl = gsap.timeline({
         scrollTrigger: {

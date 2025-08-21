@@ -310,6 +310,30 @@
     border-radius: var(--border-radius-xl);
   }
 
+  /* Additional large sizes (used on landing page) */
+  .btn-lg-plus {
+    padding: calc(var(--space-lg) + 0.25rem) calc(var(--space-2xl) + 0.5rem);
+    font-size: calc(var(--font-size-lg) + 0.125rem);
+    border-radius: var(--border-radius-xl);
+    min-height: 4rem;
+    font-weight: 500;
+  }
+  .btn-xl {
+    padding: var(--space-2xl) var(--space-3xl);
+    font-size: var(--font-size-xl);
+    border-radius: var(--border-radius-2xl);
+    min-height: 4.5rem;
+    font-weight: 600;
+  }
+  .btn-2xl {
+    padding: var(--space-3xl) var(--space-4xl);
+    font-size: var(--font-size-2xl);
+    border-radius: var(--border-radius-2xl);
+    min-height: 5rem;
+    font-weight: 700;
+    letter-spacing: 0.025em;
+  }
+
   .btn-primary {
     background: linear-gradient(135deg, var(--accent-primary), var(--accent-warm));
     color: var(--surface-elevated);
@@ -589,6 +613,11 @@
     background: var(--surface-elevated);
     box-shadow: var(--shadow-lg);
     border-radius: var(--border-radius-xl);
+  }
+
+  /* Section divider utility */
+  .section-divider {
+    border-top: 1px solid var(--border-subtle);
   }
 }
 

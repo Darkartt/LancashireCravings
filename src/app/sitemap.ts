@@ -1,4 +1,6 @@
 import type { MetadataRoute } from 'next';
+import { realProjects } from '@/lib/projects-real';
+import { generateStaticParams } from '@/app/shop/[category]/generateStaticParams';
 
 export const dynamic = 'force-static';
 export const revalidate = false;
@@ -11,14 +13,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return { url: loc, changeFrequency: 'weekly' as const, priority: p === '' ? 1.0 : 0.7 };
   });
   // Include dynamic routes from real data
-  const { realProjects } = require('@/lib/projects-real');
   const projectUrls = (realProjects || []).map((p: any) => ({
     url: `${base}/projects/${p.slug}/`,
     changeFrequency: 'monthly' as const,
     priority: 0.6
   }));
 
-  const { generateStaticParams } = require('@/app/shop/[category]/generateStaticParams');
   const shopCategories = (generateStaticParams?.() || []).map((c: any) => c.category);
   const shopUrls = shopCategories.map((c: string) => ({
     url: `${base}/shop/${c}/`,
