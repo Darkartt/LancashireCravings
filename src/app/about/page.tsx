@@ -162,7 +162,7 @@ export default function About() {
               <div className="relative">
                 <div className="aspect-[4/5] rounded-2xl overflow-hidden shadow-xl">
                   <Image 
-                    src="/OwlAtNight.jpg" 
+                    src={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/OwlAtNight.jpg`} 
                     alt="Owl at night, a memorial piece" 
                     fill
                     className="object-cover"
