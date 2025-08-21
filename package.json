@@ -8,7 +8,7 @@
   "build": "next build",
   "preexport": "node ./scripts/generate-curated-manifest.mjs",
   "postbuild": "node ./scripts/generate-curated-manifest.mjs",
-  "export": "next export",
+  "export": "node -e \"console.log('Skipping next export: handled by output: export in next.config.mjs')\"",
     "start": "next start",
     "lint": "next lint",
   "test": "jest --passWithNoTests",
