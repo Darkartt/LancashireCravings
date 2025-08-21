@@ -1,7 +1,7 @@
 import { ImageResponse } from 'next/og'
- 
-// Route segment config
-export const runtime = 'edge'
+// Ensure static export compatibility
+export const dynamic = 'force-static'
+export const revalidate = false
  
 // Image metadata
 export const size = {
