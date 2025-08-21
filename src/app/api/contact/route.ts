@@ -13,4 +13,7 @@ export async function POST(req: Request) {
   }
 }
 
-export const dynamic = 'force-dynamic';
+// In static export environments (e.g., GitHub Pages) dynamic routes are not supported.
+// Mark this route as static so the exporter doesn't fail the build.
+export const dynamic = 'force-static';
+export const revalidate = false;
