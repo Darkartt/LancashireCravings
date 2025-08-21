@@ -1,0 +1,27 @@
+{
+  "name": "Lancaster Carving Limited - Premium Custom Woodcarving",
+  "short_name": "Lancaster Carving",
+  "description": "Discover exceptional custom woodcarving craftsmanship from Mold, United Kingdom. Bespoke wooden furniture, sculptures, and architectural elements.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#faf9f7",
+  "theme_color": "#8B4513",
+  "orientation": "portrait-primary",
+  "categories": ["business", "crafts", "lifestyle"],
+  "lang": "en-GB",
+  "dir": "ltr",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/apple-touch-icon.svg",
+      "sizes": "180x180",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

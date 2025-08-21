@@ -1,0 +1,57 @@
+[
+  {
+    "label": "RawWood",
+    "source": "public\\media\\projects\\nessie\\images\\process\\nessie_nessie_007.jpg",
+    "curated": "curated_output\\Woodcarvings\\nessie\\nessie_01_RawWood.jpg"
+  },
+  {
+    "label": "RoughShape",
+    "source": "public\\media\\projects\\nessie\\images\\process\\nessie_nessie_013.jpeg",
+    "curated": "curated_output\\Woodcarvings\\nessie\\nessie_02_RoughShape.jpeg"
+  },
+  {
+    "label": "DefiningForms",
+    "source": "public\\media\\projects\\nessie\\images\\process\\nessie_nessie_049.jpg",
+    "curated": "curated_output\\Woodcarvings\\nessie\\nessie_03_DefiningForms.jpg"
+  },
+  {
+    "label": "Detailing",
+    "source": "public\\media\\projects\\nessie\\images\\process\\nessie_nessie_080.jpg",
+    "curated": "curated_output\\Woodcarvings\\nessie\\nessie_04_Detailing.jpg"
+  },
+  {
+    "label": "Finished_1",
+    "source": "public\\media\\projects\\nessie\\images\\final\\nessie_nessie_108.jpg",
+    "curated": "curated_output\\Woodcarvings\\nessie\\nessie_05_Finished_1.jpg"
+  },
+  {
+    "label": "Finished_2",
+    "source": "public\\media\\projects\\nessie\\images\\final\\nessie_nessie_119.jpg",
+    "curated": "curated_output\\Woodcarvings\\nessie\\nessie_06_Finished_2.jpg"
+  },
+  {
+    "label": "Finished_3",
+    "source": "public\\media\\projects\\nessie\\images\\final\\nessie_nessie_130.jpg",
+    "curated": "curated_output\\Woodcarvings\\nessie\\nessie_07_Finished_3.jpg"
+  },
+  {
+    "label": "Finished_4",
+    "source": "public\\media\\projects\\nessie\\images\\final\\nessie_nessie_142.jpg",
+    "curated": "curated_output\\Woodcarvings\\nessie\\nessie_08_Finished_4.jpg"
+  },
+  {
+    "label": "Finished_5",
+    "source": "public\\media\\projects\\nessie\\images\\final\\nessie_nessie_153.jpg",
+    "curated": "curated_output\\Woodcarvings\\nessie\\nessie_09_Finished_5.jpg"
+  },
+  {
+    "label": "Detail_1",
+    "source": "public\\media\\projects\\nessie\\images\\final\\nessie_nessie_135.jpg",
+    "curated": "curated_output\\Woodcarvings\\nessie\\nessie_10_Detail_1.jpg"
+  },
+  {
+    "label": "Detail_2",
+    "source": "public\\media\\projects\\nessie\\images\\final\\nessie_nessie_146.jpg",
+    "curated": "curated_output\\Woodcarvings\\nessie\\nessie_11_Detail_2.jpg"
+  }
+]
