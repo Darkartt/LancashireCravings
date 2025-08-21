@@ -1,0 +1,66 @@
+# Exclude large media files from Vercel deployment
+public/media/
+public/media/archive/
+public/media/**/*.mov
+public/media/**/*.mp4
+public/media/**/*.avi
+public/media/**/*.webm
+public/media/**/*.mkv
+
+# Exclude large directories
+curated_output/
+visual-animal-review/
+visual-project-review/
+organized-batch-reviews/
+organized-visual-review/
+batch-reviews/
+compression_temp/
+test-results/
+screenshots/
+inspection-reports/
+
+# Exclude large files
+*.mov
+*.mp4
+*.avi
+*.webm
+*.mkv
+*.zip
+*.7z
+*.tar
+*.tar.gz
+*.exe
+ffmpeg-master-latest-win64-gpl/
+
+# Exclude analysis files
+*-analysis-results*.json
+*-analysis-summary*.json
+comprehensive-project-*.json
+enhanced-*.json
+advanced-*.json
+*.log
+master-inventory*.json
+media-*.json
+nature-categorization*.json
+organized-visual-review*.json
+visual-review-batches-*.json
+
+# Keep only essential portfolio images
+!public/portfolio/
+!public/portfolio/**/*.jpg
+!public/portfolio/**/*.jpeg
+!public/portfolio/**/*.png
+!public/portfolio/**/*.webp
+!public/portfolio/**/*.gif
+
+# Keep essential public files
+!public/*.jpg
+!public/*.jpeg
+!public/*.png
+!public/*.webp
+!public/*.gif
+!public/*.svg
+!public/*.ico
+!public/*.json
+!public/*.txt
+!public/*.js
