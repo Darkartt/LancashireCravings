@@ -2,12 +2,10 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useState, useEffect, Suspense, useRef } from "react";
+import { useState, useEffect } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import Button from "../components/ui/Button";
 import ImageLightbox from "../components/ui/ImageLightbox";
-import { PageLoadingFallback } from "../components/ui/LoadingSpinner";
 import { loadMediaData } from "@/lib/media-loader";
 
 // Animations removed for a cleaner, professional experience
@@ -16,9 +14,7 @@ import { companyInfo } from "../lib/data";
 
 export default function Home() {
   const [lightboxImage, setLightboxImage] = useState<{src: string, alt: string} | null>(null);
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [showBackground, setShowBackground] = useState(true);
-  const [currentSection, setCurrentSection] = useState<string>('hero');
+  // Removed unused animation-related state
 
   // Static featured projects for immediate loading
   const [featuredProjects, setFeaturedProjects] = useState<any[]>([
@@ -64,35 +60,7 @@ export default function Home() {
   }, []);
 
   // Background visibility control based on scroll position
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollY = window.scrollY;
-      const windowHeight = window.innerHeight;
-
-      // Check which section is currently in view
-      const sections = ['hero', 'process', 'portfolio', 'about', 'testimonials'];
-      let current = 'hero';
-
-      sections.forEach(sectionId => {
-        const element = document.getElementById(sectionId);
-        if (element) {
-          const rect = element.getBoundingClientRect();
-          if (rect.top <= windowHeight / 2 && rect.bottom >= windowHeight / 2) {
-            current = sectionId;
-          }
-        }
-      });
-
-      setCurrentSection(current);
-      // Hide background for portfolio and about sections, show for others
-      setShowBackground(current === 'hero' || current === 'process');
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll(); // Initial check
-
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  // Removed legacy scroll-based background toggles
 
   const openLightbox = (src: string, alt: string) => {
     setLightboxImage({ src, alt });
