@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
-import "./globals.css";
+import "./globals_new.css";
 import { AnimationProvider } from "../components/AnimationProvider";
 import ErrorBoundary from "../components/ErrorBoundary";
-import HydrationSuppressor from "../components/HydrationSuppressor";
 import PageTransition from "../components/PageTransition";
 import { generateMetadata, generateStructuredData } from "../lib/metadata";
 
@@ -13,6 +12,10 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // For static generation, use empty nonce (CSP will fallback to unsafe-inline)
+  // For runtime, the middleware will provide the nonce via headers
+  const nonce = '';
+
   const organizationSchema = generateStructuredData('organization', {});
   const websiteSchema = generateStructuredData('website', {});
   return (
@@ -29,11 +32,13 @@ export default function RootLayout({
         <meta name="color-scheme" content="light dark" />
         <script
           type="application/ld+json"
+          nonce={nonce}
           async
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
         />
         <script
           type="application/ld+json"
+          nonce={nonce}
           async
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
         />
@@ -47,15 +52,13 @@ export default function RootLayout({
         {/* Skip link for keyboard users */}
         <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 bg-accent-primary text-white px-4 py-2 rounded-md shadow-lg">Skip to content</a>
         <ErrorBoundary>
-          <HydrationSuppressor>
-            <AnimationProvider>
-              <PageTransition>
-                <main id="main" tabIndex={-1}>
-                  {children}
-                </main>
-              </PageTransition>
-            </AnimationProvider>
-          </HydrationSuppressor>
+          <AnimationProvider>
+            <PageTransition>
+              <main id="main" tabIndex={-1} className="page-fade-in">
+                {children}
+              </main>
+            </PageTransition>
+          </AnimationProvider>
         </ErrorBoundary>
       </body>
     </html>

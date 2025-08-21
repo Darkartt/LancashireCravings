@@ -1,6 +1,8 @@
 .header-container {
   /* Remove conflicting background - using inline styles instead */
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 50; /* Ensure header stays above background animations */
+  position: relative;
 }
 
 /* Enhanced CTA Button */

@@ -75,7 +75,7 @@ export default function OptimizedImage({
         quality={quality}
         placeholder={placeholder}
         blurDataURL={blurDataURL}
-        style={{ width: 'auto', height: 'auto' }}
+        style={{ width: width ? `${width}px` : 'auto', height: height ? `${height}px` : 'auto' }}
         className={`transition-opacity duration-300 ${
           isLoaded ? 'opacity-100' : 'opacity-0'
         }`}

@@ -51,11 +51,11 @@ export default function Header() {
   <MotionDiv 
         className="px-6 sm:px-8 lg:px-12 py-6 bg-background/95 backdrop-blur-sm shadow-header-black fixed top-0 left-0 right-0 header-container"
         style={{ zIndex: 60 }}
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
+        initial={{ y: -32, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
       >
-        <div className="container mx-auto flex justify-between items-center max-w-7xl px-4 lg:px-6">
+        <div className="container-modern flex justify-between items-center max-w-7xl">
           <div className="flex items-center">
             <MotionDiv
               initial={{ opacity: 0, scale: 0.9 }}
@@ -84,12 +84,12 @@ export default function Header() {
         </div>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex space-x-8" role="navigation" aria-label="Main navigation">
+        <nav className="hidden md:flex space-x-2" role="navigation" aria-label="Main navigation">
           {navigation.map((item) => (
             <Link
               key={item.name}
               href={item.href}
-              className="text-foreground/80 hover:text-accent-primary transition-colors font-medium header-nav-link focus:outline-none focus:ring-2 focus:ring-accent-primary focus:ring-offset-2 rounded-md px-3 py-2"
+              className="nav-link"
             >
               {item.name}
             </Link>
@@ -133,10 +133,7 @@ export default function Header() {
           </button>
 
           {/* CTA Button */}
-          <Link
-            href="/commission"
-            className="bg-accent-primary text-background px-4 py-2 rounded-lg font-medium header-cta-button hidden md:block hover:bg-accent-warm transition-colors focus:outline-none focus:ring-2 focus:ring-accent-primary focus:ring-offset-2"
-          >
+          <Link href="/commission" className="hidden md:inline-flex btn btn-md btn-primary">
             Commission a Piece
           </Link>
         </div>
@@ -150,11 +147,12 @@ export default function Header() {
           role="navigation"
           aria-label="Mobile navigation"
         >
-          <nav className="flex flex-col space-y-4 max-w-7xl mx-auto">            {navigation.map((item) => (
+          <nav className="flex flex-col space-y-2 max-w-7xl mx-auto">
+            {navigation.map((item) => (
               <Link
                 key={item.name}
                 href={item.href}
-                className="text-foreground/80 hover:text-accent-primary transition-colors py-3 shadow-separator-subtle font-medium focus:outline-none focus:ring-2 focus:ring-accent-primary focus:ring-offset-2 rounded-lg"
+                className="nav-link block"
                 onClick={() => setIsMobileMenuOpen(false)}
                 tabIndex={isMobileMenuOpen ? 0 : -1}
               >
@@ -163,7 +161,7 @@ export default function Header() {
             ))}
             <Link
               href="/commission"
-              className="bg-accent-primary text-background px-4 py-3 rounded-lg font-medium text-center mt-4 hover:bg-accent-warm transition-colors focus:outline-none focus:ring-2 focus:ring-accent-primary focus:ring-offset-2"
+              className="btn btn-md btn-primary text-center mt-3"
               onClick={() => setIsMobileMenuOpen(false)}
               tabIndex={isMobileMenuOpen ? 0 : -1}
             >

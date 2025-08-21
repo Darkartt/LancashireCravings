@@ -123,7 +123,7 @@ export default function Contact() {
                   transition={{ duration: 0.8, delay: 0.7 }}
                   viewport={{ once: true }}
                 >
-                  <button type="submit" className="bg-accent-primary text-background px-6 py-3 rounded-md font-medium hover:bg-accent-primary/90 transition-colors">Submit Request</button>
+                  <button type="submit" className="btn btn-md btn-primary">Submit Request</button>
         </MotionDiv>
               </form>
               <p className="text-foreground/70 text-sm mt-4">We will respond to your inquiry within 1-2 business days.</p>
@@ -143,7 +143,7 @@ export default function Contact() {
         >
           <h3 className="text-3xl font-serif font-bold text-accent-primary mb-4">Ready to Start Your Project?</h3>
           <p className="text-lg text-foreground/80 max-w-2xl mx-auto mb-8">Our team is eager to discuss your vision and provide expert guidance on custom woodcarving solutions.</p>
-          <button className="inline-block bg-accent-primary text-background px-8 py-3 rounded-md font-medium hover:bg-accent-primary/90 transition-colors">Call Us Now: (555) 123-4567</button>
+          <button className="btn btn-lg btn-primary">Call Us Now: (555) 123-4567</button>
         </MotionDiv>
       </section>
 

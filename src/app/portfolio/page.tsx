@@ -175,10 +175,7 @@ export default function PortfolioPage() {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.8 }}
             >
-              <Link
-                href="/gallery"
-                className="inline-flex items-center gap-2 bg-[var(--accent-primary)] text-white px-8 py-4 rounded-lg font-medium hover:bg-[var(--accent-warm)] transition-colors duration-300 shadow-lg hover:shadow-xl"
-              >
+              <Link href="/gallery" className="btn btn-lg btn-primary inline-flex items-center gap-2">
                 View Complete Gallery
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
@@ -305,19 +302,13 @@ export default function PortfolioPage() {
                 with uncompromising craftsmanship.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Link
-                  href="/commission"
-                  className="inline-flex items-center gap-2 bg-[var(--accent-primary)] text-white px-8 py-4 rounded-lg font-medium hover:bg-[var(--accent-warm)] transition-colors duration-300 shadow-lg hover:shadow-xl"
-                >
+                <Link href="/commission" className="btn btn-lg btn-primary inline-flex items-center gap-2">
                   Start Commission
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
                 </Link>
-                <Link
-                  href="/contact"
-                  className="inline-flex items-center gap-2 bg-[var(--surface-elevated)] text-[var(--foreground)] px-8 py-4 rounded-lg font-medium hover:bg-[var(--border-subtle)] transition-colors duration-300 border border-[var(--border-subtle)]"
-                >
+                <Link href="/contact" className="btn btn-lg btn-secondary inline-flex items-center gap-2">
                   Discuss Ideas
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-3.582 8-8 8a8.955 8.955 0 01-2.748-.431L5 21l1.43-5.248A8 8 0 1121 12z" />

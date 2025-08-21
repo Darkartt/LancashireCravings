@@ -58,7 +58,7 @@ export default function Services() {
               <p className="text-foreground/80 mb-4">Placeholder: We design and craft bespoke furniture pieces tailored to your specifications, from elegant dining tables to intricate chairs, using premium hardwoods for lasting beauty and durability.</p>
               <p className="text-foreground/80 mb-4">Placeholder: Benefits include personalized design, exceptional craftsmanship, and pieces that become family heirlooms. Examples include custom oak dining sets and walnut desks.</p>
               <p className="text-foreground/80 mb-2">Placeholder: Starting Price: $2,500 (varies by complexity and materials).</p>
-              <Link href="/commission" className="text-accent-primary font-medium hover:underline">Request a Custom Piece →</Link>
+              <Link href="/commission" className="btn btn-sm btn-secondary">Request a Custom Piece</Link>
             </MotionDiv>
             {/* Service 2: Decorative Carvings */}
             <MotionDiv 
@@ -72,7 +72,7 @@ export default function Services() {
               <p className="text-foreground/80 mb-4">Placeholder: Our decorative carvings add a touch of artistry to any space, including wall sculptures, ornate frames, and standalone pieces crafted with meticulous detail.</p>
               <p className="text-foreground/80 mb-4">Placeholder: Benefits include unique aesthetic enhancements and custom designs that reflect personal style. Examples include cherry wood wall art and maple figurines.</p>
               <p className="text-foreground/80 mb-2">Placeholder: Starting Price: $800 (varies by size and intricacy).</p>
-              <Link href="/commission" className="text-accent-primary font-medium hover:underline">Commission a Piece →</Link>
+              <Link href="/commission" className="btn btn-sm btn-secondary">Commission a Piece</Link>
             </MotionDiv>
             {/* Service 3: Architectural Elements */}
             <MotionDiv 
@@ -86,7 +86,7 @@ export default function Services() {
               <p className="text-foreground/80 mb-4">Placeholder: We create custom architectural elements such as mantels, staircases, and door frames, enhancing the structural beauty of homes and commercial spaces with hand-carved details.</p>
               <p className="text-foreground/80 mb-4">Placeholder: Benefits include seamless integration with existing architecture and elevated property value. Examples include mahogany stair balustrades and oak door surrounds.</p>
               <p className="text-foreground/80 mb-2">Placeholder: Starting Price: $3,000 (varies by scope and materials).</p>
-              <Link href="/commission" className="text-accent-primary font-medium hover:underline">Explore Options →</Link>
+              <Link href="/commission" className="btn btn-sm btn-secondary">Explore Options</Link>
             </MotionDiv>
             {/* Service 4: Restoration */}
             <MotionDiv 
@@ -100,7 +100,7 @@ export default function Services() {
               <p className="text-foreground/80 mb-4">Placeholder: Our restoration services breathe new life into antique or damaged wooden pieces, preserving their historical value while restoring functionality and beauty.</p>
               <p className="text-foreground/80 mb-4">Placeholder: Benefits include maintaining heritage, expert matching of original techniques, and sustainable preservation. Examples include restoring Victorian furniture and colonial door frames.</p>
               <p className="text-foreground/80 mb-2">Placeholder: Starting Price: $1,000 (varies by condition and complexity).</p>
-              <Link href="/contact" className="text-accent-primary font-medium hover:underline">Request Restoration →</Link>
+              <Link href="/contact" className="btn btn-sm btn-secondary">Request Restoration</Link>
             </MotionDiv>
           </div>
         </div>
@@ -127,7 +127,7 @@ export default function Services() {
             <p className="text-foreground/80 mb-4">Placeholder: We offer workshops and classes for enthusiasts of all skill levels, from beginners to advanced carvers, teaching traditional techniques and modern approaches to woodcraft.</p>
             <p className="text-foreground/80 mb-4">Placeholder: Benefits include hands-on learning, personalized instruction from master artisans, and the opportunity to create your own wooden piece. Classes are held monthly at our Liverpool studio.</p>
             <p className="text-foreground/80 mb-2">Placeholder: Workshop Fee: $250 for a weekend session (materials included).</p>
-            <Link href="/contact" className="text-accent-primary font-medium hover:underline">Register Interest →</Link>
+            <Link href="/contact" className="btn btn-sm btn-secondary">Register Interest</Link>
           </MotionDiv>
         </div>
       </section>
@@ -149,7 +149,7 @@ export default function Services() {
             transition={{ duration: 0.5, delay: 0.2 }}
             viewport={{ once: true }}
           >
-            <Link href="/commission" className="inline-block bg-accent-primary text-background px-8 py-3 rounded-md font-medium hover:bg-accent-primary/90 transition-colors">Commission a Piece</Link>
+            <Link href="/commission" className="btn btn-lg btn-primary">Commission a Piece</Link>
           </MotionDiv>        </MotionDiv>
       </section>
 
