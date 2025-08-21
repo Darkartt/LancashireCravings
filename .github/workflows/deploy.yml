@@ -29,6 +29,7 @@ jobs:
         run: npm run build
         env:
           NODE_ENV: production
+          CUSTOM_DOMAIN: 'true'
 
       - name: Add .nojekyll file
         run: touch out/.nojekyll
@@ -40,8 +41,8 @@ jobs:
         run: |
           # Create a backup copy of the 404.html in case it's needed
           cp out/404.html out/404.original.html
-          # Ensure we have a proper index.html at the root
-          cp out/index.html out/404.html
+          # For custom domain, we don't need to copy index.html to 404.html
+          # The 404.html should remain as the actual 404 page
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
