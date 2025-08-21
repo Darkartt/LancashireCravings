@@ -711,7 +711,7 @@ export default function Home() {
               <div className="relative overflow-hidden rounded-2xl shadow-xl mb-6 group-hover:shadow-2xl transition-all duration-500">
                 <div className="aspect-[4/5]">
                   <Image 
-                    src="/BarOwlBack.jpg" 
+                    src={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/BarOwlBack.jpg`} 
                     alt="Barn Owl Back carving" 
                     fill
                     className="object-cover transition-transform duration-500 group-hover:scale-105"
@@ -735,7 +735,7 @@ export default function Home() {
               <div className="relative overflow-hidden rounded-2xl shadow-xl mb-6 group-hover:shadow-2xl transition-all duration-500">
                 <div className="aspect-[4/5]">
                   <Image 
-                    src="/OwlFront.jpg" 
+                    src={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/OwlFront.jpg`} 
                     alt="Owl Front carving" 
                     fill
                     className="object-cover transition-transform duration-500 group-hover:scale-105"
@@ -758,7 +758,7 @@ export default function Home() {
               <div className="relative overflow-hidden rounded-2xl shadow-xl mb-6 group-hover:shadow-2xl transition-all duration-500">
                 <div className="aspect-[4/5]">
                   <Image 
-                    src="/Crow.jpg" 
+                    src={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/Crow.jpg`} 
                     alt="Crow carving" 
                     fill
                     className="object-cover transition-transform duration-500 group-hover:scale-105"
@@ -782,7 +782,7 @@ export default function Home() {
               <div className="relative overflow-hidden rounded-2xl shadow-xl mb-6 group-hover:shadow-2xl transition-all duration-500">
                 <div className="aspect-[4/5]">
                   <Image 
-                    src="/FishesOnTopOfTable.jpg" 
+                    src={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/FishesOnTopOfTable.jpg`} 
                     alt="Fish carvings on table" 
                     fill
                     className="object-cover transition-transform duration-500 group-hover:scale-105"
@@ -805,7 +805,7 @@ export default function Home() {
               <div className="relative overflow-hidden rounded-2xl shadow-xl mb-6 group-hover:shadow-2xl transition-all duration-500">
                 <div className="aspect-[4/5]">
                   <Image 
-                    src="/OwlAtNight.jpg" 
+                    src={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/OwlAtNight.jpg`} 
                     alt="Owl at Night carving" 
                     fill
                     className="object-cover transition-transform duration-500 group-hover:scale-105"
@@ -828,7 +828,7 @@ export default function Home() {
               <div className="relative overflow-hidden rounded-2xl shadow-xl mb-6 group-hover:shadow-2xl transition-all duration-500">
                 <div className="aspect-[4/5]">
                   <Image 
-                    src="/Dog.jpg" 
+                    src={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/Dog.jpg`} 
                     alt="Dog carving" 
                     fill
                     className="object-cover transition-transform duration-500 group-hover:scale-105"

@@ -65,7 +65,7 @@ export default function Header() {
             >
               <Link href="/" aria-label="Lancaster Carving Limited - Home">
                 <OptimizedImage 
-                  src="/logo.svg" 
+                  src={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/logo.svg`} 
                   alt="Lancaster Carving Limited Logo" 
                   width={32} 
                   height={32}

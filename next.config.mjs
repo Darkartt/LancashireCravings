@@ -5,14 +5,15 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({ enabled: process.e
 
 const isGitHubPages = process.env.GITHUB_PAGES === 'true';
 const repoName = process.env.GITHUB_REPOSITORY?.split('/')[1] || '';
-const hasCNAME = fs.existsSync('./CNAME');
-const useSubpath = isGitHubPages && !hasCNAME;
+// Always use subpath for GitHub Pages deployments at user.github.io/<repo>
+const useSubpath = isGitHubPages;
 
 /** @type {import('next').NextConfig} */
 const baseConfig = {
   images: {
-    unoptimized: false, // Enable Next.js image optimization
-    formats: ['image/webp', 'image/avif'], // Modern formats
+    // Static export on GitHub Pages cannot use the Image Optimization server
+    unoptimized: isGitHubPages ? true : false,
+    formats: ['image/webp', 'image/avif'],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
   },
@@ -23,19 +24,18 @@ const baseConfig = {
     scrollRestoration: true,
     cssChunking: true,
   },
-  ...(useSubpath
+  ...(isGitHubPages
     ? {
         output: 'export',
         trailingSlash: true,
-        basePath: `/${repoName}`,
-        assetPrefix: `/${repoName}/`,
+        ...(useSubpath && repoName
+          ? {
+              basePath: `/${repoName}`,
+              assetPrefix: `/${repoName}/`,
+            }
+          : {}),
       }
-    : (isGitHubPages
-        ? {
-            output: 'export',
-            trailingSlash: true,
-          }
-        : {})),
+    : {}),
 };
 
 const nextConfig = withBundleAnalyzer(baseConfig);
