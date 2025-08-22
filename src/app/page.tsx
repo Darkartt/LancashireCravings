@@ -22,7 +22,7 @@ export default function Home() {
       title: "Golden Eagle Masterpiece",
       description: "Majestic golden eagle carved with incredible detail, showcasing the power and grace of this magnificent bird of prey.",
       category: "wildlife",
-      coverImage: "/OwlAtNight.jpg",
+      coverImage: "/portfolio/eagle/eagle_05_Finished_1.jpg",
       difficulty: "Expert",
       materials: ["Premium Hardwood"],
       completionTime: "6-8 weeks"
@@ -31,7 +31,7 @@ export default function Home() {
       title: "Bass Sculpture",
       description: "Detailed fish carving showing intricate scales and flowing fins, perfect for aquatic-themed collections.",
       category: "commissioned",
-      coverImage: "/FishesOnTopOfTable.jpg",
+      coverImage: "/portfolio/bass/bass_05_Finished_1.jpeg",
       difficulty: "Advanced",
       materials: ["Premium Hardwood"],
       completionTime: "4-6 weeks"
@@ -40,7 +40,7 @@ export default function Home() {
       title: "Saint Collen Statue",
       description: "Religious sculpture with flowing robes and detailed facial features, capturing spiritual essence in wood.",
       category: "religious",
-      coverImage: "/Dog.jpg",
+      coverImage: "/portfolio/stcollen/stcollen_05_Finished_1.jpeg",
       difficulty: "Master",
       materials: ["Premium Hardwood"],
       completionTime: "8-12 weeks"
