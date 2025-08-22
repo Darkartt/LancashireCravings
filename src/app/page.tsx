@@ -22,7 +22,7 @@ export default function Home() {
       title: "Golden Eagle Masterpiece",
       description: "Majestic golden eagle carved with incredible detail, showcasing the power and grace of this magnificent bird of prey.",
       category: "wildlife",
-      coverImage: "/portfolio/eagle/eagle_05_Finished_1.jpg",
+      coverImage: "/portfolio/eagle/eagle_01_RawWood.jpg",
       difficulty: "Expert",
       materials: ["Premium Hardwood"],
       completionTime: "6-8 weeks"
@@ -31,16 +31,16 @@ export default function Home() {
       title: "Bass Sculpture",
       description: "Detailed fish carving showing intricate scales and flowing fins, perfect for aquatic-themed collections.",
       category: "commissioned",
-      coverImage: "/portfolio/bass/bass_05_Finished_1.jpeg",
+      coverImage: "/portfolio/bass/bass_01_RawWood.jpeg",
       difficulty: "Advanced",
       materials: ["Premium Hardwood"],
       completionTime: "4-6 weeks"
     },
     {
-      title: "Fish Collection",
-      description: "Beautiful collection of handcrafted fish carvings showcasing different wood grains and carving techniques.",
+      title: "Workshop Highlights",
+      description: "Beautiful collection of handcrafted pieces showcasing different wood grains and carving techniques.",
       category: "wildlife",
-      coverImage: "/portfolio/fish/fish_05_Finished_1.jpeg",
+      coverImage: "/FishesOnTopOfTable.jpg",
       difficulty: "Advanced",
       materials: ["Premium Hardwood"],
       completionTime: "4-6 weeks"
@@ -334,20 +334,24 @@ export default function Home() {
               </div>
               <div className="space-y-4">
                 <div className="portfolio-showcase aspect-[4/5] overflow-hidden shadow-2xl bg-gradient-to-br from-accent-primary/20 to-accent-secondary/20">
-                  {featuredProjects[0]?.coverImage ? (
-                    <Image
-                      src={featuredProjects[0].coverImage}
-                      alt={featuredProjects[0].title}
-                      width={400}
-                      height={500}
-                      className="w-full h-full object-cover cursor-pointer hover:scale-110 transition-transform duration-500"
-                      onClick={() => openLightbox(featuredProjects[0].coverImage, featuredProjects[0].title)}
-                    />
-                  ) : (
-                    <div className="w-full h-full bg-foreground/10 flex items-center justify-center">
-                      <span className="text-foreground/40 text-center px-4">Featured Project - Main View</span>
-                    </div>
-                  )}
+                                     {featuredProjects[0]?.coverImage ? (
+                     <Image
+                       src={featuredProjects[0].coverImage}
+                       alt={featuredProjects[0].title}
+                       width={400}
+                       height={500}
+                       className="w-full h-full object-cover cursor-pointer hover:scale-110 transition-transform duration-500"
+                       onClick={() => openLightbox(featuredProjects[0].coverImage, featuredProjects[0].title)}
+                       onError={(e) => {
+                         console.warn(`Failed to load image: ${featuredProjects[0].coverImage}`);
+                         e.currentTarget.style.display = 'none';
+                       }}
+                     />
+                   ) : (
+                     <div className="w-full h-full bg-foreground/10 flex items-center justify-center">
+                       <span className="text-foreground/40 text-center px-4">Featured Project - Main View</span>
+                     </div>
+                   )}
                 </div>
                 <div className="grid grid-cols-2 gap-4">
                   {featuredProjects[1]?.coverImage ? (

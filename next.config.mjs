@@ -29,6 +29,10 @@ const baseConfig = {
         },
       ],
     }),
+    // Ensure static images work properly
+    dangerouslyAllowSVG: true,
+    contentDispositionType: 'attachment',
+    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
   env: {
     NEXT_PUBLIC_BASE_PATH: useSubpath ? `/${repoName}` : '',
