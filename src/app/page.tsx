@@ -37,13 +37,13 @@ export default function Home() {
       completionTime: "4-6 weeks"
     },
     {
-      title: "Saint Collen Statue",
-      description: "Religious sculpture with flowing robes and detailed facial features, capturing spiritual essence in wood.",
-      category: "religious",
-      coverImage: "/portfolio/stcollen/stcollen_05_Finished_1.jpeg",
-      difficulty: "Master",
+      title: "Fish Collection",
+      description: "Beautiful collection of handcrafted fish carvings showcasing different wood grains and carving techniques.",
+      category: "wildlife",
+      coverImage: "/portfolio/fish/fish_05_Finished_1.jpeg",
+      difficulty: "Advanced",
       materials: ["Premium Hardwood"],
-      completionTime: "8-12 weeks"
+      completionTime: "4-6 weeks"
     }
   ]);
 
@@ -717,14 +717,14 @@ export default function Home() {
             <div className="group cursor-pointer" data-animate-fade-up onClick={() => openLightbox("/BarOwlBack.jpg", "Barn Owl Back carving - Good Afternoon 🌞 My Barn Owls back 😜 ❤️🔪🦉")}>
               <div className="relative overflow-hidden rounded-2xl shadow-xl mb-6 group-hover:shadow-2xl transition-all duration-500">
                 <div className="aspect-[4/5]">
-                  <Image 
-                    src={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/BarOwlBack.jpg`} 
-                    alt="Barn Owl Back carving" 
-                    fill
-                    className="object-cover transition-transform duration-500 group-hover:scale-105"
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                    priority={false}
-                  />
+                                     <Image 
+                     src="/BarOwlBack.jpg" 
+                     alt="Barn Owl Back carving" 
+                     fill
+                     className="object-cover transition-transform duration-500 group-hover:scale-105"
+                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                     priority={false}
+                   />
                 </div>
                 <div className="absolute inset-0 bg-gradient-to-t from-accent-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -741,13 +741,13 @@ export default function Home() {
             <div className="group cursor-pointer" data-animate-fade-up onClick={() => openLightbox("/OwlFront.jpg", "Owl Front carving - When the sun sets gold...A new beginning begins to unfold ❤️🔪🦉")}>
               <div className="relative overflow-hidden rounded-2xl shadow-xl mb-6 group-hover:shadow-2xl transition-all duration-500">
                 <div className="aspect-[4/5]">
-                  <Image 
-                    src={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/OwlFront.jpg`} 
-                    alt="Owl Front carving" 
-                    fill
-                    className="object-cover transition-transform duration-500 group-hover:scale-105"
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  />
+                                     <Image 
+                     src="/OwlFront.jpg" 
+                     alt="Owl Front carving" 
+                     fill
+                     className="object-cover transition-transform duration-500 group-hover:scale-105"
+                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                   />
                 </div>
                 <div className="absolute inset-0 bg-gradient-to-t from-accent-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -764,13 +764,13 @@ export default function Home() {
             <div className="group cursor-pointer" data-animate-fade-up onClick={() => openLightbox("/Crow.jpg", "Crow carving - I became insane, with long intervals of horrible sanity - Edgar Allan Poe ❤️🔪🐦‍⬛")}>
               <div className="relative overflow-hidden rounded-2xl shadow-xl mb-6 group-hover:shadow-2xl transition-all duration-500">
                 <div className="aspect-[4/5]">
-                  <Image 
-                    src={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/Crow.jpg`} 
-                    alt="Crow carving" 
-                    fill
-                    className="object-cover transition-transform duration-500 group-hover:scale-105"
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  />
+                                     <Image 
+                     src="/Crow.jpg" 
+                     alt="Crow carving" 
+                     fill
+                     className="object-cover transition-transform duration-500 group-hover:scale-105"
+                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                   />
                 </div>
                 <div className="absolute inset-0 bg-gradient-to-t from-accent-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -788,13 +788,13 @@ export default function Home() {
             <div className="group cursor-pointer" data-animate-fade-up onClick={() => openLightbox("/FishesOnTopOfTable.jpg", "Fish carvings on table - A collection of handcrafted fish showcasing different wood grains and carving techniques 🐟🎨")}>
               <div className="relative overflow-hidden rounded-2xl shadow-xl mb-6 group-hover:shadow-2xl transition-all duration-500">
                 <div className="aspect-[4/5]">
-                  <Image 
-                    src={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/FishesOnTopOfTable.jpg`} 
-                    alt="Fish carvings on table" 
-                    fill
-                    className="object-cover transition-transform duration-500 group-hover:scale-105"
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  />
+                                     <Image 
+                     src="/FishesOnTopOfTable.jpg" 
+                     alt="Fish carvings on table" 
+                     fill
+                     className="object-cover transition-transform duration-500 group-hover:scale-105"
+                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                   />
                 </div>
                 <div className="absolute inset-0 bg-gradient-to-t from-accent-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -811,13 +811,13 @@ export default function Home() {
             <div className="group cursor-pointer" data-animate-fade-up onClick={() => openLightbox("/OwlAtNight.jpg", "Owl at Night - A majestic owl carving captured in atmospheric nighttime lighting 🦉🌙")}>
               <div className="relative overflow-hidden rounded-2xl shadow-xl mb-6 group-hover:shadow-2xl transition-all duration-500">
                 <div className="aspect-[4/5]">
-                  <Image 
-                    src={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/OwlAtNight.jpg`} 
-                    alt="Owl at Night carving" 
-                    fill
-                    className="object-cover transition-transform duration-500 group-hover:scale-105"
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  />
+                                     <Image 
+                     src="/OwlAtNight.jpg" 
+                     alt="Owl at Night carving" 
+                     fill
+                     className="object-cover transition-transform duration-500 group-hover:scale-105"
+                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                   />
                 </div>
                 <div className="absolute inset-0 bg-gradient-to-t from-accent-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -834,13 +834,13 @@ export default function Home() {
             <div className="group cursor-pointer" data-animate-fade-up onClick={() => openLightbox("/Dog.jpg", "Dog carving - Man's best friend immortalized in wood with loving detail 🐕❤️")}>
               <div className="relative overflow-hidden rounded-2xl shadow-xl mb-6 group-hover:shadow-2xl transition-all duration-500">
                 <div className="aspect-[4/5]">
-                  <Image 
-                    src={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/Dog.jpg`} 
-                    alt="Dog carving" 
-                    fill
-                    className="object-cover transition-transform duration-500 group-hover:scale-105"
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  />
+                                     <Image 
+                     src="/Dog.jpg" 
+                     alt="Dog carving" 
+                     fill
+                     className="object-cover transition-transform duration-500 group-hover:scale-105"
+                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                   />
                 </div>
                 <div className="absolute inset-0 bg-gradient-to-t from-accent-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">

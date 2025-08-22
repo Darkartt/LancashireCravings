@@ -15,14 +15,13 @@ const isCustomDomain = process.env.CUSTOM_DOMAIN === 'true';
 /** @type {import('next').NextConfig} */
 const baseConfig = {
   images: {
-    // Static export on GitHub Pages cannot use the Image Optimization server
-    unoptimized: (isGitHubPages || isCustomDomain) ? true : false,
+    // For Vercel, we can use image optimization
+    unoptimized: isGitHubPages ? true : false,
     formats: ['image/webp', 'image/avif'],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
     // Enable image optimization for Vercel
     ...(isVercel && {
-      domains: ['vercel.app'],
       remotePatterns: [
         {
           protocol: 'https',
@@ -39,12 +38,12 @@ const baseConfig = {
     scrollRestoration: true,
     cssChunking: true,
   },
-  // Only use static export for GitHub Pages and custom domains, not for Vercel
-  ...(isGitHubPages || isCustomDomain
+  // Only use static export for GitHub Pages, not for Vercel
+  ...(isGitHubPages
     ? {
         output: 'export',
         trailingSlash: true,
-        ...(useSubpath && repoName && isGitHubPages
+        ...(useSubpath && repoName
           ? {
               basePath: `/${repoName}`,
               assetPrefix: `/${repoName}/`,
