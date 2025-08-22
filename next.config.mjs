@@ -15,20 +15,11 @@ const isCustomDomain = process.env.CUSTOM_DOMAIN === 'true';
 /** @type {import('next').NextConfig} */
 const baseConfig = {
   images: {
-    // For Vercel, we can use image optimization
-    unoptimized: isGitHubPages ? true : false,
+    // Disable image optimization for Vercel to fix 400 errors
+    unoptimized: true,
     formats: ['image/webp', 'image/avif'],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
-    // Enable image optimization for Vercel
-    ...(isVercel && {
-      remotePatterns: [
-        {
-          protocol: 'https',
-          hostname: '**',
-        },
-      ],
-    }),
     // Ensure static images work properly
     dangerouslyAllowSVG: true,
   },
