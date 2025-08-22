@@ -1,13 +1,5 @@
-# Exclude large media files from Vercel deployment
+# Exclude large directories and files to reduce deployment size
 public/media/
-public/media/archive/
-public/media/**/*.mov
-public/media/**/*.mp4
-public/media/**/*.avi
-public/media/**/*.webm
-public/media/**/*.mkv
-
-# Exclude large directories
 curated_output/
 visual-animal-review/
 visual-project-review/
@@ -19,12 +11,14 @@ test-results/
 screenshots/
 inspection-reports/
 
-# Exclude large files
+# Exclude large video files
 *.mov
 *.mp4
 *.avi
 *.webm
 *.mkv
+
+# Exclude archives and executables
 *.zip
 *.7z
 *.tar
@@ -45,7 +39,7 @@ nature-categorization*.json
 organized-visual-review*.json
 visual-review-batches-*.json
 
-# Keep only essential portfolio images
+# IMPORTANT: Include all portfolio images
 !public/portfolio/
 !public/portfolio/**/*.jpg
 !public/portfolio/**/*.jpeg
@@ -53,7 +47,7 @@ visual-review-batches-*.json
 !public/portfolio/**/*.webp
 !public/portfolio/**/*.gif
 
-# Keep essential public files
+# Include all essential public files
 !public/*.jpg
 !public/*.jpeg
 !public/*.png
