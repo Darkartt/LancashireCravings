@@ -343,7 +343,7 @@ export default function Home() {
                        className="w-full h-full object-cover cursor-pointer hover:scale-110 transition-transform duration-500"
                        onClick={() => openLightbox(featuredProjects[0].coverImage, featuredProjects[0].title)}
                        priority
-                       unoptimized={false}
+                       unoptimized={true}
                        onError={(e) => {
                          console.warn(`Failed to load image: ${featuredProjects[0].coverImage}`);
                          e.currentTarget.style.display = 'none';
@@ -365,7 +365,7 @@ export default function Home() {
                         height={200}
                         className="w-full h-full object-cover cursor-pointer hover:scale-110 transition-transform duration-300"
                         onClick={() => openLightbox(featuredProjects[1].coverImage, featuredProjects[1].title)}
-                        unoptimized={false}
+                        unoptimized={true}
                       />
                     </div>
                   ) : (
@@ -384,7 +384,7 @@ export default function Home() {
                         height={200}
                         className="w-full h-full object-cover cursor-pointer hover:scale-110 transition-transform duration-300"
                         onClick={() => openLightbox(featuredProjects[2].coverImage, featuredProjects[2].title)}
-                        unoptimized={false}
+                        unoptimized={true}
                       />
                     </div>
                   ) : (
@@ -415,7 +415,7 @@ export default function Home() {
                     height={500}
                     className="aspect-[4/5] w-full object-cover group-hover:scale-110 transition-transform duration-500"
                     onClick={() => openLightbox(featuredProjects[0].coverImage, featuredProjects[0].title)}
-                    unoptimized={false}
+                    unoptimized={true}
                   />
                 ) : (
                   <div className="aspect-[4/5] bg-foreground/10 flex items-center justify-center">
@@ -732,7 +732,7 @@ export default function Home() {
                      fill
                      className="object-cover transition-transform duration-500 group-hover:scale-105"
                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                     priority={false}
+                     unoptimized={true}
                    />
                 </div>
                 <div className="absolute inset-0 bg-gradient-to-t from-accent-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
@@ -756,6 +756,7 @@ export default function Home() {
                      fill
                      className="object-cover transition-transform duration-500 group-hover:scale-105"
                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                     unoptimized={true}
                    />
                 </div>
                 <div className="absolute inset-0 bg-gradient-to-t from-accent-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
@@ -779,6 +780,7 @@ export default function Home() {
                      fill
                      className="object-cover transition-transform duration-500 group-hover:scale-105"
                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                     unoptimized={true}
                    />
                 </div>
                 <div className="absolute inset-0 bg-gradient-to-t from-accent-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
@@ -803,6 +805,7 @@ export default function Home() {
                      fill
                      className="object-cover transition-transform duration-500 group-hover:scale-105"
                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                     unoptimized={true}
                    />
                 </div>
                 <div className="absolute inset-0 bg-gradient-to-t from-accent-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
@@ -826,6 +829,7 @@ export default function Home() {
                      fill
                      className="object-cover transition-transform duration-500 group-hover:scale-105"
                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                     unoptimized={true}
                    />
                 </div>
                 <div className="absolute inset-0 bg-gradient-to-t from-accent-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
@@ -849,6 +853,7 @@ export default function Home() {
                      fill
                      className="object-cover transition-transform duration-500 group-hover:scale-105"
                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                     unoptimized={true}
                    />
                 </div>
                 <div className="absolute inset-0 bg-gradient-to-t from-accent-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
