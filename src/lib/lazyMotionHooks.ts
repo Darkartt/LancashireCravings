@@ -16,8 +16,32 @@ export function useLazyTransform(value: any, input: any, output: any) {
   return fn ? fn(value, input, output) : value;
 }
 
+// Simple useInView implementation that doesn't violate Rules of Hooks
 export function useLazyInView(ref: React.RefObject<Element>, options?: any) {
-  const [hook, setHook] = useState<any>(null);
-  useEffect(() => { loadMotion().then(m => setHook(() => m.useInView)); }, []);
-  return hook ? hook(ref, options) : false;
+  const [isInView, setIsInView] = useState(false);
+  
+  useEffect(() => {
+    if (!ref.current) return;
+    
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsInView(entry.isIntersecting);
+      },
+      {
+        threshold: options?.threshold || 0,
+        rootMargin: options?.margin || '0px',
+        root: options?.root || null,
+      }
+    );
+    
+    observer.observe(ref.current);
+    
+    return () => {
+      if (ref.current) {
+        observer.unobserve(ref.current);
+      }
+    };
+  }, [ref, options?.threshold, options?.margin, options?.root]);
+  
+  return isInView;
 }

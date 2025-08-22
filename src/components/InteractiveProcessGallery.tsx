@@ -159,7 +159,21 @@ const InteractiveProcessGallery: React.FC<InteractiveProcessGalleryProps> = ({
                         alt={media.alt}
                         fill
                         className="object-cover"
+                        onError={(e) => {
+                          // Hide the image and show fallback UI
+                          const target = e.target as HTMLImageElement;
+                          target.style.display = 'none';
+                          const fallback = target.parentElement?.querySelector('.image-fallback') as HTMLElement;
+                          if (fallback) fallback.style.display = 'flex';
+                        }}
                       />
+                      
+                      {/* Fallback content if image fails to load */}
+                      <div className="image-fallback absolute inset-0 bg-neutral-100 flex items-center justify-center text-neutral-500" style={{ display: 'none' }}>
+                        <svg className="w-8 h-8 text-neutral-300" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clipRule="evenodd" />
+                        </svg>
+                      </div>
                       {step.media.length > 4 && mediaIndex === 3 && (
                         <div className="absolute inset-0 bg-black/50 flex items-center justify-center text-white font-semibold">
                           +{step.media.length - 4}
@@ -278,7 +292,24 @@ const InteractiveProcessGallery: React.FC<InteractiveProcessGalleryProps> = ({
                   alt={activeMedia.alt}
                   fill
                   className="object-cover"
+                  onError={(e) => {
+                    // Hide the image and show fallback UI
+                    const target = e.target as HTMLImageElement;
+                    target.style.display = 'none';
+                    const fallback = target.parentElement?.querySelector('.image-fallback') as HTMLElement;
+                    if (fallback) fallback.style.display = 'flex';
+                  }}
                 />
+                
+                {/* Fallback content if image fails to load */}
+                <div className="image-fallback absolute inset-0 bg-neutral-100 flex items-center justify-center text-neutral-500" style={{ display: 'none' }}>
+                  <div className="text-center">
+                    <svg className="w-16 h-16 mx-auto mb-4 text-neutral-300" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clipRule="evenodd" />
+                    </svg>
+                    <p className="text-sm">Image loading...</p>
+                  </div>
+                </div>
         </MotionDiv>
             )}
       </LazyAnimatePresence>

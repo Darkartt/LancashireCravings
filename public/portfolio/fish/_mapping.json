@@ -1,37 +1,58 @@
 [
   {
     "label": "RawWood",
-    "source": "public\\media\\nature\\portraits\\images\\portraits_portrait_011.jpeg",
-    "curated": "curated_output\\Woodcarvings\\fish\\fish_01_RawWood.jpeg"
+    "curated": "fish_01_RawWood.jpeg"
   },
   {
     "label": "RoughShape",
-    "source": "public\\media\\nature\\portraits\\images\\portraits_portrait_012.jpg",
-    "curated": "curated_output\\Woodcarvings\\fish\\fish_02_RoughShape.jpg"
+    "curated": "fish_02_RoughShape.jpg"
   },
   {
     "label": "DefiningForms",
-    "source": "public\\media\\nature\\portraits\\images\\portraits_portrait_013.jpg",
-    "curated": "curated_output\\Woodcarvings\\fish\\fish_03_DefiningForms.jpg"
+    "curated": "fish_03_DefiningForms.jpg"
   },
   {
     "label": "Detailing",
-    "source": "public\\media\\nature\\portraits\\images\\portraits_portrait_014.jpg",
-    "curated": "curated_output\\Woodcarvings\\fish\\fish_04_Detailing.jpg"
+    "curated": "fish_04_Detailing.jpg"
   },
   {
     "label": "Finished_1",
-    "source": "public\\media\\nature\\portraits\\images\\portraits_portrait_003.jpeg",
-    "curated": "curated_output\\Woodcarvings\\fish\\fish_05_Finished_1.jpeg"
+    "curated": "fish_05_Finished_1.jpeg"
   },
   {
     "label": "Finished_2",
-    "source": "public\\media\\nature\\portraits\\images\\portraits_portrait_004.jpeg",
-    "curated": "curated_output\\Woodcarvings\\fish\\fish_06_Finished_2.jpeg"
+    "curated": "fish_06_Finished_2.jpeg"
   },
   {
     "label": "Detail_1",
-    "source": "public\\media\\nature\\portraits\\images\\portraits_portrait_005.jpeg",
-    "curated": "curated_output\\Woodcarvings\\fish\\fish_07_Detail_1.jpeg"
+    "curated": "fish_07_Detail_1.jpeg"
+  },
+  {
+    "label": "Finished_4",
+    "curated": "fish_08_Finished_4.jpeg"
+  },
+  {
+    "label": "Finished_5",
+    "curated": "fish_09_Finished_5.jpeg"
+  },
+  {
+    "label": "Detail_2",
+    "curated": "fish_10_Detail_1.jpeg"
+  },
+  {
+    "label": "Detail_3",
+    "curated": "fish_11_Detail_2.jpeg"
+  },
+  {
+    "label": "Variation_1",
+    "curated": "fish_12_Variation_1.jpg"
+  },
+  {
+    "label": "Variation_2",
+    "curated": "fish_13_Variation_2.jpg"
+  },
+  {
+    "label": "ArtistWithFish",
+    "curated": "fish_14_ArtistWithFish.jpg"
   }
 ]

@@ -10,48 +10,116 @@ import EnhancedTimeline from '@/components/EnhancedTimeline';
 import EnhancedBeforeAfter from '@/components/EnhancedBeforeAfter';
 import ProcessVideoPlayer from '@/components/ProcessVideoPlayer';
 import type { MediaItem } from '@/lib/media-types';
-import { loadAllMediaItems } from '@/lib/media-loader';
+import { loadMediaData } from '@/lib/media-loader';
 
 export default function ProcessDocumentationPage() {
   const [activeProject, setActiveProject] = useState<'eagle' | 'nessie' | 'bass'>('eagle');
   
-  // Lazily load media items when component mounts
+  // Use the same system as landing page and projects
   const [allMedia, setAllMedia] = useState<MediaItem[]>([]);
+  const [projects, setProjects] = useState<any[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  
   React.useEffect(() => {
     let mounted = true;
-    loadAllMediaItems().then(items => { if (mounted) setAllMedia(items); });
+    setIsLoading(true);
+    setError(null);
+    
+    loadMediaData()
+      .then(({ natureCollection, projects }) => {
+        if (!mounted) return;
+        // Get all media items from the portfolio nature collection
+        const portfolioItems = natureCollection.portfolio?.items || [];
+        console.log('Process page loaded:', { 
+          projectsCount: projects.length, 
+          mediaCount: portfolioItems.length,
+          activeProject 
+        });
+        setAllMedia(portfolioItems);
+        setProjects(projects);
+        setIsLoading(false);
+      })
+      .catch((e) => {
+        console.warn('Process: loadMediaData failed', e);
+        setError('Failed to load media data');
+        setIsLoading(false);
+      });
     return () => { mounted = false; };
   }, []);
-  const eagleMedia = allMedia.filter((media: any) => media.project === 'golden-eagle');
+  
+  // Filter media for the active project
+  const projectMedia = allMedia.filter((media: any) => media.project === activeProject);
+  
+  // Create fallback media if no project media is found
+  const createFallbackMedia = () => {
+    return [
+      {
+        id: 'fallback-1',
+        src: `/portfolio/${activeProject}/${activeProject}_01_RawWood.jpg`,
+        alt: 'Raw wood block',
+        type: 'image' as const,
+        category: 'process' as const,
+        project: activeProject
+      },
+      {
+        id: 'fallback-2',
+        src: `/portfolio/${activeProject}/${activeProject}_02_RoughShape.jpg`,
+        alt: 'Rough carved shape',
+        type: 'image' as const,
+        category: 'process' as const,
+        project: activeProject
+      },
+      {
+        id: 'fallback-3',
+        src: `/portfolio/${activeProject}/${activeProject}_04_Detailing.jpg`,
+        alt: 'Detailed carving',
+        type: 'image' as const,
+        category: 'process' as const,
+        project: activeProject
+      },
+      {
+        id: 'fallback-4',
+        src: `/portfolio/${activeProject}/${activeProject}_05_Finished_1.jpg`,
+        alt: 'Finished carved piece',
+        type: 'image' as const,
+        category: 'final' as const,
+        project: activeProject
+      }
+    ];
+  };
+
+  // Use fallback media if no project media is found
+  const effectiveProjectMedia = projectMedia.length > 0 ? projectMedia : createFallbackMedia();
   
   // Create process steps data for Interactive Process Gallery
-  const eagleProcessSteps = [
+  const processSteps = [
     {
       id: 'design',
       title: 'Design & Planning',
       description: 'Creating detailed sketches and planning the sculpture based on reference photos and anatomical studies.',
-      media: eagleMedia.slice(0, 3),
+      media: effectiveProjectMedia.filter(m => m.category === 'process').slice(0, 3),
       isActive: true
     },
     {
       id: 'rough-carving',
       title: 'Rough Carving',
       description: 'Blocking out the basic form and establishing proportions using power tools and large chisels.',
-      media: eagleMedia.slice(3, 6),
+      media: effectiveProjectMedia.filter(m => m.category === 'process').slice(3, 6),
       isActive: false
     },
     {
       id: 'detail-work',
       title: 'Detail Work',
       description: 'Adding intricate details like feathers, talons, and facial features using precision carving tools.',
-      media: eagleMedia.slice(6, 9),
+      media: effectiveProjectMedia.filter(m => m.category === 'process').slice(6, 9),
       isActive: false
     },
     {
       id: 'finishing',
       title: 'Finishing & Protection',
       description: 'Sanding, applying protective finishes, and final detailing to bring the sculpture to life.',
-      media: eagleMedia.slice(9, 12),
+      media: effectiveProjectMedia.filter(m => m.category === 'final').slice(0, 3),
       isActive: false
     }
   ];
@@ -63,7 +131,7 @@ export default function ProcessDocumentationPage() {
       title: 'Concept Development',
       description: 'Research, sketching, and planning the sculpture design',
       duration: '1-2 days',
-      media: eagleMedia.slice(0, 2),
+      media: effectiveProjectMedia.filter(m => m.category === 'process').slice(0, 2),
       isCompleted: true,
       details: 'This phase involves extensive research into the subject, gathering reference materials, and creating detailed sketches from multiple angles.',
       tools: ['Pencils', 'Sketchbook', 'Reference Photos'],
@@ -79,7 +147,7 @@ export default function ProcessDocumentationPage() {
       title: 'Wood Selection',
       description: 'Choosing the perfect piece of wood for the project',
       duration: '1 day',
-      media: eagleMedia.slice(2, 4),
+      media: effectiveProjectMedia.filter(m => m.category === 'process').slice(2, 4),
       isCompleted: true,
       details: 'Selecting wood involves considering grain direction, color, hardness, and size requirements for the specific project.',
       tools: ['Measuring Tools', 'Wood Samples'],
@@ -95,7 +163,7 @@ export default function ProcessDocumentationPage() {
       title: 'Rough Shaping',
       description: 'Establishing the basic form and proportions',
       duration: '3-5 days',
-      media: eagleMedia.slice(4, 7),
+      media: effectiveProjectMedia.filter(m => m.category === 'process').slice(4, 7),
       isCompleted: true,
       details: 'Using power tools and large chisels to remove excess material and establish the overall shape and proportions.',
       tools: ['Chainsaw', 'Angle Grinder', 'Large Gouges', 'Mallet'],
@@ -111,7 +179,7 @@ export default function ProcessDocumentationPage() {
       title: 'Detail Carving',
       description: 'Adding intricate details and textures',
       duration: '7-14 days',
-      media: eagleMedia.slice(7, 10),
+      media: effectiveProjectMedia.filter(m => m.category === 'process').slice(7, 10),
       isCompleted: false,
       details: 'The most time-intensive phase involving precise hand carving to add realistic details, textures, and character.',
       tools: ['Detail Chisels', 'V-Tools', 'Micro Gouges', 'Carving Knives'],
@@ -127,7 +195,7 @@ export default function ProcessDocumentationPage() {
       title: 'Finishing',
       description: 'Sanding, oiling, and final protective coatings',
       duration: '2-3 days',
-      media: eagleMedia.slice(10, 12),
+      media: effectiveProjectMedia.filter(m => m.category === 'final').slice(0, 3),
       isCompleted: false,
       details: 'Final preparation including progressive sanding, application of protective oils or wax, and quality assessment.',
       tools: ['Sandpaper', 'Steel Wool', 'Natural Oils', 'Wax', 'Brushes'],
@@ -145,14 +213,14 @@ export default function ProcessDocumentationPage() {
     {
       id: 'raw-wood',
       title: 'Raw Wood Block',
-      description: 'Selected piece of premium English oak ready for carving',
-      media: eagleMedia[0] || { 
+      description: 'Selected piece of premium wood ready for carving',
+      media: effectiveProjectMedia.find(m => m.src.includes('RawWood')) || effectiveProjectMedia[0] || { 
         id: '1', 
-        src: '/BarOwlBack.jpg', 
+        src: `/portfolio/${activeProject}/${activeProject}_01_RawWood.jpg`, 
         alt: 'Raw wood block', 
         type: 'image' as const,
         category: 'process' as const,
-        project: 'golden-eagle'
+        project: activeProject
       },
       timestamp: 'Day 1'
     },
@@ -160,13 +228,13 @@ export default function ProcessDocumentationPage() {
       id: 'rough-shape',
       title: 'Rough Shape',
       description: 'Basic form established with power tools',
-      media: eagleMedia[3] || { 
+      media: effectiveProjectMedia.find(m => m.src.includes('RoughShape')) || effectiveProjectMedia[1] || { 
         id: '2', 
-        src: '/OwlFront.jpg', 
+        src: `/portfolio/${activeProject}/${activeProject}_02_RoughShape.jpg`, 
         alt: 'Rough carved shape', 
         type: 'image' as const,
         category: 'process' as const,
-        project: 'golden-eagle'
+        project: activeProject
       },
       timestamp: 'Day 3-5'
     },
@@ -174,13 +242,13 @@ export default function ProcessDocumentationPage() {
       id: 'detailed-carving',
       title: 'Detailed Carving',
       description: 'Intricate details and textures added by hand',
-      media: eagleMedia[7] || { 
+      media: effectiveProjectMedia.find(m => m.src.includes('Detailing')) || effectiveProjectMedia[2] || { 
         id: '3', 
-        src: '/OwlAtNight.jpg', 
+        src: `/portfolio/${activeProject}/${activeProject}_04_Detailing.jpg`, 
         alt: 'Detailed carving', 
         type: 'image' as const,
         category: 'process' as const,
-        project: 'golden-eagle'
+        project: activeProject
       },
       timestamp: 'Day 8-15'
     },
@@ -188,26 +256,26 @@ export default function ProcessDocumentationPage() {
       id: 'finished-piece',
       title: 'Finished Masterpiece',
       description: 'Completed sculpture with protective finish applied',
-      media: eagleMedia[11] || { 
+      media: effectiveProjectMedia.find(m => m.src.includes('Finished_1')) || effectiveProjectMedia.find(m => m.category === 'final') || { 
         id: '4', 
-        src: '/Crow.jpg', 
-        alt: 'Finished carved eagle', 
+        src: `/portfolio/${activeProject}/${activeProject}_05_Finished_1.jpg`, 
+        alt: 'Finished carved piece', 
         type: 'image' as const,
-        category: 'finished' as const,
-        project: 'golden-eagle'
+        category: 'final' as const,
+        project: activeProject
       },
       timestamp: 'Day 18-20'
     }
   ];
 
-  // Mock video data
+  // Video data - using actual available videos if they exist
   const processVideo: MediaItem = {
-    id: 'eagle-timelapse',
-    src: '/videos/eagle-carving-timelapse.mp4',
-    alt: 'Eagle carving time-lapse video',
+    id: `${activeProject}-timelapse`,
+    src: `/media/projects/${activeProject}/videos/${activeProject}_${activeProject}_001.mov`,
+    alt: `${activeProject} carving time-lapse video`,
     type: 'video',
     category: 'process',
-    project: 'golden-eagle',
+    project: activeProject,
     duration: '6:00'
   };
 
@@ -218,7 +286,7 @@ export default function ProcessDocumentationPage() {
       description: 'Preparing workspace and marking the wood',
       startTime: 0,
       endTime: 30,
-      thumbnail: '/BarOwlBack.jpg'
+      thumbnail: comparisonStages[0].media.src
     },
     {
       id: 'roughing',
@@ -226,7 +294,7 @@ export default function ProcessDocumentationPage() {
       description: 'Removing bulk material with power tools',
       startTime: 30,
       endTime: 120,
-      thumbnail: '/OwlFront.jpg'
+      thumbnail: comparisonStages[1].media.src
     },
     {
       id: 'detailing',
@@ -234,7 +302,7 @@ export default function ProcessDocumentationPage() {
       description: 'Hand carving intricate details',
       startTime: 120,
       endTime: 300,
-      thumbnail: '/OwlAtNight.jpg'
+      thumbnail: comparisonStages[2].media.src
     },
     {
       id: 'finishing',
@@ -242,9 +310,15 @@ export default function ProcessDocumentationPage() {
       description: 'Final sanding and protective coating',
       startTime: 300,
       endTime: 360,
-      thumbnail: '/Crow.jpg'
+      thumbnail: comparisonStages[3].media.src
     }
   ];
+
+  // Get project title for display
+  const getProjectTitle = (projectId: string) => {
+    const project = projects.find(p => p.id === projectId);
+    return project?.title || projectId.charAt(0).toUpperCase() + projectId.slice(1);
+  };
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -268,6 +342,53 @@ export default function ProcessDocumentationPage() {
       }
     }
   };
+
+  // Show loading state
+  if (isLoading) {
+    return (
+      <div className="min-h-screen text-foreground" style={{ background: 'transparent' }}>
+        <CleanBackground variant="process" />
+        <div className="relative z-10">
+          <Header />
+          <main className="flex-1 pt-24">
+            <div className="container mx-auto px-6 lg:px-8 py-16">
+              <div className="text-center">
+                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-accent-primary mx-auto mb-4"></div>
+                <p className="text-lg text-foreground/70">Loading process documentation...</p>
+              </div>
+            </div>
+          </main>
+          <Footer />
+        </div>
+      </div>
+    );
+  }
+
+  // Show error state
+  if (error) {
+    return (
+      <div className="min-h-screen text-foreground" style={{ background: 'transparent' }}>
+        <CleanBackground variant="process" />
+        <div className="relative z-10">
+          <Header />
+          <main className="flex-1 pt-24">
+            <div className="container mx-auto px-6 lg:px-8 py-16">
+              <div className="text-center">
+                <p className="text-lg text-red-600 mb-4">{error}</p>
+                <button 
+                  onClick={() => window.location.reload()} 
+                  className="bg-accent-primary text-white px-6 py-3 rounded-full hover:bg-accent-primary/90 transition-colors"
+                >
+                  Retry
+                </button>
+              </div>
+            </div>
+          </main>
+          <Footer />
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen text-foreground" style={{ background: 'transparent' }}>
@@ -337,8 +458,8 @@ export default function ProcessDocumentationPage() {
             {/* Interactive Process Gallery */}
             <MotionDiv as="section" variants={itemVariants} className="container mx-auto px-6 lg:px-8">
               <InteractiveProcessGallery
-                projectTitle="Golden Eagle"
-                steps={eagleProcessSteps}
+                projectTitle={getProjectTitle(activeProject)}
+                steps={processSteps}
                 autoPlay={false}
                 showThumbnails={true}
                 variant="tabs"
@@ -384,7 +505,7 @@ export default function ProcessDocumentationPage() {
                 showControls={true}
                 showChapters={true}
                 showPlaybackSpeed={true}
-                posterImage={eagleMedia[0]}
+                posterImage={comparisonStages[0].media}
                 variant="cinematic"
               />
             </MotionDiv>
@@ -405,7 +526,7 @@ export default function ProcessDocumentationPage() {
               <div className="container mx-auto px-6 lg:px-8">
                 <InteractiveProcessGallery
                   projectTitle="Process Overview"
-                  steps={eagleProcessSteps}
+                  steps={processSteps}
                   variant="grid"
                 />
               </div>

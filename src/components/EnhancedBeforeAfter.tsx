@@ -171,14 +171,31 @@ const EnhancedBeforeAfter: React.FC<EnhancedBeforeAfterProps> = ({
             transition={{ duration: 0.5 }}
             className="bg-background rounded-xl border border-neutral-200 overflow-hidden shadow-lg"
           >
-            <div className="aspect-video relative">
+            <div className="aspect-[4/3] sm:aspect-[3/2] relative max-h-96">
               <Image
                 src={currentStage.media.src}
                 alt={currentStage.media.alt}
                 fill
                 className="object-cover"
+                onError={(e) => {
+                  // Hide the image and show fallback UI
+                  const target = e.target as HTMLImageElement;
+                  target.style.display = 'none';
+                  const fallback = target.parentElement?.querySelector('.image-fallback') as HTMLElement;
+                  if (fallback) fallback.style.display = 'flex';
+                }}
               />
               
+              {/* Fallback content if image fails to load */}
+              <div className="image-fallback absolute inset-0 bg-neutral-100 flex items-center justify-center text-neutral-500" style={{ display: 'none' }}>
+                <div className="text-center">
+                  <svg className="w-16 h-16 mx-auto mb-4 text-neutral-300" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clipRule="evenodd" />
+                  </svg>
+                  <p className="text-sm">Image loading...</p>
+                </div>
+              </div>
+
               {/* Stage Info Overlay */}
               <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-6 text-white">
                 <h3 className="text-xl font-serif font-semibold mb-2">
@@ -419,13 +436,30 @@ const EnhancedBeforeAfter: React.FC<EnhancedBeforeAfterProps> = ({
             transition={{ duration: 0.3 }}
             className="bg-background rounded-xl border border-neutral-200 overflow-hidden shadow-lg"
           >
-            <div className="aspect-video relative">
+            <div className="aspect-[4/3] sm:aspect-[3/2] relative max-h-80">
               <Image
                 src={currentStage.media.src}
                 alt={currentStage.media.alt}
                 fill
                 className="object-cover"
+                onError={(e) => {
+                  // Hide the image and show fallback UI
+                  const target = e.target as HTMLImageElement;
+                  target.style.display = 'none';
+                  const fallback = target.parentElement?.querySelector('.image-fallback') as HTMLElement;
+                  if (fallback) fallback.style.display = 'flex';
+                }}
               />
+              
+              {/* Fallback content if image fails to load */}
+              <div className="image-fallback absolute inset-0 bg-neutral-100 flex items-center justify-center text-neutral-500" style={{ display: 'none' }}>
+                <div className="text-center">
+                  <svg className="w-12 h-12 mx-auto mb-2 text-neutral-300" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clipRule="evenodd" />
+                  </svg>
+                  <p className="text-xs">Image loading...</p>
+                </div>
+              </div>
             </div>
             <div className="p-6">
               <h3 className="text-xl font-serif font-semibold text-accent-primary mb-3">

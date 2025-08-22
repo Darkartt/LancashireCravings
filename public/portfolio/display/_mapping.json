@@ -1,0 +1,18 @@
+[
+  {
+    "label": "ArtistWithFish",
+    "curated": "display_01_ArtistWithFish.jpg"
+  },
+  {
+    "label": "FishDisplay",
+    "curated": "display_02_FishDisplay.jpg"
+  },
+  {
+    "label": "FishInDoor",
+    "curated": "display_03_FishInDoor.jpg"
+  },
+  {
+    "label": "FishWithOwls",
+    "curated": "display_04_FishWithOwls.jpg"
+  }
+]

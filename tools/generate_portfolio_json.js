@@ -14,10 +14,12 @@ function relPortfolioSrc(projectFolder, mappingCuratedPath) {
   return `/portfolio/${projectFolder}/${base}`;
 }
 function guessCategory(id) {
-  if (/eagle/.test(id)) return 'wildlife';
+  if (/eagle|owl|squirrel|crow|dog/.test(id)) return 'wildlife';
   if (/nessie|loch|monster/.test(id)) return 'mythical';
   if (/st[- ]?collen/.test(id)) return 'religious';
   if (/bass|fish/.test(id)) return 'commissioned';
+  if (/display/.test(id)) return 'display';
+  if (/bee/.test(id)) return 'nature';
   return 'nature';
 }
 

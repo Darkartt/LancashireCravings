@@ -15,6 +15,62 @@
       "featured": true
     },
     {
+      "id": "bee",
+      "title": "Bee",
+      "slug": "bee",
+      "description": "Bee curated portfolio",
+      "category": "nature",
+      "coverImage": "/portfolio/bee/bee_05_Finished_1.jpg",
+      "mediaFolder": "/portfolio/bee",
+      "mediaCount": {
+        "images": 1,
+        "videos": 0
+      },
+      "featured": true
+    },
+    {
+      "id": "crow",
+      "title": "Crow",
+      "slug": "crow",
+      "description": "Crow curated portfolio",
+      "category": "wildlife",
+      "coverImage": "/portfolio/crow/crow_05_Finished_1.jpg",
+      "mediaFolder": "/portfolio/crow",
+      "mediaCount": {
+        "images": 1,
+        "videos": 0
+      },
+      "featured": true
+    },
+    {
+      "id": "display",
+      "title": "Display",
+      "slug": "display",
+      "description": "Display curated portfolio",
+      "category": "display",
+      "coverImage": "/portfolio/display/display_01_ArtistWithFish.jpg",
+      "mediaFolder": "/portfolio/display",
+      "mediaCount": {
+        "images": 4,
+        "videos": 0
+      },
+      "featured": true
+    },
+    {
+      "id": "dog",
+      "title": "Dog",
+      "slug": "dog",
+      "description": "Dog curated portfolio",
+      "category": "wildlife",
+      "coverImage": "/portfolio/dog/dog_05_Finished_1.jpg",
+      "mediaFolder": "/portfolio/dog",
+      "mediaCount": {
+        "images": 1,
+        "videos": 0
+      },
+      "featured": true
+    },
+    {
       "id": "eagle",
       "title": "Eagle",
       "slug": "eagle",
@@ -37,7 +93,7 @@
       "coverImage": "/portfolio/fish/fish_05_Finished_1.jpeg",
       "mediaFolder": "/portfolio/fish",
       "mediaCount": {
-        "images": 7,
+        "images": 14,
         "videos": 0
       },
       "featured": true
@@ -52,6 +108,34 @@
       "mediaFolder": "/portfolio/nessie",
       "mediaCount": {
         "images": 11,
+        "videos": 0
+      },
+      "featured": true
+    },
+    {
+      "id": "owl",
+      "title": "Owl",
+      "slug": "owl",
+      "description": "Owl curated portfolio",
+      "category": "wildlife",
+      "coverImage": "/portfolio/owl/owl_05_Finished_1.jpg",
+      "mediaFolder": "/portfolio/owl",
+      "mediaCount": {
+        "images": 5,
+        "videos": 0
+      },
+      "featured": true
+    },
+    {
+      "id": "squirrel",
+      "title": "Squirrel",
+      "slug": "squirrel",
+      "description": "Squirrel curated portfolio",
+      "category": "wildlife",
+      "coverImage": "/portfolio/squirrel/squirrel_05_Finished_1.jpg",
+      "mediaFolder": "/portfolio/squirrel",
+      "mediaCount": {
+        "images": 1,
         "videos": 0
       },
       "featured": true
@@ -192,6 +276,83 @@
       "filename": "bass_11_Detail_2.jpeg",
       "order": 11,
       "featured": false
+    },
+    {
+      "id": "bee-1",
+      "type": "image",
+      "src": "/portfolio/bee/bee_05_Finished_1.jpg",
+      "alt": "Bee - Finished_1",
+      "category": "final",
+      "project": "bee",
+      "filename": "bee_05_Finished_1.jpg",
+      "order": 1,
+      "featured": true
+    },
+    {
+      "id": "crow-1",
+      "type": "image",
+      "src": "/portfolio/crow/crow_05_Finished_1.jpg",
+      "alt": "Crow - Finished_1",
+      "category": "final",
+      "project": "crow",
+      "filename": "crow_05_Finished_1.jpg",
+      "order": 1,
+      "featured": true
+    },
+    {
+      "id": "display-1",
+      "type": "image",
+      "src": "/portfolio/display/display_01_ArtistWithFish.jpg",
+      "alt": "Display - ArtistWithFish",
+      "category": "process",
+      "project": "display",
+      "filename": "display_01_ArtistWithFish.jpg",
+      "order": 1,
+      "featured": false
+    },
+    {
+      "id": "display-2",
+      "type": "image",
+      "src": "/portfolio/display/display_02_FishDisplay.jpg",
+      "alt": "Display - FishDisplay",
+      "category": "process",
+      "project": "display",
+      "filename": "display_02_FishDisplay.jpg",
+      "order": 2,
+      "featured": false
+    },
+    {
+      "id": "display-3",
+      "type": "image",
+      "src": "/portfolio/display/display_03_FishInDoor.jpg",
+      "alt": "Display - FishInDoor",
+      "category": "process",
+      "project": "display",
+      "filename": "display_03_FishInDoor.jpg",
+      "order": 3,
+      "featured": false
+    },
+    {
+      "id": "display-4",
+      "type": "image",
+      "src": "/portfolio/display/display_04_FishWithOwls.jpg",
+      "alt": "Display - FishWithOwls",
+      "category": "process",
+      "project": "display",
+      "filename": "display_04_FishWithOwls.jpg",
+      "order": 4,
+      "featured": false
+    },
+    {
+      "id": "dog-1",
+      "type": "image",
+      "src": "/portfolio/dog/dog_05_Finished_1.jpg",
+      "alt": "Dog - Finished_1",
+      "category": "final",
+      "project": "dog",
+      "filename": "dog_05_Finished_1.jpg",
+      "order": 1,
+      "featured": true
     },
     {
       "id": "eagle-1",
@@ -392,6 +553,83 @@
       "featured": false
     },
     {
+      "id": "fish-8",
+      "type": "image",
+      "src": "/portfolio/fish/fish_08_Finished_4.jpeg",
+      "alt": "Fish - Finished_4",
+      "category": "final",
+      "project": "fish",
+      "filename": "fish_08_Finished_4.jpeg",
+      "order": 8,
+      "featured": false
+    },
+    {
+      "id": "fish-9",
+      "type": "image",
+      "src": "/portfolio/fish/fish_09_Finished_5.jpeg",
+      "alt": "Fish - Finished_5",
+      "category": "final",
+      "project": "fish",
+      "filename": "fish_09_Finished_5.jpeg",
+      "order": 9,
+      "featured": false
+    },
+    {
+      "id": "fish-10",
+      "type": "image",
+      "src": "/portfolio/fish/fish_10_Detail_1.jpeg",
+      "alt": "Fish - Detail_2",
+      "category": "final",
+      "project": "fish",
+      "filename": "fish_10_Detail_1.jpeg",
+      "order": 10,
+      "featured": false
+    },
+    {
+      "id": "fish-11",
+      "type": "image",
+      "src": "/portfolio/fish/fish_11_Detail_2.jpeg",
+      "alt": "Fish - Detail_3",
+      "category": "final",
+      "project": "fish",
+      "filename": "fish_11_Detail_2.jpeg",
+      "order": 11,
+      "featured": false
+    },
+    {
+      "id": "fish-12",
+      "type": "image",
+      "src": "/portfolio/fish/fish_12_Variation_1.jpg",
+      "alt": "Fish - Variation_1",
+      "category": "process",
+      "project": "fish",
+      "filename": "fish_12_Variation_1.jpg",
+      "order": 12,
+      "featured": false
+    },
+    {
+      "id": "fish-13",
+      "type": "image",
+      "src": "/portfolio/fish/fish_13_Variation_2.jpg",
+      "alt": "Fish - Variation_2",
+      "category": "process",
+      "project": "fish",
+      "filename": "fish_13_Variation_2.jpg",
+      "order": 13,
+      "featured": false
+    },
+    {
+      "id": "fish-14",
+      "type": "image",
+      "src": "/portfolio/fish/fish_14_ArtistWithFish.jpg",
+      "alt": "Fish - ArtistWithFish",
+      "category": "process",
+      "project": "fish",
+      "filename": "fish_14_ArtistWithFish.jpg",
+      "order": 14,
+      "featured": false
+    },
+    {
       "id": "nessie-1",
       "type": "image",
       "src": "/portfolio/nessie/nessie_01_RawWood.jpg",
@@ -511,6 +749,72 @@
       "filename": "nessie_11_Detail_2.jpg",
       "order": 11,
       "featured": false
+    },
+    {
+      "id": "owl-1",
+      "type": "image",
+      "src": "/portfolio/owl/owl_05_Finished_1.jpg",
+      "alt": "Owl - Finished_1",
+      "category": "final",
+      "project": "owl",
+      "filename": "owl_05_Finished_1.jpg",
+      "order": 1,
+      "featured": true
+    },
+    {
+      "id": "owl-2",
+      "type": "image",
+      "src": "/portfolio/owl/owl_06_Finished_2.jpg",
+      "alt": "Owl - Finished_2",
+      "category": "final",
+      "project": "owl",
+      "filename": "owl_06_Finished_2.jpg",
+      "order": 2,
+      "featured": false
+    },
+    {
+      "id": "owl-3",
+      "type": "image",
+      "src": "/portfolio/owl/owl_07_Finished_3.jpg",
+      "alt": "Owl - Finished_3",
+      "category": "final",
+      "project": "owl",
+      "filename": "owl_07_Finished_3.jpg",
+      "order": 3,
+      "featured": false
+    },
+    {
+      "id": "owl-4",
+      "type": "image",
+      "src": "/portfolio/owl/owl_08_Finished_4.jpg",
+      "alt": "Owl - Finished_4",
+      "category": "final",
+      "project": "owl",
+      "filename": "owl_08_Finished_4.jpg",
+      "order": 4,
+      "featured": false
+    },
+    {
+      "id": "owl-5",
+      "type": "image",
+      "src": "/portfolio/owl/owl_09_Finished_5.jpg",
+      "alt": "Owl - Finished_5",
+      "category": "final",
+      "project": "owl",
+      "filename": "owl_09_Finished_5.jpg",
+      "order": 5,
+      "featured": false
+    },
+    {
+      "id": "squirrel-1",
+      "type": "image",
+      "src": "/portfolio/squirrel/squirrel_05_Finished_1.jpg",
+      "alt": "Squirrel - Finished_1",
+      "category": "final",
+      "project": "squirrel",
+      "filename": "squirrel_05_Finished_1.jpg",
+      "order": 1,
+      "featured": true
     },
     {
       "id": "stcollen-1",
