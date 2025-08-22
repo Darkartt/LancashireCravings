@@ -22,7 +22,7 @@ export default function Home() {
       title: "Golden Eagle Masterpiece",
       description: "Majestic golden eagle carved with incredible detail, showcasing the power and grace of this magnificent bird of prey.",
       category: "wildlife",
-      coverImage: "/portfolio/eagle/eagle_01_RawWood.jpg",
+      coverImage: "/portfolio/eagle/eagle_05_Finished_1.jpg",
       difficulty: "Expert",
       materials: ["Premium Hardwood"],
       completionTime: "6-8 weeks"
@@ -31,16 +31,16 @@ export default function Home() {
       title: "Bass Sculpture",
       description: "Detailed fish carving showing intricate scales and flowing fins, perfect for aquatic-themed collections.",
       category: "commissioned",
-      coverImage: "/portfolio/bass/bass_01_RawWood.jpeg",
+      coverImage: "/portfolio/bass/bass_05_Finished_1.jpeg",
       difficulty: "Advanced",
       materials: ["Premium Hardwood"],
       completionTime: "4-6 weeks"
     },
     {
-      title: "Workshop Highlights",
-      description: "Beautiful collection of handcrafted pieces showcasing different wood grains and carving techniques.",
+      title: "Fish Collection",
+      description: "Beautiful collection of handcrafted fish carvings showcasing different wood grains and carving techniques.",
       category: "wildlife",
-      coverImage: "/FishesOnTopOfTable.jpg",
+      coverImage: "/portfolio/fish/fish_05_Finished_1.jpeg",
       difficulty: "Advanced",
       materials: ["Premium Hardwood"],
       completionTime: "4-6 weeks"
@@ -342,6 +342,8 @@ export default function Home() {
                        height={500}
                        className="w-full h-full object-cover cursor-pointer hover:scale-110 transition-transform duration-500"
                        onClick={() => openLightbox(featuredProjects[0].coverImage, featuredProjects[0].title)}
+                       priority
+                       unoptimized={false}
                        onError={(e) => {
                          console.warn(`Failed to load image: ${featuredProjects[0].coverImage}`);
                          e.currentTarget.style.display = 'none';
@@ -363,6 +365,7 @@ export default function Home() {
                         height={200}
                         className="w-full h-full object-cover cursor-pointer hover:scale-110 transition-transform duration-300"
                         onClick={() => openLightbox(featuredProjects[1].coverImage, featuredProjects[1].title)}
+                        unoptimized={false}
                       />
                     </div>
                   ) : (
@@ -381,6 +384,7 @@ export default function Home() {
                         height={200}
                         className="w-full h-full object-cover cursor-pointer hover:scale-110 transition-transform duration-300"
                         onClick={() => openLightbox(featuredProjects[2].coverImage, featuredProjects[2].title)}
+                        unoptimized={false}
                       />
                     </div>
                   ) : (
@@ -411,6 +415,7 @@ export default function Home() {
                     height={500}
                     className="aspect-[4/5] w-full object-cover group-hover:scale-110 transition-transform duration-500"
                     onClick={() => openLightbox(featuredProjects[0].coverImage, featuredProjects[0].title)}
+                    unoptimized={false}
                   />
                 ) : (
                   <div className="aspect-[4/5] bg-foreground/10 flex items-center justify-center">
