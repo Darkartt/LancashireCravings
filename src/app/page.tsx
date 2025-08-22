@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { useState, useEffect } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
@@ -335,15 +334,11 @@ export default function Home() {
               <div className="space-y-4">
                 <div className="portfolio-showcase aspect-[4/5] overflow-hidden shadow-2xl bg-gradient-to-br from-accent-primary/20 to-accent-secondary/20">
                                      {featuredProjects[0]?.coverImage ? (
-                     <Image
+                     <img
                        src={featuredProjects[0].coverImage}
                        alt={featuredProjects[0].title}
-                       width={400}
-                       height={500}
                        className="w-full h-full object-cover cursor-pointer hover:scale-110 transition-transform duration-500"
                        onClick={() => openLightbox(featuredProjects[0].coverImage, featuredProjects[0].title)}
-                       priority
-                       unoptimized={true}
                        onError={(e) => {
                          console.warn(`Failed to load image: ${featuredProjects[0].coverImage}`);
                          e.currentTarget.style.display = 'none';
@@ -358,14 +353,11 @@ export default function Home() {
                 <div className="grid grid-cols-2 gap-4">
                   {featuredProjects[1]?.coverImage ? (
                     <div className="product-card-blob aspect-square overflow-hidden shadow-lg bg-gradient-to-br from-accent-primary/20 to-accent-secondary/20">
-                      <Image
+                      <img
                         src={featuredProjects[1].coverImage}
                         alt={featuredProjects[1].title}
-                        width={200}
-                        height={200}
                         className="w-full h-full object-cover cursor-pointer hover:scale-110 transition-transform duration-300"
                         onClick={() => openLightbox(featuredProjects[1].coverImage, featuredProjects[1].title)}
-                        unoptimized={true}
                       />
                     </div>
                   ) : (
@@ -377,14 +369,11 @@ export default function Home() {
                   )}
                   {featuredProjects[2]?.coverImage ? (
                     <div className="product-card-blob aspect-square overflow-hidden shadow-lg bg-gradient-to-br from-accent-primary/20 to-accent-secondary/20">
-                      <Image
+                      <img
                         src={featuredProjects[2].coverImage}
                         alt={featuredProjects[2].title}
-                        width={200}
-                        height={200}
                         className="w-full h-full object-cover cursor-pointer hover:scale-110 transition-transform duration-300"
                         onClick={() => openLightbox(featuredProjects[2].coverImage, featuredProjects[2].title)}
-                        unoptimized={true}
                       />
                     </div>
                   ) : (
@@ -408,14 +397,11 @@ export default function Home() {
               >
                 <div className="portfolio-showcase relative overflow-hidden shadow-xl bg-gradient-to-br from-accent-primary/20 to-accent-secondary/20 mb-6 group-hover:shadow-2xl transition-all duration-500 rounded-xl">
                 {featuredProjects[0]?.coverImage ? (
-                  <Image
+                  <img
                     src={featuredProjects[0].coverImage}
                     alt={featuredProjects[0].title}
-                    width={400}
-                    height={500}
                     className="aspect-[4/5] w-full object-cover group-hover:scale-110 transition-transform duration-500"
                     onClick={() => openLightbox(featuredProjects[0].coverImage, featuredProjects[0].title)}
-                    unoptimized={true}
                   />
                 ) : (
                   <div className="aspect-[4/5] bg-foreground/10 flex items-center justify-center">
@@ -726,13 +712,10 @@ export default function Home() {
             <div className="group cursor-pointer" data-animate-fade-up onClick={() => openLightbox("/BarOwlBack.jpg", "Barn Owl Back carving - Good Afternoon 🌞 My Barn Owls back 😜 ❤️🔪🦉")}>
               <div className="relative overflow-hidden rounded-2xl shadow-xl mb-6 group-hover:shadow-2xl transition-all duration-500">
                 <div className="aspect-[4/5]">
-                                     <Image 
+                                     <img 
                      src="/BarOwlBack.jpg" 
                      alt="Barn Owl Back carving" 
-                     fill
-                     className="object-cover transition-transform duration-500 group-hover:scale-105"
-                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                     unoptimized={true}
+                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                    />
                 </div>
                 <div className="absolute inset-0 bg-gradient-to-t from-accent-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
@@ -750,13 +733,10 @@ export default function Home() {
             <div className="group cursor-pointer" data-animate-fade-up onClick={() => openLightbox("/OwlFront.jpg", "Owl Front carving - When the sun sets gold...A new beginning begins to unfold ❤️🔪🦉")}>
               <div className="relative overflow-hidden rounded-2xl shadow-xl mb-6 group-hover:shadow-2xl transition-all duration-500">
                 <div className="aspect-[4/5]">
-                                     <Image 
+                                     <img 
                      src="/OwlFront.jpg" 
                      alt="Owl Front carving" 
-                     fill
-                     className="object-cover transition-transform duration-500 group-hover:scale-105"
-                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                     unoptimized={true}
+                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                    />
                 </div>
                 <div className="absolute inset-0 bg-gradient-to-t from-accent-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
@@ -774,13 +754,10 @@ export default function Home() {
             <div className="group cursor-pointer" data-animate-fade-up onClick={() => openLightbox("/Crow.jpg", "Crow carving - I became insane, with long intervals of horrible sanity - Edgar Allan Poe ❤️🔪🐦‍⬛")}>
               <div className="relative overflow-hidden rounded-2xl shadow-xl mb-6 group-hover:shadow-2xl transition-all duration-500">
                 <div className="aspect-[4/5]">
-                                     <Image 
+                                     <img 
                      src="/Crow.jpg" 
                      alt="Crow carving" 
-                     fill
-                     className="object-cover transition-transform duration-500 group-hover:scale-105"
-                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                     unoptimized={true}
+                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                    />
                 </div>
                 <div className="absolute inset-0 bg-gradient-to-t from-accent-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
@@ -799,13 +776,10 @@ export default function Home() {
             <div className="group cursor-pointer" data-animate-fade-up onClick={() => openLightbox("/FishesOnTopOfTable.jpg", "Fish carvings on table - A collection of handcrafted fish showcasing different wood grains and carving techniques 🐟🎨")}>
               <div className="relative overflow-hidden rounded-2xl shadow-xl mb-6 group-hover:shadow-2xl transition-all duration-500">
                 <div className="aspect-[4/5]">
-                                     <Image 
+                                     <img 
                      src="/FishesOnTopOfTable.jpg" 
                      alt="Fish carvings on table" 
-                     fill
-                     className="object-cover transition-transform duration-500 group-hover:scale-105"
-                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                     unoptimized={true}
+                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                    />
                 </div>
                 <div className="absolute inset-0 bg-gradient-to-t from-accent-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
@@ -823,13 +797,10 @@ export default function Home() {
             <div className="group cursor-pointer" data-animate-fade-up onClick={() => openLightbox("/OwlAtNight.jpg", "Owl at Night - A majestic owl carving captured in atmospheric nighttime lighting 🦉🌙")}>
               <div className="relative overflow-hidden rounded-2xl shadow-xl mb-6 group-hover:shadow-2xl transition-all duration-500">
                 <div className="aspect-[4/5]">
-                                     <Image 
+                                     <img 
                      src="/OwlAtNight.jpg" 
                      alt="Owl at Night carving" 
-                     fill
-                     className="object-cover transition-transform duration-500 group-hover:scale-105"
-                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                     unoptimized={true}
+                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                    />
                 </div>
                 <div className="absolute inset-0 bg-gradient-to-t from-accent-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
@@ -847,13 +818,10 @@ export default function Home() {
             <div className="group cursor-pointer" data-animate-fade-up onClick={() => openLightbox("/Dog.jpg", "Dog carving - Man's best friend immortalized in wood with loving detail 🐕❤️")}>
               <div className="relative overflow-hidden rounded-2xl shadow-xl mb-6 group-hover:shadow-2xl transition-all duration-500">
                 <div className="aspect-[4/5]">
-                                     <Image 
+                                     <img 
                      src="/Dog.jpg" 
                      alt="Dog carving" 
-                     fill
-                     className="object-cover transition-transform duration-500 group-hover:scale-105"
-                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                     unoptimized={true}
+                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                    />
                 </div>
                 <div className="absolute inset-0 bg-gradient-to-t from-accent-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
