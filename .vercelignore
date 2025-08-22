@@ -1,5 +1,7 @@
 # Exclude large directories and files to reduce deployment size
+# Exclude media but NOT portfolio
 public/media/
+!public/portfolio/
 curated_output/
 visual-animal-review/
 visual-project-review/
@@ -39,13 +41,13 @@ nature-categorization*.json
 organized-visual-review*.json
 visual-review-batches-*.json
 
-# IMPORTANT: Only include portfolio images, exclude all other public/media
-!public/portfolio/
+# Include portfolio images explicitly
 !public/portfolio/**/*.jpg
 !public/portfolio/**/*.jpeg
 !public/portfolio/**/*.png
 !public/portfolio/**/*.webp
 !public/portfolio/**/*.gif
+!public/portfolio/**/*.json
 
 # Include essential public files (but not media)
 !public/*.jpg
