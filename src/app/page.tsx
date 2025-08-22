@@ -81,7 +81,13 @@ export default function Home() {
       <Header />
 
       {/* Hero Section - Enhanced Full-Height Immersive */}
-  <section id="hero" style={{ zIndex: 10, position: 'relative' }} className="hero-section relative min-h-screen flex flex-col justify-center items-center bg-transparent pt-40 pb-40 hero-parallax section-transition-smooth">
+  <section id="hero" style={{ zIndex: 10, position: 'relative' }} className="hero-section relative min-h-screen flex flex-col justify-center items-center bg-gradient-to-br from-background via-background to-accent-primary/5 pt-40 pb-40 hero-parallax section-transition-smooth overflow-hidden">
+        {/* Background decorative elements */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute top-20 left-10 w-32 h-32 bg-accent-primary/10 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-20 right-10 w-40 h-40 bg-accent-secondary/10 rounded-full blur-3xl"></div>
+          <div className="absolute top-1/2 left-1/4 w-24 h-24 bg-accent-tertiary/10 rounded-full blur-2xl"></div>
+        </div>
         <div className="container-modern text-center max-w-6xl relative z-10">
           <div
             className="mb-6"
@@ -387,11 +393,12 @@ export default function Home() {
 
           {/* Portfolio Categories */}
           <div className="portfolio-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
-            <div 
-              className="portfolio-item group cursor-pointer card-hover"
-              data-animate-fade-up
-            >
-              <div className="portfolio-showcase relative overflow-hidden shadow-xl bg-gradient-to-br from-accent-primary/20 to-accent-secondary/20 mb-6 group-hover:shadow-2xl transition-all duration-500">
+            {/* Enhanced portfolio cards with better styling */}
+                          <div 
+                className="portfolio-item group cursor-pointer card-hover bg-surface-elevated rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 border border-border-subtle hover:border-accent-primary/30"
+                data-animate-fade-up
+              >
+                <div className="portfolio-showcase relative overflow-hidden shadow-xl bg-gradient-to-br from-accent-primary/20 to-accent-secondary/20 mb-6 group-hover:shadow-2xl transition-all duration-500 rounded-xl">
                 {featuredProjects[0]?.coverImage ? (
                   <Image
                     src={featuredProjects[0].coverImage}
