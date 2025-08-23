@@ -154,7 +154,7 @@ describe('Accessibility Tests - WCAG 2.1 AAA Compliance', () => {
           />
           <img 
             src="/woodcarving-process.jpg" 
-            alt="Master craftsman Edward Langston hand-carving detailed feathers on golden eagle sculpture using traditional chisels"
+            alt="Master craftsman Christian James Lancaster hand-carving detailed feathers on golden eagle sculpture using traditional chisels"
           />
         </section>
       );

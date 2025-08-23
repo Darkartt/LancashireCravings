@@ -55,9 +55,9 @@ export default function Services() {
               viewport={{ once: true }}
             >
               <h4 className="text-xl font-serif font-semibold text-foreground mb-4">Custom Furniture</h4>
-              <p className="text-foreground/80 mb-4">Placeholder: We design and craft bespoke furniture pieces tailored to your specifications, from elegant dining tables to intricate chairs, using premium hardwoods for lasting beauty and durability.</p>
-              <p className="text-foreground/80 mb-4">Placeholder: Benefits include personalized design, exceptional craftsmanship, and pieces that become family heirlooms. Examples include custom oak dining sets and walnut desks.</p>
-              <p className="text-foreground/80 mb-2">Placeholder: Starting Price: $2,500 (varies by complexity and materials).</p>
+              <p className="text-foreground/80 mb-4">We design and craft bespoke furniture pieces tailored to your specifications, from elegant dining tables to intricate chairs, using premium hardwoods for lasting beauty and durability.</p>
+              <p className="text-foreground/80 mb-4">Benefits include personalized design, exceptional craftsmanship, and pieces that become family heirlooms. Examples include custom oak dining sets and walnut desks.</p>
+              <p className="text-foreground/80 mb-2">Starting Price: £2,500 (varies by complexity and materials).</p>
               <Link href="/commission" className="btn btn-sm btn-secondary">Request a Custom Piece</Link>
             </MotionDiv>
             {/* Service 2: Decorative Carvings */}
@@ -69,9 +69,9 @@ export default function Services() {
               viewport={{ once: true }}
             >
               <h4 className="text-xl font-serif font-semibold text-foreground mb-4">Decorative Carvings</h4>
-              <p className="text-foreground/80 mb-4">Placeholder: Our decorative carvings add a touch of artistry to any space, including wall sculptures, ornate frames, and standalone pieces crafted with meticulous detail.</p>
-              <p className="text-foreground/80 mb-4">Placeholder: Benefits include unique aesthetic enhancements and custom designs that reflect personal style. Examples include cherry wood wall art and maple figurines.</p>
-              <p className="text-foreground/80 mb-2">Placeholder: Starting Price: $800 (varies by size and intricacy).</p>
+              <p className="text-foreground/80 mb-4">Our decorative carvings add a touch of artistry to any space, including wall sculptures, ornate frames, and standalone pieces crafted with meticulous detail.</p>
+              <p className="text-foreground/80 mb-4">Benefits include unique aesthetic enhancements and custom designs that reflect personal style. Examples include cherry wood wall art and maple figurines.</p>
+              <p className="text-foreground/80 mb-2">Starting Price: £800 (varies by size and intricacy).</p>
               <Link href="/commission" className="btn btn-sm btn-secondary">Commission a Piece</Link>
             </MotionDiv>
             {/* Service 3: Architectural Elements */}
@@ -83,9 +83,9 @@ export default function Services() {
               viewport={{ once: true }}
             >
               <h4 className="text-xl font-serif font-semibold text-foreground mb-4">Architectural Elements</h4>
-              <p className="text-foreground/80 mb-4">Placeholder: We create custom architectural elements such as mantels, staircases, and door frames, enhancing the structural beauty of homes and commercial spaces with hand-carved details.</p>
-              <p className="text-foreground/80 mb-4">Placeholder: Benefits include seamless integration with existing architecture and elevated property value. Examples include mahogany stair balustrades and oak door surrounds.</p>
-              <p className="text-foreground/80 mb-2">Placeholder: Starting Price: $3,000 (varies by scope and materials).</p>
+              <p className="text-foreground/80 mb-4">We create custom architectural elements such as mantels, staircases, and door frames, enhancing the structural beauty of homes and commercial spaces with hand-carved details.</p>
+              <p className="text-foreground/80 mb-4">Benefits include seamless integration with existing architecture and elevated property value. Examples include mahogany stair balustrades and oak door surrounds.</p>
+              <p className="text-foreground/80 mb-2">Starting Price: £3,000 (varies by scope and materials).</p>
               <Link href="/commission" className="btn btn-sm btn-secondary">Explore Options</Link>
             </MotionDiv>
             {/* Service 4: Restoration */}
@@ -97,9 +97,9 @@ export default function Services() {
               viewport={{ once: true }}
             >
               <h4 className="text-xl font-serif font-semibold text-foreground mb-4">Restoration</h4>
-              <p className="text-foreground/80 mb-4">Placeholder: Our restoration services breathe new life into antique or damaged wooden pieces, preserving their historical value while restoring functionality and beauty.</p>
-              <p className="text-foreground/80 mb-4">Placeholder: Benefits include maintaining heritage, expert matching of original techniques, and sustainable preservation. Examples include restoring Victorian furniture and colonial door frames.</p>
-              <p className="text-foreground/80 mb-2">Placeholder: Starting Price: $1,000 (varies by condition and complexity).</p>
+              <p className="text-foreground/80 mb-4">Our restoration services breathe new life into antique or damaged wooden pieces, preserving their historical value while restoring functionality and beauty.</p>
+              <p className="text-foreground/80 mb-4">Benefits include maintaining heritage, expert matching of original techniques, and sustainable preservation. Examples include restoring Victorian furniture and colonial door frames.</p>
+              <p className="text-foreground/80 mb-2">Starting Price: £1,000 (varies by condition and complexity).</p>
               <Link href="/contact" className="btn btn-sm btn-secondary">Request Restoration</Link>
             </MotionDiv>
           </div>
@@ -124,9 +124,9 @@ export default function Services() {
             viewport={{ once: true }}
           >
             <h4 className="text-xl font-serif font-semibold text-foreground mb-4">Learn the Art of Woodcarving</h4>
-            <p className="text-foreground/80 mb-4">Placeholder: We offer workshops and classes for enthusiasts of all skill levels, from beginners to advanced carvers, teaching traditional techniques and modern approaches to woodcraft.</p>
-            <p className="text-foreground/80 mb-4">Placeholder: Benefits include hands-on learning, personalized instruction from master artisans, and the opportunity to create your own wooden piece. Classes are held monthly at our Liverpool studio.</p>
-            <p className="text-foreground/80 mb-2">Placeholder: Workshop Fee: $250 for a weekend session (materials included).</p>
+            <p className="text-foreground/80 mb-4">We offer workshops and classes for enthusiasts of all skill levels, from beginners to advanced carvers, teaching traditional techniques and modern approaches to woodcraft.</p>
+                         <p className="text-foreground/80 mb-4">Benefits include hands-on learning, personalized instruction from master artisans, and the opportunity to create your own wooden piece. Classes are held monthly at our Mold workshop.</p>
+            <p className="text-foreground/80 mb-2">Workshop Fee: £250 for a weekend session (materials included).</p>
             <Link href="/contact" className="btn btn-sm btn-secondary">Register Interest</Link>
           </MotionDiv>
         </div>
@@ -142,7 +142,7 @@ export default function Services() {
           viewport={{ once: true }}
         >
           <h3 className="text-3xl font-serif font-bold text-accent-primary mb-6">Ready to Begin Your Project?</h3>
-          <p className="text-lg text-foreground/80 max-w-2xl mx-auto mb-8">Placeholder: Contact us to discuss your vision for a custom woodcarving piece or to enroll in one of our upcoming workshops. Let’s create something extraordinary together.</p>
+          <p className="text-lg text-foreground/80 max-w-2xl mx-auto mb-8">Contact us to discuss your vision for a custom woodcarving piece or to enroll in one of our upcoming workshops. Let’s create something extraordinary together.</p>
           <MotionDiv
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}

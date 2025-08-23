@@ -48,8 +48,8 @@ export default function About() {
               viewport={{ once: true }}
             >
               <h3 className="text-2xl font-serif font-bold text-accent-primary mb-4">A Legacy of Craftsmanship</h3>
-              <p className="text-foreground/80 mb-4">Founded in 1987 by master woodcarver Edward Langston, Lancaster Carving Limited was born from a deep reverence for the timeless art of woodworking. What began as a small workshop in Mold has grown into a globally recognized atelier, celebrated for creating unique, bespoke wooden masterpieces.</p>
-              <p className="text-foreground/80">Edward's vision was simple yet profound: to preserve traditional carving techniques while embracing bespoke design tailored to each client's vision, ensuring no two pieces are ever identical. Today, under the guidance of his son, Michael Langston, we continue to honor that legacy with every piece we create.</p>
+              <p className="text-foreground/80 mb-4">Founded in 2019 by master woodcarver Christian James Lancaster, Lancaster Carving Limited was born from a deep reverence for the timeless art of woodworking. What began as a small workshop in Mold has grown into a respected atelier, celebrated for creating unique, bespoke wooden masterpieces.</p>
+              <p className="text-foreground/80">Christian's vision was simple yet profound: to preserve traditional carving techniques while embracing bespoke design tailored to each client's vision, ensuring no two pieces are ever identical. Today, we continue to honor that legacy with every piece we create.</p>
             </MotionDiv>
             <div className="rounded-lg shadow-lg h-80 bg-foreground/10"></div>
           </div>

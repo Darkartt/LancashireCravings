@@ -357,11 +357,11 @@
     {
       "id": "eagle-1",
       "type": "image",
-      "src": "/portfolio/eagle/eagle_01_RawWood.jpeg",
+      "src": "/portfolio/eagle/eagle_01_RawWood.jpg",
       "alt": "Eagle - RawWood",
       "category": "process",
       "project": "eagle",
-      "filename": "eagle_01_RawWood.jpeg",
+      "filename": "eagle_01_RawWood.jpg",
       "order": 1,
       "featured": false
     },

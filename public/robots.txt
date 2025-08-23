@@ -4,15 +4,16 @@ Allow: /
 # Sitemap
 Sitemap: https://exampledesign.co.uk/sitemap.xml
 
-# Block certain files
+# Block certain files and directories
 Disallow: /api/
 Disallow: /_next/
 Disallow: /admin/
-# Note: Allow required JSON resources
-Allow: /manifest.json
-Allow: /curated-manifest.json
+Disallow: /private/
+Disallow: /temp/
+Disallow: /test/
+Disallow: /draft/
 
-# Allow important pages
+# Allow important pages and resources
 Allow: /
 Allow: /about
 Allow: /portfolio
@@ -22,6 +23,56 @@ Allow: /process
 Allow: /blog
 Allow: /contact
 Allow: /shop
+Allow: /projects
 
-# Crawl delay (optional)
+# Allow important resources
+Allow: /manifest.json
+Allow: /curated-manifest.json
+Allow: /logo.svg
+Allow: /favicon.svg
+Allow: /apple-touch-icon.svg
+Allow: /og-image.jpg
+
+# Allow image directories
+Allow: /portfolio/
+Allow: /images/
+Allow: /media/
+
+# Crawl delay for respectful crawling
 Crawl-delay: 1
+
+# Specific rules for different bots
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0.5
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Slurp
+Allow: /
+Crawl-delay: 1
+
+# Block AI training bots (optional)
+User-agent: GPTBot
+Disallow: /
+
+User-agent: ChatGPT-User
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: anthropic-ai
+Disallow: /
+
+User-agent: Claude-Web
+Disallow: /
+
+# Block archive bots
+User-agent: ia_archiver
+Disallow: /
+
+User-agent: archive.org_bot
+Disallow: /

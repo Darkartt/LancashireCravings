@@ -182,18 +182,15 @@ export const navigation = [
   { name: 'Gallery', href: '/gallery' },
   { name: 'Projects', href: '/projects' },
   { name: 'Process', href: '/process' },
-  { name: 'Time-lapse', href: '/timelapses' },
-  { name: 'Behind Scenes', href: '/behind-the-scenes' },
   { name: 'Services', href: '/services' },
-  { name: 'Shop', href: '/shop' },
-  { name: 'Blog', href: '/blog' },
+  { name: 'FAQ', href: '/faq' },
   { name: 'Contact', href: '/contact' },
 ];
 
 // Company information
 export const companyInfo = {
   name: 'Lancaster Carving Limited',
-  tagline: 'Master Craftsman Since 1987',
+  tagline: 'Premium Woodcarving Since 2019',
   description: 'From our Mold, United Kingdom workshop to discerning collectors worldwide, we transform sustainably-sourced hardwoods into one-of-a-kind sculptural treasures that tell your story.',
   address: {
     street: 'Institute lane',

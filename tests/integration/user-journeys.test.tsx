@@ -190,7 +190,7 @@ describe('Integration Tests - Full User Journeys', () => {
       const submitButton = screen.getByRole('button', { name: /submit commission/i });
 
       // Fill out the form completely
-      await user.type(nameInput, 'Edward Langston');
+              await user.type(nameInput, 'Christian James Lancaster');
       await user.type(emailInput, 'edward@example.com');
       await user.selectOptions(projectSelect, 'sculpture');
       await user.type(messageTextarea, 'I would like to commission a golden eagle sculpture for my estate collection.');
@@ -199,7 +199,7 @@ describe('Integration Tests - Full User Journeys', () => {
       await user.click(submitButton);
 
       // Form should be properly filled
-      expect(nameInput).toHaveValue('Edward Langston');
+              expect(nameInput).toHaveValue('Christian James Lancaster');
       expect(emailInput).toHaveValue('edward@example.com');
       expect(projectSelect).toHaveValue('sculpture');
       expect(messageTextarea).toHaveValue('I would like to commission a golden eagle sculpture for my estate collection.');

@@ -19,7 +19,7 @@ export default function Home() {
             data-animate-scale
           >
             <span className="inline-block px-6 py-2 bg-accent-primary/10 text-accent-primary rounded-full text-sm font-medium tracking-wider uppercase border border-accent-primary/20">
-              Master Craftsman Since 1987
+              Premium Woodcarving Since 2019
             </span>
           </div>
           
@@ -36,7 +36,7 @@ export default function Home() {
             className="text-xl md:text-2xl lg:text-3xl text-foreground/80 max-w-4xl mx-auto mb-12 hero-subtitle leading-relaxed"
             data-animate-fade-up
           >
-            From our Liverpool workshop to discerning collectors worldwide, we transform sustainably-sourced hardwoods into 
+            From our Mold workshop to discerning collectors worldwide, we transform sustainably-sourced hardwoods into 
             <span className="text-accent-primary font-semibold"> one-of-a-kind sculptural treasures</span> that tell your story.
           </p>
 
@@ -390,12 +390,12 @@ export default function Home() {
                   "Every piece of wood has a story waiting to be revealed. My role is simply to listen and carve away everything that doesn't belong."
                 </p>
                 <p>
-                  For over three decades, Master Craftsman Edward Langston has dedicated his life to the ancient art of woodcarving. 
-                  What began as childhood fascination with his grandfather's whittling knife has evolved into a world-renowned workshop 
-                  that serves collectors, institutions, and discerning clients across six continents.
+                  Since 2019, Master Craftsman Christian James Lancaster has dedicated his life to the ancient art of woodcarving. 
+                  What began as a passion for traditional craftsmanship has evolved into a respected workshop 
+                  that serves collectors and discerning clients across the United Kingdom and beyond.
                 </p>
                 <p>
-                  Based in the heart of Liverpool's historic arts quarter, our workshop combines traditional hand-carving techniques 
+                  Based in the historic town of Mold, our workshop combines traditional hand-carving techniques 
                   with an understanding of contemporary design. Every commission is a collaboration between artisan, client, and the 
                   raw beauty of sustainably-sourced hardwoods.
                 </p>
@@ -410,13 +410,13 @@ export default function Home() {
             <div className="order-1 lg:order-2" data-animate-slide-right>
               <div className="aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl bg-gradient-to-br from-accent-primary/20 to-accent-secondary/20 mb-6">
                 <div className="w-full h-full bg-foreground/10 flex items-center justify-center">
-                  <span className="text-foreground/40 text-center px-4">Master Craftsman Edward Langston in his Liverpool workshop</span>
+                  <span className="text-foreground/40 text-center px-4">Master Craftsman Christian James Lancaster in his Mold workshop</span>
                 </div>
               </div>
               <div className="text-center">
                 <div className="bg-background p-6 rounded-xl shadow-lg border border-foreground/10">
                   <p className="text-foreground/80 italic mb-4">
-                    "Edward's work transcends mere decoration—each piece is a meditation on the relationship between human creativity and natural beauty."
+                    "Christian's work transcends mere decoration—each piece is a meditation on the relationship between human creativity and natural beauty."
                   </p>
                   <p className="text-xs font-semibold text-accent-primary">— Victoria M., Private Collector</p>
                 </div>
@@ -480,7 +480,7 @@ export default function Home() {
             <div className="testimonial-card" data-animate-fade-up>
               <div className="text-4xl text-accent-primary mb-6">"</div>
               <p className="text-lg text-foreground/80 leading-relaxed mb-6">
-                The sculpture Edward created for our estate exceeded every expectation. It's not just art—it's a piece of our family's heritage carved in wood.
+                The sculpture Christian created for our estate exceeded every expectation. It's not just art—it's a piece of our family's heritage carved in wood.
               </p>
               <div className="flex items-center gap-4">
                 <div className="w-12 h-12 bg-accent-primary/20 rounded-full flex items-center justify-center">

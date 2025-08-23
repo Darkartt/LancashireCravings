@@ -18,7 +18,7 @@ export default function Home() {
             data-animate-scale
           >
             <span className="inline-block px-6 py-2 bg-accent-primary/10 text-accent-primary rounded-full text-sm font-medium tracking-wider uppercase border border-accent-primary/20">
-              Master Craftsman Since 1987
+              Premium Woodcarving Since 2019
             </span>
           </div>
           
@@ -35,7 +35,7 @@ export default function Home() {
             className="text-xl md:text-2xl lg:text-3xl text-foreground/80 max-w-4xl mx-auto mb-12 hero-subtitle leading-relaxed"
             data-animate-fade-up
           >
-            From our Liverpool workshop to discerning collectors worldwide, we transform sustainably-sourced hardwoods into 
+            From our Mold workshop to discerning collectors worldwide, we transform sustainably-sourced hardwoods into 
             <span className="text-accent-primary font-semibold"> one-of-a-kind sculptural treasures</span> that tell your story.
           </p>
 
@@ -388,12 +388,12 @@ export default function Home() {
                   "Every piece of wood has a story waiting to be revealed. My role is simply to listen and carve away everything that doesn't belong."
                 </p>
                 <p>
-                  For over three decades, Master Craftsman Edward Langston has dedicated his life to the ancient art of woodcarving. 
-                  What began as childhood fascination with his grandfather's whittling knife has evolved into a world-renowned workshop 
-                  that serves collectors, institutions, and discerning clients across six continents.
+                  Since 2019, Master Craftsman Christian James Lancaster has dedicated his life to the ancient art of woodcarving. 
+                  What began as a passion for traditional craftsmanship has evolved into a respected workshop 
+                  that serves collectors and discerning clients across the United Kingdom and beyond.
                 </p>
                 <p>
-                  Our Liverpool workshop, now led by Edward's son Michael, continues this legacy of excellence. We work exclusively 
+                  Our Mold workshop continues this legacy of excellence. We work exclusively 
                   with sustainably sourced hardwoods—each plank carefully selected for its grain, character, and story. From the 
                   rich warmth of American walnut to the striking figure of European olive, every material becomes part of the 
                   narrative we create together.
@@ -423,8 +423,8 @@ export default function Home() {
                   {/* Placeholder for craftsman portrait */}
                   <div className="w-full h-full bg-foreground/10 flex items-center justify-center">
                     <span className="text-foreground/40 text-center px-4">
-                      Master Craftsman Edward Langston<br />
-                      <span className="text-sm">At work in the Liverpool workshop</span>
+                                              Master Craftsman Christian James Lancaster<br />
+                      <span className="text-sm">At work in the Mold workshop</span>
                     </span>
                   </div>
                 </div>
@@ -515,7 +515,7 @@ export default function Home() {
               <div className="lg:col-span-2">
                 <div className="text-6xl text-accent-primary/20 mb-4">"</div>
                 <blockquote className="text-2xl md:text-3xl font-serif italic text-foreground/90 leading-relaxed mb-8">
-                  Working with Elite Woodcraft was like commissioning a piece of history. Edward and his team didn't just create a sculpture—they created a family heirloom that captures the essence of our heritage.
+                  Working with Elite Woodcraft was like commissioning a piece of history. Christian and his team didn't just create a sculpture—they created a family heirloom that captures the essence of our heritage.
                 </blockquote>
                 <div className="flex items-center gap-4">
                   <div className="w-16 h-16 rounded-full bg-accent-primary/10 flex items-center justify-center">
