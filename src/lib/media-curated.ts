@@ -88,7 +88,7 @@ function guessCategory(id: string): Project['category'] {
   if (/nessie|loch|monster/.test(id)) return 'mythical';
   if (/st[- ]?collen/.test(id)) return 'religious';
   if (/bass|fish/.test(id)) return 'commissioned';
-  if (/display/.test(id)) return 'display';
+  if (/display/.test(id)) return 'workshop';
   if (/bee/.test(id)) return 'nature';
   return 'nature';
 }
