@@ -5,9 +5,7 @@ import MotionDiv from '@/components/MotionContainer';
 import CleanBackground from '@/components/CleanBackground';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import InteractiveProcessGallery from '@/components/InteractiveProcessGallery';
 import EnhancedTimeline from '@/components/EnhancedTimeline';
-import EnhancedBeforeAfter from '@/components/EnhancedBeforeAfter';
 import ProcessVideoPlayer from '@/components/ProcessVideoPlayer';
 import type { MediaItem } from '@/lib/media-types';
 import { loadMediaData } from '@/lib/media-loader';
@@ -17,7 +15,6 @@ export default function ProcessDocumentationPage() {
   
   // Use the same system as landing page and projects
   const [allMedia, setAllMedia] = useState<MediaItem[]>([]);
-  const [projects, setProjects] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   
@@ -27,17 +24,15 @@ export default function ProcessDocumentationPage() {
     setError(null);
     
     loadMediaData()
-      .then(({ natureCollection, projects }) => {
+      .then(({ natureCollection }) => {
         if (!mounted) return;
         // Get all media items from the portfolio nature collection
         const portfolioItems = natureCollection.portfolio?.items || [];
         console.log('Process page loaded:', { 
-          projectsCount: projects.length, 
           mediaCount: portfolioItems.length,
           activeProject 
         });
         setAllMedia(portfolioItems);
-        setProjects(projects);
         setIsLoading(false);
       })
       .catch((e) => {
@@ -92,37 +87,7 @@ export default function ProcessDocumentationPage() {
   // Use fallback media if no project media is found
   const effectiveProjectMedia = projectMedia.length > 0 ? projectMedia : createFallbackMedia();
   
-  // Create process steps data for Interactive Process Gallery
-  const processSteps = [
-    {
-      id: 'design',
-      title: 'Design & Planning',
-      description: 'Creating detailed sketches and planning the sculpture based on reference photos and anatomical studies.',
-      media: effectiveProjectMedia.filter(m => m.category === 'process').slice(0, 3),
-      isActive: true
-    },
-    {
-      id: 'rough-carving',
-      title: 'Rough Carving',
-      description: 'Blocking out the basic form and establishing proportions using power tools and large chisels.',
-      media: effectiveProjectMedia.filter(m => m.category === 'process').slice(3, 6),
-      isActive: false
-    },
-    {
-      id: 'detail-work',
-      title: 'Detail Work',
-      description: 'Adding intricate details like feathers, talons, and facial features using precision carving tools.',
-      media: effectiveProjectMedia.filter(m => m.category === 'process').slice(6, 9),
-      isActive: false
-    },
-    {
-      id: 'finishing',
-      title: 'Finishing & Protection',
-      description: 'Sanding, applying protective finishes, and final detailing to bring the sculpture to life.',
-      media: effectiveProjectMedia.filter(m => m.category === 'final').slice(0, 3),
-      isActive: false
-    }
-  ];
+
 
   // Create timeline steps for Enhanced Timeline
   const timelineSteps = [
@@ -314,11 +279,7 @@ export default function ProcessDocumentationPage() {
     }
   ];
 
-  // Get project title for display
-  const getProjectTitle = (projectId: string) => {
-    const project = projects.find(p => p.id === projectId);
-    return project?.title || projectId.charAt(0).toUpperCase() + projectId.slice(1);
-  };
+
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -455,16 +416,7 @@ export default function ProcessDocumentationPage() {
             animate="visible"
             className="space-y-24 py-16"
           >
-            {/* Interactive Process Gallery */}
-            <MotionDiv as="section" variants={itemVariants} className="container mx-auto px-6 lg:px-8">
-              <InteractiveProcessGallery
-                projectTitle={getProjectTitle(activeProject)}
-                steps={processSteps}
-                autoPlay={false}
-                showThumbnails={true}
-                variant="tabs"
-              />
-            </MotionDiv>
+
 
             {/* Enhanced Timeline */}
             <MotionDiv as="section" variants={itemVariants} className="container mx-auto px-6 lg:px-8">
@@ -479,20 +431,7 @@ export default function ProcessDocumentationPage() {
               />
             </MotionDiv>
 
-            {/* Enhanced Before/After Comparison */}
-            <MotionDiv as="section" variants={itemVariants} className="bg-neutral-50 py-16">
-              <div className="container mx-auto px-6 lg:px-8">
-                <EnhancedBeforeAfter
-                  stages={comparisonStages}
-                  title="Transformation Journey"
-                  description="Witness the complete transformation from raw wood to finished masterpiece"
-                  variant="timeline"
-                  autoPlay={false}
-                  showLabels={true}
-                  showProgress={true}
-                />
-              </div>
-            </MotionDiv>
+
 
             {/* Process Video Player */}
             <MotionDiv as="section" variants={itemVariants} className="container mx-auto px-6 lg:px-8">
@@ -510,27 +449,9 @@ export default function ProcessDocumentationPage() {
               />
             </MotionDiv>
 
-            {/* Alternative Before/After - Slider */}
-            <MotionDiv as="section" variants={itemVariants} className="container mx-auto px-6 lg:px-8">
-              <EnhancedBeforeAfter
-                stages={[comparisonStages[0], comparisonStages[3]]}
-                title="Before & After Comparison"
-                description="Drag the slider to see the dramatic transformation"
-                variant="slider"
-                showLabels={true}
-              />
-            </MotionDiv>
 
-            {/* Grid Process Gallery */}
-            <MotionDiv as="section" variants={itemVariants} className="bg-neutral-50 py-16">
-              <div className="container mx-auto px-6 lg:px-8">
-                <InteractiveProcessGallery
-                  projectTitle="Process Overview"
-                  steps={processSteps}
-                  variant="grid"
-                />
-              </div>
-            </MotionDiv>
+
+
           </MotionDiv>
 
           {/* Call to Action */}
