@@ -3,14 +3,8 @@ import { createRequire } from 'node:module';
 const require = createRequire(import.meta.url);
 const withBundleAnalyzer = require('@next/bundle-analyzer')({ enabled: process.env.ANALYZE === 'true' });
 
-const isGitHubPages = process.env.GITHUB_PAGES === 'true';
 const isVercel = process.env.VERCEL === '1';
-const repoName = process.env.GITHUB_REPOSITORY?.split('/')[1] || '';
-// Always use subpath for GitHub Pages deployments at user.github.io/<repo>
-const useSubpath = isGitHubPages;
-
-// For exampledesigns.co.uk deployment
-const isCustomDomain = process.env.CUSTOM_DOMAIN === 'true';
+const isCustomDomain = process.env.CUSTOM_DOMAIN === 'true' || process.env.VERCEL_URL?.includes('exampledesign.co.uk');
 
 /** @type {import('next').NextConfig} */
 const baseConfig = {
@@ -24,26 +18,19 @@ const baseConfig = {
     dangerouslyAllowSVG: true,
   },
   env: {
-    NEXT_PUBLIC_BASE_PATH: useSubpath ? `/${repoName}` : '',
-    CUSTOM_DOMAIN: process.env.CUSTOM_DOMAIN || 'false',
+    CUSTOM_DOMAIN: isCustomDomain ? 'true' : 'false',
   },
   experimental: {
     scrollRestoration: true,
     cssChunking: true,
   },
-  // Only use static export for GitHub Pages, not for Vercel
-  ...(isGitHubPages
-    ? {
-        output: 'export',
-        trailingSlash: true,
-        ...(useSubpath && repoName
-          ? {
-              basePath: `/${repoName}`,
-              assetPrefix: `/${repoName}/`,
-            }
-          : {}),
-      }
-    : {}),
+  // Vercel-specific optimizations
+  ...(isVercel ? {
+    // Enable Vercel's built-in optimizations
+    swcMinify: true,
+    compress: true,
+    poweredByHeader: false,
+  } : {}),
 };
 
 const nextConfig = withBundleAnalyzer(baseConfig);

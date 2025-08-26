@@ -15,16 +15,17 @@ function generateNonce(): string {
 function generateCSPHeader(nonce: string): string {
   const csp = [
     "default-src 'self'",
-    "script-src 'self' 'nonce-" + nonce + "'",
-    "style-src 'self' 'nonce-" + nonce + "'",
-    "img-src 'self' data: blob: https:",
+    "script-src 'self' 'nonce-" + nonce + "' 'strict-dynamic'",
+    "style-src 'self' 'nonce-" + nonce + "' 'unsafe-hashes'",
+    "img-src 'self' data: blob: https: *.vercel.app *.vercel-insights.com",
     "font-src 'self' data: https:",
-    "connect-src 'self'",
-    "frame-ancestors 'self'",
+    "connect-src 'self' https: *.vercel.app *.vercel-insights.com",
+    "frame-ancestors 'none'",
     "object-src 'none'",
-    "base-uri 'self'",
+    "base-uri 'none'",
     "form-action 'self'",
-    'upgrade-insecure-requests'
+    "upgrade-insecure-requests",
+    "require-trusted-types-for 'script'"
   ].join('; ');
 
   return csp;
@@ -47,12 +48,14 @@ export function middleware(req: NextRequest) {
   // Set security headers
   res.headers.set('Content-Security-Policy', csp);
   res.headers.set('Referrer-Policy', 'strict-origin-when-cross-origin');
-  res.headers.set('X-Frame-Options', 'SAMEORIGIN');
+  res.headers.set('X-Frame-Options', 'DENY');
   res.headers.set('X-Content-Type-Options', 'nosniff');
   res.headers.set('X-DNS-Prefetch-Control', 'on');
-  res.headers.set('Permissions-Policy', 'geolocation=(), microphone=(), camera=()');
-  // 6 months HSTS; includeSubDomains (add preload after verifying domain)
-  res.headers.set('Strict-Transport-Security', 'max-age=15552000; includeSubDomains');
+  res.headers.set('Permissions-Policy', 'geolocation=(), microphone=(), camera=(), payment=(), usb=(), magnetometer=(), gyroscope=(), accelerometer=()');
+  // 1 year HSTS with preload for exampledesign.co.uk
+  res.headers.set('Strict-Transport-Security', 'max-age=31536000; includeSubDomains; preload');
+  res.headers.set('Cross-Origin-Resource-Policy', 'same-origin');
+  res.headers.set('Cross-Origin-Embedder-Policy', 'require-corp');
 
   // Pass the nonce to the page via a custom header (will be consumed by layout)
   res.headers.set('X-Nonce', nonce);
