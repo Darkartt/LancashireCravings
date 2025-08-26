@@ -15,17 +15,16 @@ function generateNonce(): string {
 function generateCSPHeader(nonce: string): string {
   const csp = [
     "default-src 'self'",
-    "script-src 'self' 'nonce-" + nonce + "' 'strict-dynamic'",
+    "script-src 'self' 'nonce-" + nonce + "'",
     "style-src 'self' 'nonce-" + nonce + "' 'unsafe-hashes'",
-    "img-src 'self' data: blob: https: *.vercel.app *.vercel-insights.com",
+    "img-src 'self' data: blob: https:",
     "font-src 'self' data: https:",
-    "connect-src 'self' https: *.vercel.app *.vercel-insights.com",
+    "connect-src 'self' https:",
     "frame-ancestors 'none'",
     "object-src 'none'",
     "base-uri 'none'",
     "form-action 'self'",
-    "upgrade-insecure-requests",
-    "require-trusted-types-for 'script'"
+    "upgrade-insecure-requests"
   ].join('; ');
 
   return csp;
@@ -55,7 +54,7 @@ export function middleware(req: NextRequest) {
   // 1 year HSTS with preload for exampledesign.co.uk
   res.headers.set('Strict-Transport-Security', 'max-age=31536000; includeSubDomains; preload');
   res.headers.set('Cross-Origin-Resource-Policy', 'same-origin');
-  res.headers.set('Cross-Origin-Embedder-Policy', 'require-corp');
+
 
   // Pass the nonce to the page via a custom header (will be consumed by layout)
   res.headers.set('X-Nonce', nonce);

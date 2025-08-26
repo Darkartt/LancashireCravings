@@ -35,9 +35,5 @@
     }
   ],
 
-  "functions": {
-    "middleware.ts": {
-      "maxDuration": 10
-    }
-  }
+
 }
