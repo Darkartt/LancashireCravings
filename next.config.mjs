@@ -9,13 +9,15 @@ const isCustomDomain = process.env.CUSTOM_DOMAIN === 'true' || process.env.VERCE
 /** @type {import('next').NextConfig} */
 const baseConfig = {
   images: {
-    // Disable image optimization for Vercel to fix 400 errors
-    unoptimized: true,
+    // Enable image optimization for better performance
+    unoptimized: false,
     formats: ['image/webp', 'image/avif'],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
     // Ensure static images work properly
     dangerouslyAllowSVG: true,
+    // Enable WebP and AVIF formats
+    minimumCacheTTL: 60 * 60 * 24 * 30, // 30 days
   },
   env: {
     CUSTOM_DOMAIN: isCustomDomain ? 'true' : 'false',
