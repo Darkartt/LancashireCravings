@@ -219,11 +219,20 @@ export default function Home() {
                 </div>
                 <div className="lg:w-1/2">
                   <div className="aspect-[4/3] rounded-2xl overflow-hidden shadow-xl bg-gradient-to-br from-accent-primary/20 to-accent-secondary/20 relative">
-                    <img
-                      src="/portfolio/_Portfolio_BestOf/fish_Best_2.jpg"
-                      alt="Fish carving with detailed wood grain and natural finish"
-                      className="w-full h-full object-cover cursor-pointer hover:scale-105 transition-transform duration-500"
-                      onClick={() => openLightbox("/portfolio/_Portfolio_BestOf/fish_Best_2.jpg", "Fish carving with detailed wood grain and natural finish")}
+                    <picture>
+      <source
+        type="image/webp"
+        srcSet="\portfolio\_Portfolio_BestOf\fish_Best_2_800w.webp 800w, \portfolio\_Portfolio_BestOf\fish_Best_2_1200w.webp 1200w, \portfolio\_Portfolio_BestOf\fish_Best_2_1600w.webp 1600w"
+        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+      />
+      <img
+        src="\portfolio\_Portfolio_BestOf\fish_Best_2_optimized.jpg"
+        alt="Fish carving with detailed wood grain and natural finish"
+        className="w-full h-full object-cover cursor-pointer hover:scale-105 transition-transform duration-500"
+        loading="lazy"
+        
+      />
+    </picture> openLightbox("/portfolio/_Portfolio_BestOf/fish_Best_2.jpg", "Fish carving with detailed wood grain and natural finish")}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none"></div>
                   </div>
@@ -246,11 +255,20 @@ export default function Home() {
                 </div>
                 <div className="lg:w-1/2">
                   <div className="aspect-[4/3] rounded-2xl overflow-hidden shadow-xl bg-gradient-to-br from-accent-primary/20 to-accent-secondary/20 relative">
-                    <img
-                      src="/portfolio/_Portfolio_BestOf/eagle_Best_2.jpg"
-                      alt="Golden eagle carving showcasing master craftsmanship and detailed feather work"
-                      className="w-full h-full object-cover cursor-pointer hover:scale-105 transition-transform duration-500"
-                      onClick={() => openLightbox("/portfolio/_Portfolio_BestOf/eagle_Best_2.jpg", "Golden eagle carving showcasing master craftsmanship and detailed feather work")}
+                    <picture>
+      <source
+        type="image/webp"
+        srcSet="\portfolio\_Portfolio_BestOf\eagle_Best_2_800w.webp 800w, \portfolio\_Portfolio_BestOf\eagle_Best_2_1200w.webp 1200w, \portfolio\_Portfolio_BestOf\eagle_Best_2_1600w.webp 1600w"
+        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+      />
+      <img
+        src="\portfolio\_Portfolio_BestOf\eagle_Best_2_optimized.jpg"
+        alt="Golden eagle carving showcasing master craftsmanship and detailed feather work"
+        className="w-full h-full object-cover cursor-pointer hover:scale-105 transition-transform duration-500"
+        loading="lazy"
+        
+      />
+    </picture> openLightbox("/portfolio/_Portfolio_BestOf/eagle_Best_2.jpg", "Golden eagle carving showcasing master craftsmanship and detailed feather work")}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none"></div>
                   </div>
@@ -442,11 +460,20 @@ export default function Home() {
               data-animate-fade-up
             >
               <div className="portfolio-showcase relative overflow-hidden shadow-xl bg-gradient-to-br from-accent-primary/20 to-accent-secondary/20 mb-6 group-hover:shadow-2xl transition-all duration-500">
-                <img
-                  src="/portfolio/_Portfolio_BestOf/nessie_Best_1.jpg"
-                  alt="Mythical Nessie sculpture showcasing architectural carving techniques"
-                  className="aspect-[4/5] w-full object-cover group-hover:scale-110 transition-transform duration-500 cursor-pointer"
-                  onClick={() => openLightbox("/portfolio/_Portfolio_BestOf/nessie_Best_1.jpg", "Mythical Nessie sculpture showcasing architectural carving techniques")}
+                <picture>
+      <source
+        type="image/webp"
+        srcSet="\portfolio\_Portfolio_BestOf\nessie_Best_1_800w.webp 800w, \portfolio\_Portfolio_BestOf\nessie_Best_1_1200w.webp 1200w, \portfolio\_Portfolio_BestOf\nessie_Best_1_1600w.webp 1600w"
+        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+      />
+      <img
+        src="\portfolio\_Portfolio_BestOf\nessie_Best_1_optimized.jpg"
+        alt="Mythical Nessie sculpture showcasing architectural carving techniques"
+        className="aspect-[4/5] w-full object-cover group-hover:scale-110 transition-transform duration-500 cursor-pointer"
+        loading="lazy"
+        
+      />
+    </picture> openLightbox("/portfolio/_Portfolio_BestOf/nessie_Best_1.jpg", "Mythical Nessie sculpture showcasing architectural carving techniques")}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-accent-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
               </div>
@@ -469,11 +496,20 @@ export default function Home() {
               data-animate-fade-up
             >
               <div className="portfolio-showcase relative overflow-hidden shadow-xl bg-gradient-to-br from-accent-primary/20 to-accent-secondary/20 mb-6 group-hover:shadow-2xl transition-all duration-500">
-                <img
-                  src="/portfolio/_Portfolio_BestOf/stcollen_Best_1.jpeg"
-                  alt="Religious sculpture representing heirloom-quality craftsmanship"
-                  className="aspect-[4/5] w-full object-cover group-hover:scale-110 transition-transform duration-500 cursor-pointer"
-                  onClick={() => openLightbox("/portfolio/_Portfolio_BestOf/stcollen_Best_1.jpeg", "Religious sculpture representing heirloom-quality craftsmanship")}
+                <picture>
+      <source
+        type="image/webp"
+        srcSet="\portfolio\_Portfolio_BestOf\stcollen_Best_1_800w.webp 800w, \portfolio\_Portfolio_BestOf\stcollen_Best_1_1200w.webp 1200w, \portfolio\_Portfolio_BestOf\stcollen_Best_1_1600w.webp 1600w"
+        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+      />
+      <img
+        src="\portfolio\_Portfolio_BestOf\stcollen_Best_1_optimized.jpg"
+        alt="Religious sculpture representing heirloom-quality craftsmanship"
+        className="aspect-[4/5] w-full object-cover group-hover:scale-110 transition-transform duration-500 cursor-pointer"
+        loading="lazy"
+        
+      />
+    </picture> openLightbox("/portfolio/_Portfolio_BestOf/stcollen_Best_1.jpeg", "Religious sculpture representing heirloom-quality craftsmanship")}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-accent-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
               </div>
@@ -522,35 +558,71 @@ export default function Home() {
             </h3>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
               <div className="aspect-square overflow-hidden rounded-xl shadow-lg hover:shadow-2xl transition-all duration-500 cursor-pointer group">
-                <img
-                  src="/portfolio/_Portfolio_BestOf/owl_Best_1.jpg"
-                  alt="Majestic owl carving with intricate feather details"
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                  onClick={() => openLightbox("/portfolio/_Portfolio_BestOf/owl_Best_1.jpg", "Majestic owl carving with intricate feather details")}
+                <picture>
+      <source
+        type="image/webp"
+        srcSet="\portfolio\_Portfolio_BestOf\owl_Best_1_800w.webp 800w, \portfolio\_Portfolio_BestOf\owl_Best_1_1200w.webp 1200w, \portfolio\_Portfolio_BestOf\owl_Best_1_1600w.webp 1600w"
+        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+      />
+      <img
+        src="\portfolio\_Portfolio_BestOf\owl_Best_1_optimized.jpg"
+        alt="Majestic owl carving with intricate feather details"
+        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+        loading="lazy"
+        
+      />
+    </picture> openLightbox("/portfolio/_Portfolio_BestOf/owl_Best_1.jpg", "Majestic owl carving with intricate feather details")}
                 />
               </div>
               <div className="aspect-square overflow-hidden rounded-xl shadow-lg hover:shadow-2xl transition-all duration-500 cursor-pointer group">
-                <img
-                  src="/portfolio/_Portfolio_BestOf/bee_Best_1.jpg"
-                  alt="Delicate bee carving on honeycomb"
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                  onClick={() => openLightbox("/portfolio/_Portfolio_BestOf/bee_Best_1.jpg", "Delicate bee carving on honeycomb")}
+                <picture>
+      <source
+        type="image/webp"
+        srcSet="\portfolio\_Portfolio_BestOf\bee_Best_1_800w.webp 800w, \portfolio\_Portfolio_BestOf\bee_Best_1_1200w.webp 1200w, \portfolio\_Portfolio_BestOf\bee_Best_1_1600w.webp 1600w"
+        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+      />
+      <img
+        src="\portfolio\_Portfolio_BestOf\bee_Best_1_optimized.jpg"
+        alt="Delicate bee carving on honeycomb"
+        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+        loading="lazy"
+        
+      />
+    </picture> openLightbox("/portfolio/_Portfolio_BestOf/bee_Best_1.jpg", "Delicate bee carving on honeycomb")}
                 />
               </div>
               <div className="aspect-square overflow-hidden rounded-xl shadow-lg hover:shadow-2xl transition-all duration-500 cursor-pointer group">
-                <img
-                  src="/portfolio/_Portfolio_BestOf/crow_Best_1.jpg"
-                  alt="Mysterious crow sculpture with detailed plumage"
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                  onClick={() => openLightbox("/portfolio/_Portfolio_BestOf/crow_Best_1.jpg", "Mysterious crow sculpture with detailed plumage")}
+                <picture>
+      <source
+        type="image/webp"
+        srcSet="\portfolio\_Portfolio_BestOf\crow_Best_1_800w.webp 800w, \portfolio\_Portfolio_BestOf\crow_Best_1_1200w.webp 1200w, \portfolio\_Portfolio_BestOf\crow_Best_1_1600w.webp 1600w"
+        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+      />
+      <img
+        src="\portfolio\_Portfolio_BestOf\crow_Best_1_optimized.jpg"
+        alt="Mysterious crow sculpture with detailed plumage"
+        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+        loading="lazy"
+        
+      />
+    </picture> openLightbox("/portfolio/_Portfolio_BestOf/crow_Best_1.jpg", "Mysterious crow sculpture with detailed plumage")}
                 />
               </div>
               <div className="aspect-square overflow-hidden rounded-xl shadow-lg hover:shadow-2xl transition-all duration-500 cursor-pointer group">
-                <img
-                  src="/portfolio/_Portfolio_BestOf/dog_Best_1.jpg"
-                  alt="Lifelike dog carving capturing personality and character"
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                  onClick={() => openLightbox("/portfolio/_Portfolio_BestOf/dog_Best_1.jpg", "Lifelike dog carving capturing personality and character")}
+                <picture>
+      <source
+        type="image/webp"
+        srcSet="\portfolio\_Portfolio_BestOf\dog_Best_1_800w.webp 800w, \portfolio\_Portfolio_BestOf\dog_Best_1_1200w.webp 1200w, \portfolio\_Portfolio_BestOf\dog_Best_1_1600w.webp 1600w"
+        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+      />
+      <img
+        src="\portfolio\_Portfolio_BestOf\dog_Best_1_optimized.jpg"
+        alt="Lifelike dog carving capturing personality and character"
+        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+        loading="lazy"
+        
+      />
+    </picture> openLightbox("/portfolio/_Portfolio_BestOf/dog_Best_1.jpg", "Lifelike dog carving capturing personality and character")}
                 />
               </div>
             </div>
@@ -609,11 +681,20 @@ export default function Home() {
             
             <div className="order-1 lg:order-2" data-animate-slide-right>
               <div className="aspect-[4/5] blob-container blob-lg overflow-hidden shadow-2xl bg-gradient-to-br from-accent-primary/20 to-accent-secondary/20 mb-6 relative">
-                <img
-                  src="/portfolio/display/display_01_ArtistWithFish.jpg"
-                  alt="Master Craftsman Christian James Lancaster with handcrafted fish sculptures"
-                  className="w-full h-full object-cover relative z-10"
-                  onClick={() => openLightbox("/portfolio/display/display_01_ArtistWithFish.jpg", "Master Craftsman Christian James Lancaster with handcrafted fish sculptures")}
+                <picture>
+      <source
+        type="image/webp"
+        srcSet="\portfolio\display\display_01_ArtistWithFish_800w.webp 800w, \portfolio\display\display_01_ArtistWithFish_1200w.webp 1200w, \portfolio\display\display_01_ArtistWithFish_1600w.webp 1600w"
+        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+      />
+      <img
+        src="\portfolio\display\display_01_ArtistWithFish_optimized.jpg"
+        alt="Master Craftsman Christian James Lancaster with handcrafted fish sculptures"
+        className="w-full h-full object-cover relative z-10"
+        loading="lazy"
+        
+      />
+    </picture> openLightbox("/portfolio/display/display_01_ArtistWithFish.jpg", "Master Craftsman Christian James Lancaster with handcrafted fish sculptures")}
                 />
                 {/* Subtle border shadow effect */}
                 <div className="absolute inset-0 rounded-3xl shadow-[0_0_30px_rgba(139,69,19,0.3),0_8px_32px_rgba(0,0,0,0.2)] pointer-events-none z-20"></div>
@@ -769,11 +850,20 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
             <div className="group cursor-pointer" data-animate-fade-up>
               <div className="aspect-[3/4] overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500">
-                <img
-                  src="/portfolio/_Portfolio_BestOf/bass_Best_1.jpeg"
-                  alt="Bass sculpture with detailed scales and natural wood finish"
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                  onClick={() => openLightbox("/portfolio/_Portfolio_BestOf/bass_Best_1.jpeg", "Bass sculpture with detailed scales and natural wood finish")}
+                <picture>
+      <source
+        type="image/webp"
+        srcSet="\portfolio\_Portfolio_BestOf\bass_Best_1_800w.webp 800w, \portfolio\_Portfolio_BestOf\bass_Best_1_1200w.webp 1200w, \portfolio\_Portfolio_BestOf\bass_Best_1_1600w.webp 1600w"
+        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+      />
+      <img
+        src="\portfolio\_Portfolio_BestOf\bass_Best_1_optimized.jpg"
+        alt="Bass sculpture with detailed scales and natural wood finish"
+        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+        loading="lazy"
+        
+      />
+    </picture> openLightbox("/portfolio/_Portfolio_BestOf/bass_Best_1.jpeg", "Bass sculpture with detailed scales and natural wood finish")}
                 />
               </div>
               <div className="mt-4 text-center">
@@ -784,11 +874,20 @@ export default function Home() {
 
             <div className="group cursor-pointer" data-animate-fade-up>
               <div className="aspect-[3/4] overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500">
-                <img
-                  src="/portfolio/_Portfolio_BestOf/nessie_Best_2.jpg"
-                  alt="Nessie sculpture with mythical details and flowing form"
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                  onClick={() => openLightbox("/portfolio/_Portfolio_BestOf/nessie_Best_2.jpg", "Nessie sculpture with mythical details and flowing form")}
+                <picture>
+      <source
+        type="image/webp"
+        srcSet="\portfolio\_Portfolio_BestOf\nessie_Best_2_800w.webp 800w, \portfolio\_Portfolio_BestOf\nessie_Best_2_1200w.webp 1200w, \portfolio\_Portfolio_BestOf\nessie_Best_2_1600w.webp 1600w"
+        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+      />
+      <img
+        src="\portfolio\_Portfolio_BestOf\nessie_Best_2_optimized.jpg"
+        alt="Nessie sculpture with mythical details and flowing form"
+        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+        loading="lazy"
+        
+      />
+    </picture> openLightbox("/portfolio/_Portfolio_BestOf/nessie_Best_2.jpg", "Nessie sculpture with mythical details and flowing form")}
                 />
               </div>
               <div className="mt-4 text-center">
@@ -799,11 +898,20 @@ export default function Home() {
 
             <div className="group cursor-pointer" data-animate-fade-up>
               <div className="aspect-[3/4] overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500">
-                <img
-                  src="/portfolio/_Portfolio_BestOf/stcollen_Best_2.jpeg"
-                  alt="Religious sculpture with sacred symbolism and craftsmanship"
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                  onClick={() => openLightbox("/portfolio/_Portfolio_BestOf/stcollen_Best_2.jpeg", "Religious sculpture with sacred symbolism and craftsmanship")}
+                <picture>
+      <source
+        type="image/webp"
+        srcSet="\portfolio\_Portfolio_BestOf\stcollen_Best_2_800w.webp 800w, \portfolio\_Portfolio_BestOf\stcollen_Best_2_1200w.webp 1200w, \portfolio\_Portfolio_BestOf\stcollen_Best_2_1600w.webp 1600w"
+        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+      />
+      <img
+        src="\portfolio\_Portfolio_BestOf\stcollen_Best_2_optimized.jpg"
+        alt="Religious sculpture with sacred symbolism and craftsmanship"
+        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+        loading="lazy"
+        
+      />
+    </picture> openLightbox("/portfolio/_Portfolio_BestOf/stcollen_Best_2.jpeg", "Religious sculpture with sacred symbolism and craftsmanship")}
                 />
               </div>
               <div className="mt-4 text-center">
@@ -842,11 +950,7 @@ export default function Home() {
             <div className="group cursor-pointer" data-animate-fade-up onClick={() => openLightbox("/BarOwlBack.jpg", "Barn Owl Back carving - Good Afternoon 🌞 My Barn Owls back 😜 ❤️🔪🦉")}>
               <div className="relative overflow-hidden rounded-2xl shadow-xl mb-6 group-hover:shadow-2xl transition-all duration-500">
                 <div className="aspect-[4/5]">
-                                     <img 
-                     src="/BarOwlBack.jpg" 
-                     alt="Barn Owl Back carving" 
-                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                   />
+                                     <img src="/BarOwlBack.jpg" alt="Barn Owl Back carving" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"  />
                 </div>
                 <div className="absolute inset-0 bg-gradient-to-t from-accent-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -863,11 +967,7 @@ export default function Home() {
             <div className="group cursor-pointer" data-animate-fade-up onClick={() => openLightbox("/OwlFront.jpg", "Owl Front carving - When the sun sets gold...A new beginning begins to unfold ❤️🔪🦉")}>
               <div className="relative overflow-hidden rounded-2xl shadow-xl mb-6 group-hover:shadow-2xl transition-all duration-500">
                 <div className="aspect-[4/5]">
-                                     <img 
-                     src="/OwlFront.jpg" 
-                     alt="Owl Front carving" 
-                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                   />
+                                     <img src="/OwlFront.jpg" alt="Owl Front carving" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"  />
                 </div>
                 <div className="absolute inset-0 bg-gradient-to-t from-accent-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -884,11 +984,20 @@ export default function Home() {
             <div className="group cursor-pointer" data-animate-fade-up onClick={() => openLightbox("/Crow.jpg", "Crow carving - I became insane, with long intervals of horrible sanity - Edgar Allan Poe ❤️🔪🐦‍⬛")}>
               <div className="relative overflow-hidden rounded-2xl shadow-xl mb-6 group-hover:shadow-2xl transition-all duration-500">
                 <div className="aspect-[4/5]">
-                                     <img 
-                     src="/Crow.jpg" 
-                     alt="Crow carving" 
-                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                   />
+                                     <picture>
+      <source
+        type="image/webp"
+        srcSet="\Crow_800w.webp 800w, \Crow_1200w.webp 1200w, \Crow_1600w.webp 1600w"
+        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+      />
+      <img
+        src="\Crow_optimized.jpg"
+        alt="Crow carving"
+        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+        loading="lazy"
+        
+      />
+    </picture>
                 </div>
                 <div className="absolute inset-0 bg-gradient-to-t from-accent-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -906,11 +1015,20 @@ export default function Home() {
             <div className="group cursor-pointer" data-animate-fade-up onClick={() => openLightbox("/FishesOnTopOfTable.jpg", "Fish carvings on table - A collection of handcrafted fish showcasing different wood grains and carving techniques 🐟🎨")}>
               <div className="relative overflow-hidden rounded-2xl shadow-xl mb-6 group-hover:shadow-2xl transition-all duration-500">
                 <div className="aspect-[4/5]">
-                                     <img 
-                     src="/FishesOnTopOfTable.jpg" 
-                     alt="Fish carvings on table" 
-                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                   />
+                                     <picture>
+      <source
+        type="image/webp"
+        srcSet="\FishesOnTopOfTable_800w.webp 800w, \FishesOnTopOfTable_1200w.webp 1200w, \FishesOnTopOfTable_1600w.webp 1600w"
+        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+      />
+      <img
+        src="\FishesOnTopOfTable_optimized.jpg"
+        alt="Fish carvings on table"
+        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+        loading="lazy"
+        
+      />
+    </picture>
                 </div>
                 <div className="absolute inset-0 bg-gradient-to-t from-accent-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -927,11 +1045,20 @@ export default function Home() {
             <div className="group cursor-pointer" data-animate-fade-up onClick={() => openLightbox("/OwlAtNight.jpg", "Owl at Night - A majestic owl carving captured in atmospheric nighttime lighting 🦉🌙")}>
               <div className="relative overflow-hidden rounded-2xl shadow-xl mb-6 group-hover:shadow-2xl transition-all duration-500">
                 <div className="aspect-[4/5]">
-                                     <img 
-                     src="/OwlAtNight.jpg" 
-                     alt="Owl at Night carving" 
-                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                   />
+                                     <picture>
+      <source
+        type="image/webp"
+        srcSet="\OwlAtNight_800w.webp 800w, \OwlAtNight_1200w.webp 1200w, \OwlAtNight_1600w.webp 1600w"
+        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+      />
+      <img
+        src="\OwlAtNight_optimized.jpg"
+        alt="Owl at Night carving"
+        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+        loading="lazy"
+        
+      />
+    </picture>
                 </div>
                 <div className="absolute inset-0 bg-gradient-to-t from-accent-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -948,11 +1075,20 @@ export default function Home() {
             <div className="group cursor-pointer" data-animate-fade-up onClick={() => openLightbox("/Dog.jpg", "Dog carving - Man's best friend immortalized in wood with loving detail 🐕❤️")}>
               <div className="relative overflow-hidden rounded-2xl shadow-xl mb-6 group-hover:shadow-2xl transition-all duration-500">
                 <div className="aspect-[4/5]">
-                                     <img 
-                     src="/Dog.jpg" 
-                     alt="Dog carving" 
-                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                   />
+                                     <picture>
+      <source
+        type="image/webp"
+        srcSet="\Dog_800w.webp 800w, \Dog_1200w.webp 1200w, \Dog_1600w.webp 1600w"
+        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+      />
+      <img
+        src="\Dog_optimized.jpg"
+        alt="Dog carving"
+        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+        loading="lazy"
+        
+      />
+    </picture>
                 </div>
                 <div className="absolute inset-0 bg-gradient-to-t from-accent-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
