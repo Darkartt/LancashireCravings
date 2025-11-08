@@ -40,7 +40,7 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# Large media files
+# Large media files - exclude everything except portfolio
 public/media/
 public/media/archive/
 public/media/**/*.mov
@@ -53,6 +53,14 @@ public/media/**/*.mkv
 *.avi
 *.webm
 *.mkv
+
+# Keep only essential portfolio images
+!public/portfolio/
+!public/portfolio/**/*.jpg
+!public/portfolio/**/*.jpeg
+!public/portfolio/**/*.png
+!public/portfolio/**/*.webp
+!public/portfolio/**/*.gif
 
 # Large analysis files
 *-analysis-results*.json
@@ -83,3 +91,17 @@ sorted_animals/
 sorted_animals_reclassified/
 __pycache__/
 *.py[cod]
+
+# Exclude large directories from deployment
+curated_output/
+visual-animal-review/
+visual-project-review/
+organized-batch-reviews/
+organized-visual-review/
+batch-reviews/
+compression_temp/
+test-results/
+test-results-*.txt
+screenshots/
+inspection-reports/
+visual-review-batches-*.json
