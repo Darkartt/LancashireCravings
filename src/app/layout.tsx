@@ -3,6 +3,7 @@ import "./globals_new.css";
 import { AnimationProvider } from "../components/AnimationProvider";
 import ErrorBoundary from "../components/ErrorBoundary";
 import PageTransition from "../components/PageTransition";
+import { CartProvider } from "../contexts/CartContext";
 import { generateMetadata, generateStructuredData } from "../lib/metadata";
 
 export const metadata: Metadata = generateMetadata({});
@@ -47,13 +48,15 @@ export default function RootLayout({
         {/* Skip link for keyboard users */}
         <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 bg-accent-primary text-white px-4 py-2 rounded-md shadow-lg">Skip to content</a>
         <ErrorBoundary>
-          <AnimationProvider>
-            <PageTransition>
-              <main id="main" tabIndex={-1} className="page-fade-in">
-                {children}
-              </main>
-            </PageTransition>
-          </AnimationProvider>
+          <CartProvider>
+            <AnimationProvider>
+              <PageTransition>
+                <main id="main" tabIndex={-1} className="page-fade-in">
+                  {children}
+                </main>
+              </PageTransition>
+            </AnimationProvider>
+          </CartProvider>
         </ErrorBoundary>
       </body>
     </html>
