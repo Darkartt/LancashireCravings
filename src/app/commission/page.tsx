@@ -1,19 +1,47 @@
 "use client";
 
-// Commission page is temporarily simplified while animation refactor is in progress.
-// Original rich implementation (hero, configurator, form, process timeline) was removed due to
-// structural corruption during a failed framer-motion lazy-loading conversion.
-// TODO: Rebuild progressively using MotionDiv / lazyMotion pattern WITHOUT direct framer-motion import.
+import { CommissionForm } from "@/components/forms/CommissionForm";
+import { Toaster } from "@/components/ui/sonner";
 
 export default function CommissionPage() {
   return (
-    <main className="min-h-screen flex flex-col items-center justify-center p-12 text-center gap-6">
-      <h1 className="text-4xl md:text-5xl font-serif font-bold text-accent-primary">Commission Experience Updating</h1>
-      <p className="max-w-xl text-sm md:text-base text-foreground/70 leading-relaxed">
-        We're refactoring this page to defer heavy animation and 3D configurator code for faster initial loads.
-        The full commission workflow (interactive configurator, request form, process timeline) will return shortly.
-      </p>
-      <p className="text-xs text-foreground/50">Placeholder page rendered intentionally minimal to restore a clean build.</p>
-    </main>
+    <>
+      <main className="min-h-screen bg-gradient-to-b from-background to-muted/20 py-16">
+        <div className="container mx-auto">
+          {/* Hero Section */}
+          <div className="text-center mb-12 px-4">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-foreground mb-4">
+              Commission Your Masterpiece
+            </h1>
+            <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+              Transform your vision into a bespoke work of art. Our master craftsmen bring decades of expertise
+              to create one-of-a-kind pieces that tell your story.
+            </p>
+          </div>
+
+          {/* Commission Form */}
+          <CommissionForm />
+
+          {/* Additional Info */}
+          <div className="mt-16 max-w-4xl mx-auto px-4">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+              <div className="p-6 rounded-lg bg-card border border-border">
+                <div className="text-3xl font-bold text-primary mb-2">1-3 Days</div>
+                <p className="text-sm text-muted-foreground">Response Time</p>
+              </div>
+              <div className="p-6 rounded-lg bg-card border border-border">
+                <div className="text-3xl font-bold text-primary mb-2">100%</div>
+                <p className="text-sm text-muted-foreground">Satisfaction Guaranteed</p>
+              </div>
+              <div className="p-6 rounded-lg bg-card border border-border">
+                <div className="text-3xl font-bold text-primary mb-2">35+ Years</div>
+                <p className="text-sm text-muted-foreground">Master Craftsmanship</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+      <Toaster position="top-center" richColors />
+    </>
   );
 }

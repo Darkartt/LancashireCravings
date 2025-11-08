@@ -2,8 +2,8 @@
 
 import { useState } from 'react';
 import { useFormValidation, commonValidations } from '../hooks/useFormValidation';
-import Input from './ui/Input';
-import Button from './ui/Button';
+import Input from './ui/LegacyInput';
+import Button from './ui/LegacyButton';
 
 interface ContactFormData {
   name: string;
