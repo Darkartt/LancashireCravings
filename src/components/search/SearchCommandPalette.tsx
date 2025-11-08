@@ -130,11 +130,12 @@ export function SearchCommandPalette() {
       {/* Search Trigger Button */}
       <button
         onClick={() => setOpen(true)}
+        aria-label="Open search (Cmd+K)"
         className="flex items-center gap-2 px-3 py-2 text-sm text-muted-foreground hover:text-foreground transition-colors border border-border rounded-md hover:bg-muted/50"
       >
-        <Search className="w-4 h-4" />
+        <Search className="w-4 h-4" aria-hidden="true" />
         <span className="hidden md:inline">Search...</span>
-        <kbd className="pointer-events-none hidden md:inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground">
+        <kbd className="pointer-events-none hidden md:inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground" aria-hidden="true">
           <span className="text-xs">⌘</span>K
         </kbd>
       </button>

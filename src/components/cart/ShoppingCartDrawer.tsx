@@ -86,10 +86,11 @@ export function ShoppingCartDrawer() {
                             size="icon"
                             className="h-7 w-7"
                             onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                            aria-label={`Decrease quantity of ${item.name}`}
                           >
                             <Minus className="w-3 h-3" />
                           </Button>
-                          <span className="px-2 text-sm font-medium w-8 text-center">
+                          <span className="px-2 text-sm font-medium w-8 text-center" aria-label={`Quantity: ${item.quantity}`}>
                             {item.quantity}
                           </span>
                           <Button
@@ -97,6 +98,7 @@ export function ShoppingCartDrawer() {
                             size="icon"
                             className="h-7 w-7"
                             onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                            aria-label={`Increase quantity of ${item.name}`}
                           >
                             <Plus className="w-3 h-3" />
                           </Button>
@@ -111,8 +113,9 @@ export function ShoppingCartDrawer() {
                     <Button
                       variant="ghost"
                       size="icon"
-                      className="h-8 w-8 opacity-0 group-hover:opacity-100 transition-opacity"
+                      className="h-8 w-8 opacity-0 group-hover:opacity-100 focus:opacity-100 transition-opacity"
                       onClick={() => removeItem(item.id)}
+                      aria-label={`Remove ${item.name} from cart`}
                     >
                       <Trash2 className="w-4 h-4 text-destructive" />
                     </Button>

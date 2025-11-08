@@ -97,7 +97,10 @@ export function generateMetadata({
   return metadata;
 }
 
-export function generateStructuredData(type: 'organization' | 'website' | 'product' | 'article', data: any) {
+export function generateStructuredData(
+  type: 'organization' | 'website' | 'product' | 'article' | 'creativework' | 'localbusiness' | 'service' | 'breadcrumb' | 'faqpage',
+  data: any
+) {
   const baseData = {
     '@context': 'https://schema.org',
   };
@@ -121,6 +124,33 @@ export function generateStructuredData(type: 'organization' | 'website' | 'produ
           contactType: 'customer service',
           availableLanguage: 'English',
         },
+        sameAs: [
+          // Add social media links when available
+        ],
+        ...data,
+      };
+
+    case 'localbusiness':
+      return {
+        ...baseData,
+        '@type': 'LocalBusiness',
+        name: 'Lancaster Carving Limited',
+        image: `${defaultMetadata.siteUrl}/logo.svg`,
+        url: defaultMetadata.siteUrl,
+        telephone: data.telephone || '',
+        priceRange: '££-£££',
+        address: {
+          '@type': 'PostalAddress',
+          addressLocality: 'Mold',
+          addressRegion: 'Flintshire',
+          addressCountry: 'GB',
+        },
+        geo: data.geo || {
+          '@type': 'GeoCoordinates',
+          latitude: data.latitude,
+          longitude: data.longitude,
+        },
+        openingHoursSpecification: data.openingHours || [],
         ...data,
       };
 
@@ -143,6 +173,10 @@ export function generateStructuredData(type: 'organization' | 'website' | 'produ
       return {
         ...baseData,
         '@type': 'Product',
+        name: data.name,
+        description: data.description,
+        image: data.images || [],
+        sku: data.sku || data.id,
         brand: {
           '@type': 'Brand',
           name: 'Lancaster Carving Limited',
@@ -151,13 +185,102 @@ export function generateStructuredData(type: 'organization' | 'website' | 'produ
           '@type': 'Organization',
           name: 'Lancaster Carving Limited',
         },
+        offers: {
+          '@type': 'Offer',
+          url: data.url || defaultMetadata.siteUrl,
+          priceCurrency: 'GBP',
+          price: data.price,
+          priceValidUntil: data.priceValidUntil,
+          itemCondition: 'https://schema.org/NewCondition',
+          availability: data.availability || 'https://schema.org/InStock',
+          seller: {
+            '@type': 'Organization',
+            name: 'Lancaster Carving Limited',
+          },
+        },
+        aggregateRating: data.aggregateRating ? {
+          '@type': 'AggregateRating',
+          ratingValue: data.aggregateRating.ratingValue,
+          reviewCount: data.aggregateRating.reviewCount,
+        } : undefined,
+        review: data.reviews || [],
         ...data,
+      };
+
+    case 'creativework':
+      return {
+        ...baseData,
+        '@type': 'CreativeWork',
+        name: data.name,
+        description: data.description,
+        creator: {
+          '@type': 'Organization',
+          name: 'Lancaster Carving Limited',
+        },
+        image: data.images || [],
+        dateCreated: data.dateCreated,
+        material: data.material,
+        artform: 'Wood Carving',
+        ...data,
+      };
+
+    case 'service':
+      return {
+        ...baseData,
+        '@type': 'Service',
+        name: data.name || 'Custom Woodcarving Commission',
+        description: data.description || 'Bespoke woodcarving and furniture commission service',
+        provider: {
+          '@type': 'Organization',
+          name: 'Lancaster Carving Limited',
+        },
+        areaServed: {
+          '@type': 'Country',
+          name: 'United Kingdom',
+        },
+        serviceType: data.serviceType || 'Custom Woodcarving',
+        ...data,
+      };
+
+    case 'breadcrumb':
+      return {
+        ...baseData,
+        '@type': 'BreadcrumbList',
+        itemListElement: data.items?.map((item: any, index: number) => ({
+          '@type': 'ListItem',
+          position: index + 1,
+          name: item.name,
+          item: `${defaultMetadata.siteUrl}${item.url}`,
+        })) || [],
+      };
+
+    case 'faqpage':
+      return {
+        ...baseData,
+        '@type': 'FAQPage',
+        mainEntity: data.faqs?.map((faq: any) => ({
+          '@type': 'Question',
+          name: faq.question,
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: faq.answer,
+          },
+        })) || [],
       };
 
     case 'article':
       return {
         ...baseData,
         '@type': 'Article',
+        headline: data.headline || data.title,
+        description: data.description,
+        image: data.image || [],
+        datePublished: data.datePublished,
+        dateModified: data.dateModified || data.datePublished,
+        author: {
+          '@type': 'Organization',
+          name: 'Lancaster Carving Limited',
+        },
         publisher: {
           '@type': 'Organization',
           name: 'Lancaster Carving Limited',

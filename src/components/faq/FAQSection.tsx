@@ -10,6 +10,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { MessageCircle, HelpCircle } from "lucide-react";
 import Link from "next/link";
+import { generateFAQSchema } from "@/lib/seo";
 
 interface FAQ {
   question: string;
@@ -22,6 +23,7 @@ interface FAQSectionProps {
   faqs: FAQ[];
   showContact?: boolean;
   className?: string;
+  includeSchema?: boolean;
 }
 
 export function FAQSection({
@@ -30,9 +32,18 @@ export function FAQSection({
   faqs,
   showContact = true,
   className = "",
+  includeSchema = true,
 }: FAQSectionProps) {
+  const faqSchema = includeSchema ? generateFAQSchema(faqs) : null;
+
   return (
     <div className={className}>
+      {faqSchema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        />
+      )}
       <Card>
         <CardHeader>
           <div className="flex items-center gap-3">
