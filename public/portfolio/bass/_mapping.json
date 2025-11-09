@@ -7,7 +7,7 @@
   {
     "label": "RoughShape",
     "source": "public\\media\\projects\\bass\\images\\process\\bass_bass_026.jpeg",
-    "curated": "curated_output\\Woodcarvings\\bass\\bass_02_RoughShape.jpeg"
+    "curated": "curated_output\\Woodcarvings\\bass\\bass_02_RoughShape.jpg"
   },
   {
     "label": "DefiningForms",
@@ -30,11 +30,6 @@
     "curated": "curated_output\\Woodcarvings\\bass\\bass_06_Finished_2.jpeg"
   },
   {
-    "label": "Finished_3",
-    "source": "public\\media\\projects\\bass\\images\\final\\bass_bass_172.jpeg",
-    "curated": "curated_output\\Woodcarvings\\bass\\bass_07_Finished_3.jpeg"
-  },
-  {
     "label": "Finished_4",
     "source": "public\\media\\projects\\bass\\images\\final\\bass_bass_187.jpeg",
     "curated": "curated_output\\Woodcarvings\\bass\\bass_08_Finished_4.jpeg"
@@ -42,7 +37,7 @@
   {
     "label": "Finished_5",
     "source": "public\\media\\projects\\bass\\images\\final\\bass_bass_202.jpeg",
-    "curated": "curated_output\\Woodcarvings\\bass\\bass_09_Finished_5.jpeg"
+    "curated": "curated_output\\Woodcarvings\\bass\\bass_09_Finished_5.jpg"
   },
   {
     "label": "Detail_1",

@@ -9,7 +9,7 @@
       "coverImage": "/portfolio/bass/bass_05_Finished_1.jpeg",
       "mediaFolder": "/portfolio/bass",
       "mediaCount": {
-        "images": 11,
+        "images": 10,
         "videos": 0
       },
       "featured": true
@@ -86,11 +86,11 @@
     {
       "id": "bass-2",
       "type": "image",
-      "src": "/portfolio/bass/bass_02_RoughShape.jpeg",
+      "src": "/portfolio/bass/bass_02_RoughShape.jpg",
       "alt": "Bass - RoughShape",
       "category": "process",
       "project": "bass",
-      "filename": "bass_02_RoughShape.jpeg",
+      "filename": "bass_02_RoughShape.jpg",
       "order": 2,
       "featured": false
     },
@@ -141,66 +141,55 @@
     {
       "id": "bass-7",
       "type": "image",
-      "src": "/portfolio/bass/bass_07_Finished_3.jpeg",
-      "alt": "Bass - Finished_3",
+      "src": "/portfolio/bass/bass_08_Finished_4.jpeg",
+      "alt": "Bass - Finished_4",
       "category": "final",
       "project": "bass",
-      "filename": "bass_07_Finished_3.jpeg",
+      "filename": "bass_08_Finished_4.jpeg",
       "order": 7,
       "featured": false
     },
     {
       "id": "bass-8",
       "type": "image",
-      "src": "/portfolio/bass/bass_08_Finished_4.jpeg",
-      "alt": "Bass - Finished_4",
+      "src": "/portfolio/bass/bass_09_Finished_5.jpg",
+      "alt": "Bass - Finished_5",
       "category": "final",
       "project": "bass",
-      "filename": "bass_08_Finished_4.jpeg",
+      "filename": "bass_09_Finished_5.jpg",
       "order": 8,
       "featured": false
     },
     {
       "id": "bass-9",
       "type": "image",
-      "src": "/portfolio/bass/bass_09_Finished_5.jpeg",
-      "alt": "Bass - Finished_5",
+      "src": "/portfolio/bass/bass_10_Detail_1.jpeg",
+      "alt": "Bass - Detail_1",
       "category": "final",
       "project": "bass",
-      "filename": "bass_09_Finished_5.jpeg",
+      "filename": "bass_10_Detail_1.jpeg",
       "order": 9,
       "featured": false
     },
     {
       "id": "bass-10",
       "type": "image",
-      "src": "/portfolio/bass/bass_10_Detail_1.jpeg",
-      "alt": "Bass - Detail_1",
-      "category": "final",
-      "project": "bass",
-      "filename": "bass_10_Detail_1.jpeg",
-      "order": 10,
-      "featured": false
-    },
-    {
-      "id": "bass-11",
-      "type": "image",
       "src": "/portfolio/bass/bass_11_Detail_2.jpeg",
       "alt": "Bass - Detail_2",
       "category": "final",
       "project": "bass",
       "filename": "bass_11_Detail_2.jpeg",
-      "order": 11,
+      "order": 10,
       "featured": false
     },
     {
       "id": "eagle-1",
       "type": "image",
-      "src": "/portfolio/eagle/eagle_01_RawWood.jpeg",
+      "src": "/portfolio/eagle/eagle_01_RawWood.jpg",
       "alt": "Eagle - RawWood",
       "category": "process",
       "project": "eagle",
-      "filename": "eagle_01_RawWood.jpeg",
+      "filename": "eagle_01_RawWood.jpg",
       "order": 1,
       "featured": false
     },
@@ -394,22 +383,22 @@
     {
       "id": "nessie-1",
       "type": "image",
-      "src": "/portfolio/nessie/nessie_01_RawWood.jpg",
+      "src": "/portfolio/nessie/nessie_01_RawWood.jpeg",
       "alt": "Nessie - RawWood",
       "category": "process",
       "project": "nessie",
-      "filename": "nessie_01_RawWood.jpg",
+      "filename": "nessie_01_RawWood.jpeg",
       "order": 1,
       "featured": false
     },
     {
       "id": "nessie-2",
       "type": "image",
-      "src": "/portfolio/nessie/nessie_02_RoughShape.jpeg",
+      "src": "/portfolio/nessie/nessie_02_RoughShape.jpg",
       "alt": "Nessie - RoughShape",
       "category": "process",
       "project": "nessie",
-      "filename": "nessie_02_RoughShape.jpeg",
+      "filename": "nessie_02_RoughShape.jpg",
       "order": 2,
       "featured": false
     },
